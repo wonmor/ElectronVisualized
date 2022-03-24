@@ -1,1 +1,1 @@
-# **ElectronVisualized**: An Interactive Module
+# ElectronVisualized: An Interactive Module
