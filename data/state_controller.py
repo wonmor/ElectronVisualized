@@ -18,3 +18,14 @@ class Views(object):
                 menu_vw = menu.Menu()
             case states.SIM:
                 sim_vw = sim.Sim()
+
+
+
+
+
+
+
+'''
+WHAT IS CLASSMETHOD?
+https://www.programiz.com/python-programming/methods/built-in/classmethod
+'''

@@ -19,10 +19,10 @@
 import sys
 import pygame as pg
 
-from data.main_activity import MainActivity
+from data.main_activity import MainController
 
 if __name__ == '__main__':
-    MainActivity()
+    MainController()
     pg.quit()
     sys.exit()
 
