@@ -13,3 +13,5 @@ An interactive module that visualizes the electron configurations of different e
 ## Dependencies
 - **Kivy**: Cross-platform Python Framework for NUI Development
 - **Kivent**: An Entity-based Game Engine for **Kivy**
+- **Cython**: C-Extensions for Python
+- **NumPy**: Core Library for Scientific Computing
