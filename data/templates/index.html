@@ -1,10 +1,80 @@
 <!DOCTYPE html>
 <html>
 
-<head></head>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>ElectronVisualized: An Interactive Module</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500&family=League+Spartan:wght@200;300&display=swap');
+        html {
+            font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            background: #ee9ca7;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #ffdde1, #ee9ca7);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #ffdde1, #ee9ca7);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
+        
+        h1 {
+            font-size: 400%;
+            font-weight: bold;
+        }
+        
+        h2 {
+            font-weight: 400;
+        }
+        
+        h3 {
+            font-weight: 300;
+            font-size: 200%
+        }
+        
+        #main_section {
+            padding: 2%;
+            font-size: 70%;
+            margin-left: 10%;
+            margin-right: 10%;
+            margin-top: 2.5%;
+            background-color: black;
+            color: white;
+            opacity: 60%;
+            border-radius: 25px;
+        }
+        
+        #display_section {
+            padding: 1vw;
+            font-size: 70%;
+            margin-left: 10%;
+            margin-right: 10%;
+            margin-top: 2.5%;
+            margin-bottom: 2.5%;
+            opacity: 75%;
+            background-color: white;
+            border-radius: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
 
 <body>
-    <img src="/plot.png" alt="my plot">
+    <div id="main_section">
+        <img style="width: 10%" src="https://pngimage.net/wp-content/uploads/2018/05/core-values-icon-png-2.png" alt="logo_image">
+        <h1>ElectronVisualized</h1>
+        <h3>The website is still in development and will be completed in a timely manner.</h3>
+    </div>
+    <div id="display_section">
+        <h1>Hydrogen</h1>
+        <h3>A chemical element with the symbol H and atomic number 1. Hydrogen is the lightest element. At standard conditions hydrogen is a gas of diatomic molecules having the formula H2. It is colorless, odorless, tasteless,[8] non-toxic, and highly combustible.
+            Hydrogen is the most abundant chemical substance in the universe, constituting roughly 75% of all normal matter.</h3>
+        <img style="width: 50%" src="/plot.png" alt="my plot">
+    </div>
 </body>
 
 </html>
