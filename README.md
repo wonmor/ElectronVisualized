@@ -1,4 +1,4 @@
-<img width="841" alt="Screen Shot 2022-05-11 at 3 44 06 PM" src="https://user-images.githubusercontent.com/35755386/167932969-5c051cbf-9da8-4825-8068-9d0457df736c.png">
+<img width="300" alt="Screen Shot 2022-05-11 at 3 44 06 PM" src="https://user-images.githubusercontent.com/35755386/167932969-5c051cbf-9da8-4825-8068-9d0457df736c.png">
 
 An interactive module that visualizes the electron configurations of different elements. Displayed in an orbital format, based upon the internal calculations performed that involve the famous Dirac equation, which describes the shape and structure of the electrons in terms of the wavefunction.
 
