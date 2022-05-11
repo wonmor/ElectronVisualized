@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500&family=League+Spartan:wght@200;300&display=swap");
+html {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  background: #ee9ca7;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #ffdde1, #ee9ca7);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #ffdde1, #ee9ca7);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+h1 {
+  font-size: 400%;
+  font-weight: bold;
+  padding: inherit;
+}
+
+h2 {
+  font-weight: 400;
+  padding: inherit;
+}
+
+h3 {
+  font-weight: 400;
+  font-size: 200%;
+  padding: inherit;
+}
+
+#main_section {
+  padding: 2%;
+  font-size: 70%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 2.5%;
+  background-color: black;
+  color: white;
+  opacity: 60%;
+  border-radius: 25px;
+}
+
+#display_section {
+  padding: 1vw;
+  font-size: 70%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 2.5%;
+  margin-bottom: 2.5%;
+  opacity: 75%;
+  background-color: white;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#element_name {
+  background-color: #ffdde1;
+  padding: 20px;
+  border-radius: 25px;
+  margin-bottom: 1%;
+}
+
+#main_heading {
+  font-size: 300%;
+}
+
+#sub_heading {
+  margin-top: -5%;
+}
