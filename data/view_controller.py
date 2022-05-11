@@ -4,22 +4,27 @@ from data.main_activity import MainActivity
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 
-from states import menu, sim
+# from states import menu, sim
 
 from data.extensions import db
 
 from data.main_controller import MainController
 
-import state_constants
+# import state_constants
 
 import io
 
-states = state_constants.Views
+# states = state_constants.Views
 
 bp = Blueprint('main', __name__)
 
-
 @bp.route('/')
+def index():
+    session.clear()
+    return render_template("index.html")
+
+
+@bp.route('/plot.png')
 def plot_png():
     fig = MainActivity.plot_points()
     output = io.BytesIO()

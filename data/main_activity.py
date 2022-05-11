@@ -1,15 +1,19 @@
-import state_controller as sc
+# import state_controller as sc
 
-from . import state_constants
+# from . import state_constants
 
+import matplotlib
 import matplotlib.pyplot as plt
+
+matplotlib.use('Agg')
+
 import numpy as np
 
 
 class MainActivity(object):
 
     def __init__(self):
-        sc.Views()
+        # sc.Views()
         self.display_index = 4
         # MainActivity.plot_points()
 

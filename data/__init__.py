@@ -1,5 +1,7 @@
+from data.main_controller import MainController
 from .extensions import db
 from flask import Flask
+from dotenv import load_dotenv
 
 import logging
 
@@ -19,14 +21,15 @@ def create_app():
 
     # GENERATE REQUIREMENTS.TXT: pip3 freeze > requirements.txt
 
-    from . import state_controller
+    from . import view_controller
 
     app.logger.debug('App init!')
 
+    load_dotenv()
 
     app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
 
-    app.register_blueprint(state_controller.bp)
+    app.register_blueprint(view_controller.bp)
 
     # SETTING UP THE BLUEPRINT TO PREVENT CIRCULAR IMPORT; TUTORIAL: https://stackoverflow.com/questions/23432791/how-to-handle-dynamic-decorators-in-python-easily
 
