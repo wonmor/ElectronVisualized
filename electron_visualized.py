@@ -17,13 +17,11 @@
 # -----------------------------------------------------------------------------
 
 import sys
-import pygame as pg
 
 from data.main_activity import MainController
 
 if __name__ == '__main__':
     MainController()
-    pg.quit()
     sys.exit()
 
 # PIP FREEZE LOCALLY: pip3 freeze -l > requirements.txt
