@@ -4,7 +4,7 @@ An interactive module that visualizes the electron configurations of different e
 
 ---
 
-### [Launch Application](https://electron-visualized.herokuapp.com)
+### [Launch Website](https://electron-visualized.herokuapp.com)
 
 The website is currently running Mr. Nazrul's code for electron simulation posted on his [Medium page](https://towardsdatascience.com/quantum-physics-visualization-with-python-35df8b365ff).
 
