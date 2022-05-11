@@ -8,6 +8,8 @@ instance/*
 .webassets-cache
 .env
 
+.idea
+
 ### Flask.Python Stack ###
 # Byte-compiled / optimized / DLL files
 __pycache__/
