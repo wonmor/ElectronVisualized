@@ -2,6 +2,16 @@
 
 An interactive module that visualizes the electron configurations of different elements. Displayed in an orbital format, based upon the internal calculations performed that involve the famous Dirac equation, which describes the shape and structure of the electrons in terms of the wavefunction.
 
+---
+
+### [Launch Application](https://electron-visualized.herokuapp.com)
+
+The website is currently running Mr. Nazrul's code for electron simulation posted on his Medium page: 
+
+https://towardsdatascience.com/quantum-physics-visualization-with-python-35df8b365ff
+
+---
+
 [View the **Project Scope Statement**](https://github.com/wonmor/ElectronVisualized/blob/main/docs/John%20Seong%20-%20ICS3%20Project%20Scope%20Statement%20-%20ElectronVisualized.pdf)
 
 ---
