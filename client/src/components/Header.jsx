@@ -1,9 +1,16 @@
 import { useState } from 'react';
 
+import { useSelector, useDispatch } from 'react-redux'
+import { decrement, increment } from '../counterSlice'
+
 import "./Header.css";
 import Logo from "../assets/e_logo.svg";
 
-const Header = () => {
+export default function Header() {
+  // For React-Redux state management library: https://react-redux.js.org/tutorials/quick-start
+  const count = useSelector((state) => state.counter.value)
+  const dispatch = useDispatch()
+
   const [isActive, setActive] = useState("false");
   const ShowResponsiveMenu = () => {
     setActive(!isActive); 
@@ -77,6 +84,4 @@ const Header = () => {
       </div>
     </nav>
   );
-};
-
-export default Header;
+}

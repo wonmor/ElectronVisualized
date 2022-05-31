@@ -1,0 +1,7 @@
+h1 {
+    @apply text-7xl;
+}
+
+p {
+    @apply text-xl;
+}

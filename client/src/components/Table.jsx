@@ -4,7 +4,7 @@ import axios from "axios";
 import { Canvas } from "react-three-fiber";
 import Renderer from "./Renderer";
 
-import Controls from "./objects/Controls";
+import Controls from "./Controls";
 
 const CANVAS_WIDTH = "100vw";
 const CANVAS_HEIGHT = "85vh";

@@ -5,7 +5,7 @@ import * as THREE from "three";
 
 import five from "./objects/Five.png";
 
-const Renderer = (props) => {
+export default function Renderer(props) {
     const mesh = useRef();
 
     const [active, setActive] = useState(false);
@@ -32,5 +32,3 @@ const Renderer = (props) => {
     </mesh>
     );
 }
-
-export default Renderer;
