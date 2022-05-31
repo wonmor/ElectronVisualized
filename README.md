@@ -1,6 +1,8 @@
-<img width="500" alt="Screen Shot 2022-05-11 at 3 44 06 PM" src="https://user-images.githubusercontent.com/35755386/167932969-5c051cbf-9da8-4825-8068-9d0457df736c.png">
+![e_logo](https://user-images.githubusercontent.com/35755386/171070068-7c1150cc-e908-4c1e-ab11-e05f6e439057.png)
 
-An interactive module that visualizes the electron configurations of different elements. Displayed in an orbital format, based upon the internal calculations performed that involve the famous Dirac equation, which describes the shape and structure of the electrons in terms of the wavefunction.
+# ElectronViualized
+
+A real-time electron orbitals simulation. Displayed based upon the internal calculations performed that involve the famous Dirac equation, which describes the shape and structure of the electrons by numerically deriving the wavefunction.
 
 ---
 
@@ -19,7 +21,14 @@ The website is currently running **Syed Sadat Nazrul**'s code for all the comput
 
 ---
 
-## Dependencies
+## Technologies Used
+
+### Front-End
+- **React**: Front-End Javascript Library
+- **ThreeJS**: JavaScript 3D Library
+- **Tailwind CSS**: A Utility-First Cascading Style Sheets Framework
+
+### Back-End
 - **Flask**: Microframework for Web
 - **Matplotlib**: Visualization with Python
 - **NumPy**: Core Library for Scientific Computing
