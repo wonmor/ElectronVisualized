@@ -8,8 +8,7 @@ A **real-time** electron orbital simulation. Displayed based upon the internal c
 
 ### [Launch Website](https://electron-visualized.herokuapp.com)
 
-The website is currently running **Syed Sadat Nazrul**'s code for all the computations posted on his [Medium page](https://towardsdatascience.com/quantum-physics-visualization-with-python-35df8b365ff).
-
+<img width="1728" alt="Screen Shot 2022-05-30 at 10 23 42 PM" src="https://user-images.githubusercontent.com/35755386/171080354-8341ba6b-b540-466c-81a8-5766f4cd5cf3.png">
 
 ---
 
