@@ -1,0 +1,52 @@
+from flask_cors import CORS
+from .extensions import db
+from flask import Flask
+from dotenv import load_dotenv
+
+import os
+
+'''
+TIPS & TRICKS
+1. COMMAND + K and then COMMAND + C to comment multiple lines on VSCode
+2. FLASK ENVIRONMENT EXPLANATION: https://pythonbasics.org/flask-environment-production/
+3. HOW TO SET UP SECRET_KEY ON HEROKU: https://stackoverflow.com/questions/47949022/git-heroku-how-to-hide-my-secret-key
+4. COMMAND (RUN ON TERMINAL): heroku config:set SECRET_KEY='<ENTER SECRET KEY>' -a lottery-simulator-2022
+4. HEROKU-FLASK-REACT SETUP TUTORIAL: https://towardsdatascience.com/reactjs-python-flask-on-heroku-2a308272886a
+'''
+
+def create_app():
+    # Initialize the app
+    app = Flask(__name__)
+
+    from . import api
+
+    load_dotenv()
+
+    app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
+
+    app.register_blueprint(api.bp)
+
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+
+    register_extensions(app)
+
+    return app
+
+
+def register_extensions(app):
+    # Intialize the database
+    db.init_app(app)
+
+
+# Created a global variable that runs the create_app function, in order to import it from the terminal
+app = create_app()
+
+'''
+STEPS TO GENERATE THE DB FILE
+1. cd guessing-game-bla-bla
+2. python3 (on mac, windows: open a python terminal)
+3. >>> import website
+4. >>> from website.extensions import db
+5. >>> from website import app
+6. >>> db.create_all(app=website.create_app())
+'''
