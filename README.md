@@ -2,7 +2,7 @@
 
 # ElectronVisualized
 
-A **real-time** electron orbital simulation. Displayed based upon the internal calculations performed that involve the famous Dirac equation, which describes the shape and structure of the electrons by numerically deriving the wavefunction.
+A **real-time** electron orbital simulation. Displayed based upon the internal calculations performed that involve the famous **Density Functional Theory**, which describes the probable locations of electrons by numerically deriving the wavefunction.
 
 Website is still in the **development** phase but will be completed in a timely manner.
 
