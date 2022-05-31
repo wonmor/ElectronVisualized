@@ -1,6 +1,6 @@
 <img width="100" alt="e_logo" src="https://user-images.githubusercontent.com/35755386/171070068-7c1150cc-e908-4c1e-ab11-e05f6e439057.png">
 
-# ElectronViualized
+# ElectronVisualized
 
 A **real-time** electron orbital simulation. Displayed based upon the internal calculations performed that involve the famous Dirac equation, which describes the shape and structure of the electrons by numerically deriving the wavefunction.
 
@@ -36,3 +36,11 @@ The website is currently running **Syed Sadat Nazrul**'s code for all the comput
 - **NumPy** and **SciPy**: Core Libraries for Scientific Computing
 - **ASE**: Atomic Simulation Environment 
 - **GPAW**: Projector-Augmented Wave Extension for ASE (Pseudo Wave Function Generator)
+
+---
+
+## How to Run
+
+1. ```cd client && npm install```
+2. ```yarn start build```
+3. On a seperate terminal, type ```cd client && yarn start-api```
