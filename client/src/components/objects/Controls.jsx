@@ -1,6 +1,5 @@
 import { extend, useThree } from "react-three-fiber";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import { deg2rad } from "deg2rad";
 
 import React from "react";
 

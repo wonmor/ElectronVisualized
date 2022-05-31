@@ -8,6 +8,9 @@ instance/*
 .webassets-cache
 .env
 
+# For NPM
+node_modules
+
 .idea
 
 ### Flask.Python Stack ###
