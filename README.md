@@ -2,7 +2,7 @@
 
 # ElectronViualized
 
-A real-time electron orbitals simulation. Displayed based upon the internal calculations performed that involve the famous Dirac equation, which describes the shape and structure of the electrons by numerically deriving the wavefunction.
+A **real-time** electron orbital simulation. Displayed based upon the internal calculations performed that involve the famous Dirac equation, which describes the shape and structure of the electrons by numerically deriving the wavefunction.
 
 ---
 
