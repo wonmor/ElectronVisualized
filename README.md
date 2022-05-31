@@ -36,3 +36,11 @@ The website is currently running **Syed Sadat Nazrul**'s code for all the comput
 - **NumPy** and **SciPy**: Core Libraries for Scientific Computing
 - **ASE**: Atomic Simulation Environment 
 - **GPAW**: Projector-Augmented Wave Extension for ASE (Pseudo Wave Function Generator)
+
+---
+
+## How to Run
+
+1. ```cd client && npm install```
+2. ```yarn start build```
+3. On a seperate terminal, type ```cd client && yarn start-api```
