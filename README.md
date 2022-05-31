@@ -6,8 +6,9 @@ A **real-time** electron orbital simulation. Displayed based upon the internal c
 
 ### [Launch Website](https://electron-visualized.herokuapp.com)
 
-
 ---
+
+## Useful Links
 
 [View the **Project Scope Statement**](https://github.com/wonmor/ElectronVisualized/blob/main/docs/John%20Seong%20-%20ICS3%20Project%20Scope%20Statement%20-%20ElectronVisualized.pdf)
 
