@@ -3,6 +3,9 @@ import Renderer from "./Renderer";
 
 import Controls from "./objects/Controls";
 
+const CANVAS_WIDTH = "100vw";
+const CANVAS_HEIGHT = "85vh";
+
 const Table = () => {
   return (
     <div className="bg-gray-700">
@@ -13,7 +16,7 @@ const Table = () => {
           its mass is 1 AMU.
         </p>
       </div>
-      <div style={{ width: "100vw", height: "85vh" }}>
+      <div style={{ width: CANVAS_WIDTH, height: CANVAS_HEIGHT }}>
         <Canvas camera={{ fov: 30, position: [-5, 8, 8]}}>
           <Controls />
           <ambientLight intensity={0.5} />
@@ -21,7 +24,7 @@ const Table = () => {
           <pointLight position={[-10, -10, -10]} />
           <Renderer position={[-1.2, 0, 0]} />
           <Renderer position={[2.5, 0, 0]} />
-          <gridHelper />
+          <gridHelper args={[undefined, undefined, "white"]} />
         </Canvas>
       </div>
     </div>

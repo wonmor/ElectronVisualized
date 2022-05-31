@@ -1,5 +1,7 @@
-from flask import Blueprint, jsonify, send_from_directory
+from flask import Blueprint, jsonify, request, send_from_directory
 from flask_cors import CORS, cross_origin
+
+# from renderer import element_plotter
 
 '''
 ----------------------------------------------------------------
@@ -46,7 +48,9 @@ CORS(bp, resources={r'/api/*': {'origins': '*'}})
 def serve():
     return send_from_directory(bp.static_folder, 'index.html')
 
-@bp.route('/api', methods=['GET'])
+@bp.route('/api/plot_diagram', methods=['POST'])
 @cross_origin()
-def logo_img():
-    return jsonify("jheez")
+def plot_diagram():
+    if request.method == 'POST':
+        pass
+        # return jsonify(element_plotter())
