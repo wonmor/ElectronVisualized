@@ -16,6 +16,8 @@ const Renderer = (props) => {
 
     const texture = useMemo(() => new THREE.TextureLoader().load(five), []);
 
+    // Make sure you MANUALLY collect all the garbage!
+    
     return (
     <mesh
     {...props}

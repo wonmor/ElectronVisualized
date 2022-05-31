@@ -15,6 +15,11 @@ const Table = () => {
           The first element in the periodic table. The atomic number is 1 and
           its mass is 1 AMU.
         </p>
+        <div class="gap-3 flex items-center justify-center pt-5">
+          <a href="https://github.com/wonmor/Rosetta-Enforcer/discussions" className="bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded" type="button ">
+              Start Rendering
+          </a>
+        </div>
       </div>
       <div style={{ width: CANVAS_WIDTH, height: CANVAS_HEIGHT }}>
         <Canvas camera={{ fov: 30, position: [-5, 8, 8]}}>

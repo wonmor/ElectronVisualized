@@ -1,4 +1,5 @@
 # Retrieve the electron density distribution data
+from flask import jsonify
 import numpy as np
 from ase.data.colors import jmol_colors as atomic_colors
 
@@ -9,7 +10,7 @@ def element_plotter():
     # mlab.clf()
 
     # Reading data from the density cube file
-    filename1 = './elements/density.cube'
+    filename1 = 'server/density.cube'
 
     with open(filename1, 'r') as f:
         lines = f.read().splitlines()
@@ -88,7 +89,7 @@ def element_plotter():
     # Plot the atoms and the bonds
 
     # Calculating min and max coordinates of grid
-    filename2 = './elements/grid.npy'
+    filename2 = 'server/grid.npy'
 
     grid_coords = np.load(filename2)
 
@@ -152,11 +153,15 @@ def element_plotter():
 
     return_value = {
         'no_of_atoms': no_of_atoms,
-        'atomic_colors': atomic_colors,
+        'atomic_colors': atomic_colors.tolist(),
         'elements': elements,
-        'atoms_x': atoms_x,
-        'atoms_y': atoms_y,
-        'atoms_z': atoms_z
+        'atoms_x': atoms_x.tolist(),
+        'atoms_y': atoms_y.tolist(),
+        'atoms_z': atoms_z.tolist()
     }
 
-    return return_value
+    return jsonify(return_value)
+
+    '''
+    Generate random number in the allocated orbital area
+    '''

@@ -38,6 +38,10 @@ https://www.brown.edu/Departments/Engineering/Labs/Peterson/tips/ElectronDensity
 
 from server.extensions import db
 
+from . import renderer
+
+from server.elements.H2 import plot_hydrogen
+
 bp = Blueprint('main', __name__, static_folder='../client/build', static_url_path='/')
 
 # WHAT IS CORS: https://flask-cors.readthedocs.io/en/latest/
@@ -48,9 +52,9 @@ CORS(bp, resources={r'/api/*': {'origins': '*'}})
 def serve():
     return send_from_directory(bp.static_folder, 'index.html')
 
-@bp.route('/api/plot_diagram', methods=['POST'])
+@bp.route('/api/plot', methods=['GET'])
 @cross_origin()
-def plot_diagram():
-    if request.method == 'POST':
-        pass
-        # return jsonify(element_plotter())
+def plot():
+    if request.method == 'GET':
+        plot_hydrogen()
+        return renderer.element_plotter()
