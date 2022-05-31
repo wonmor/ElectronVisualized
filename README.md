@@ -26,6 +26,7 @@ Website is still in the **development** phase but will be completed in a timely 
 
 ### Front-End: ```./client```
 - **React**: Front-End Javascript Library
+- **Redux**: An Open-Source JavaScript Library for Managing and Centralizing Application State
 - **ThreeJS**: JavaScript 3D Library
 - **Tailwind CSS**: A Utility-First Cascading Style Sheets Framework
 
