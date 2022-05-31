@@ -13,7 +13,7 @@ def plot_hydrogen():
     calc = GPAW(h=.18,
                 xc='PBE',
                 maxiter=3500,
-                txt='out.txt',
+                txt='server/GPAW_log.txt',
                 occupations=FermiDirac(0.1))
 
     mol = molecule('H2')

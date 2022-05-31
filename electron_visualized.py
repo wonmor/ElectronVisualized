@@ -6,15 +6,15 @@
 # z
 # Author:      John Seong
 # Created:     23-Mar-2022
-# Updated:     30-May-2022
+# Updated:     31-May-2022
 # -----------------------------------------------------------------------------
 # I think this project deserves a level 4+ because...
 #
 # 1. A real-time electron movement simulation that no other program offers in a non-scientific field of software engineering 
 #       – derived by the electrons' angular momentum formula
 # 2. Each dot represent a probable location that the electron might reside at based upon the wavefunction 
-#       — derived by Schrödinger's Equation and the famous Dirac representation (numerical wavefunction)
-# 3. Used industry standard Quantum Mechanics simulation libaries such as ASE and GPAW for numerically calculating the electron density
+#       — according to the Density Functional Theory (DFT)
+# 3. Used industry standard Quantum Mechanics simulation libaries such as ASE and GPAW for numerically computing the electron density
 # -----------------------------------------------------------------------------
 
 from server import create_app
@@ -24,4 +24,6 @@ app = create_app()
 if __name__ == '__main__':
     app.run()
 
-# PIP FREEZE LOCALLY: pip3 freeze -l > requirements.txt
+'''
+PIP FREEZE LOCALLY: pip3 freeze -l > requirements.txt
+'''
