@@ -33,6 +33,6 @@ The website is currently running **Syed Sadat Nazrul**'s code for all the comput
 ### Back-End: ```./server```
 - **Flask**: Microframework for Web
 - **Matplotlib**: Visualization with Python
-- **NumPy**: Core Library for Scientific Computing
+- **NumPy** and **SciPy**: Core Libraries for Scientific Computing
 - **ASE**: Atomic Simulation Environment 
 - **GPAW**: Projector-Augmented Wave Extension for ASE (Pseudo Wave Function Generator)
