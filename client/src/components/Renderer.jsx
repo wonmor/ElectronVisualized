@@ -3,32 +3,32 @@ import React, { useRef, useState, useMemo } from "react";
 import { useFrame } from "react-three-fiber";
 import * as THREE from "three";
 
-import five from "./elements/five.png";
+import five from "./objects/Five.png";
 
 const Renderer = (props) => {
     const mesh = useRef();
 
-  const [active, setActive] = useState(false);
+    const [active, setActive] = useState(false);
 
-  useFrame(() => {
-    mesh.current.rotation.x = mesh.current.rotation.y += 0.01;
-  });
+    useFrame(() => {
+        mesh.current.rotation.x = mesh.current.rotation.y += 0.01;
+    });
 
-  const texture = useMemo(() => new THREE.TextureLoader().load(five), []);
-  
-  return (
+    const texture = useMemo(() => new THREE.TextureLoader().load(five), []);
+
+    return (
     <mesh
     {...props}
     ref={mesh}
     scale={active ? [2, 2, 2] : [1.5, 1.5, 1.5]}
     onClick={(e) => setActive(!active)}
-      >
-      <boxBufferGeometry args={[1, 1, 1]} />
-      <meshBasicMaterial attach="material" transparent side={THREE.DoubleSide}>
+        >
+        <boxBufferGeometry args={[1, 1, 1]} />
+        <meshBasicMaterial attach="material" transparent side={THREE.DoubleSide}>
         <primitive attach="map" object={texture} />
-      </meshBasicMaterial>
+        </meshBasicMaterial>
     </mesh>
-  );
+    );
 }
 
 export default Renderer;

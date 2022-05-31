@@ -2,6 +2,8 @@ from flask import Blueprint, jsonify, send_from_directory
 from flask_cors import CORS, cross_origin
 
 '''
+----------------------------------------------------------------
+
 THE "WORLD ENGINE," A RESTful API THAT POWERS THE INTERACTIVE MODULE ELECTRONVISUALIZED
 DEVELOPED AND DESIGNED BY JOHN SEONG
 SUPPORTED PLATFORMS: WEB, IOS & MACOS (IN DEV)
@@ -22,12 +24,15 @@ After installing libxc through brew...
 5. export CPPFLAGS="-I/opt/homebrew/opt/openblas/include"
 
 After all this, execute pip3 install gpaw
-'''
 
-from gpaw import GPAW, FermiDirac
-from ase.structure import molecule
-from ase.io import write
-import numpy as np
+----------------------------------------------------------------
+
+:: HELPFUL LINKS ::
+
+https://www.brown.edu/Departments/Engineering/Labs/Peterson/tips/ElectronDensity/index.html
+
+----------------------------------------------------------------
+'''
 
 from server.extensions import db
 
