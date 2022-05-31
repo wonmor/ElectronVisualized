@@ -8,13 +8,14 @@ A **real-time** electron orbital simulation. Displayed based upon the internal c
 
 ### [Launch Website](https://electron-visualized.herokuapp.com)
 
-<img width="1728" alt="Screen Shot 2022-05-30 at 10 23 42 PM" src="https://user-images.githubusercontent.com/35755386/171080354-8341ba6b-b540-466c-81a8-5766f4cd5cf3.png">
 
 ---
 
 [View the **Project Scope Statement**](https://github.com/wonmor/ElectronVisualized/blob/main/docs/John%20Seong%20-%20ICS3%20Project%20Scope%20Statement%20-%20ElectronVisualized.pdf)
 
 ---
+
+<img width="1000" alt="Screen Shot 2022-05-30 at 10 23 42 PM" src="https://user-images.githubusercontent.com/35755386/171080354-8341ba6b-b540-466c-81a8-5766f4cd5cf3.png">
 
 ![IMG_7647](https://user-images.githubusercontent.com/35755386/166985579-96c2d483-e74c-4802-ac92-762b2ccc8bc9.jpg)
 
