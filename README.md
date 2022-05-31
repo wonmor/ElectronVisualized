@@ -23,12 +23,14 @@ The website is currently running **Syed Sadat Nazrul**'s code for all the comput
 
 ## Technologies Used
 
-### Front-End
+### Front-End: ```./client```
 - **React**: Front-End Javascript Library
 - **ThreeJS**: JavaScript 3D Library
 - **Tailwind CSS**: A Utility-First Cascading Style Sheets Framework
 
-### Back-End
+---
+
+### Back-End: ```./server```
 - **Flask**: Microframework for Web
 - **Matplotlib**: Visualization with Python
 - **NumPy**: Core Library for Scientific Computing
