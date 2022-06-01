@@ -77,14 +77,14 @@ def element_plotter():
     # image_minz = source.outputs[0].bounds[4]
     # image_maxz = source.outputs[0].bounds[5]
 
-    image_minx = -30
-    image_maxx = 30
+    image_minx = -10.0
+    image_maxx = 10.0
 
-    image_miny = -30
-    image_maxy = 30
+    image_miny = -10.0
+    image_maxy = 10.0
 
-    image_minz = -30
-    image_maxz = 30
+    image_minz = -10.0
+    image_maxz = 10.0
 
     # Plot the atoms and the bonds
 
@@ -112,23 +112,17 @@ def element_plotter():
         atoms_x += [0.5 + image_minx + (x - grid_minx) *
                     (image_maxx - image_minx) / (grid_maxx - grid_minx)]
 
-    atoms_x = np.array(atoms_x)
-
     atoms_y = []
 
     for y in atoms_y_coords_in_density:
         atoms_y += [0.5 + image_miny + (y - grid_miny) *
                     (image_maxy - image_miny) / (grid_maxy - grid_miny)]
 
-    atoms_y = np.array(atoms_y)
-
     atoms_z = []
 
     for z in atoms_z_coords_in_density:
         atoms_z += [0.5 + image_minz + (z - grid_minz) *
                     (image_maxz - image_minz) / (grid_maxz - grid_minz)]
-
-    atoms_z = np.array(atoms_z)
 
     # Plotting atoms and the bond between them
 
@@ -155,9 +149,9 @@ def element_plotter():
         'no_of_atoms': no_of_atoms,
         'atomic_colors': atomic_colors.tolist(),
         'elements': elements,
-        'atoms_x': atoms_x.tolist(),
-        'atoms_y': atoms_y.tolist(),
-        'atoms_z': atoms_z.tolist()
+        'atoms_x': atoms_x,
+        'atoms_y': atoms_y,
+        'atoms_z': atoms_z
     }
 
     return jsonify(return_value)

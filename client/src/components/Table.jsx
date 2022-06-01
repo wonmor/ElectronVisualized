@@ -1,23 +1,27 @@
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch, Provider } from "react-redux";
+
+import store from "../store";
 
 // A MUST — MAKE SURE THAT YOU WRITE CURLY BRACKETS NEXT TO IMPORT!
-import { setGlobalAtomInfo } from '../states/atomInfoSlice'
+import { setGlobalAtomInfo } from "../states/atomInfoSlice";
 
 import axios from "axios";
 
 import { Canvas } from "react-three-fiber";
 
-import Renderer from "./Renderer";
+import { Atoms, Particles, Tube } from "./Renderer";
 import Controls from "./Controls";
 
-import CANVAS from "./Constants";
+import CANVAS, { RENDERER } from "./Constants";
+
+var coordinates = [];
 
 export default function Table() {
   const [atomInfo, setAtomInfo] = useState(null);
 
-  const globalAtomInfo = useSelector((state) => state.atomInfo.value)
-  const dispatch = useDispatch()
+  const globalAtomInfo = useSelector((state) => state.atomInfo.value);
+  const dispatch = useDispatch();
 
   const update = () => {
     axios({
@@ -48,6 +52,14 @@ export default function Table() {
 
   console.log(globalAtomInfo);
 
+  var atoms_x, atoms_y, atoms_z;
+
+  if (globalAtomInfo != null) {
+    atoms_x = globalAtomInfo["atoms_x"];
+    atoms_y = globalAtomInfo["atoms_y"];
+    atoms_z = globalAtomInfo["atoms_z"];
+  }
+
   return (
     <div className="bg-gray-700">
       <div className="text-white text-center pt-10 pb-10">
@@ -75,11 +87,61 @@ export default function Table() {
           <ambientLight intensity={0.5} />
           <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
           <pointLight position={[-10, -10, -10]} />
-          <Renderer position={[-1.2, 0, 0]} />
-          <Renderer position={[2.5, 0, 0]} />
+
+          {globalAtomInfo && (
+            <Provider store={store}>
+              {atoms_x.map((value, index) => {
+                randomParticles(atoms_x, atoms_y, atoms_z, index);
+
+                return (
+                  <>
+                    <Atoms
+                      position={[
+                        atoms_x[index],
+                        atoms_y[index],
+                        atoms_z[index],
+                      ]}
+                    />
+                  </>
+                );
+              })}
+              {coordinates.map((value, index) => {
+                return <Particles position={coordinates[index]} />;
+              })}
+              <Tube position={[(atoms_x[1] + atoms_x[0]) / 2, (atoms_y[1] + atoms_y[0]) / 2, atoms_z[0]]} />
+            </Provider>
+          )}
+
           <gridHelper args={[undefined, undefined, "white"]} />
         </Canvas>
       </div>
     </div>
   );
 }
+
+function randomSpherePoint(x0, y0, z0, radius) {
+  var u = Math.random();
+  var v = Math.random();
+
+  var theta = 2 * Math.PI * u;
+  var phi = Math.acos(2 * v - 1);
+
+  var x = x0 + radius * Math.sin(phi) * Math.cos(theta);
+  var y = y0 + radius * Math.sin(phi) * Math.sin(theta);
+  var z = z0 + radius * Math.cos(phi);
+
+  return [x, y, z];
+}
+
+const randomParticles = (atoms_x, atoms_y, atoms_z, index) => {
+  for (var i = 0; i < 200; i++) {
+    coordinates.push(
+      randomSpherePoint(
+        atoms_x[index],
+        atoms_y[index],
+        atoms_z[index],
+        RENDERER.ATOM_RADIUS
+      )
+    );
+  }
+};

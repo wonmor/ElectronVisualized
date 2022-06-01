@@ -1,3 +1,3 @@
-web: gunicorn electron_visualized:app
+web: cd client && npm run start-heroku
 
 # HOW TO SET UP HEROKU GUNICRON PROFILE: https://stackoverflow.com/questions/38851564/heroku-gunicorn-procfile

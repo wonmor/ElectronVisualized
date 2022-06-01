@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 export const atomInfoSlice = createSlice({
     name: 'atomInfo',
     initialState: {
-        value: []
+        value: null
     },
     reducers: {
         setGlobalAtomInfo: (state, action) => {

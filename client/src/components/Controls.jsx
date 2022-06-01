@@ -11,6 +11,8 @@ export default function Controls() {
   return (
     <orbitControls
       enableZoom={true}
+      minDistance={5}
+      maxDistance={30}
       args={[camera, gl.domElement]}
     />
   );

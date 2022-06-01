@@ -26,7 +26,8 @@
         "build-api": "sudo apt install libxc-dev",
         "build": "react-scripts build",
         "test": "react-scripts test",
-        "eject": "react-scripts eject"
+        "eject": "react-scripts eject",
+        "start-heroku": "node heroku.js"
     },
     "eslintConfig": {
         "extends": [

@@ -26,4 +26,5 @@ if __name__ == '__main__':
 
 '''
 PIP FREEZE LOCALLY: pip3 freeze -l > requirements.txt
+DEPLOYING FLASK + REACT APP ON HEROKU: https://www.realpythonproject.com/how-to-setup-automated-deployment-for-multiple-apps-under-a-single-github-repository-in-heroku/
 '''
