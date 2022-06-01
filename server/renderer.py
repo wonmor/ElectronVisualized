@@ -5,6 +5,18 @@ from ase.data.colors import jmol_colors as atomic_colors
 
 
 def element_plotter():
+    '''
+    This is a function that generates the coordinates for all plausible locations where electrons might reside in
+    
+    Parameters
+    ----------
+    None
+
+    Returns
+    -------
+    List
+        A JSONified dictionary that contains the electron density and coordinate data
+    '''
 
     # mlab.figure(1, bgcolor=(0, 0, 0), size=(350, 350))
     # mlab.clf()

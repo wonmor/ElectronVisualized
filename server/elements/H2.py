@@ -10,6 +10,17 @@ DOWNLOAD DATASETS FOR THE PSEUDO WAVEFUNCTION GENERATION PROCESS:
 '''
 
 def plot_hydrogen():
+    '''
+    This is a function that applies the Density Functional Theory and generates the coordinates of probable locations of electrons of Hydrogen atom
+    
+    Parameters
+    ----------
+    None
+
+    Returns
+    -------
+    None
+    '''
     calc = GPAW(h=.18,
                 xc='PBE',
                 maxiter=3500,

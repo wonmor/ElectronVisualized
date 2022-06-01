@@ -15,7 +15,17 @@ TIPS & TRICKS
 '''
 
 def create_app():
-    # Initialize the app
+    '''
+    Initializes the Flask REST API that handles most of the mathematical operations
+    
+    Parameters
+    ----------
+    None
+    
+    Returns
+    -------
+    None
+    '''
     app = Flask(__name__)
 
     from . import api
@@ -34,7 +44,16 @@ def create_app():
 
 
 def register_extensions(app):
-    # Intialize the database
+    '''
+    Initializes the SQLAlchemy database that stores the data safety on the server-side
+    
+    Parameters
+    ----------
+    app: Object
+        An object that stores the Flask app instance
+    -------
+    None
+    '''
     db.init_app(app)
 
 
