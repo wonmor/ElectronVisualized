@@ -1,2 +1,1 @@
-python-dev liblapack-dev
-libxc-dev
+python3-dev libopenblas-dev libxc-dev libscalapack-mpi-dev libfftw3-dev

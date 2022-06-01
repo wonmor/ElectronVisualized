@@ -26,6 +26,9 @@ ON MAC:
 4. export LDFLAGS="-L/opt/homebrew/opt/openblas/lib"
 5. export CPPFLAGS="-I/opt/homebrew/opt/openblas/include"
 
+ON UBUNTU:
+https://gitlab.com/gpaw/gpaw/-/blob/master/doc/platforms/Linux/ubuntu.rst#id1
+
 After all this, execute pip3 install gpaw
 
 ----------------------------------------------------------------
