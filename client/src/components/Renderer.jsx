@@ -3,7 +3,7 @@ import React, { useRef, useState, useMemo } from "react";
 import { useFrame } from "react-three-fiber";
 import * as THREE from "three";
 
-import five from "./objects/Five.png";
+import five from "../assets/Five.png";
 
 export default function Renderer(props) {
     const mesh = useRef();
