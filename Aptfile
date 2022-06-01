@@ -1,1 +1,1 @@
-build-essential binutils python3-dev liblapack-dev libblas-dev libopenblas-dev libxc-dev libscalapack-mpi-dev libfftw3-dev ase gpaw
+build-essential binutils python3-dev liblapack-dev libopenblas-dev libxc-dev libscalapack-mpi-dev libfftw3-dev ase gpaw
