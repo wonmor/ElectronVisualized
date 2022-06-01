@@ -16,7 +16,7 @@ Website is still in the **development** phase but will be completed in a timely 
 
 ---
 
-<img width="1000" alt="Screen Shot 2022-05-30 at 10 23 42 PM" src="https://user-images.githubusercontent.com/35755386/171080354-8341ba6b-b540-466c-81a8-5766f4cd5cf3.png">
+<img width="1000" alt="Screen Shot 2022-05-31 at 11 50 19 PM" src="https://user-images.githubusercontent.com/35755386/171324066-30705e39-105b-46e0-90e0-defb88971e32.png">
 
 ![IMG_7647](https://user-images.githubusercontent.com/35755386/166985579-96c2d483-e74c-4802-ac92-762b2ccc8bc9.jpg)
 
