@@ -15,8 +15,9 @@ SUPPORTED PLATFORMS: WEB(REACT + FLASK STACK), IOS & MACOS (IN DEV)
 
 :: TIPS & TRICKS FOR INSTALLING GPAW (PSEUDO WAVEFUNCTION GENERATOR/CALCULATOR) ON A MACOS ENVIRONMENT ::
 
-UPDATED LINK: https://elements.heroku.com/buildpacks/camenergydatalab/heroku-buildpack-python
-A MUST READ!
+A MUST! ADD CONDA BUILDPACK TO HEROKU: https://elements.heroku.com/buildpacks/heroku-python/conda-buildpack
+
+ALSO DO NOT PLACE GPAW IN THE REQUIREMENTS.TXT FILE; MOVE IT TO CONDA-REQUIREMENTS.TXT AS IT REQUIRES C DEPENDENCIES
 
 Make sure you download libxc through brew and execute all the export commands on macOS:
 https://gitlab.com/gpaw/gpaw/-/merge_requests/830/diffs#43b43d9adc91f1e38f6d186a1d173d83aaea27fd
@@ -55,7 +56,7 @@ from server.extensions import db
 
 from . import renderer
 
-# from server.elements.H2 import plot_hydrogen
+from server.elements.H2 import plot_hydrogen
 
 bp = Blueprint('main', __name__, static_folder='../client/build', static_url_path='/')
 
@@ -95,5 +96,5 @@ def plot():
         A JSONified dictionary that contains the electron density and coordinate data
     '''
     if request.method == 'GET':
-        # plot_hydrogen()
+        plot_hydrogen()
         return renderer.element_plotter()
