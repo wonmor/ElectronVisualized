@@ -8,7 +8,8 @@ from flask_cors import CORS, cross_origin
 
 THE "WORLD ENGINE," A RESTful API THAT POWERS THE INTERACTIVE MODULE ELECTRONVISUALIZED
 DEVELOPED AND DESIGNED BY JOHN SEONG
-SUPPORTED PLATFORMS: WEB, IOS & MACOS (IN DEV)
+
+SUPPORTED PLATFORMS: WEB(REACT + FLASK STACK), IOS & MACOS (IN DEV)
 
 ----------------------------------------------------------------
 
@@ -36,6 +37,13 @@ After all this, execute pip3 install gpaw
 :: HELPFUL LINKS ::
 
 https://www.brown.edu/Departments/Engineering/Labs/Peterson/tips/ElectronDensity/index.html
+
+----------------------------------------------------------------
+
+:: HOW TO ACCESS HEROKU CLI BASH TERMINAL ::
+
+heroku login
+heroku ps:exec --app=scoreboard-backend-dev
 
 ----------------------------------------------------------------
 '''
