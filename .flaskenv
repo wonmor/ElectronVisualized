@@ -1,2 +1,2 @@
 FLASK_APP=electron_visualized.py
-FLASK_ENV=development
+FLASK_ENV=production
