@@ -95,5 +95,5 @@ def plot():
         A JSONified dictionary that contains the electron density and coordinate data
     '''
     if request.method == 'GET':
-        plot_hydrogen()
+        # plot_hydrogen()
         return renderer.element_plotter()
