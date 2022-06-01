@@ -1,1 +1,2 @@
-libxc-dev
+python-dev liblapack-dev
+python-gtk2 libxc-dev

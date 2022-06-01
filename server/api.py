@@ -19,6 +19,7 @@ https://gitlab.com/gpaw/gpaw/-/merge_requests/830/diffs#43b43d9adc91f1e38f6d186a
 
 After installing libxc through brew...
 
+ON MAC:
 1. export C_INCLUDE_PATH=/opt/homebrew/Cellar/libxc/5.2.3/include
 2. export LIBRARY_PATH=/opt/homebrew/Cellar/libxc/5.2.3/lib
 3. export LD_LIBRARY_PATH=/opt/homebrew/Cellar/libxc/5.2.3/lib

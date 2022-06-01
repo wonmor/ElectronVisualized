@@ -25,6 +25,9 @@ if __name__ == '__main__':
     app.run()
 
 '''
+TIPS & TRICKS
+
 PIP FREEZE LOCALLY: pip3 freeze -l > requirements.txt
 DEPLOYING FLASK + REACT APP ON HEROKU: https://www.realpythonproject.com/how-to-setup-automated-deployment-for-multiple-apps-under-a-single-github-repository-in-heroku/
+HOW TO INSTALL ASE AND GPAW ON LINUX (SERVER): http://dtu.cnwiki.dk/10302/page/2699/optional-install-ase-and-gpaw-on-your-laptop
 '''
