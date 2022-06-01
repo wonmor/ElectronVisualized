@@ -49,6 +49,6 @@ Website is still in the **development** phase but will be completed in a timely 
 ## How to Run
 
 1. Install **BLAS** and **Libxc** globally, either using ```brew``` or other package managers available on the desired operating system
-2. Setup the **client-side**:```cd client && npm install```
+2. Setup the **client-side**: ```cd client && npm install```
 3. ```yarn start build```
 4. Setup the **server-side**: On a seperate terminal, execute ```cd client && yarn start-api```
