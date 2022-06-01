@@ -40,6 +40,7 @@ Website is still in the **development** phase but will be completed in a timely 
 - **GPAW**: Projector-Augmented Wave Extension for ASE (Pseudo Wave Function Generator)
 - **Libxc**: The Electronic Structure Library for DFT (Density Functional Theory)
 - **SQLAlchemy**: An Open-Source SQL Toolkit 
+- **Heroku APT Buildpack**: Add Support for Apt-Based Dependencies 
 
 ---
 
