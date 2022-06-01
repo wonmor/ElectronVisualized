@@ -15,6 +15,9 @@ SUPPORTED PLATFORMS: WEB(REACT + FLASK STACK), IOS & MACOS (IN DEV)
 
 :: TIPS & TRICKS FOR INSTALLING GPAW (PSEUDO WAVEFUNCTION GENERATOR/CALCULATOR) ON A MACOS ENVIRONMENT ::
 
+UPDATED LINK: https://elements.heroku.com/buildpacks/camenergydatalab/heroku-buildpack-python
+A MUST READ!
+
 Make sure you download libxc through brew and execute all the export commands on macOS:
 https://gitlab.com/gpaw/gpaw/-/merge_requests/830/diffs#43b43d9adc91f1e38f6d186a1d173d83aaea27fd
 

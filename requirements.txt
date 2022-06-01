@@ -8,7 +8,6 @@ Flask==2.1.2
 Flask-Cors==3.0.10
 Flask-SQLAlchemy==2.5.1
 fonttools==4.33.3
-gpaw==22.1.0
 itsdangerous==2.1.2
 Jinja2==3.1.2
 kiwisolver==1.4.2
