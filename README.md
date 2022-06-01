@@ -41,7 +41,8 @@ Website is still in the **development** phase but will be completed in a timely 
 - **Libxc**: The Electronic Structure Library for DFT (Density Functional Theory)
 - **BLAS**: Basic Linear Algebra Subprograms
 - **SQLAlchemy**: An Open-Source SQL Toolkit 
-- **Heroku APT Buildpack**: Add Support for Apt-Based Dependencies 
+- **Conda** Buildpack: Python Distribution for Scientific Computing by Continuum Analytics.
+- **Heroku APT** Buildpack: Add Support for Apt-Based Dependencies 
 
 ---
 
