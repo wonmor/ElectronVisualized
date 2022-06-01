@@ -23,11 +23,11 @@
     "scripts": {
         "start": "react-scripts start",
         "start-api": "cd ../ && venv/bin/flask run --no-debugger",
+        "start-heroku": "node heroku.js",
         "build-api": "sudo apt install libxc-dev",
         "build": "react-scripts build",
         "test": "react-scripts test",
-        "eject": "react-scripts eject",
-        "start-heroku": "node heroku.js"
+        "eject": "react-scripts eject"
     },
     "eslintConfig": {
         "extends": [
