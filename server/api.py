@@ -55,7 +55,7 @@ from server.extensions import db
 
 from . import renderer
 
-from server.elements.H2 import plot_hydrogen
+# from server.elements.H2 import plot_hydrogen
 
 bp = Blueprint('main', __name__, static_folder='../client/build', static_url_path='/')
 
