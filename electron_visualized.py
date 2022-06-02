@@ -1,9 +1,14 @@
-# -----------------------------------------------------------------------------
-# Name:        ElectronVisualized
+'''
+█████████████████████████████████████████████████████████████████████████████████████████████████████████████
+█▄─▄▄─█▄─▄███▄─▄▄─█─▄▄▄─█─▄─▄─█▄─▄▄▀█─▄▄─█▄─▀█▄─▄███▄─█─▄█▄─▄█─▄▄▄▄█▄─██─▄██▀▄─██▄─▄███▄─▄█░▄▄░▄█▄─▄▄─█▄─▄▄▀█
+██─▄█▀██─██▀██─▄█▀█─███▀███─████─▄─▄█─██─██─█▄▀─█████▄▀▄███─██▄▄▄▄─██─██─███─▀─███─██▀██─███▀▄█▀██─▄█▀██─██─█
+▀▄▄▄▄▄▀▄▄▄▄▄▀▄▄▄▄▄▀▄▄▄▄▄▀▀▄▄▄▀▀▄▄▀▄▄▀▄▄▄▄▀▄▄▄▀▀▄▄▀▀▀▀▀▄▀▀▀▄▄▄▀▄▄▄▄▄▀▀▄▄▄▄▀▀▄▄▀▄▄▀▄▄▄▄▄▀▄▄▄▀▄▄▄▄▄▀▄▄▄▄▄▀▄▄▄▄▀▀
+'''
+# ----------------------------------------------------------------------------
 # Purpose:     An interactive module that visualizes the electron configurations of different elements.
 #              Displayed in an orbital format, based upon the internal calculations performed that involve the famous Dirac equation,
 #              which describes the shape and structure of the electrons in terms of the wavefunction.
-# z
+#
 # Author:      John Seong
 # Created:     23-Mar-2022
 # Updated:     31-May-2022

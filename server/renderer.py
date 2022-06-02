@@ -14,7 +14,7 @@ def element_plotter():
 
     Returns
     -------
-    List
+    JSON Array
         A JSONified dictionary that contains the electron density and coordinate data
     '''
 

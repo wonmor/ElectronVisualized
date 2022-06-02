@@ -6,8 +6,21 @@ import { decrement, increment } from '../states/counterSlice'
 import "./Header.css";
 import Logo from "../assets/e_logo.svg";
 
+// For React-Redux state management library: https://react-redux.js.org/tutorials/quick-start
+
 export default function Header() {
-  // For React-Redux state management library: https://react-redux.js.org/tutorials/quick-start
+  /*
+    This is a component function in JSX that contains the HTML markup that represent each graphical element on the webpage
+
+    Parameters
+    ----------
+    None
+
+    Returns
+    -------
+    DOM File
+        A HTML markup that contains graphical elements
+  */
   const count = useSelector((state) => state.counter.value)
   const dispatch = useDispatch()
 

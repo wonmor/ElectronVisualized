@@ -7,6 +7,18 @@ import { useSelector } from "react-redux";
 import { RENDERER } from "./Constants";
 
 export function Atoms(props) {
+  /*
+  This is a component function in JSX
+
+  Parameters
+  ----------
+  None
+
+  Returns
+  -------
+  React Property
+    Contains the information regarding mesh (in this case, atoms) under React-ThreeJS library
+  */
   const mesh = useRef();
 
   const [active, setActive] = useState(false);
@@ -25,6 +37,18 @@ export function Atoms(props) {
 }
 
 export function Particles(props) {
+  /*
+  This is a component function in JSX
+
+  Parameters
+  ----------
+  None
+
+  Returns
+  -------
+  React Property
+    Contains the information regarding mesh (in this case, particles) under React-ThreeJS library
+  */
   const mesh = useRef();
 
   const [active, setActive] = useState(false);
@@ -49,6 +73,18 @@ export function Particles(props) {
 }
 
 export function Tube(props) {
+  /*
+  This is a component function in JSX
+
+  Parameters
+  ----------
+  None
+
+  Returns
+  -------
+  React Property
+    Contains the information regarding mesh (in this case, tube that connects two atoms) under React-ThreeJS library
+  */
   const globalAtomInfo = useSelector((state) => state.atomInfo.value);
 
   const mesh = useRef();

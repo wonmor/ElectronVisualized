@@ -4,7 +4,11 @@ from flask_cors import CORS, cross_origin
 '''
 ----------------------------------------------------------------
 
-THE "WORLD ENGINE," A RESTful API THAT POWERS THE INTERACTIVE MODULE ELECTRONVISUALIZED
+█─█ ▀▀█▀▀ ░█─░█ ░█▀▀▀ 　 ░█──░█ ░█▀▀▀█ ░█▀▀█ ░█─── ░█▀▀▄ 　 ░█▀▀▀ ░█▄─░█ ░█▀▀█ ▀█▀ ░█▄─░█ ░█▀▀▀ █─█ 
+─── ─░█── ░█▀▀█ ░█▀▀▀ 　 ░█░█░█ ░█──░█ ░█▄▄▀ ░█─── ░█─░█ 　 ░█▀▀▀ ░█░█░█ ░█─▄▄ ░█─ ░█░█░█ ░█▀▀▀ ─── 
+─── ─░█── ░█─░█ ░█▄▄▄ 　 ░█▄▀▄█ ░█▄▄▄█ ░█─░█ ░█▄▄█ ░█▄▄▀ 　 ░█▄▄▄ ░█──▀█ ░█▄▄█ ▄█▄ ░█──▀█ ░█▄▄▄ ───
+
+A RESTful API THAT POWERS THE INTERACTIVE MODULE ELECTRONVISUALIZED
 DEVELOPED AND DESIGNED BY JOHN SEONG
 
 SUPPORTED PLATFORMS: WEB(REACT + FLASK STACK), IOS & MACOS (IN DEV)
@@ -54,17 +58,18 @@ heroku ps:exec --app=scoreboard-backend-dev
 https://blog.miguelgrinberg.com/post/how-to-dockerize-a-react-flask-project
 
 BUILD DOCKER FILE COMMAND — SERVER:
-docker build -f /Users/johnseong/Documents/GitHub/ElectronVisualized/DockerFile.api -t electronvisualized-api .
+docker build -f /Users/johnseong/Documents/GitHub/ElectronVisualized/Dockerfile.api -t electronvisualized-api .
 [OPTIONAL] docker run --rm -p 5000:5000 electronvisualized-api
 
 BUILD DOCKER FILE COMMAND — CLIENT:
-docker build -f /Users/johnseong/Documents/GitHub/ElectronVisualized/DockerFile.client -t electronvisualized-client .
+docker build -f /Users/johnseong/Documents/GitHub/ElectronVisualized/Dockerfile.client -t electronvisualized-client .
 
 DOCKER-COMPOSE:
 docker-compose build
 docker-compose up
 
 HEROKU:
+heroku stack:set container
 heroku container:push --recursive
 heroku container:release web worker // If it's DockerFile.web and DockerFile.worker...
 ----------------------------------------------------------------
@@ -110,7 +115,7 @@ def plot():
 
     Returns
     -------
-    Dictionary
+    JSON Array
         A JSONified dictionary that contains the electron density and coordinate data
     '''
     if request.method == 'GET':

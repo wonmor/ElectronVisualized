@@ -1,3 +1,4 @@
 build:
   docker:
-    web: Dockerfile
+    web: Dockerfile.client
+    worker: Dockerfile.api
