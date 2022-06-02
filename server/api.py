@@ -13,7 +13,7 @@ SUPPORTED PLATFORMS: WEB(REACT + FLASK STACK), IOS & MACOS (IN DEV)
 
 ----------------------------------------------------------------
 
-:: TIPS & TRICKS FOR INSTALLING GPAW (PSEUDO WAVEFUNCTION GENERATOR/CALCULATOR) ON A MACOS ENVIRONMENT ::
+:: TIPS & TRICKS FOR INSTALLING GPAW (PSEUDO WAVEFUNCTION GENERATOR/CALCULATOR) IN A MACOS ENVIRONMENT ::
 
 A MUST! ADD CONDA BUILDPACK TO HEROKU: https://elements.heroku.com/buildpacks/heroku-python/conda-buildpack
 
@@ -48,6 +48,14 @@ https://www.brown.edu/Departments/Engineering/Labs/Peterson/tips/ElectronDensity
 
 heroku login
 heroku ps:exec --app=scoreboard-backend-dev
+
+---------------------------------------------------------------- 
+
+:: HOW TO DOCKERIZE A REACT + FLASK STACK ::
+
+https://blog.miguelgrinberg.com/post/how-to-dockerize-a-react-flask-project
+
+BUILD DOCKER FILE COMMAND: docker build -f /Users/johnseong/Documents/GitHub/ElectronVisualized/DockerFile.combo -t electronvisualized .
 
 ----------------------------------------------------------------
 '''

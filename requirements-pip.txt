@@ -8,14 +8,12 @@ Flask
 Flask-Cors
 Flask-SQLAlchemy
 fonttools
-gpaw
 gunicorn
 itsdangerous
 Jinja2
 kiwisolver
 MarkupSafe
 matplotlib
-numpy
 packaging
 Pillow
 pycodestyle
@@ -25,7 +23,6 @@ python-dateutil
 python-dotenv
 python-vtk
 pytz
-scipy
 six
 SQLAlchemy
 toml
