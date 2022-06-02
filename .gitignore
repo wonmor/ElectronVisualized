@@ -274,3 +274,8 @@ Temporary Items
 
 *.db
 # Ignore all the .db files
+
+# For ASE and GPAW
+server/grid.npy
+server/GPAW_log.txt
+server/density.cube
