@@ -56,6 +56,7 @@ heroku ps:exec --app=scoreboard-backend-dev
 :: HOW TO DOCKERIZE A REACT + FLASK STACK (REPLACE PATH WITH YOUR PROJECT PATH, DEFAULT SET TO MAC STANDARD)::
 
 https://blog.miguelgrinberg.com/post/how-to-dockerize-a-react-flask-project
+https://developer.okta.com/blog/2020/06/24/heroku-docker-react#deploy-your-react-app-to-heroku
 
 BUILD DOCKER FILE COMMAND — SERVER:
 docker build -f /Users/johnseong/Documents/GitHub/ElectronVisualized/Dockerfile.api -t electronvisualized-api .
