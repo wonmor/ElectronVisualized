@@ -4,9 +4,21 @@ from ase.io import write
 import numpy as np
 
 '''
+
+░█─░█ █──█ █▀▀▄ █▀▀█ █▀▀█ █▀▀▀ █▀▀ █▀▀▄ 
+░█▀▀█ █▄▄█ █──█ █▄▄▀ █──█ █─▀█ █▀▀ █──█ 
+░█─░█ ▄▄▄█ ▀▀▀─ ▀─▀▀ ▀▀▀▀ ▀▀▀▀ ▀▀▀ ▀──▀
+
+VERY IMPORTANT!
+
 DOWNLOAD DATASETS FOR THE PSEUDO WAVEFUNCTION GENERATION PROCESS:
 1. gpaw install-data <dir>
 2. export GPAW_SETUP_PATH=~/gpaw-setups-<version>
+
+ON HEROKU:
+SET THE ENVIRONMENTAL VARIABLE TO
+KEY — GPAW_SETUP_PATH
+DATA — server/datasets/gpaw-setups-0.9.20000
 '''
 
 def plot_hydrogen():
@@ -16,7 +28,7 @@ def plot_hydrogen():
     Parameters
     ----------
     None
-    
+
     Returns
     -------
     None
