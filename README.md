@@ -41,7 +41,6 @@ Website is still in the **development** phase but will be completed in a timely 
 - **Libxc**: The Electronic Structure Library for DFT (Density Functional Theory)
 - **BLAS**: Basic Linear Algebra Subprograms
 - **SQLAlchemy**: An Open-Source SQL Toolkit 
-- **Docker**: Platform as a Service (PaaS)
 - **Heroku APT** Buildpack: Add Support for Apt-Based Dependencies 
 
 ---
