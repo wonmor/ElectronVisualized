@@ -52,5 +52,5 @@ Website is still in the **development** phase but will be completed in a timely 
 3. ```yarn build``` to convert React JSXs into production files that Flask (our back-end) can read
 4. Setup the **server-side**: On a **seperate** terminal, go to the root folder, and set up the virtual environment
 5. **OPTIONAL**: ```gpaw install-data <dir>``` if you would like to generate your own version of GPAW datasets; otherwise, use the one that is pre-packaged in this repo
-6. Run ```export GPAW_SETUP_PATH=~/gpaw-setups-<version>``` to direct the API to the GPAW datasets that are pre-rendered (already included in the repo)
+6. Run ```export GPAW_SETUP_PATH=~/gpaw-setups-<version>``` to direct the API to the GPAW datasets that are rendered in step 5 (or use the one that is already included in this repo)
 7. Execute ```pip3 install requirements.txt && cd client && yarn start-api```
