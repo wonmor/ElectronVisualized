@@ -36,9 +36,9 @@ Website is still in the **development** phase but will be completed in a timely 
 - **Flask**: Microframework for Web
 - **Matplotlib**: Visualization with Python
 - **NumPy** and **SciPy**: Core Libraries for Scientific Computing
+- **ASE**: Atomic Simulation Environment 
 - MUST INSTALL BEFORE **GPAW** — **Libxc**: The Electronic Structure Library for DFT (Density Functional Theory)
 - MUST INSTALL BEFORE **GPAW** — **BLAS**: Basic Linear Algebra Subprograms
-- **ASE**: Atomic Simulation Environment 
 - **GPAW**: Projector-Augmented Wave Extension for ASE (Pseudo Wave Function Generator)
 - **SQLAlchemy**: An Open-Source SQL Toolkit
 - **Docker**: OS-level Virtualization
