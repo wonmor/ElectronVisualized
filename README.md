@@ -50,4 +50,7 @@ Website is still in the **development** phase but will be completed in a timely 
 1. Install **BLAS** and **Libxc** globally, either using ```brew``` or other package managers available on the desired operating system
 2. Setup the **client-side**: ```cd client && npm install```
 3. ```yarn build```
-4. Setup the **server-side**: On a **seperate** terminal, go to the root folder, set up the virtual environment, then execute ```pip3 install requirements.txt && cd client && yarn start-api```
+4. Setup the **server-side**: On a **seperate** terminal, go to the root folder, and set up the virtual environment
+5. **OPTIONAL**: ```gpaw install-data <dir>``` if you would like to generate your own version of GPAW datasets; otherwise, use the one that is pre-packaged in this repo
+6. Run ```export GPAW_SETUP_PATH=~/gpaw-setups-<version>``` to direct the API to the GPAW datasets that are pre-rendered (already included in the repo)
+7. Execute ```pip3 install requirements.txt && cd client && yarn start-api```
