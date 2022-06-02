@@ -76,11 +76,11 @@ heroku container:release web worker // If it's DockerFile.web and DockerFile.wor
 ----------------------------------------------------------------
 '''
 
-from extensions import db
+from server.extensions import db
 
-import renderer
+from . import renderer
 
-from elements.H2 import plot_hydrogen
+from server.elements.H2 import plot_hydrogen
 
 bp = Blueprint('main', __name__, static_folder='../client/build', static_url_path='/')
 

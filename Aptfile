@@ -1,1 +1,1 @@
-build-essential binutils python3-dev gfortran liblapack-dev libopenblas-dev libxc-dev libscalapack-mpi-dev libfftw3-dev
+build-essential binutils python3-dev gfortran liblapack-dev libopenblas-dev libxc-dev libscalapack-mpi-dev libfftw3-dev ase
