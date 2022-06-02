@@ -42,7 +42,6 @@ Website is still in the **development** phase but will be completed in a timely 
 - **BLAS**: Basic Linear Algebra Subprograms
 - **SQLAlchemy**: An Open-Source SQL Toolkit 
 - **Docker**: OS-level Virtualization
-- **Heroku APT** Buildpack: Add Support for Apt-Based Dependencies 
 
 ---
 
