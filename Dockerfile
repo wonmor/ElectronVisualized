@@ -4,4 +4,5 @@ COPY requirements.txt /
 RUN pip3 install -r /requirements.txt
 COPY . /app
 WORKDIR /app
-CMD ["python", "./electron_visualized.py"]
+EXPOSE 5000
+CMD gunicorn electron_visualized:app

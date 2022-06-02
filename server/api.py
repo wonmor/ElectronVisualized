@@ -73,6 +73,13 @@ HEROKU:
 heroku stack:set container
 heroku container:push --recursive
 heroku container:release web worker // If it's DockerFile.web and DockerFile.worker...
+
+----------------------------------------------------------------
+
+:: ADDITIONAL REALLY HELPFUL LINKS ::
+
+https://dev.to/ejach/how-to-deploy-a-python-flask-app-on-heroku-using-docker-mpc
+
 ----------------------------------------------------------------
 '''
 
