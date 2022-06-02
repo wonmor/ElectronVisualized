@@ -1,8 +1,6 @@
 from flask import Blueprint, jsonify, request, send_from_directory
 from flask_cors import CORS, cross_origin
 
-# from renderer import element_plotter
-
 '''
 ----------------------------------------------------------------
 
@@ -51,20 +49,32 @@ heroku ps:exec --app=scoreboard-backend-dev
 
 ---------------------------------------------------------------- 
 
-:: HOW TO DOCKERIZE A REACT + FLASK STACK ::
+:: HOW TO DOCKERIZE A REACT + FLASK STACK (REPLACE PATH WITH YOUR PROJECT PATH, DEFAULT SET TO MAC STANDARD)::
 
 https://blog.miguelgrinberg.com/post/how-to-dockerize-a-react-flask-project
 
-BUILD DOCKER FILE COMMAND: docker build -f /Users/johnseong/Documents/GitHub/ElectronVisualized/DockerFile.combo -t electronvisualized .
+BUILD DOCKER FILE COMMAND — SERVER:
+docker build -f /Users/johnseong/Documents/GitHub/ElectronVisualized/DockerFile.api -t electronvisualized-api .
+[OPTIONAL] docker run --rm -p 5000:5000 electronvisualized-api
 
+BUILD DOCKER FILE COMMAND — CLIENT:
+docker build -f /Users/johnseong/Documents/GitHub/ElectronVisualized/DockerFile.client -t electronvisualized-client .
+
+DOCKER-COMPOSE:
+docker-compose build
+docker-compose up
+
+HEROKU:
+heroku container:push --recursive
+heroku container:release web worker // If it's DockerFile.web and DockerFile.worker...
 ----------------------------------------------------------------
 '''
 
-from server.extensions import db
+from extensions import db
 
-from . import renderer
+import renderer
 
-from server.elements.H2 import plot_hydrogen
+from elements.H2 import plot_hydrogen
 
 bp = Blueprint('main', __name__, static_folder='../client/build', static_url_path='/')
 
@@ -100,7 +110,7 @@ def plot():
 
     Returns
     -------
-    List
+    Dictionary
         A JSONified dictionary that contains the electron density and coordinate data
     '''
     if request.method == 'GET':

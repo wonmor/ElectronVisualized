@@ -29,3 +29,7 @@ toml
 traits
 traitsui
 Werkzeug
+numpy
+scipy
+pandas
+gpaw

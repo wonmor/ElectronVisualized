@@ -1,6 +1,0 @@
-libgfortran-ng
-libopenblas
-numpy
-scipy
-pandas
-gpaw
