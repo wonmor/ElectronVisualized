@@ -41,12 +41,11 @@ Website is still in the **development** phase but will be completed in a timely 
 - **Libxc**: The Electronic Structure Library for DFT (Density Functional Theory)
 - **BLAS**: Basic Linear Algebra Subprograms
 - **SQLAlchemy**: An Open-Source SQL Toolkit 
-- **Conda** Buildpack: Python Distribution for Scientific Computing by Continuum Analytics.
 - **Heroku APT** Buildpack: Add Support for Apt-Based Dependencies 
 
 ---
 
-## How to Run
+## How to Run Locally
 
 1. Install **BLAS** and **Libxc** globally, either using ```brew``` or other package managers available on the desired operating system
 2. Setup the **client-side**: ```cd client && npm install```
