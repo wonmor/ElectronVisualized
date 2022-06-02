@@ -47,7 +47,7 @@ Website is still in the **development** phase but will be completed in a timely 
 
 ## How to Run Locally
 
-1. Install **BLAS** and **Libxc** globally, either using ```brew``` or other package managers available on the desired operating system
+1. Install **BLAS** and **Libxc** globally, e.g. using ```brew``` on macOS or other package managers like ```APT``` (Linux) or ```Chocolatey``` (Windows)
 2. Setup the **client-side**: ```cd client && npm install```
 3. ```yarn build``` to convert React JSXs into production files that Flask (our back-end) can read
 4. Setup the **server-side**: On a **seperate** terminal, go to the root folder, and set up the virtual environment
