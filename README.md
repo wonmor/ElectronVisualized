@@ -49,7 +49,7 @@ Website is still in the **development** phase but will be completed in a timely 
 
 1. Install **C-based dependencies** BLAS and Libxc globally, e.g. using ```brew``` on macOS or other package managers like ```APT``` on Linux or ```Chocolatey``` on Windows (Heroku runs on top of Ubuntu by default, so in this case, I set up a ```Dockerfile``` to ```apt-get install```. A bit of trial and error were involved in the process of finding the right method, as Heroku's official ```APT buildpack``` was not suitable for deploying applications that involve scientific computing (modules such as SciPy or GPAW)
 2. Setup the **client-side**: ```cd client && npm install```
-3. ```yarn build``` to convert React JSXs into production files that Flask (our back-end) can read
+3. ```yarn build``` to convert React ```*.JSX``` into production files that Flask (our back-end) can read
 4. Setup the **server-side**: On a **seperate** terminal, go to the ```root``` folder, and set up the virtual environment
 5. **OPTIONAL**: ```gpaw install-data <dir>``` if you would like to generate your own version of GPAW datasets; otherwise, use the one that is pre-packaged in this repo
 6. Run ```export GPAW_SETUP_PATH=~/gpaw-setups-<version>``` to direct the API to the GPAW datasets that are rendered in step 5 (or use the one that is already included in this repo)
