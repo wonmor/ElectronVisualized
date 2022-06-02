@@ -49,4 +49,4 @@ Website is still in the **development** phase but will be completed in a timely 
 1. Install **BLAS** and **Libxc** globally, either using ```brew``` or other package managers available on the desired operating system
 2. Setup the **client-side**: ```cd client && npm install```
 3. ```yarn build```
-4. Setup the **server-side**: On a **seperate** terminal, execute ```pip3 install requirements.txt && cd client && yarn start-api```
+4. Setup the **server-side**: On a **seperate** terminal, go to the root folder, set up the virtual environment, then execute ```pip3 install requirements.txt && cd client && yarn start-api```
