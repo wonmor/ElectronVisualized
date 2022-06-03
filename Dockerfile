@@ -1,11 +1,12 @@
 # FOR FRONT-END DEPLOYMENT... (REACT)
 FROM node:16-alpine as build-step
 WORKDIR /
-ENV PATH /app/node_modules/.bin:$PATH
-COPY client/package.json yarn.lock ./app/
-COPY client/src ./app/src
-COPY client/public ./app/public
-WORKDIR /app
+ENV PATH /app/client/node_modules/.bin:$PATH
+COPY yarn.lock ./app
+COPY client/package.json ./app/client
+COPY client/src ./app/client/src
+COPY client/public ./app/client/public
+WORKDIR /app/client
 RUN yarn install
 RUN yarn build
 
@@ -15,7 +16,7 @@ WORKDIR /
 RUN apt-get update && apt-get install -y python3-dev gfortran libopenblas-dev libxc-dev libscalapack-mpi-dev libfftw3-dev
 COPY requirements.txt /
 RUN pip3 install -r /requirements.txt
-COPY . /app
+COPY electron_visualized .flaskenv server /app/
 WORKDIR /app
 EXPOSE 5000
 CMD gunicorn electron_visualized:app
