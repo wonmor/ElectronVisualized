@@ -15,7 +15,7 @@ WORKDIR /
 RUN apt-get update && apt-get install -y python3-dev gfortran libopenblas-dev libxc-dev libscalapack-mpi-dev libfftw3-dev
 COPY requirements.txt /
 RUN pip3 install -r /requirements.txt
-COPY electron_visualized .flaskenv server /app/
+COPY electron_visualized.py .flaskenv server /app/
 WORKDIR /app
 EXPOSE 5000
 CMD gunicorn electron_visualized:app
