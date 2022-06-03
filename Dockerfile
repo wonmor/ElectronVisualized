@@ -16,7 +16,8 @@ RUN apt-get update && apt-get install -y python3-dev gfortran libopenblas-dev li
 COPY requirements.txt /
 RUN pip3 install -r /requirements.txt
 # Pretty much pass everything in the root folder except for the client folder, as we do NOT want to overwrite the pre-generated client folder that is already in the ./app folder
-COPY electron_visualized.py .flaskenv server ./app/
+COPY electron_visualized.py .flaskenv ./app/
+COPY server ./app/server
 WORKDIR /app
 EXPOSE 5000
 CMD gunicorn electron_visualized:app
