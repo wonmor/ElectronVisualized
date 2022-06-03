@@ -22,7 +22,7 @@ Website is still in the **development** phase but will be completed in a timely 
 
 ---
 
-## Technologies Used (A Ton, You're Welcome)
+## Technologies Used (A Sh*t Ton, You're Welcome)
 
 ### Front-End: ```./client```
 - **React**: Front-End Javascript Library
