@@ -18,4 +18,5 @@ RUN pip3 install -r ./requirements.txt
 COPY electron_visualized.py .flaskenv ./
 COPY server ./server
 EXPOSE 5000
-CMD gunicorn electron_visualized:app
+ENTRYPOINT ["python"]
+CMD ["electron_visualized.py"]
