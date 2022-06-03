@@ -4,11 +4,13 @@
 
 A **real-time** electron orbital simulation **single-handedly** developed by a **high school student** (with some help with libraries written by **multiple** PhD holders; thank you). Displayed based upon the internal calculations performed that involve the famous **Density Functional Theory**, which describes the probable locations of electrons by numerically deriving the wavefunction.
 
-Website is still in the **development** phase but will be completed in a timely manner.
+---
 
-***FOR DEVELOPERS**: Visit ```{URL}/api/plot``` to retrieve data from the great **WORLD ENGINE** REST API!*
+## Official Build 1.0
 
-### [Launch API](https://electron-visualized.herokuapp.com/api/plot)
+### [Launch Website](https://electron-visualized.herokuapp.com/)
+
+***FOR DEVELOPERS**: Click this [link](https://electron-visualized.herokuapp.com/api/plot) to retrieve data from the great **WORLD ENGINE** REST API!*
 
 ---
 
