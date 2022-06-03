@@ -1,8 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useLayoutEffect } from "react";
 
-import * as THREE from 'three'
-
-import { useSelector } from "react-redux";
+import * as THREE from "three";
 
 import { RENDERER } from "./Constants";
 
@@ -30,8 +28,16 @@ export function Atoms(props) {
       scale={[1, 1, 1]}
       onClick={(e) => setActive(!active)}
     >
-      <sphereBufferGeometry args={[RENDERER.ATOM_RADIUS, 30, 30]} attach="geometry" />
-      <meshBasicMaterial color={0xfff1ef} opacity={0.1} transparent={true} attach="material" />
+      <sphereBufferGeometry
+        args={[RENDERER.ATOM_RADIUS, 30, 30]}
+        attach="geometry"
+      />
+      <meshBasicMaterial
+        color={0xfff1ef}
+        opacity={0.1}
+        transparent={true}
+        attach="material"
+      />
     </mesh>
   );
 }
@@ -66,13 +72,16 @@ export function Particles(props) {
       scale={[1, 1, 1]}
       onClick={(e) => setActive(!active)}
     >
-      <sphereBufferGeometry args={[RENDERER.PARTICLE_RADIUS, 30, 30]} attach="geometry" />
+      <sphereBufferGeometry
+        args={[RENDERER.PARTICLE_RADIUS, 30, 30]}
+        attach="geometry"
+      />
       <meshBasicMaterial color={0xfff1ef} attach="material" />
     </mesh>
   );
 }
 
-export function Tube(props) {
+export function Line({ start, end }) {
   /*
   This is a component function in JSX
 
@@ -85,36 +94,18 @@ export function Tube(props) {
   React Property
     Contains the information regarding mesh (in this case, tube that connects two atoms) under React-ThreeJS library
   */
-  const globalAtomInfo = useSelector((state) => state.atomInfo.value);
-
-  const mesh = useRef();
-
-  const [active, setActive] = useState(false);
-
-  var atoms_x, atoms_y, atoms_z;
-
-  if (globalAtomInfo != null) {
-    atoms_x = globalAtomInfo["atoms_x"];
-    atoms_y = globalAtomInfo["atoms_y"];
-    atoms_z = globalAtomInfo["atoms_z"];
-  }
-
-  const points = []
-
-  points.push(new THREE.Vector3(atoms_x[0], atoms_y[0], atoms_z[0]))
-  points.push(new THREE.Vector3(atoms_x[1], atoms_y[1], atoms_z[1]))
+  const ref = useRef();
+  useLayoutEffect(() => {
+    ref.current.geometry.setFromPoints(
+      [start, end].map((point) => new THREE.Vector3(...point))
+    );
+  }, [start, end]);
 
   return (
-    <mesh
-      {...props}
-      ref={mesh}
-      rotateX={Math.PI / 2}
-      scale={[1.5, 1.5, 1.5]}
-      onClick={(e) => setActive(!active)}
-    >
-      <bufferGeometry attach="geometry" setFromPoints={points} />
-      <lineBasicMaterial attach="material" color={0xfff1ef} linewidth={10} linecap={'round'} linejoin={'round'} />
-    </mesh>
+    <line ref={ref}>
+      <bufferGeometry attach="geometry" />
+      <lineBasicMaterial color="white" linewidth="5" attach="material" />
+    </line>
   );
 }
 

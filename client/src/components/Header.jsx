@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import { useSelector, useDispatch } from 'react-redux'
-import { decrement, increment } from '../states/counterSlice'
+// import { useSelector, useDispatch } from 'react-redux'
+// import { decrement, increment } from '../states/counterSlice'
 
 import "./Header.css";
 import Logo from "../assets/e_logo.svg";
@@ -21,8 +21,9 @@ export default function Header() {
     DOM File
         A HTML markup that contains graphical elements
   */
-  const count = useSelector((state) => state.counter.value)
-  const dispatch = useDispatch()
+
+  // const count = useSelector((state) => state.counter.value)
+  // const dispatch = useDispatch()
 
   const [isActive, setActive] = useState("false");
   const ShowResponsiveMenu = () => {
