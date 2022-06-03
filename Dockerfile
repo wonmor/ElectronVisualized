@@ -10,6 +10,8 @@ RUN yarn build
 
 # FOR BACK-END DEPLOYMENT... (FLASK)
 FROM python:3.10.4-slim
+WORKDIR /
+COPY --from=build-step app ./app
 WORKDIR /app
 RUN apt-get update && apt-get install -y python3-dev gfortran libopenblas-dev libxc-dev libscalapack-mpi-dev libfftw3-dev
 COPY requirements.txt ./
