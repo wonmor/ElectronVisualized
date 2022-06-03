@@ -8,7 +8,7 @@ Website is still in the **development** phase but will be completed in a timely 
 
 ***FOR DEVELOPERS**: Visit ```{URL}/api/plot``` to retrieve data from the great **WORLD ENGINE** REST API!*
 
-### [Launch Website](https://electron-visualized.herokuapp.com/api/plot)
+### [Launch API](https://electron-visualized.herokuapp.com/api/plot)
 
 ---
 
