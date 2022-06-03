@@ -66,5 +66,5 @@ Website is still in the **development** phase but will be completed in a timely 
 
 ## Last Words Before I Dip
 
+![Mr. Bean GIF](https://user-images.githubusercontent.com/35755386/171760980-8d553501-64b4-4601-bd6c-2c7ca3d7fe23.gif)
 
-<iframe src="https://giphy.com/embed/m9NSQjJEPv5AY" width="480" height="323" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/fav-mr-bean-1997-m9NSQjJEPv5AY">via GIPHY</a></p>
