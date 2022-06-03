@@ -12,7 +12,7 @@ import axios from "axios";
 
 import { Canvas } from "@react-three/fiber";
 
-import { Atoms, Particles, Line } from "./Renderer";
+import { Atoms, Particles, BondLine } from "./Renderer";
 import Controls from "./Controls";
 
 import CANVAS, { RENDERER } from "./Constants";
@@ -124,7 +124,7 @@ export default function Table() {
               {coordinates.map((value, index) => {
                 return <Particles position={value} />
               })}
-              <Line start={[atoms_x[0], atoms_y[0], atoms_z[0]]} end={[atoms_x[1], atoms_y[1], atoms_z[1]]} />
+              <BondLine start={[atoms_x[0], atoms_y[0], atoms_z[0]]} end={[atoms_x[1], atoms_y[1], atoms_z[1]]} />
             </Provider>
           )}
 
@@ -184,7 +184,7 @@ const genLineSegments = (lineCoordinates) => {
   */
   for (var i = 0; i < lineCoordinates.length; i++) {
     if (i !== (lineCoordinates.length - 1)) {
-      return <Line start={lineCoordinates[i]} end={lineCoordinates[i + 1]} />
+      return <BondLine start={lineCoordinates[i]} end={lineCoordinates[i + 1]} />
     }
   }
 }
@@ -243,7 +243,7 @@ const randomParticles = (atoms_x, atoms_y, atoms_z, no_of_atoms) => {
         atoms_x[no_of_atoms],
         atoms_y[no_of_atoms],
         atoms_z[no_of_atoms],
-        RENDERER.ATOM_RADIUS
+        2.0
       )
     );
   }

@@ -2,7 +2,13 @@ import React, { useRef, useState, useLayoutEffect } from "react";
 
 import * as THREE from "three";
 
+import { extend } from "@react-three/fiber";
+
+import { Line2, LineGeometry, LineMaterial } from 'three-fatline';
+
 import { RENDERER } from "./Constants";
+
+extend({ LineGeometry, LineMaterial });
 
 export function Atoms(props) {
   /*
@@ -34,7 +40,7 @@ export function Atoms(props) {
       />
       <meshBasicMaterial
         color={0xfff1ef}
-        opacity={0.1}
+        opacity={0.7}
         transparent={true}
         attach="material"
       />
@@ -81,7 +87,7 @@ export function Particles(props) {
   );
 }
 
-export function Line({ start, end }) {
+export function BondLine({ start, end }) {
   /*
   This is a component function in JSX
 
@@ -94,18 +100,24 @@ export function Line({ start, end }) {
   React Property
     Contains the information regarding mesh (in this case, tube that connects two atoms) under React-ThreeJS library
   */
-  const ref = useRef();
-  useLayoutEffect(() => {
-    ref.current.geometry.setFromPoints(
-      [start, end].map((point) => new THREE.Vector3(...point))
-    );
-  }, [start, end]);
+  const geometry = new LineGeometry();
+  geometry.setPositions(start.concat(end)); // [ x1, y1, z1,  x2, y2, z2, ... ] format
+  
+  const material = new LineMaterial({
+    color: 'hotpink',
+    linewidth: 5, // px
+    resolution: new THREE.Vector2(640, 480), // resolution of the viewport
+    transparent: true,
+    opacity: 0.5
+    // dashed, dashScale, dashSize, gapSize
+  });
+  
+  const myLine = new Line2(geometry, material);
+  
+  myLine.computeLineDistances();
 
   return (
-    <line ref={ref}>
-      <bufferGeometry attach="geometry" />
-      <lineBasicMaterial color="white" linewidth="5" attach="material" />
-    </line>
+    <primitive object={myLine} position={[0, 0, 0]} />
   );
 }
 
