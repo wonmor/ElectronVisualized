@@ -237,7 +237,7 @@ const randomParticles = (atoms_x, atoms_y, atoms_z, no_of_atoms) => {
   -------
   None
   */
-  for (var i = 0; i < 60; i++) {
+  for (var i = 0; i < 300; i++) {
     coordinates.push(
       randomSpherePoint(
         atoms_x[no_of_atoms],
