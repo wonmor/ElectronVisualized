@@ -66,4 +66,5 @@ Website is still in the **development** phase but will be completed in a timely 
 
 ## Last Words Before I Dip
 
-<div style="width:100%;height:0;padding-bottom:67%;position:relative;"><iframe src="https://giphy.com/embed/m9NSQjJEPv5AY" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/fav-mr-bean-1997-m9NSQjJEPv5AY">via GIPHY</a></p>
+
+<iframe src="https://giphy.com/embed/m9NSQjJEPv5AY" width="480" height="323" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/fav-mr-bean-1997-m9NSQjJEPv5AY">via GIPHY</a></p>
