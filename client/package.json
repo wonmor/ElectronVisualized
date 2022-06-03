@@ -5,6 +5,7 @@
     "private": true,
     "proxy": "http://localhost:5000",
     "dependencies": {
+        "@react-three/fiber": "^8.0.21",
         "@reduxjs/toolkit": "^1.8.2",
         "@testing-library/jest-dom": "^5.16.4",
         "@testing-library/react": "^13.2.0",
@@ -16,7 +17,6 @@
         "react-redux": "^8.0.2",
         "react-router-dom": "^6.3.0",
         "react-scripts": "5.0.1",
-        "react-three-fiber": "^6.0.13",
         "three": "^0.140.2",
         "web-vitals": "^2.1.4"
     },

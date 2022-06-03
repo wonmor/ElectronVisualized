@@ -8,7 +8,7 @@ import { setGlobalAtomInfo } from "../states/atomInfoSlice";
 
 import axios from "axios";
 
-import { Canvas } from "react-three-fiber";
+import { Canvas } from "@react-three/fiber";
 
 import { Atoms, Particles, Tube } from "./Renderer";
 import Controls from "./Controls";
