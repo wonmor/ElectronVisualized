@@ -18,6 +18,18 @@ import CANVAS, { RENDERER } from "./Constants";
 var coordinates = [];
 
 export default function Table() {
+  /*
+  This is a component function in JSX that also handles the HTTP requests from the server by using AJAX
+
+  Parameters
+  ----------
+  None
+
+  Returns
+  -------
+  React Property
+    Contains the information regarding mesh (in this case, atoms) under React-ThreeJS library
+  */
   const [atomInfo, setAtomInfo] = useState(null);
 
   const globalAtomInfo = useSelector((state) => state.atomInfo.value);
@@ -120,6 +132,21 @@ export default function Table() {
 }
 
 function randomSpherePoint(x0, y0, z0, radius) {
+  /*
+  A function that computes the coordinates for the random points used as a placeholder
+
+  Parameters
+  ----------
+  x0: Float
+  y0: Float
+  z0: Float
+  radius: Float
+
+  Returns
+  -------
+  Array
+    Contains the x, y, and z coordinates of the random point that is generated
+  */
   var u = Math.random();
   var v = Math.random();
 
@@ -134,6 +161,20 @@ function randomSpherePoint(x0, y0, z0, radius) {
 }
 
 const randomParticles = (atoms_x, atoms_y, atoms_z, index) => {
+  /*
+  A function that generates random points on the sphere (for placeholder purposes when the server has failed)
+
+  Parameters
+  ----------
+  atoms_x: Float
+  atoms_y: Float
+  atoms_z: Float
+  index: Integer
+
+  Returns
+  -------
+  None
+  */
   for (var i = 0; i < 200; i++) {
     coordinates.push(
       randomSpherePoint(

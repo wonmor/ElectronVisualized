@@ -1,11 +1,10 @@
 # FOR FRONT-END DEPLOYMENT... (REACT)
 FROM node:16-alpine as build-step
-WORKDIR /
-ENV PATH /app/client/node_modules/.bin:$PATH
-RUN mkdir ./app
-COPY yarn.lock ./app
-COPY client ./app
 WORKDIR /app/client
+ENV PATH /app/node_modules/.bin:$PATH
+COPY client/package.json yarn.lock ./
+COPY client/src ./src
+COPY client/public ./public
 RUN yarn install
 RUN yarn build
 
