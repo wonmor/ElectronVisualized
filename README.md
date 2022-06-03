@@ -33,15 +33,15 @@ Website is still in the **development** phase but will be completed in a timely 
 ---
 
 ### Back-End: ```./server```
-- **Flask**: Microframework for Web — INSTALL VIA **PIP**
-- **Matplotlib**: Visualization with Python — INSTALL VIA **PIP**
-- **NumPy** and **SciPy**: Core Libraries for Scientific Computing — INSTALL VIA **PIP**
-- **ASE**: Atomic Simulation Environment — INSTALL VIA **PIP**
-- *A **MUST** INSTALL BEFORE **GPAW*** — **Libxc**: The Electronic Structure Library for DFT (Density Functional Theory) — INSTALL VIA **BREW**, **APT**, OR **CHOCOLATEY**
-- *A **MUST** INSTALL BEFORE **GPAW*** — **BLAS**: Basic Linear Algebra Subprograms — INSTALL VIA **BREW**, **APT**, OR **CHOCOLATEY**
-- **GPAW**: Projector-Augmented Wave Extension for ASE (Pseudo Wave Function Generator) — INSTALL VIA **PIP**
-- **SQLAlchemy**: An Open-Source SQL Toolkit — INSTALL VIA **PIP**
-- **Docker**: OS-level Virtualization — INSTALL ON THEIR **WEBSITE** THROUGH GUI INSTALLER (FOR HEROKU DEPLOYMENT ONLY)
+- **Flask**: Microframework for Web — *INSTALL VIA **PIP***
+- **Matplotlib**: Visualization with Python — *INSTALL VIA **PIP***
+- **NumPy** and **SciPy**: Core Libraries for Scientific Computing — *INSTALL VIA **PIP***
+- **ASE**: Atomic Simulation Environment — *INSTALL VIA **PIP***
+- *A **MUST** INSTALL BEFORE **GPAW*** — **Libxc**: The Electronic Structure Library for DFT (Density Functional Theory) — *INSTALL VIA **BREW**, **APT**, OR **CHOCOLATEY***
+- *A **MUST** INSTALL BEFORE **GPAW*** — **BLAS**: Basic Linear Algebra Subprograms — *INSTALL VIA **BREW**, **APT**, OR **CHOCOLATEY***
+- **GPAW**: Projector-Augmented Wave Extension for ASE (Pseudo Wave Function Generator) — *INSTALL VIA **PIP***
+- **SQLAlchemy**: An Open-Source SQL Toolkit — *INSTALL VIA **PIP***
+- **Docker**: OS-level Virtualization — *INSTALL ON THEIR **WEBSITE** THROUGH GUI INSTALLER* *(FOR **HEROKU** DEPLOYMENT ONLY)*
 
 ---
 
