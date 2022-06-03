@@ -6,6 +6,8 @@ A **real-time** electron orbital simulation **single-handedly** developed by a *
 
 Website is still in the **development** phase but will be completed in a timely manner.
 
+**FOR DEVELOPERS**: Go to ```{URL}/api/plot``` to retrieve data from the great **WORLD ENGINE** REST API
+
 ### [Launch Website](https://electron-visualized.herokuapp.com)
 
 ---
