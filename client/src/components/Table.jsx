@@ -27,8 +27,8 @@ export default function Table() {
 
   Returns
   -------
-  React Property
-    Contains the information regarding mesh (in this case, atoms) under React-ThreeJS library
+  DOM File
+    A HTML markup that contains graphical elements
   */
   const [atomInfo, setAtomInfo] = useState(null);
 
