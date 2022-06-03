@@ -64,7 +64,7 @@ Website is still in the **development** phase but will be completed in a timely 
 
 ---
 
-## Last Words Before I Dip
+## Final Words Before I Dip
 
-![Mr. Bean GIF](https://user-images.githubusercontent.com/35755386/171760980-8d553501-64b4-4601-bd6c-2c7ca3d7fe23.gif)
-![sparrow-welcome](https://user-images.githubusercontent.com/35755386/171761156-270884a3-75f6-4487-ba09-43622403a5df.gif)
+![Sparrow-Welcome](https://user-images.githubusercontent.com/35755386/171761156-270884a3-75f6-4487-ba09-43622403a5df.gif)
+![Mr-Bean-GIF](https://user-images.githubusercontent.com/35755386/171760980-8d553501-64b4-4601-bd6c-2c7ca3d7fe23.gif)
