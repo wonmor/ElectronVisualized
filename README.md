@@ -2,7 +2,7 @@
 
 # ElectronVisualized
 
-A **real-time** electron orbital simulation. Displayed based upon the internal calculations performed that involve the famous **Density Functional Theory**, which describes the probable locations of electrons by numerically deriving the wavefunction.
+A **real-time** electron orbital simulation single-handedly developed by a **high school student**. (With some help with libraries written by **multiple** PhD holders; thank you) Displayed based upon the internal calculations performed that involve the famous **Density Functional Theory**, which describes the probable locations of electrons by numerically deriving the wavefunction.
 
 Website is still in the **development** phase but will be completed in a timely manner.
 
@@ -67,4 +67,4 @@ Website is still in the **development** phase but will be completed in a timely 
 ## Last Words Before I Dip
 
 ![Mr. Bean GIF](https://user-images.githubusercontent.com/35755386/171760980-8d553501-64b4-4601-bd6c-2c7ca3d7fe23.gif)
-
+![sparrow-welcome](https://user-images.githubusercontent.com/35755386/171761156-270884a3-75f6-4487-ba09-43622403a5df.gif)
