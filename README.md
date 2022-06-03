@@ -20,7 +20,7 @@ A **real-time** electron density simulation **single-handedly** developed by a *
 
 ---
 
-<img width="1000" alt="Screen Shot 2022-06-03 at 4 36 36 PM" src="https://user-images.githubusercontent.com/35755386/171948655-47de65a0-668c-4927-a4cf-c38cf70d3c44.png">
+<img width="1200" alt="Screen Shot 2022-06-03 at 5 15 45 PM" src="https://user-images.githubusercontent.com/35755386/171954296-579eaa40-ec6e-4c80-8e2c-20d4d87f117a.png">
 
 ![IMG_7647](https://user-images.githubusercontent.com/35755386/166985579-96c2d483-e74c-4802-ac92-762b2ccc8bc9.jpg)
 
