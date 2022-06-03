@@ -2,6 +2,7 @@
 FROM node:16-alpine as build-step
 WORKDIR /
 ENV PATH /app/client/node_modules/.bin:$PATH
+RUN mkdir ./app
 COPY yarn.lock ./app
 COPY client ./app
 WORKDIR /app/client
