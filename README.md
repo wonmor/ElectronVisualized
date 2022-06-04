@@ -39,7 +39,6 @@ A **real-time** electron density simulation **single-handedly** developed by a *
 ### Back-End: ```./server```
 - **Flask**: Microframework for Web — *INSTALL VIA **PIP***
 - **Docker**: OS-level Virtualization — *INSTALL ON THEIR **WEBSITE** THROUGH GUI INSTALLER* *(FOR **HEROKU** DEPLOYMENT ONLY)*
-- **Matplotlib**: Visualization with Python — *INSTALL VIA **PIP***
 - **NumPy** and **SciPy**: Core Libraries for Scientific Computing — *INSTALL VIA **PIP***
 - **ASE**: Atomic Simulation Environment — *INSTALL VIA **PIP***
 - *A **MUST** INSTALL BEFORE **GPAW*** — **Libxc**: The Electronic Structure Library for DFT (Density Functional Theory) — *INSTALL VIA **BREW**, **APT**, OR **CHOCOLATEY***
