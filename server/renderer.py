@@ -1,4 +1,5 @@
 # Retrieve the electron density distribution data
+import json
 from flask import jsonify
 
 import numpy as np
@@ -69,10 +70,32 @@ def element_plotter():
 
     data.shape = (xdim, ydim, zdim)
 
-    # Display the electron density distribution
-    # source = mlab.pipeline.scalar_field(data)
     min = data.min()
     max = data.max()
+
+    # Only display volumes that exceed 150% * min value
+    vmin = min + 0.5 * (max - min)
+
+    # Only display volumes that are below 160% * min value
+    vmax = min + 0.6 * (max - min)
+
+    density_data = {}
+
+    for x in range(xdim):
+        for y in range(ydim):
+            for z in range(zdim):
+                v = round(data[x][y][z], 2)
+                if not v < vmin or v > vmax:
+                    density_data[f'{x}, {y}, {z}'] = v
+                # density_data["x, y, z"] = volume
+
+    print("Density data sorting completed!")
+
+    with open('client/src/assets/density_data.json', 'w') as outfile:
+        json.dump(density_data, outfile, sort_keys=True, indent=4, separators=(',', ': '))
+                
+    # Display the electron density distribution
+    # source = mlab.pipeline.scalar_field(data)
     # vol = mlab.pipeline.volume(source, vmin=min + 0.5 * (max - min),
     #                            vmax=min + 0.6 * (max - min))
 
@@ -165,11 +188,18 @@ def element_plotter():
         'no_of_atoms': no_of_atoms,
         'atomic_colors': atomic_colors.tolist(),
         'elements': elements,
-        'density_data': data.tolist(),
+        'xdim': xdim,
+        'ydim': ydim,
+        'zdim': zdim,
+        'vmax': vmax,
+        'vmin': vmin,
+        'density_data': density_data,
         'atoms_x': atoms_x,
         'atoms_y': atoms_y,
         'atoms_z': atoms_z
     }
+
+    print("Sending JSON file to the client side...")
 
     return jsonify(return_value)
 

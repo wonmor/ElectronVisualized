@@ -3,8 +3,6 @@ import { useSelector, useDispatch, Provider } from "react-redux";
 
 import store from "../store";
 
-import * as THREE from 'three'
-
 // A MUST — MAKE SURE THAT YOU WRITE CURLY BRACKETS NEXT TO IMPORT!
 import { setGlobalAtomInfo } from "../states/atomInfoSlice";
 
@@ -16,9 +14,6 @@ import { Atoms, Particles, BondLine } from "./Renderer";
 import Controls from "./Controls";
 
 import CANVAS from "./Constants";
-
-var coordinates = [];
-
 
 export default function Table() {
   /*
@@ -49,9 +44,19 @@ export default function Table() {
           no_of_atoms: res.no_of_atoms,
           atomic_colors: res.atomic_colors,
           elements: res.elements,
+
           atoms_x: res.atoms_x,
           atoms_y: res.atoms_y,
           atoms_z: res.atoms_z,
+
+          xdim: res.xdim,
+          ydim: res.ydim,
+          zdim: res.zdim,
+
+          vmax: res.vmax,
+          vmin: res.vmin,
+
+          density_data: res.density_data
         });
       })
       .catch((error) => {
@@ -65,15 +70,15 @@ export default function Table() {
 
   useEffect(update, []);
 
-  var atoms_x, atoms_y, atoms_z, no_of_atoms, lineCoordinates;
+  var atoms_x, atoms_y, atoms_z, density_data;
 
+  // Define local variables
   if (globalAtomInfo != null) {
     atoms_x = globalAtomInfo["atoms_x"];
     atoms_y = globalAtomInfo["atoms_y"];
     atoms_z = globalAtomInfo["atoms_z"];
-    no_of_atoms = globalAtomInfo["no_of_atoms"];
 
-    lineCoordinates = genLineCoords(atoms_x, atoms_y, atoms_z, no_of_atoms)
+    density_data = globalAtomInfo["density_data"]
   }
 
   return (
@@ -107,8 +112,6 @@ export default function Table() {
           {globalAtomInfo && (
             <Provider store={store}>
               {atoms_x.map((value, index) => {
-                randomParticles(atoms_x, atoms_y, atoms_z, index);
-
                 return (
                   <>
                     <Atoms
@@ -121,8 +124,10 @@ export default function Table() {
                   </>
                 );
               })}
-              {coordinates.map((value, index) => {
-                return <Particles position={value} />
+              {Object.keys(density_data).map((key, index) => {
+                var coords = key.split(", ");
+                
+                return <Particles position={[coords[0] / 5 - 10.7, coords[1] / 5 - 10.7, coords[2] / 5 - 10.7]} />
               })}
               <BondLine start={[atoms_x[0], atoms_y[0], atoms_z[0]]} end={[atoms_x[1], atoms_y[1], atoms_z[1]]} />
             </Provider>
@@ -134,117 +139,3 @@ export default function Table() {
     </div>
   );
 }
-
-const randomSpherePoint = (x0, y0, z0, radius) => {
-  /*
-  A function that computes the coordinates for the random points used as a placeholder
-
-  Parameters
-  ----------
-  x0: Float
-    The x-coordinate of the position of the sphere
-  y0: Float
-    The y-coordinate of the position of the sphere
-  z0: Float
-    The z-coordinate of the position of the sphere
-  radius: Float
-    The value of the radius of the target sphere
-
-  Returns
-  -------
-  Array
-    Contains the x, y, and z coordinates of the random point that is generated
-  */
-  var u = Math.random();
-  var v = Math.random();
-
-  var theta = 2 * Math.PI * u;
-  var phi = Math.acos(2 * v - 1);
-
-  var x = x0 + radius * Math.sin(phi) * Math.cos(theta);
-  var y = y0 + radius * Math.sin(phi) * Math.sin(theta);
-  var z = z0 + radius * Math.cos(phi);
-
-  return [x, y, z];
-}
-
-const genLineSegments = (lineCoordinates) => {
-  /*
-  This is a component function in JSX that dictates the behaviour of the line segment that connects two atoms (expresses the VSEPR shape and bond type)
-
-  Parameters
-  ----------
-  lineCoordinates: Array
-    Contains all the coordinates that the bond line (sigma bond, pi bond etc.) should be at
-
-  Returns
-  -------
-  DOM File
-    A HTML markup that contains graphical elements
-  */
-  for (var i = 0; i < lineCoordinates.length; i++) {
-    if (i !== (lineCoordinates.length - 1)) {
-      return <BondLine start={lineCoordinates[i]} end={lineCoordinates[i + 1]} />
-    }
-  }
-}
-
-const genLineCoords = (atoms_x, atoms_y, atoms_z, no_of_atoms) => {
-  /*
-  A function that computes the coordinates for the random points used as a placeholder
-
-  Parameters
-  ----------
-  atoms_x: Array
-    Contains the x-coordinates of atom's position
-  atoms_y: Array
-    Contains the y-coordinates of atom's position
-  atoms_z: Array
-    Contains the z-coordinates of atom's position
-  no_of_atoms: Integer
-    Essentially the number of atoms present
-
-  Returns
-  -------
-  Array
-    Contains the x, y, and z coordinates of all vector locations of where the line should be at
-  */
-  var vertices = []
-
-  for (var i = 0; i < no_of_atoms.length; i++) {
-    vertices.push(new THREE.Vector3(atoms_x[i], atoms_y[i], atoms_z[i]))
-  }
-
-  return vertices;
-}
-
-const randomParticles = (atoms_x, atoms_y, atoms_z, no_of_atoms) => {
-  /*
-  A function that generates random points on the sphere (for placeholder purposes when the server has failed)
-
-  Parameters
-  ----------
-  atoms_x: Array
-    Contains the x-coordinates of atom's position
-  atoms_y: Array
-    Contains the y-coordinates of atom's position
-  atoms_z: Array
-    Contains the z-coordinates of atom's position
-  no_of_atoms: Integer
-    Essentially the number of atoms present
-
-  Returns
-  -------
-  None
-  */
-  for (var i = 0; i < 300; i++) {
-    coordinates.push(
-      randomSpherePoint(
-        atoms_x[no_of_atoms],
-        atoms_y[no_of_atoms],
-        atoms_z[no_of_atoms],
-        2.0
-      )
-    );
-  }
-};

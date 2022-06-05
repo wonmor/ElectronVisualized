@@ -1,10 +1,11 @@
-import React, { useRef, useState, useLayoutEffect } from "react";
+import React, { useRef, useState } from "react";
+import { useSelector } from "react-redux";
 
 import * as THREE from "three";
 
 import { extend } from "@react-three/fiber";
 
-import { Line2, LineGeometry, LineMaterial } from 'three-fatline';
+import { Line2, LineGeometry, LineMaterial } from "three-fatline";
 
 import { RENDERER } from "./Constants";
 
@@ -48,7 +49,7 @@ export function Atoms(props) {
   );
 }
 
-export function Particles(props) {
+export function Particles(props, volume) {
   /*
   This is a component function in JSX
 
@@ -63,7 +64,7 @@ export function Particles(props) {
   */
   const mesh = useRef();
 
-  const [active, setActive] = useState(false);
+  console.log(volume);
 
   //   useFrame(() => {
   //     mesh.current.rotation.x = mesh.current.rotation.y += 0.01;
@@ -72,19 +73,17 @@ export function Particles(props) {
   // Make sure you MANUALLY collect all the garbage!
 
   return (
-    <mesh
-      {...props}
-      ref={mesh}
-      scale={[1, 1, 1]}
-      onClick={(e) => setActive(!active)}
-    >
+    <mesh {...props} ref={mesh} scale={[1, 1, 1]}>
       <sphereBufferGeometry
         args={[RENDERER.PARTICLE_RADIUS, 30, 30]}
+        transparent={true}
+        opacity={1.0}
         attach="geometry"
       />
       <meshBasicMaterial color={0xfff1ef} attach="material" />
     </mesh>
   );
+  // Color formatted in grayscale...
 }
 
 export function BondLine({ start, end }) {
@@ -102,23 +101,21 @@ export function BondLine({ start, end }) {
   */
   const geometry = new LineGeometry();
   geometry.setPositions(start.concat(end)); // [ x1, y1, z1,  x2, y2, z2, ... ] format
-  
+
   const material = new LineMaterial({
-    color: 'hotpink',
+    color: "hotpink",
     linewidth: 5, // px
     resolution: new THREE.Vector2(640, 480), // resolution of the viewport
     transparent: true,
-    opacity: 0.5
+    opacity: 0.5,
     // dashed, dashScale, dashSize, gapSize
   });
-  
+
   const myLine = new Line2(geometry, material);
-  
+
   myLine.computeLineDistances();
 
-  return (
-    <primitive object={myLine} position={[0, 0, 0]} />
-  );
+  return <primitive object={myLine} position={[0, 0, 0]} />;
 }
 
 // FIX THE TUBE!
