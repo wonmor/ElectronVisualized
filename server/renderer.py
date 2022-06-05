@@ -176,5 +176,3 @@ def element_plotter():
     '''
     Generate random number in the allocated orbital area
     '''
-
-element_plotter()
