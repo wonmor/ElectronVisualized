@@ -4,7 +4,7 @@ import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
-import Table from './components/Table';
+import Element from './components/Element';
 
 // Where is the BUILD folder in create-react-app? : https://create-react-app.dev/docs/deployment/
 const App = () => {
@@ -25,7 +25,8 @@ const App = () => {
       <Header />
       <div>
         <Routes>
-          <Route exact path="/" element={<Table />} />
+          <Route exact path="/" element={<Element />} />
+          <Route path="/element" element={<Element />} />
         </Routes>
       </div>
       <Footer />

@@ -15,9 +15,9 @@ import Controls from "./Controls";
 
 import CANVAS from "./Constants";
 
-import "./Table.css";
+import "./Element.css";
 
-export default function Table() {
+export default function Element() {
   /*
   This is a component function in JSX that also handles the HTTP requests from the server by using AJAX
 
@@ -92,10 +92,10 @@ export default function Table() {
     <div className="bg-gray-700">
       <div className="text-white text-center pt-10 pb-10">
         <h1>Hydrogen Gas</h1>
-        <p className="pt-5">
+        <p className="pt-5 pr-5 pl-5">
           Hydrogen is the first element in the periodic table. The atomic number
           is 1 and its mass is 1 AMU. Its gas form consists of two Hydrogen
-          atoms bonded together (Sigma Bond).
+          atoms, forming a Sigma bond.
         </p>
         <div class="gap-3 flex items-center justify-center pt-5">
           {!disable ? (
