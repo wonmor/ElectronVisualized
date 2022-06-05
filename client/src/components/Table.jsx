@@ -15,7 +15,7 @@ import { Canvas } from "@react-three/fiber";
 import { Atoms, Particles, BondLine } from "./Renderer";
 import Controls from "./Controls";
 
-import CANVAS, { RENDERER } from "./Constants";
+import CANVAS from "./Constants";
 
 var coordinates = [];
 

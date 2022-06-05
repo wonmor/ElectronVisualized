@@ -1,5 +1,6 @@
 # Retrieve the electron density distribution data
 from flask import jsonify
+
 import numpy as np
 from ase.data.colors import jmol_colors as atomic_colors
 
@@ -62,6 +63,9 @@ def element_plotter():
         str = ' '.join(f.readlines()[(6 + no_of_atoms):])
 
     data = np.fromstring(str, sep=' ')
+
+    # Normalize the data into range from -255 to 255
+    data = 510.0 * (data - np.min(data)) / np.ptp(data) - 255.0
 
     data.shape = (xdim, ydim, zdim)
 
@@ -161,6 +165,7 @@ def element_plotter():
         'no_of_atoms': no_of_atoms,
         'atomic_colors': atomic_colors.tolist(),
         'elements': elements,
+        'data': data.tolist(),
         'atoms_x': atoms_x,
         'atoms_y': atoms_y,
         'atoms_z': atoms_z
@@ -171,3 +176,5 @@ def element_plotter():
     '''
     Generate random number in the allocated orbital area
     '''
+
+element_plotter()
