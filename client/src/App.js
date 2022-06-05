@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 
 import Table from './components/Table'
 import Element from './components/Element';
+import NotFound from './components/NotFound';
 
 // Where is the BUILD folder in create-react-app? : https://create-react-app.dev/docs/deployment/
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
       <Header />
       <div>
         <Routes>
+          <Route path="*" element={<NotFound />} />
           <Route exact path="/" element={<Table />} />
           <Route path="/element" element={<Element />} />
         </Routes>
