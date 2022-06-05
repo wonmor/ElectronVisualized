@@ -32,10 +32,12 @@ export default function Header() {
 
   return (
     <nav className="flex items-center justify-between flex-wrap bg-rose-500 p-3">
-      <img className="w-20 mr-5" src={Logo} alt="logo"></img>
+      <a href="/">
       <div className="flex items-center flex-shrink-0 text-white mr-6">
+      <img className="w-20 mr-5" src={Logo} alt="logo"></img>
         <span className="font-semibold text-xl tracking-tight">ElectronVisualized</span>
       </div>
+      </a>
       <div className="block lg:hidden">
         <button onClick={ShowResponsiveMenu} className="flex items-center px-3 py-2 border rounded text-rose-200 border-rose-400 hover:text-white hover:border-white">
           <svg

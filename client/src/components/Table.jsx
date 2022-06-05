@@ -28,36 +28,43 @@ export default function Table() {
   DOM File
     A HTML markup that contains graphical elements
   */
-  const [atomInfo, setAtomInfo] = useState(null);
 
-  const globalAtomInfo = useSelector((state) => state.atomInfo.value);
+  const [disable, setDisable] = useState(false);
+
+  const [preRender, setPreRender] = useState(true);
+
+  const globalAtomInfo = useSelector((state) => state.atomInfo.globalAtomInfo);
+
   const dispatch = useDispatch();
 
-  const update = () => {
-    axios({
+  const update = async () => {
+    await axios({
       method: "GET",
       url: "/api/plot",
     })
       .then((response) => {
+        setPreRender(false)
         const res = response.data;
-        setAtomInfo({
-          no_of_atoms: res.no_of_atoms,
-          atomic_colors: res.atomic_colors,
-          elements: res.elements,
+        dispatch(
+          setGlobalAtomInfo({
+            no_of_atoms: res.no_of_atoms,
+            atomic_colors: res.atomic_colors,
+            elements: res.elements,
 
-          atoms_x: res.atoms_x,
-          atoms_y: res.atoms_y,
-          atoms_z: res.atoms_z,
+            atoms_x: res.atoms_x,
+            atoms_y: res.atoms_y,
+            atoms_z: res.atoms_z,
 
-          xdim: res.xdim,
-          ydim: res.ydim,
-          zdim: res.zdim,
+            xdim: res.xdim,
+            ydim: res.ydim,
+            zdim: res.zdim,
 
-          vmax: res.vmax,
-          vmin: res.vmin,
+            vmax: res.vmax,
+            vmin: res.vmin,
 
-          density_data: res.density_data
-        });
+            density_data: res.density_data,
+          }) || null
+        );
       })
       .catch((error) => {
         if (error.response) {
@@ -68,8 +75,6 @@ export default function Table() {
       });
   };
 
-  useEffect(update, []);
-
   var atoms_x, atoms_y, atoms_z, density_data;
 
   // Define local variables
@@ -78,7 +83,7 @@ export default function Table() {
     atoms_y = globalAtomInfo["atoms_y"];
     atoms_z = globalAtomInfo["atoms_z"];
 
-    density_data = globalAtomInfo["density_data"]
+    density_data = globalAtomInfo["density_data"];
   }
 
   return (
@@ -86,20 +91,24 @@ export default function Table() {
       <div className="text-white text-center pt-10 pb-10">
         <h1>Hydrogen Gas</h1>
         <p className="pt-5">
-          Hydrogen is the first element in the periodic table. The atomic number is 1 and
-          its mass is 1 AMU. Its gas form consists of two Hydrogen atoms bonded together (Sigma Bond).
+          Hydrogen is the first element in the periodic table. The atomic number
+          is 1 and its mass is 1 AMU. Its gas form consists of two Hydrogen
+          atoms bonded together (Sigma Bond).
         </p>
         <div class="gap-3 flex items-center justify-center pt-5">
-          <button
-            onClick={() => {
-              update();
-              dispatch(setGlobalAtomInfo(atomInfo) || null);
-            }}
-            className="bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
-            type="button "
-          >
-            <span>Start Rendering</span>
-          </button>
+          {!disable ? (
+            <button
+              disabled={disable}
+              onClick={() => {
+                update();
+                setDisable(true);
+              }}
+              className="absolute mt-10 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
+              type="button"
+            >
+              <span>Start Rendering</span>
+            </button>
+          ) : (preRender ? <h3 className="mt-10">Rendering in progress...</h3> : null)}
         </div>
       </div>
       <div style={{ width: CANVAS.WIDTH, height: CANVAS.HEIGHT }}>
@@ -126,10 +135,24 @@ export default function Table() {
               })}
               {Object.keys(density_data).map((key, index) => {
                 var coords = key.split(", ");
-                
-                return <Particles position={[coords[0] / 5 - 10.7, coords[1] / 5 - 10.7, coords[2] / 5 - 10.7]} />
+                // Save the global variable...
+                // dispatch(setCurrentVolume(density_data[key]) || 0.0);
+
+                return (
+                  <Particles
+                    volume={[density_data[key]]}
+                    position={[
+                      coords[0] / 5 - 10.7,
+                      coords[1] / 5 - 10.7,
+                      coords[2] / 5 - 10.7,
+                    ]}
+                  />
+                );
               })}
-              <BondLine start={[atoms_x[0], atoms_y[0], atoms_z[0]]} end={[atoms_x[1], atoms_y[1], atoms_z[1]]} />
+              <BondLine
+                start={[atoms_x[0], atoms_y[0], atoms_z[0]]}
+                end={[atoms_x[1], atoms_y[1], atoms_z[1]]}
+              />
             </Provider>
           )}
 

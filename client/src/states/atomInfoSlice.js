@@ -15,12 +15,12 @@ export const atomInfoSlice = createSlice({
     */
     name: 'atomInfo',
     initialState: {
-        value: null
+        globalAtomInfo: null,
     },
     reducers: {
         setGlobalAtomInfo: (state, action) => {
-            state.value = action.payload
-        }
+            state.globalAtomInfo = action.payload
+        },
     },
 })
 

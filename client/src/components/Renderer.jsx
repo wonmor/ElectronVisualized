@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import { useSelector } from "react-redux";
 
 import * as THREE from "three";
 
@@ -64,7 +63,7 @@ export function Particles(props, volume) {
   */
   const mesh = useRef();
 
-  console.log(volume);
+  console.log(volume)
 
   //   useFrame(() => {
   //     mesh.current.rotation.x = mesh.current.rotation.y += 0.01;
@@ -80,10 +79,9 @@ export function Particles(props, volume) {
         opacity={1.0}
         attach="geometry"
       />
-      <meshBasicMaterial color={0xfff1ef} attach="material" />
+      <meshBasicMaterial color={`rgb(255.0, ${255.0 - volume}, ${255.0 - volume})`} attach="material" />
     </mesh>
   );
-  // Color formatted in grayscale...
 }
 
 export function BondLine({ start, end }) {
@@ -92,7 +90,10 @@ export function BondLine({ start, end }) {
 
   Parameters
   ----------
-  None
+  start: Integer
+    Specify the start point
+  end: Integer
+    Specify the end point
 
   Returns
   -------

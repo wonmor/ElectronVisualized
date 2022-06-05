@@ -2,6 +2,10 @@ h1 {
     @apply text-7xl;
 }
 
+h3 {
+    @apply text-2xl absolute;
+}
+
 p {
     @apply text-xl;
 }
