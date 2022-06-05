@@ -165,7 +165,7 @@ def element_plotter():
         'no_of_atoms': no_of_atoms,
         'atomic_colors': atomic_colors.tolist(),
         'elements': elements,
-        'data': data.tolist(),
+        'density_data': data.tolist(),
         'atoms_x': atoms_x,
         'atoms_y': atoms_y,
         'atoms_z': atoms_z
