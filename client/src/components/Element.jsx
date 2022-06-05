@@ -35,6 +35,10 @@ export default function Element() {
 
   const [preRender, setPreRender] = useState(true);
 
+  const [serverError, setServerError] = useState(false);
+
+  const [statusText, setStatusText] = useState("Rendering in progress...");
+
   const globalAtomInfo = useSelector((state) => state.atomInfo.globalAtomInfo);
 
   const dispatch = useDispatch();
@@ -70,6 +74,9 @@ export default function Element() {
       })
       .catch((error) => {
         if (error.response) {
+          setStatusText("Server communication error has occured!")
+          setServerError(true)
+          
           console.log(error.response);
           console.log(error.response.status);
           console.log(error.response.headers);
@@ -110,7 +117,7 @@ export default function Element() {
             >
               <span>Start Rendering</span>
             </button>
-          ) : (preRender ? <div className="mt-40 absolute text-gray-400"><h3>{"Rendering in progress..."}</h3><div className="scale-75 lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div> : null)}
+          ) : (preRender ? <div className={`absolute text-gray-400 ${serverError ? "mt-10" : "mt-40"}`}><h3>{statusText}</h3>{!serverError && <div className="scale-75 lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>}</div> : null)}
         </div>
       </div>
       <div style={{ width: CANVAS.WIDTH, height: CANVAS.HEIGHT }}>

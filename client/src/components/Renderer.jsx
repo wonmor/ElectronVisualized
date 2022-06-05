@@ -112,11 +112,11 @@ export function BondLine({ start, end }) {
     // dashed, dashScale, dashSize, gapSize
   });
 
-  const myLine = new Line2(geometry, material);
+  const lineSegment = new Line2(geometry, material);
 
-  myLine.computeLineDistances();
+  lineSegment.computeLineDistances();
 
-  return <primitive object={myLine} position={[0, 0, 0]} />;
+  return <primitive object={lineSegment} position={[0, 0, 0]} />;
 }
 
 // FIX THE TUBE!
