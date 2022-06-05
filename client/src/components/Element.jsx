@@ -89,13 +89,13 @@ export default function Element() {
   }
 
   return (
-    <div className="bg-gray-700">
+    <div className="bg-gray-700" style={{'min-height': '100vh'}}>
       <div className="text-white text-center pt-10 pb-10">
-        <h1>Hydrogen Gas</h1>
-        <p className="pt-5 pr-5 pl-5">
-          Hydrogen is the first element in the periodic table. The atomic number
-          is 1 and its mass is 1 AMU. Its gas form consists of two Hydrogen
-          atoms, forming a Sigma bond.
+        <h1>Hydrogen Gas.</h1>
+        <h2 className="mt-5 pb-5 text-gray-400 border-b border-gray-400">Simulated <span className="text-white">Real-Time&#8482;</span> using <span className="text-white">GPAW</span> and <span className="text-white">ASE</span>.</h2>
+        <p className="pt-5 pr-5 pl-5 text-gray-400">
+          <b>Hydrogen</b> is the first element in the periodic table. The atomic number
+          is <b>1</b> and its mass is <b>1 AMU</b>. Its gas form consists of two <b>Hydrogen</b> atoms, forming a <b>Sigma</b> bond.
         </p>
         <div class="gap-3 flex items-center justify-center pt-5">
           {!disable ? (
@@ -105,12 +105,12 @@ export default function Element() {
                 update();
                 setDisable(true);
               }}
-              className="absolute mt-10 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
+              className="absolute mt-10 bg-transparent hover:bg-blue-500 text-gray-400 hover:text-white py-2 px-4 border border-gray-400 hover:border-transparent rounded"
               type="button"
             >
               <span>Start Rendering</span>
             </button>
-          ) : (preRender ? <div className="mt-40 absolute"><h3>{"Rendering in progress..."}</h3><div className="scale-75 lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div> : null)}
+          ) : (preRender ? <div className="mt-40 absolute text-gray-400"><h3>{"Rendering in progress..."}</h3><div className="scale-75 lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div> : null)}
         </div>
       </div>
       <div style={{ width: CANVAS.WIDTH, height: CANVAS.HEIGHT }}>
