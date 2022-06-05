@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSelector, useDispatch, Provider } from "react-redux";
 
 import store from "../store";
@@ -14,6 +14,8 @@ import { Atoms, Particles, BondLine } from "./Renderer";
 import Controls from "./Controls";
 
 import CANVAS from "./Constants";
+
+import "./Table.css";
 
 export default function Table() {
   /*
@@ -43,7 +45,6 @@ export default function Table() {
       url: "/api/plot",
     })
       .then((response) => {
-        setPreRender(false)
         const res = response.data;
         dispatch(
           setGlobalAtomInfo({
@@ -65,6 +66,7 @@ export default function Table() {
             density_data: res.density_data,
           }) || null
         );
+        setPreRender(false)
       })
       .catch((error) => {
         if (error.response) {
@@ -108,11 +110,11 @@ export default function Table() {
             >
               <span>Start Rendering</span>
             </button>
-          ) : (preRender ? <h3 className="mt-10">Rendering in progress...</h3> : null)}
+          ) : (preRender ? <div className="mt-40 absolute"><h3>{"Rendering in progress..."}</h3><div className="scale-75 lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div> : null)}
         </div>
       </div>
       <div style={{ width: CANVAS.WIDTH, height: CANVAS.HEIGHT }}>
-        <Canvas camera={{ fov: 30, position: [-5, 8, 8] }}>
+        <Canvas camera={{ fov: 35, position: [-5, 8, 8] }}>
           <Controls />
           <ambientLight intensity={0.5} />
           <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />

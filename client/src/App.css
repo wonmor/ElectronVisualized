@@ -3,7 +3,7 @@ h1 {
 }
 
 h3 {
-    @apply text-2xl absolute;
+    @apply text-2xl;
 }
 
 p {

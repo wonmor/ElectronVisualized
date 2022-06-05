@@ -12,6 +12,8 @@
         "@testing-library/user-event": "^13.5.0",
         "axios": "^0.27.2",
         "deg2rad": "^1.0.0",
+        "flowbite": "^1.4.7",
+        "flowbite-react": "^0.0.25",
         "react": "^18.1.0",
         "react-dom": "^18.1.0",
         "react-redux": "^8.0.2",
