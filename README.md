@@ -28,6 +28,8 @@ A **real-time** electron density simulation **single-handedly** developed by a *
 
 ![IMG_7647](https://user-images.githubusercontent.com/35755386/166985579-96c2d483-e74c-4802-ac92-762b2ccc8bc9.jpg)
 
+<img width="1200" alt="Screen Shot 2022-06-05 at 10 10 18 PM" src="https://user-images.githubusercontent.com/35755386/172083147-e11ab873-f156-4dda-8d26-71652a1de0c8.png">
+
 ---
 
 ## Technologies Used (A Sh*t Ton, You're Welcome)
