@@ -51,8 +51,8 @@ export default function API() {
           </h1>
           <h2 className="mt-5 p-5 leading-normal bg-gray-600 text-gray-400">
             <span className="text-6xl">Introducing the <span className="text-white">World Engine</span>.</span><br></br>A <span className="text-white">REST API</span> Powered by the Industry-Leading{" "}
-            <span className="text-white">ASE</span> and{" "}
-            <span className="text-white">GPAW</span> Libaries.
+            <span className="text-white">GPAW</span> and{" "}
+            <span className="text-white">ASE</span> Libaries.
           </h2>
           <h2 className="p-5 leading-tight text-gray-400">
             An implementation that seemed to be impossible to be made.<br></br>
