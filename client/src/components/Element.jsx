@@ -10,10 +10,13 @@ import axios from "axios";
 
 import { Canvas } from "@react-three/fiber";
 
-import { Atoms, Particles, BondLine } from "./Renderer";
+import { Atoms, BondLine } from "./Renderer";
+
 import Controls from "./Controls";
 
 import CANVAS from "./Constants";
+
+import { RENDERER } from "./Constants";
 
 export default function Element() {
   /*
@@ -68,13 +71,13 @@ export default function Element() {
             density_data: res.density_data,
           }) || null
         );
-        setPreRender(false)
+        setPreRender(false);
       })
       .catch((error) => {
         if (error.response) {
-          setStatusText("Server communication error has occured!")
-          setServerError(true)
-          
+          setStatusText("Server communication error has occured!");
+          setServerError(true);
+
           console.log(error.response);
           console.log(error.response.status);
           console.log(error.response.headers);
@@ -94,13 +97,20 @@ export default function Element() {
   }
 
   return (
-    <div className="bg-gray-700" style={{'min-height': '100vh'}}>
+    <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
       <div className="text-white text-center pt-10 pb-10">
-        <h1>Hydrogen Gas. <span className="text-gray-400">Visualized.</span></h1>
-        <h2 className="mt-5 pb-5 text-gray-400 border-b border-gray-400">Simulated <span className="text-white">Real-Time</span> using <span className="text-white">GPAW</span> and <span className="text-white">ASE</span>.</h2>
+        <h1>
+          Hydrogen Gas. <span className="text-gray-400">Visualized.</span>
+        </h1>
+        <h2 className="mt-5 pb-5 text-gray-400 border-b border-gray-400">
+          Simulated <span className="text-white">Real-Time</span> using{" "}
+          <span className="text-white">GPAW</span> and{" "}
+          <span className="text-white">ASE</span>.
+        </h2>
         <p className="pt-5 pr-5 pl-5 text-gray-400">
-          <b>Hydrogen</b> is the first element in the periodic table. The atomic number
-          is <b>1</b> and its mass is <b>1 AMU</b>. Its gas form consists of two <b>Hydrogen</b> atoms, forming a <b>Sigma</b> bond.
+          <b>Hydrogen</b> is the first element in the periodic table. The atomic
+          number is <b>1</b> and its mass is <b>1 AMU</b>. Its gas form consists
+          of two <b>Hydrogen</b> atoms, forming a <b>Sigma</b> bond.
         </p>
         <div class="gap-3 flex items-center justify-center pt-5">
           {!disable ? (
@@ -115,7 +125,27 @@ export default function Element() {
             >
               <span>Start Rendering</span>
             </button>
-          ) : (preRender ? <div className={`absolute text-gray-400 ${serverError ? "mt-10" : "mt-40"}`}><h3>{statusText}</h3>{!serverError && <div className="scale-75 lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>}</div> : null)}
+          ) : preRender ? (
+            <div
+              className={`absolute text-gray-400 ${
+                serverError ? "mt-10" : "mt-40"
+              }`}
+            >
+              <h3>{statusText}</h3>
+              {!serverError && (
+                <div className="scale-75 lds-roller">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+              )}
+            </div>
+          ) : null}
         </div>
       </div>
       <div style={{ width: CANVAS.WIDTH, height: CANVAS.HEIGHT }}>
@@ -142,18 +172,31 @@ export default function Element() {
               })}
               {Object.keys(density_data).map((key, index) => {
                 var coords = key.split(", ");
+                var volume = density_data[key]
                 // Save the global variable...
                 // dispatch(setCurrentVolume(density_data[key]) || 0.0);
 
                 return (
-                  <Particles
-                    volume={[density_data[key]]}
+                  // Generate particles...
+                  <mesh
                     position={[
                       coords[0] / 5 - 10.7,
                       coords[1] / 5 - 10.7,
                       coords[2] / 5 - 10.7,
                     ]}
-                  />
+                    scale={[1, 1, 1]}
+                  >
+                    <sphereBufferGeometry
+                      args={[RENDERER.PARTICLE_RADIUS, 30, 30]}
+                      transparent={true}
+                      opacity={1.0}
+                      attach="geometry"
+                    />
+                    <meshBasicMaterial
+                      color={`rgb(255, ${Math.round(255.0 - volume * 2.5)}, ${Math.round(255.0 - volume * 2.5)})`}
+                      attach="material"
+                    />
+                  </mesh>
                 );
               })}
               <BondLine

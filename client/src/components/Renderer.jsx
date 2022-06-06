@@ -40,46 +40,10 @@ export function Atoms(props) {
       />
       <meshBasicMaterial
         color={0xfff1ef}
-        opacity={0.7}
+        opacity={0.2}
         transparent={true}
         attach="material"
       />
-    </mesh>
-  );
-}
-
-export function Particles(props, volume) {
-  /*
-  This is a component function in JSX
-
-  Parameters
-  ----------
-  None
-
-  Returns
-  -------
-  React Property
-    Contains the information regarding mesh (in this case, particles) under React-ThreeJS library
-  */
-  const mesh = useRef();
-
-  console.log(volume)
-
-  //   useFrame(() => {
-  //     mesh.current.rotation.x = mesh.current.rotation.y += 0.01;
-  //   });
-
-  // Make sure you MANUALLY collect all the garbage!
-
-  return (
-    <mesh {...props} ref={mesh} scale={[1, 1, 1]}>
-      <sphereBufferGeometry
-        args={[RENDERER.PARTICLE_RADIUS, 30, 30]}
-        transparent={true}
-        opacity={1.0}
-        attach="geometry"
-      />
-      <meshBasicMaterial color={`rgb(255.0, ${255.0 - volume}, ${255.0 - volume})`} attach="material" />
     </mesh>
   );
 }
@@ -108,7 +72,7 @@ export function BondLine({ start, end }) {
     linewidth: 5, // px
     resolution: new THREE.Vector2(640, 480), // resolution of the viewport
     transparent: true,
-    opacity: 0.5,
+    opacity: 0.2,
     // dashed, dashScale, dashSize, gapSize
   });
 
