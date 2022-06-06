@@ -10,7 +10,7 @@ A **real-time** electron density simulation **single-handedly** developed by a *
 
 ### [Launch Website](https://electron-visualized.herokuapp.com/)
 
-***FOR DEVELOPERS**: Click this [link](https://electron-visualized.herokuapp.com/api/plot) to retrieve data from the great **WORLD ENGINE** REST API!*
+***FOR DEVELOPERS**: Click this [link](https://electron-visualized.herokuapp.com/api/) to retrieve data from the great **WORLD ENGINE** REST API!*
 
 ---
 
