@@ -199,7 +199,7 @@ export default function Element() {
                       opacity={normalizeData(volume, 1, 0) / 50}
                       color={`rgb(255, ${Math.round(
                         255.0 - volume * 2.5
-                      )}, ${Math.round(255.0 - volume * 3)})`}
+                      )}, ${Math.round(255.0 - volume * 2.5)})`}
                       attach="material"
                     />
                   </mesh>
