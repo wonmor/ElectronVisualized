@@ -21,7 +21,7 @@ KEY — GPAW_SETUP_PATH
 DATA — server/datasets/gpaw-setups-0.9.20000
 '''
 
-def plot_hydrogen():
+def plot_molecule(name='H2'):
     '''
     This is a function that applies the Density Functional Theory and generates the coordinates of probable locations of electrons of Hydrogen atom
     
@@ -39,7 +39,7 @@ def plot_hydrogen():
                 txt='server/GPAW_log.txt',
                 occupations=FermiDirac(0.1))
 
-    mol = molecule('H2')
+    mol = molecule(name)
 
     mol.set_cell((5.0, 5.1, 5.2))
     mol.set_pbc((False, False, False))

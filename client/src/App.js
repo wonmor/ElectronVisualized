@@ -9,7 +9,6 @@ import Element from './components/Element';
 import NotFound from './components/NotFound';
 import API from './components/API';
 
-// Where is the BUILD folder in create-react-app? : https://create-react-app.dev/docs/deployment/
 const App = () => {
   /*
   This is a component function in JSX that contains the HTML markup that represent each graphical element on the webpage

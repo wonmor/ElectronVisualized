@@ -18,23 +18,57 @@ import Controls from "./Controls";
 
 import CANVAS from "./Constants";
 
-function normalizeData(val, max, min) {
+const normalizeData = (val, max, min) => {
+  /*
+  This function normalizes a given dataset within a certain range that is defined
+
+  Parameters
+  ----------
+  val: Float
+    A value that has to be normalized within a range
+  max: Float
+    The desired upper limit of the value
+  min: Float
+    The desired lower limit of the value
+
+  Returns
+  -------
+  Float
+    Returns a normalized float value contained within the boundary set
+  */
+
   return (val - min) / (max - min);
 }
 
-function useInterval(callback, delay) {
+const useLazyInterval = (callback, delay) => {
+  /*
+  This function calls the saved interval and resets it into a new value;
+  It also prevents memory leak by discaring the data when it's unused
+
+  Parameters
+  ----------
+  callback: Function(s)
+    Input the function(s) to execute every n milliseconds
+
+  Returns
+  -------
+  Function
+    Clear the previously stored interval to conserve memory
+  */
+
   const savedCallback = useRef();
 
-  // Remember the latest callback.
+  // Remember the latest callback
   useEffect(() => {
     savedCallback.current = callback;
   }, [callback]);
 
-  // Set up the interval.
+  // Set up the interval
   useEffect(() => {
     let id = setInterval(() => {
       savedCallback.current();
     }, delay);
+    // Clear the interval to conserve memory
     return () => clearInterval(id);
   }, [delay]);
 }
@@ -60,6 +94,11 @@ export default function Element() {
   const [statusText, setStatusText] = useState("Rendering in Progress...");
   const [particleRadius, setParticleRadius] = useState(0.025);
 
+  /*
+  Define that React and Redux states: former being used locally, and the latter being used globally.
+  The purpose of using constants is due to its high efficiency when it comes to memory management.
+  */
+
   const [reachedMaxPeak, setMaxPeak] = useState(false);
   const [reachedMinPeak, setMinPeak] = useState(true);
 
@@ -69,7 +108,8 @@ export default function Element() {
 
   const dispatch = useDispatch();
 
-  useInterval(() => {
+  // Handles the breathing animation event... needs more memoryr optimization though!
+  useLazyInterval(() => {
     if (animation) {
       if (!reachedMaxPeak || reachedMinPeak) {
         setParticleRadius(particleRadius + 0.01);
@@ -133,54 +173,72 @@ export default function Element() {
     setParticleRadius(value);
   };
 
-  var atoms_x, atoms_y, atoms_z, density_data;
+  const [atoms_x, setAtomsX] = useState(null);
+  const [atoms_y, setAtomsY] = useState(null);
+  const [atoms_z, setAtomsZ] = useState(null);
+
+  const [density_data, setDensityData] = useState(null);
+
+  const [coords, setCoords] = useState(null);
+  const [volume, setVolume] = useState(null);
 
   // Define local variables
   if (globalAtomInfo != null) {
-    atoms_x = globalAtomInfo["atoms_x"];
-    atoms_y = globalAtomInfo["atoms_y"];
-    atoms_z = globalAtomInfo["atoms_z"];
+    setAtomsX(globalAtomInfo["atoms_x"]);
+    setAtomsY(globalAtomInfo["atoms_y"]);
+    setAtomsZ(globalAtomInfo["atoms_z"]);
 
-    density_data = globalAtomInfo["density_data"];
+    setDensityData(globalAtomInfo["density_data"]);
   }
 
   return (
     <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
       <div className="text-white text-center pt-10 pb-10">
+
         <h1>
           Hydrogen Gas. <span className="text-gray-400">Visualized.</span>
         </h1>
+
         <h2 className="mt-5 pb-5 text-gray-400 border-b border-gray-400">
           Simulated <span className="text-white">Real-Time</span> using{" "}
           <span className="text-white">GPAW</span> and{" "}
           <span className="text-white">ASE</span>.
         </h2>
+
         <p className="pt-5 pr-5 pl-5 text-gray-400">
           <b>Hydrogen</b> is the first element in the periodic table. The atomic
-          number is <b>1</b> and its mass is <b>1 AMU</b>. Its gas form consists
+          number is <b>1</b> and its mass is <b>1.01 g/mol</b>. Its gas form consists
           of two <b>Hydrogen</b> atoms, forming a <b>Sigma</b> bond.
         </p>
+
         <div class="gap-3 flex items-center justify-center pt-5">
           {!disable ? (
+
             <button
               disabled={disable}
+
               onClick={() => {
                 update();
                 setDisable(true);
               }}
+
               className="absolute mt-10 bg-transparent hover:bg-blue-500 text-gray-400 hover:text-white py-2 px-4 border border-gray-400 hover:border-transparent rounded"
               type="button"
             >
               <span>Start Rendering</span>
             </button>
+
           ) : preRender ? (
+
             <div
               className={`absolute text-gray-400 ${
                 serverError ? "mt-10" : "mt-40"
               }`}
             >
               <h3>{statusText}</h3>
+
               {!serverError && (
+
                 <div className="scale-75 lds-roller">
                   <div></div>
                   <div></div>
@@ -191,9 +249,13 @@ export default function Element() {
                   <div></div>
                   <div></div>
                 </div>
+
               )}
+
             </div>
+
           ) : (
+            
             <Box
               component="span"
               sx={{
@@ -205,25 +267,33 @@ export default function Element() {
               }}
             >
               {!animation && (
+
                 <div>
                   <p className="text-gray-400">Particle Radius</p>
+
                   <Slider
                     className="ml-40 mr-40 mb-5"
+
                     onClick={() => {
                       setAnimation(false);
                     }}
+
                     sx={{
                       width: 300,
                       color: "gray",
                     }}
+
                     value={particleRadius}
                     onChange={changeParticleRadius}
+
                     min={0.01}
                     max={0.07}
                     step={0.001}
+
                     valueLabelDisplay="auto"
                   />
                 </div>
+
               )}
               <Button
                 onClick={() => {
@@ -236,7 +306,9 @@ export default function Element() {
                     setMinPeak(true);
                   }
                 }}
+                
                 variant="outlined"
+
                 sx={{
                   marginLeft: "7.5em",
                   marginRight: "7.5em",
@@ -250,16 +322,22 @@ export default function Element() {
           )}
         </div>
       </div>
+
       <div style={{ width: CANVAS.WIDTH, height: CANVAS.HEIGHT }}>
         <Canvas camera={{ fov: 35, position: [-5, 8, 8] }}>
+
           <Controls />
+
           <ambientLight intensity={0.5} />
           <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
           <pointLight position={[-10, -10, -10]} />
 
           {globalAtomInfo && (
+
             <Provider store={store}>
+
               {atoms_x.map((value, index) => {
+
                 return (
                   <>
                     <Atoms
@@ -269,14 +347,16 @@ export default function Element() {
                         atoms_z[index],
                       ]}
                     />
+
                   </>
                 );
+
               })}
+
               {Object.keys(density_data).map((key, index) => {
-                var coords = key.split(", ");
-                var volume = density_data[key];
-                // Save the global variable...
-                // dispatch(setCurrentVolume(density_data[key]) || 0.0);
+
+                setCoords(key.split(", "));
+                setVolume(density_data[key]);
 
                 return (
                   // Generate particles...
@@ -292,6 +372,7 @@ export default function Element() {
                       args={[particleRadius, 30, 30]}
                       attach="geometry"
                     />
+
                     <meshBasicMaterial
                       transparent={true}
                       opacity={normalizeData(volume, 1, 0) / 50}
@@ -300,17 +381,22 @@ export default function Element() {
                       )}, ${Math.round(255.0 - volume * 2.5)})`}
                       attach="material"
                     />
+
                   </mesh>
                 );
               })}
+
               <BondLine
                 start={[atoms_x[0], atoms_y[0], atoms_z[0]]}
                 end={[atoms_x[1], atoms_y[1], atoms_z[1]]}
               />
+
             </Provider>
+            
           )}
 
           <gridHelper args={[undefined, undefined, "white"]} />
+
         </Canvas>
       </div>
     </div>

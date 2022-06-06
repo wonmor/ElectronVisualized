@@ -87,7 +87,7 @@ from server.extensions import db
 
 from . import renderer
 
-from server.elements.H2 import plot_hydrogen
+from server.molecule import plot_molecule
 
 
 bp = Blueprint('main', __name__, static_folder='../client/build', static_url_path='/')
@@ -133,5 +133,5 @@ def plot():
         A JSONified dictionary that contains the electron density and coordinate data
     '''
     if request.method == 'GET':
-        plot_hydrogen()
+        plot_molecule()
         return renderer.element_plotter()

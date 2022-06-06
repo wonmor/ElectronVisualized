@@ -70,9 +70,15 @@ export default function Header() {
           </a>
           <a
             href="/api"
-            className="block mt-4 lg:inline-block lg:mt-0 text-rose-200 hover:text-white"
+            className="block mt-4 lg:inline-block lg:mt-0 text-rose-200 hover:text-white mr-4"
           >
             API
+          </a>
+          <a
+            href="/docs"
+            className="block mt-4 lg:inline-block lg:mt-0 text-rose-200 hover:text-white"
+          >
+            Docs
           </a>
         </div>
       </div>
