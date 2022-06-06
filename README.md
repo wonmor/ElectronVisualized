@@ -26,6 +26,12 @@ A **real-time** electron density simulation **single-handedly** developed by a *
 
 <img width="1200" alt="Screen Shot 2022-06-05 at 10 07 56 PM" src="https://user-images.githubusercontent.com/35755386/172083077-061157c6-6c0a-4c7b-b585-63228cf38dd1.png">
 
+---
+
+## Project Sketches
+
+These sketches were drawn at an early stage of development.
+
 ![IMG_7647](https://user-images.githubusercontent.com/35755386/166985579-96c2d483-e74c-4802-ac92-762b2ccc8bc9.jpg)
 
 <img width="1200" alt="Screen Shot 2022-06-05 at 10 10 18 PM" src="https://user-images.githubusercontent.com/35755386/172083147-e11ab873-f156-4dda-8d26-71652a1de0c8.png">
