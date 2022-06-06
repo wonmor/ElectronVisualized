@@ -18,6 +18,10 @@ import CANVAS from "./Constants";
 
 import { RENDERER } from "./Constants";
 
+function normalizeData(val, max, min) {
+  return (val - min) / (max - min);
+}
+
 export default function Element() {
   /*
   This is a component function in JSX that also handles the HTTP requests from the server by using AJAX
@@ -172,7 +176,7 @@ export default function Element() {
               })}
               {Object.keys(density_data).map((key, index) => {
                 var coords = key.split(", ");
-                var volume = density_data[key]
+                var volume = density_data[key];
                 // Save the global variable...
                 // dispatch(setCurrentVolume(density_data[key]) || 0.0);
 
@@ -188,12 +192,14 @@ export default function Element() {
                   >
                     <sphereBufferGeometry
                       args={[RENDERER.PARTICLE_RADIUS, 30, 30]}
-                      transparent={true}
-                      opacity={1.0}
                       attach="geometry"
                     />
                     <meshBasicMaterial
-                      color={`rgb(255, ${Math.round(255.0 - volume * 2.5)}, ${Math.round(255.0 - volume * 2.5)})`}
+                      transparent={true}
+                      opacity={normalizeData(volume, 1, 0) / 50}
+                      color={`rgb(255, ${Math.round(
+                        255.0 - volume * 2.5
+                      )}, ${Math.round(255.0 - volume * 3)})`}
                       attach="material"
                     />
                   </mesh>
