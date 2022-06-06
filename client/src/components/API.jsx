@@ -44,7 +44,7 @@ export default function API() {
   return (
     <div>
       <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
-        <div className="text-white text-center pt-10 text-gray-400">
+        <div className="text-white text-center pt-10 pl-5 pr-5 text-gray-400">
           <h1 className="pb-5">
             <span className="text-white">Density Functional Theory</span> Meets the{" "}
             <span className="text-white">Web</span>.
@@ -52,7 +52,7 @@ export default function API() {
           <h2 className="mt-5 p-5 leading-normal bg-gray-600 text-gray-400">
             <span className="text-6xl">Introducing the <span className="text-white">World Engine</span>.</span><br></br>A <span className="text-white">REST API</span> Powered by the Industry-Leading{" "}
             <span className="text-white">ASE</span> and{" "}
-            <span className="text-white">GPAW</span> libaries.
+            <span className="text-white">GPAW</span> Libaries.
           </h2>
           <h2 className="p-5 leading-tight text-gray-400">
             An implementation that seemed to be impossible to be made.<br></br>
@@ -94,7 +94,7 @@ export default function API() {
               )}
             </div>
           ) : null}
-          <div className="p-5">
+          <div className="pt-5 pb-5">
             {preRender ? (
               <img className="border-dotted border-2 border-white" src="/API.png" alt="Screenshot" />
             ) : (
