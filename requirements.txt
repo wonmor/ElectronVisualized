@@ -1,5 +1,6 @@
 apptools==5.1.0
 ase==3.22.1
+asgiref==3.5.2
 autopep8==1.6.0
 bidict==0.22.0
 boto3==1.24.2

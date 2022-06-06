@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 
 import counterReducer from './states/counterSlice'
 import atomInfoReducer from './states/atomInfoSlice'
+import renderInfoReducer from './states/renderInfoSlice'
 
 /*
 ╔═══╦═══╦═══╦═══╦════╗─╔═══╦═══╦═══╦╗─╔╦═╗╔═╗╔═══╦═══╦═══╦╗─╔╦═══╦═══╦═══╦═══╗
@@ -28,6 +29,7 @@ export default configureStore({
   */
   reducer: {
     counter: counterReducer,
-    atomInfo: atomInfoReducer
+    atomInfo: atomInfoReducer,
+    renderInfo: renderInfoReducer
   },
 })

@@ -50,7 +50,7 @@ export default function API() {
     */
     await axios({
       method: "GET",
-      url: "/api/plot",
+      url: "/api/molecule",
     })
       .then((response) => {
         const res = response.data;
@@ -100,7 +100,7 @@ export default function API() {
                   fetchData();
                   setDisable(true);
                 }}
-                className="ml-2 bg-transparent hover:bg-blue-500 text-gray-400 hover:text-white py-2 px-4 border border-gray-400 hover:border-transparent rounded"
+                className="mt-5 sm:mt-0 ml-2 bg-transparent hover:bg-blue-500 text-gray-400 hover:text-white py-2 px-4 border border-gray-400 hover:border-transparent rounded"
                 type="button"
               >
                 <span>Fetch Data from the API</span>

@@ -8,6 +8,8 @@ import store from "../store";
 // A MUST — MAKE SURE THAT YOU WRITE CURLY BRACKETS NEXT TO IMPORT!
 import { setGlobalAtomInfo } from "../states/atomInfoSlice";
 
+import { setGlobalRenderInfo } from "../states/renderInfoSlice";
+
 import axios from "axios";
 
 import { Canvas } from "@react-three/fiber";
@@ -44,7 +46,7 @@ const normalizeData = (val, max, min) => {
   */
 
   return (val - min) / (max - min);
-}
+};
 
 const useLazyInterval = (callback, delay) => {
   /*
@@ -77,7 +79,7 @@ const useLazyInterval = (callback, delay) => {
     // Clear the interval to conserve memory
     return () => clearInterval(id);
   }, [delay]);
-}
+};
 
 export default function Molecule() {
   /*
@@ -92,26 +94,35 @@ export default function Molecule() {
   DOM File
     A HTML markup that contains graphical elements
   */
-
-  const [disable, setDisable] = useState(false);
-  const [preRender, setPreRender] = useState(true);
-  const [serverError, setServerError] = useState(false);
-
-  const [statusText, setStatusText] = useState("Rendering in Progress...");
-
   const [particleRadius, setParticleRadius] = useState(0.025);
+
+  const [reachedMaxPeak, setMaxPeak] = useState(false);
+  const [reachedMinPeak, setMinPeak] = useState(true);
 
   /*
   Define that React and Redux states: former being used locally, and the latter being used globally.
   The purpose of using constants is due to its high efficiency when it comes to memory management.
   */
 
-  const [reachedMaxPeak, setMaxPeak] = useState(false);
-  const [reachedMinPeak, setMinPeak] = useState(true);
-
-  const [animation, setAnimation] = useState(true);
-
   const globalAtomInfo = useSelector((state) => state.atomInfo.globalAtomInfo);
+
+  const globalRenderInfo = useSelector(
+    (state) => state.renderInfo.globalRenderInfo
+  );
+
+  const [animation, setAnimation] = useState(globalRenderInfo["animation"]);
+
+  const [statusText, setStatusText] = useState(globalRenderInfo["statusText"]);
+
+  const [disableButton, setDisableButton] = useState(
+    globalRenderInfo["disableButton"]
+  );
+
+  const [preRender, setPreRender] = useState(globalRenderInfo["preRender"]);
+
+  const [serverError, setServerError] = useState(
+    globalRenderInfo["serverError"]
+  );
 
   const dispatch = useDispatch();
 
@@ -120,8 +131,7 @@ export default function Molecule() {
     if (animation) {
       if (!reachedMaxPeak || reachedMinPeak) {
         setParticleRadius(particleRadius + 0.01);
-      }
-      if (!reachedMinPeak || reachedMaxPeak) {
+      } else {
         setParticleRadius(particleRadius - 0.01);
       }
       if (particleRadius < 0.01) {
@@ -132,16 +142,44 @@ export default function Molecule() {
         setMinPeak(false);
         setMaxPeak(true);
       }
-    }
-    else {
+    } else {
+      // Clear the interval when animation event is not triggered...
       clearInterval();
     }
-  }, 1500);
+  }, 1500); // Execute every 1.5 seconds
+
+  /*
+  Whenever the state information regarding DOM element
+  hide/show changes, run this function...
+  */
+
+  useEffect(() => {
+    dispatch(
+      setGlobalRenderInfo({
+        animation: animation,
+        disableButton: disableButton,
+        preRender: preRender,
+        serverError: serverError,
+        statusText: statusText,
+      })
+    );
+  }, [animation, disableButton, dispatch, preRender, serverError, statusText]);
 
   const update = async () => {
+    /*
+    This is an asyncronous function that sends HTML requests to the server, ran by Flask (Python)
+
+    Parameters
+    ----------
+    None
+
+    Returns
+    -------
+    None
+    */
     await axios({
       method: "GET",
-      url: "/api/plot",
+      url: "/api/molecule",
     })
       .then((response) => {
         const res = response.data;
@@ -180,13 +218,23 @@ export default function Molecule() {
   };
 
   const changeParticleRadius = (event, value) => {
+    /*
+    This function changes the state of individual particle radius...
+
+    Parameters
+    ----------
+    None
+
+    Returns
+    -------
+    None
+    */
     setParticleRadius(value);
   };
 
   return (
     <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
       <div className="text-white text-center pt-10 pb-10">
-
         <h1>
           Hydrogen Gas. <span className="text-gray-400">Visualized.</span>
         </h1>
@@ -199,29 +247,24 @@ export default function Molecule() {
 
         <p className="pt-5 pr-5 pl-5 text-gray-400">
           <b>Hydrogen</b> is the first element in the periodic table. The atomic
-          number is <b>1</b> and its mass is <b>1.01 g/mol</b>. Its gas form consists
-          of two <b>Hydrogen</b> atoms, forming a <b>Sigma</b> bond.
+          number is <b>1</b> and its mass is <b>1.01 g/mol</b>. Its gas form
+          consists of two <b>Hydrogen</b> atoms, forming a <b>Sigma</b> bond.
         </p>
 
         <div class="gap-3 flex items-center justify-center pt-5">
-          {!disable ? (
-
+          {!disableButton ? (
             <button
-              disabled={disable}
-
+              disabled={disableButton}
               onClick={() => {
                 update();
-                setDisable(true);
+                setDisableButton(true);
               }}
-
               className="absolute mt-10 bg-transparent hover:bg-blue-500 text-gray-400 hover:text-white py-2 px-4 border border-gray-400 hover:border-transparent rounded"
               type="button"
             >
               <span>Start Rendering</span>
             </button>
-
           ) : preRender ? (
-
             <div
               className={`absolute text-gray-400 ${
                 serverError ? "mt-10" : "mt-40"
@@ -230,7 +273,6 @@ export default function Molecule() {
               <h3>{statusText}</h3>
 
               {!serverError && (
-
                 <div className="scale-75 lds-roller">
                   <div></div>
                   <div></div>
@@ -241,13 +283,9 @@ export default function Molecule() {
                   <div></div>
                   <div></div>
                 </div>
-
               )}
-
             </div>
-
           ) : (
-            
             <Box
               component="span"
               sx={{
@@ -259,33 +297,26 @@ export default function Molecule() {
               }}
             >
               {!animation && (
-
                 <div>
                   <p className="text-gray-400">Particle Radius</p>
 
                   <Slider
                     className="ml-40 mr-40 mb-5"
-
                     onClick={() => {
                       setAnimation(false);
                     }}
-
                     sx={{
                       width: 300,
                       color: "gray",
                     }}
-
                     value={particleRadius}
                     onChange={changeParticleRadius}
-
                     min={0.01}
                     max={0.07}
                     step={0.001}
-
                     valueLabelDisplay="auto"
                   />
                 </div>
-
               )}
               <Button
                 onClick={() => {
@@ -293,14 +324,12 @@ export default function Molecule() {
 
                   if (!animation) {
                     setParticleRadius(0.01);
-                    
+
                     setMaxPeak(false);
                     setMinPeak(true);
                   }
                 }}
-                
                 variant="outlined"
-
                 sx={{
                   marginLeft: "7.5em",
                   marginRight: "7.5em",
@@ -317,7 +346,6 @@ export default function Molecule() {
 
       <div style={{ width: CANVAS.WIDTH, height: CANVAS.HEIGHT }}>
         <Canvas camera={{ fov: 35, position: [-5, 8, 8] }}>
-
           <Controls />
 
           <ambientLight intensity={0.5} />
@@ -325,11 +353,8 @@ export default function Molecule() {
           <pointLight position={[-10, -10, -10]} />
 
           {globalAtomInfo && (
-
             <Provider store={store}>
-
               {globalAtomInfo["atoms_x"].map((value, index) => {
-
                 return (
                   <>
                     <Atoms
@@ -339,16 +364,13 @@ export default function Molecule() {
                         globalAtomInfo["atoms_z"][index],
                       ]}
                     />
-
                   </>
                 );
-
               })}
 
               {Object.keys(globalAtomInfo["density_data"]).map((key, index) => {
-
-                const coords = (key.split(", "));
-                const volume = (globalAtomInfo["density_data"][key]);
+                const coords = key.split(", ");
+                const volume = globalAtomInfo["density_data"][key];
 
                 return (
                   // Generate particles...
@@ -373,22 +395,26 @@ export default function Molecule() {
                       )}, ${Math.round(255.0 - volume * 2.5)})`}
                       attach="material"
                     />
-
                   </mesh>
                 );
               })}
 
               <BondLine
-                start={[globalAtomInfo["atoms_x"][0], globalAtomInfo["atoms_y"][0], globalAtomInfo["atoms_z"][0]]}
-                end={[globalAtomInfo["atoms_x"][1], globalAtomInfo["atoms_y"][1], globalAtomInfo["atoms_z"][1]]}
+                start={[
+                  globalAtomInfo["atoms_x"][0],
+                  globalAtomInfo["atoms_y"][0],
+                  globalAtomInfo["atoms_z"][0],
+                ]}
+                end={[
+                  globalAtomInfo["atoms_x"][1],
+                  globalAtomInfo["atoms_y"][1],
+                  globalAtomInfo["atoms_z"][1],
+                ]}
               />
-
             </Provider>
-            
           )}
 
           <gridHelper args={[undefined, undefined, "white"]} />
-
         </Canvas>
       </div>
     </div>

@@ -18,6 +18,11 @@ bp = Blueprint('main', __name__, static_folder='../client/build', static_url_pat
 
 CORS(bp, resources={r'/api/*': {'origins': '*'}})
 
+# For React Router Redirection Purposes...
+@bp.app_errorhandler(404)   
+def not_found(e):   
+  return bp.send_static_file('index.html')
+
 @bp.route('/') 
 def serve():
     '''
@@ -34,16 +39,13 @@ def serve():
     '''
     return bp.send_static_file('index.html')
 
-# For React Router Redirection Purposes...
-@bp.app_errorhandler(404)   
-def not_found(e):   
-  return bp.send_static_file('index.html')
-
-@bp.route('/api/plot', methods=['GET'])
+@bp.route('/api/molecule', methods=['GET'])
 @cross_origin()
 def plot():
     '''
-    When API call is made, this function executes the plot_hydrogen method which computes the electron density data for hydrogen atom
+    When API call is made, this function asyncronously executes
+    the plot_hydrogen method which computes the
+    electron density data for hydrogen atom
     
     Parameters
     ----------
@@ -54,8 +56,9 @@ def plot():
     JSON Array
         A JSONified dictionary that contains the electron density and coordinate data
     '''
-    if request.method == 'GET':
-        return molecule.plot_molecule()
+    
+    data = molecule.plot_molecule()
+    return data
 
 '''
 ----------------------------------------------------------------

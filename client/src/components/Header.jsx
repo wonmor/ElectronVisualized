@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import useWindowSize from "../useWindowsSize";
 
 import "./Header.css";
@@ -28,10 +30,28 @@ export default function Header() {
 
   const [showMenu, setMenu] = useState(false);
 
+  const navigate = useNavigate();
+
+  const movePage = (page) => {
+    /*
+    This function, when executed, navigates the user to another page smoothly without a flicker
+
+    Parameters
+    ----------
+    page: String
+      The desired URL
+
+    Returns
+    -------
+    None
+    */
+    navigate(page);
+  };
+
   return (
     <nav className="flex items-center justify-between flex-wrap bg-rose-500 p-3">
 
-      <a href="/">
+      <button onClick={() => {movePage("/")}}>
         <div className="flex items-center flex-shrink-0 text-white mr-6">
 
           <img className="w-20 mr-5" src={Logo} alt="logo"></img>
@@ -41,7 +61,7 @@ export default function Header() {
           </span>
 
         </div>
-      </a>
+      </button>
 
       <div className="block lg:hidden">
 
@@ -68,34 +88,27 @@ export default function Header() {
 
         <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
           <div className="text-sm lg:flex-grow">
-            
-            <a
-              href="/"
-              className="block mt-4 lg:inline-block lg:mt-0 text-rose-200 hover:text-white mr-4"
-            >
-              Table
-            </a>
 
-            <a
-              href="/molecule"
+            <button
+              onClick={() => {movePage("/molecule")}}
               className="block mt-4 lg:inline-block lg:mt-0 text-rose-200 hover:text-white mr-4"
             >
               Molecule
-            </a>
+            </button>
 
-            <a
-              href="/api"
+            <button
+              onClick={() => {movePage("/api")}}
               className="block mt-4 lg:inline-block lg:mt-0 text-rose-200 hover:text-white mr-4"
             >
               API
-            </a>
+            </button>
 
-            <a
-              href="/docs"
+            <button
+              onClick={() => {movePage("/docs")}}
               className="block mt-4 lg:inline-block lg:mt-0 text-rose-200 hover:text-white"
             >
               Docs
-            </a>
+            </button>
 
           </div>
         </div>
