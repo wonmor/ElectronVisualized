@@ -9,7 +9,6 @@ const CANVAS = {
 
 export const RENDERER = {
     ATOM_RADIUS: "0.3",
-    PARTICLE_RADIUS: "0.01",
     TUBE_RADIUS: "0.3"
 }
 

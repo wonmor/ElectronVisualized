@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch, Provider } from "react-redux";
+
+import { Box, Slider, Button } from "@mui/material";
 
 import store from "../store";
 
@@ -16,10 +18,25 @@ import Controls from "./Controls";
 
 import CANVAS from "./Constants";
 
-import { RENDERER } from "./Constants";
-
 function normalizeData(val, max, min) {
   return (val - min) / (max - min);
+}
+
+function useInterval(callback, delay) {
+  const savedCallback = useRef();
+
+  // Remember the latest callback.
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  // Set up the interval.
+  useEffect(() => {
+    let id = setInterval(() => {
+      savedCallback.current();
+    }, delay);
+    return () => clearInterval(id);
+  }, [delay]);
 }
 
 export default function Element() {
@@ -37,16 +54,39 @@ export default function Element() {
   */
 
   const [disable, setDisable] = useState(false);
-
   const [preRender, setPreRender] = useState(true);
-
   const [serverError, setServerError] = useState(false);
 
   const [statusText, setStatusText] = useState("Rendering in Progress...");
+  const [particleRadius, setParticleRadius] = useState(0.025);
+
+  const [reachedMaxPeak, setMaxPeak] = useState(false);
+  const [reachedMinPeak, setMinPeak] = useState(true);
+
+  const [animation, setAnimation] = useState(true);
 
   const globalAtomInfo = useSelector((state) => state.atomInfo.globalAtomInfo);
 
   const dispatch = useDispatch();
+
+  useInterval(() => {
+    if (animation) {
+      if (!reachedMaxPeak || reachedMinPeak) {
+        setParticleRadius(particleRadius + 0.01);
+      }
+      if (!reachedMinPeak || reachedMaxPeak) {
+        setParticleRadius(particleRadius - 0.01);
+      }
+      if (particleRadius < 0.01) {
+        setMinPeak(true);
+        setMaxPeak(false);
+      }
+      if (particleRadius > 0.04) {
+        setMinPeak(false);
+        setMaxPeak(true);
+      }
+    }
+  }, 1500);
 
   const update = async () => {
     await axios({
@@ -87,6 +127,10 @@ export default function Element() {
           console.log(error.response.headers);
         }
       });
+  };
+
+  const changeParticleRadius = (event, value) => {
+    setParticleRadius(value);
   };
 
   var atoms_x, atoms_y, atoms_z, density_data;
@@ -149,7 +193,61 @@ export default function Element() {
                 </div>
               )}
             </div>
-          ) : null}
+          ) : (
+            <Box
+              component="span"
+              sx={{
+                p: 2,
+                border: "1px dashed grey",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+              }}
+            >
+              {!animation && (
+                <div>
+                  <p className="text-gray-400">Particle Radius</p>
+                  <Slider
+                    className="ml-40 mr-40 mb-5"
+                    onClick={() => {
+                      setAnimation(false);
+                    }}
+                    sx={{
+                      width: 300,
+                      color: "gray",
+                    }}
+                    value={particleRadius}
+                    onChange={changeParticleRadius}
+                    min={0.01}
+                    max={0.07}
+                    step={0.001}
+                    valueLabelDisplay="auto"
+                  />
+                </div>
+              )}
+              <Button
+                onClick={() => {
+                  setAnimation(!animation);
+
+                  if (!animation) {
+                    setParticleRadius(0.01);
+                    
+                    setMaxPeak(false);
+                    setMinPeak(true);
+                  }
+                }}
+                variant="outlined"
+                sx={{
+                  marginLeft: "7.5em",
+                  marginRight: "7.5em",
+                  color: "gray",
+                  borderColor: "gray",
+                }}
+              >
+                {!animation ? "Enable Animation" : "Disable Animation"}
+              </Button>
+            </Box>
+          )}
         </div>
       </div>
       <div style={{ width: CANVAS.WIDTH, height: CANVAS.HEIGHT }}>
@@ -191,7 +289,7 @@ export default function Element() {
                     scale={[1, 1, 1]}
                   >
                     <sphereBufferGeometry
-                      args={[RENDERER.PARTICLE_RADIUS, 30, 30]}
+                      args={[particleRadius, 30, 30]}
                       attach="geometry"
                     />
                     <meshBasicMaterial
