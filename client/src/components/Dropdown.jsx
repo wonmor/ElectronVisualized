@@ -1,20 +1,56 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 
-function classNames(...classes) {
+/*
+████████████████████████████████████████████████████████████████████████████████████
+█▄─▄▄▀█▄─▄▄▀█─▄▄─█▄─▄▄─█▄─▄▄▀█─▄▄─█▄─█▀▀▀█─▄█▄─▀█▄─▄███▄─▀█▀─▄█▄─▄▄─█▄─▀█▄─▄█▄─██─▄█
+██─██─██─▄─▄█─██─██─▄▄▄██─██─█─██─██─█─█─█─███─█▄▀─█████─█▄█─███─▄█▀██─█▄▀─███─██─██
+▀▄▄▄▄▀▀▄▄▀▄▄▀▄▄▄▄▀▄▄▄▀▀▀▄▄▄▄▀▀▄▄▄▄▀▀▄▄▄▀▄▄▄▀▀▄▄▄▀▀▄▄▀▀▀▄▄▄▀▄▄▄▀▄▄▄▄▄▀▄▄▄▀▀▄▄▀▀▄▄▄▄▀▀
+*/
+
+const classNames = (...classes) => {
+  /*
+  This function handles all the CSS className properties that will be linked with the DOM element
+
+  Parameters
+  ----------
+  None
+
+  Returns
+  -------
+  String
+    Contains the names of the classes
+  */
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Dropdown() {
-const [dataType, setDataType] = useState("Hydrogen Gas — Density");
+const dataTypeConversion = {
+  "H2": "Hydrogen Gas — Density",
+}
 
+export default function Dropdown() {
+  /*
+  This is a component function in JSX that handles all the dropdown menu-related events
+
+  Parameters
+  ----------
+  None
+
+  Returns
+  -------
+  DOM File
+    Contains HTML properties that each represent the graphic element on the website
+  */
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
+
         <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
-          {dataType}
+          {dataTypeConversion["H2"]}
+          
           <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
+
         </Menu.Button>
       </div>
 
@@ -30,9 +66,10 @@ const [dataType, setDataType] = useState("Hydrogen Gas — Density");
         <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
             <Menu.Item>
+
               {({ active }) => (
                 <a
-                  href="#"
+                  href="#api-description"
                   className={classNames(
                     active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                     "block px-4 py-2 text-sm"
@@ -41,7 +78,9 @@ const [dataType, setDataType] = useState("Hydrogen Gas — Density");
                   Hydrogen Gas — Density
                 </a>
               )}
+
             </Menu.Item>
+            
             {/* <Menu.Item>
               {({ active }) => (
                 <a

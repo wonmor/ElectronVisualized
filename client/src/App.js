@@ -5,13 +5,24 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 
 import Table from './components/Table'
-import Element from './components/Element';
+import Molecule from './components/Molecule';
 import NotFound from './components/NotFound';
 import API from './components/API';
 
-const App = () => {
+/*
+██████╗░░█████╗░██╗░░░██╗████████╗███████╗██████╗░░██████╗
+██╔══██╗██╔══██╗██║░░░██║╚══██╔══╝██╔════╝██╔══██╗██╔════╝
+██████╔╝██║░░██║██║░░░██║░░░██║░░░█████╗░░██████╔╝╚█████╗░
+██╔══██╗██║░░██║██║░░░██║░░░██║░░░██╔══╝░░██╔══██╗░╚═══██╗
+██║░░██║╚█████╔╝╚██████╔╝░░░██║░░░███████╗██║░░██║██████╔╝
+╚═╝░░╚═╝░╚════╝░░╚═════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝╚═════╝░
+*/
+
+export default function App() {
   /*
-  This is a component function in JSX that contains the HTML markup that represent each graphical element on the webpage
+  This is a component function in JSX that contains the HTML markup
+  that represent each graphical element on the webpage;
+  This specific function handles React's client-side routing feature
 
   Parameters
   ----------
@@ -29,7 +40,7 @@ const App = () => {
         <Routes>
           <Route path="*" element={<NotFound />} />
           <Route exact path="/" element={<Table />} />
-          <Route path="/element" element={<Element />} />
+          <Route path="/molecule" element={<Molecule />} />
           <Route path="/api" element={<API />} />
         </Routes>
       </div>
@@ -37,5 +48,3 @@ const App = () => {
     </div>
   );
 }
-
-export default App;

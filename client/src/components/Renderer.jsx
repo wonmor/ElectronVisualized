@@ -8,6 +8,12 @@ import { Line2, LineGeometry, LineMaterial } from "three-fatline";
 
 import { RENDERER } from "./Constants";
 
+/*
+░█▀▀█ ░█▀▀▀ ░█▄─░█ ░█▀▀▄ ░█▀▀▀ ░█▀▀█ ░█▀▀▀ ░█▀▀█ 
+░█▄▄▀ ░█▀▀▀ ░█░█░█ ░█─░█ ░█▀▀▀ ░█▄▄▀ ░█▀▀▀ ░█▄▄▀ 
+░█─░█ ░█▄▄▄ ░█──▀█ ░█▄▄▀ ░█▄▄▄ ░█─░█ ░█▄▄▄ ░█─░█
+*/
+
 extend({ LineGeometry, LineMaterial });
 
 export function Atoms(props) {
@@ -38,6 +44,7 @@ export function Atoms(props) {
         args={[RENDERER.ATOM_RADIUS, 30, 30]}
         attach="geometry"
       />
+
       <meshBasicMaterial
         color={0xfff1ef}
         opacity={0.2}
@@ -65,6 +72,7 @@ export function BondLine({ start, end }) {
     Contains the information regarding mesh (in this case, tube that connects two atoms) under React-ThreeJS library
   */
   const geometry = new LineGeometry();
+
   geometry.setPositions(start.concat(end)); // [ x1, y1, z1,  x2, y2, z2, ... ] format
 
   const material = new LineMaterial({
@@ -82,5 +90,3 @@ export function BondLine({ start, end }) {
 
   return <primitive object={lineSegment} position={[0, 0, 0]} />;
 }
-
-// FIX THE TUBE!

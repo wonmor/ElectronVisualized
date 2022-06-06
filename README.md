@@ -2,7 +2,7 @@
 
 # ElectronVisualized
 
-A **real-time** electron density simulation **single-handedly** developed by a **high school student** (with some help with libraries written by **multiple** PhD holders; thank you). Displayed based upon the internal calculations performed that involve the famous **Density Functional Theory**, which describes the probable locations of electrons by numerically deriving the wavefunction.
+A **real-time** electron density simulation **single-handedly** developed by a **high school student** (with some help with libraries written by **multiple** PhD holders; thank you). Displayed based upon the internal calculations performed that involve the famous **Density Functional Theory**, which describes the probable locations of electrons by approximating the wavefunction.
 
 ---
 
@@ -43,6 +43,8 @@ These sketches were drawn at an early stage of development.
 - **Redux**: An Open-Source JavaScript Library for Managing and Centralizing Application State — *ANNOYING **AF** PLUGIN, BUT I HAD NO OTHER OPTIONS...*
 - **ThreeJS**: JavaScript 3D Library
 - **Tailwind CSS**: A Utility-First Cascading Style Sheets Framework
+- **Headless UI**: UI Component Library
+- **MUI**: Another UI Component Library (LOL)
 
 ---
 

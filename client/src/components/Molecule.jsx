@@ -18,6 +18,12 @@ import Controls from "./Controls";
 
 import CANVAS from "./Constants";
 
+/*
+░█▀▄▀█ ░█▀▀▀█ ░█─── ░█▀▀▀ ░█▀▀█ ░█─░█ ░█─── ░█▀▀▀ 
+░█░█░█ ░█──░█ ░█─── ░█▀▀▀ ░█─── ░█─░█ ░█─── ░█▀▀▀ 
+░█──░█ ░█▄▄▄█ ░█▄▄█ ░█▄▄▄ ░█▄▄█ ─▀▄▄▀ ░█▄▄█ ░█▄▄▄
+*/
+
 const normalizeData = (val, max, min) => {
   /*
   This function normalizes a given dataset within a certain range that is defined
@@ -73,7 +79,7 @@ const useLazyInterval = (callback, delay) => {
   }, [delay]);
 }
 
-export default function Element() {
+export default function Molecule() {
   /*
   This is a component function in JSX that also handles the HTTP requests from the server by using AJAX
 
@@ -92,6 +98,7 @@ export default function Element() {
   const [serverError, setServerError] = useState(false);
 
   const [statusText, setStatusText] = useState("Rendering in Progress...");
+
   const [particleRadius, setParticleRadius] = useState(0.025);
 
   /*
@@ -125,6 +132,9 @@ export default function Element() {
         setMinPeak(false);
         setMaxPeak(true);
       }
+    }
+    else {
+      clearInterval();
     }
   }, 1500);
 
@@ -172,24 +182,6 @@ export default function Element() {
   const changeParticleRadius = (event, value) => {
     setParticleRadius(value);
   };
-
-  const [atoms_x, setAtomsX] = useState(null);
-  const [atoms_y, setAtomsY] = useState(null);
-  const [atoms_z, setAtomsZ] = useState(null);
-
-  const [density_data, setDensityData] = useState(null);
-
-  const [coords, setCoords] = useState(null);
-  const [volume, setVolume] = useState(null);
-
-  // Define local variables
-  if (globalAtomInfo != null) {
-    setAtomsX(globalAtomInfo["atoms_x"]);
-    setAtomsY(globalAtomInfo["atoms_y"]);
-    setAtomsZ(globalAtomInfo["atoms_z"]);
-
-    setDensityData(globalAtomInfo["density_data"]);
-  }
 
   return (
     <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
@@ -336,15 +328,15 @@ export default function Element() {
 
             <Provider store={store}>
 
-              {atoms_x.map((value, index) => {
+              {globalAtomInfo["atoms_x"].map((value, index) => {
 
                 return (
                   <>
                     <Atoms
                       position={[
-                        atoms_x[index],
-                        atoms_y[index],
-                        atoms_z[index],
+                        globalAtomInfo["atoms_x"][index],
+                        globalAtomInfo["atoms_y"][index],
+                        globalAtomInfo["atoms_z"][index],
                       ]}
                     />
 
@@ -353,10 +345,10 @@ export default function Element() {
 
               })}
 
-              {Object.keys(density_data).map((key, index) => {
+              {Object.keys(globalAtomInfo["density_data"]).map((key, index) => {
 
-                setCoords(key.split(", "));
-                setVolume(density_data[key]);
+                const coords = (key.split(", "));
+                const volume = (globalAtomInfo["density_data"][key]);
 
                 return (
                   // Generate particles...
@@ -387,8 +379,8 @@ export default function Element() {
               })}
 
               <BondLine
-                start={[atoms_x[0], atoms_y[0], atoms_z[0]]}
-                end={[atoms_x[1], atoms_y[1], atoms_z[1]]}
+                start={[globalAtomInfo["atoms_x"][0], globalAtomInfo["atoms_y"][0], globalAtomInfo["atoms_z"][0]]}
+                end={[globalAtomInfo["atoms_x"][1], globalAtomInfo["atoms_y"][1], globalAtomInfo["atoms_z"][1]]}
               />
 
             </Provider>

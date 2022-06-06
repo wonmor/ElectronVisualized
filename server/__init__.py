@@ -6,12 +6,17 @@ from dotenv import load_dotenv
 import os
 
 '''
-TIPS & TRICKS
-1. COMMAND + K and then COMMAND + C to comment multiple lines on VSCode
-2. FLASK ENVIRONMENT EXPLANATION: https://pythonbasics.org/flask-environment-production/
-3. HOW TO SET UP SECRET_KEY ON HEROKU: https://stackoverflow.com/questions/47949022/git-heroku-how-to-hide-my-secret-key
-4. COMMAND (RUN ON TERMINAL): heroku config:set SECRET_KEY='<ENTER SECRET KEY>' -a lottery-simulator-2022
-4. HEROKU-FLASK-REACT SETUP TUTORIAL: https://towardsdatascience.com/reactjs-python-flask-on-heroku-2a308272886a
+----------------------------------------------------------------
+
+█─█ ▀▀█▀▀ ░█─░█ ░█▀▀▀ 　 ░█──░█ ░█▀▀▀█ ░█▀▀█ ░█─── ░█▀▀▄ 　 ░█▀▀▀ ░█▄─░█ ░█▀▀█ ▀█▀ ░█▄─░█ ░█▀▀▀ █─█ 
+─── ─░█── ░█▀▀█ ░█▀▀▀ 　 ░█░█░█ ░█──░█ ░█▄▄▀ ░█─── ░█─░█ 　 ░█▀▀▀ ░█░█░█ ░█─▄▄ ░█─ ░█░█░█ ░█▀▀▀ ─── 
+─── ─░█── ░█─░█ ░█▄▄▄ 　 ░█▄▀▄█ ░█▄▄▄█ ░█─░█ ░█▄▄█ ░█▄▄▀ 　 ░█▄▄▄ ░█──▀█ ░█▄▄█ ▄█▄ ░█──▀█ ░█▄▄▄ ───
+
+A RESTful API THAT POWERS THE INTERACTIVE MODULE ELECTRONVISUALIZED
+DEVELOPED AND DESIGNED BY JOHN SEONG
+
+SUPPORTED PLATFORMS: WEB(REACT + FLASK STACK), IOS & MACOS (IN DEV)
+----------------------------------------------------------------
 '''
 
 def create_app():
@@ -70,4 +75,11 @@ STEPS TO GENERATE THE DB FILE
 4. >>> from website.extensions import db
 5. >>> from website import app
 6. >>> db.create_all(app=website.create_app())
+
+TIPS & TRICKS
+1. COMMAND + K and then COMMAND + C to comment multiple lines on VSCode
+2. FLASK ENVIRONMENT EXPLANATION: https://pythonbasics.org/flask-environment-production/
+3. HOW TO SET UP SECRET_KEY ON HEROKU: https://stackoverflow.com/questions/47949022/git-heroku-how-to-hide-my-secret-key
+4. COMMAND (RUN ON TERMINAL): heroku config:set SECRET_KEY='<ENTER SECRET KEY>' -a lottery-simulator-2022
+4. HEROKU-FLASK-REACT SETUP TUTORIAL: https://towardsdatascience.com/reactjs-python-flask-on-heroku-2a308272886a
 '''

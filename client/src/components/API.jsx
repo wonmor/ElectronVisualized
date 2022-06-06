@@ -4,6 +4,15 @@ import Dropdown from "./Dropdown";
 
 import axios from "axios";
 
+/*
+░█████╗░██████╗░██╗  ██████╗░░█████╗░░██████╗░███████╗
+██╔══██╗██╔══██╗██║  ██╔══██╗██╔══██╗██╔════╝░██╔════╝
+███████║██████╔╝██║  ██████╔╝███████║██║░░██╗░█████╗░░
+██╔══██║██╔═══╝░██║  ██╔═══╝░██╔══██║██║░░╚██╗██╔══╝░░
+██║░░██║██║░░░░░██║  ██║░░░░░██║░░██║╚██████╔╝███████╗
+╚═╝░░╚═╝╚═╝░░░░░╚═╝  ╚═╝░░░░░╚═╝░░╚═╝░╚═════╝░╚══════╝
+*/
+
 export default function API() {
   /*
   This is a component function in JSX that handles all the API-related events
@@ -74,7 +83,7 @@ export default function API() {
             <span className="text-white">ASE</span> Libaries.
           </h2>
 
-          <h2 className="p-5 leading-tight text-gray-400">
+          <h2 id="api-description" className="p-5 leading-tight text-gray-400">
             An implementation that seemed to be impossible to be made.<br></br>
             Handcrafted for{" "}
             <span className="text-white">Computational Chemists</span> and{" "}
@@ -131,12 +140,12 @@ export default function API() {
             ) : (
 
               <div className="text-center">
-                <p className="inline-block text-left bg-gray-800 p-5 text-white">
+                <div className="inline-block text-xl text-left bg-gray-800 p-5 text-white">
                     <span className="text-5xl text-gray-400">HYDROGEN GAS</span>
                     <br></br><br></br>
                     <span><code>density_data:</code></span>
                   <pre>{JSON.stringify(atomInfo.density_data, null, 2)}</pre>
-                </p>
+                </div>
               </div>
 
             )}
