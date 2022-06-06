@@ -69,10 +69,10 @@ export default function Header() {
             Element
           </a>
           <a
-            href="https://github.com/wonmor/ElectronVisualized"
+            href="/api"
             className="block mt-4 lg:inline-block lg:mt-0 text-rose-200 hover:text-white"
           >
-            Source Code
+            API
           </a>
         </div>
       </div>

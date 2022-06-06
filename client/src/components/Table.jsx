@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import Particles from "react-tsparticles";
 import "./Table.css";
 
 
@@ -12,24 +11,6 @@ export default function Table() {
 
   return (
     <div>
-        <Particles
-        params={{
-          fpsLimit: 60,
-          particles: {
-            color: {
-              value: "#000"
-            },
-            links: {
-              enable: true,
-              color: "#000",
-              distance: 150
-            },
-            move: {
-              enable: true
-            }
-          }
-        }}
-      />
       <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
         <div className="text-white text-center pt-10 pb-10 text-gray-400">
           <h1>
@@ -37,7 +18,7 @@ export default function Table() {
             Reimagined.
           </h1>
           <h2 className="mt-5 pb-5 text-gray-400 border-b border-gray-400">
-            Simulated <span className="text-white">Real-Time&#8482;</span> using{" "}
+            Simulated <span className="text-white">Real-Time</span> using{" "}
             <span className="text-white">GPAW</span> and{" "}
             <span className="text-white">ASE</span>.
           </h2>

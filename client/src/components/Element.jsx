@@ -15,8 +15,6 @@ import Controls from "./Controls";
 
 import CANVAS from "./Constants";
 
-import "./Element.css";
-
 export default function Element() {
   /*
   This is a component function in JSX that also handles the HTTP requests from the server by using AJAX
@@ -37,7 +35,7 @@ export default function Element() {
 
   const [serverError, setServerError] = useState(false);
 
-  const [statusText, setStatusText] = useState("Rendering in progress...");
+  const [statusText, setStatusText] = useState("Rendering in Progress...");
 
   const globalAtomInfo = useSelector((state) => state.atomInfo.globalAtomInfo);
 
@@ -98,8 +96,8 @@ export default function Element() {
   return (
     <div className="bg-gray-700" style={{'min-height': '100vh'}}>
       <div className="text-white text-center pt-10 pb-10">
-        <h1>Hydrogen Gas.</h1>
-        <h2 className="mt-5 pb-5 text-gray-400 border-b border-gray-400">Simulated <span className="text-white">Real-Time&#8482;</span> using <span className="text-white">GPAW</span> and <span className="text-white">ASE</span>.</h2>
+        <h1>Hydrogen Gas. <span className="text-gray-400">Visualized.</span></h1>
+        <h2 className="mt-5 pb-5 text-gray-400 border-b border-gray-400">Simulated <span className="text-white">Real-Time</span> using <span className="text-white">GPAW</span> and <span className="text-white">ASE</span>.</h2>
         <p className="pt-5 pr-5 pl-5 text-gray-400">
           <b>Hydrogen</b> is the first element in the periodic table. The atomic number
           is <b>1</b> and its mass is <b>1 AMU</b>. Its gas form consists of two <b>Hydrogen</b> atoms, forming a <b>Sigma</b> bond.
