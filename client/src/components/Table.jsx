@@ -27,7 +27,7 @@ export default function Table() {
             is available at the moment.
           </p>
           <div
-            className="m-10 scale-90 sm:scale-100"
+            className="m-10 scale-75 sm:scale-100"
             role="region"
             tabindex="0"
           >
