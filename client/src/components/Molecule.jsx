@@ -109,7 +109,9 @@ export default function Molecule() {
 
   const globalAtomInfo = useSelector((state) => state.atomInfo.globalAtomInfo);
 
-  const globalSelectedElement = useSelector((state) => state.selectedElement.globalSelectedElement);
+  const globalSelectedElement = useSelector(
+    (state) => state.selectedElement.globalSelectedElement
+  );
 
   const globalRenderInfo = useSelector(
     (state) => state.renderInfo.globalRenderInfo
@@ -221,7 +223,7 @@ export default function Molecule() {
         }
       });
   };
-  
+
   const changeParticleRadius = (event, value) => {
     /*
     This function changes the state of individual particle radius...
@@ -241,19 +243,18 @@ export default function Molecule() {
     <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
       <div className="text-white text-center pt-10 pb-10">
         <h1>
-          {globalSelectedElement["name"]} <span className="text-gray-400">Visualized.</span>
+          {globalSelectedElement["name"]}{" "}
+          <span className="text-gray-400">Visualized.</span>
         </h1>
 
         <h2 className="mt-5 pb-5 ml-5 mr-5 text-gray-400 border-b border-gray-500">
-          Simulated <span className="text-white">Real-Time</span> using{" "}
+          Simulated <span className="text-white">Real Time</span> using{" "}
           <span className="text-white">GPAW</span> and{" "}
           <span className="text-white">ASE</span>.
         </h2>
 
         <p className="pt-5 pr-5 pl-5 text-gray-400">
-          <b>Hydrogen</b> is the first element in the periodic table. The atomic
-          number is <b>1</b> and its mass is <b>1.01 g/mol</b>. Its gas form
-          consists of two <b>Hydrogen</b> atoms, forming a <b>Sigma</b> bond.
+          {globalSelectedElement["description"]}
         </p>
 
         <div class="gap-3 flex items-center justify-center pt-5">
@@ -357,12 +358,11 @@ export default function Molecule() {
           <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
           <pointLight position={[-10, -10, -10]} />
 
-          {(globalAtomInfo && !preRender) && (
+          {globalAtomInfo && !preRender && (
             <Provider store={store}>
               {globalAtomInfo["atoms_x"].map((value, index) => {
                 return (
                   <mesh>
-
                     <Atoms
                       position={[
                         globalAtomInfo["atoms_x"][index],
@@ -394,7 +394,6 @@ export default function Molecule() {
                         ]} // [ x1, y1, z1,  x2, y2, z2, ... ] format
                       />
                     )}
-
                   </mesh>
                 );
               })}
@@ -429,7 +428,6 @@ export default function Molecule() {
                   </mesh>
                 );
               })}
-              
             </Provider>
           )}
 

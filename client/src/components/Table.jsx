@@ -34,6 +34,17 @@ export default function Table() {
 
   const navigate = useNavigate();
 
+  const moleculeDict = {
+    H2: [
+      "Hydrogen Gas",
+      "Hydrogen is the first element in the periodic table. The atomic number is 1 and its mass is 1.01 g/mol. Its gas form consists of two Hydrogen atoms, forming a Sigma bond.",
+    ],
+    H2O: [
+      "Water [Beta]",
+      "Water is an inorganic, transparent, tasteless, odorless, and nearly colorless chemical substance, which is the main constituent of Earth's hydrosphere and the fluids of all known living organisms.",
+    ],
+  };
+
   const movePage = (page) => {
     /*
     This function, when executed, navigates the user to another page smoothly without a flicker
@@ -73,7 +84,7 @@ export default function Table() {
     );
   };
 
-  const appendNewRender = (element, name) => {
+  const appendNewRender = (element, name, description) => {
     /*
     This function clears the previous render
     and append a new information to Redux global state
@@ -90,6 +101,7 @@ export default function Table() {
       setGlobalSelectedElement({
         element: element,
         name: name,
+        description: description,
       })
     );
     resetAllPreviousRenders();
@@ -115,7 +127,7 @@ export default function Table() {
           <li
             onMouseDown={() => {
               // This code runs first...
-              appendNewRender('H', 'Hydrogen Atom');
+              appendNewRender("H", "Hydrogen Atom", "Hydrogen is the first element in the periodic table. The atomic number is 1 and its mass is 1.01 g/mol. Its gas form consists of two Hydrogen atoms, forming a Sigma bond.");
             }}
             onClick={() => {
               // This code runs after a global state change...
@@ -266,23 +278,30 @@ export default function Table() {
             <h1 className="mt-5 pt-5 pl-5 pr-5 text-gray-400">Molecules</h1>
 
             <p className="p-5 text-gray-400">
-              Visualize your favourite molecule using <b>GPAW</b> and <b>ASE</b> packages. Now available on the <b>Web</b>.
+              Visualize your favourite molecule using <b>GPAW</b> and <b>ASE</b>{" "}
+              packages. Now available on the <b>Web</b>.
             </p>
 
-            <button
-              onMouseDown={() => {
-                // This code runs first...
-                appendNewRender('H2', 'Hydrogen Gas');
-              }}
-              onClick={() => {
-                // This code runs after a global state change...
-                movePage(`/renderer/${globalSelectedElement["element"]}`);
-              }}
-              className="mb-5 sm:mt-0 bg-transparent hover:bg-blue-500 text-gray-400 hover:text-white py-2 px-4 border border-gray-400 hover:border-transparent rounded"
-              type="button"
-            >
-              <span>Hydrogen Gas</span>
-            </button>
+            {Object.keys(moleculeDict).map((key, index) => {
+              const value = moleculeDict[key];
+
+              return (
+                <button
+                  onMouseDown={() => {
+                    // This code runs first...
+                    appendNewRender(key, value[0], value[1]);
+                  }}
+                  onClick={() => {
+                    // This code runs after a global state change...
+                    movePage(`/renderer/${globalSelectedElement["element"]}`);
+                  }}
+                  className="mb-5 mr-2 sm:mt-0 bg-transparent hover:bg-blue-500 text-gray-400 hover:text-white py-2 px-4 border border-gray-400 hover:border-transparent rounded"
+                  type="button"
+                >
+                  <span>{value[0]}</span>
+                </button>
+              );
+            })}
           </div>
 
           <h1 className="mt-5 pl-5 pr-5 text-gray-400">Atoms</h1>
