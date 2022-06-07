@@ -6,7 +6,7 @@ A **real-time** electron density simulation **single-handedly** developed by a *
 
 ---
 
-## Official Build 1.0
+## Official Build 1.7
 
 ### [Launch Website](https://electron-visualized.herokuapp.com/)
 
