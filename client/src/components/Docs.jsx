@@ -1,15 +1,4 @@
-import Dropdown from "./Dropdown";
-
-/*
-░█████╗░██████╗░██╗  ██████╗░░█████╗░░██████╗░███████╗
-██╔══██╗██╔══██╗██║  ██╔══██╗██╔══██╗██╔════╝░██╔════╝
-███████║██████╔╝██║  ██████╔╝███████║██║░░██╗░█████╗░░
-██╔══██║██╔═══╝░██║  ██╔═══╝░██╔══██║██║░░╚██╗██╔══╝░░
-██║░░██║██║░░░░░██║  ██║░░░░░██║░░██║╚██████╔╝███████╗
-╚═╝░░╚═╝╚═╝░░░░░╚═╝  ╚═╝░░░░░╚═╝░░╚═╝░╚═════╝░╚══════╝
-*/
-
-export default function Developer() {
+export default function Docs() {
   /*
   This is a component function in JSX
 
@@ -43,7 +32,21 @@ export default function Developer() {
             <span className="text-white">Elegant</span> Interaction Between the{" "}
             <span className="text-white">User</span> and the{" "}
             <span className="text-white">Developer</span>.
-            <p className="pt-10 pr-5 pl-5 text-left text-3xl">Welcome to Earth.</p>
+            <p className="pt-10 pr-5 pl-5 text-rose-100 text-3xl">
+              Table of Contents
+            </p>
+            <a
+              href="#introduction"
+              className="mt-5 sm:mt-0 ml-2 bg-transparent hover:bg-blue-500 text-rose-100 hover:text-white py-2 px-4 border border-rose-100 hover:border-transparent rounded"
+            >
+              Introduction
+            </a>
+            <p
+              id="introduction"
+              className="mt-10 pt-5 pr-5 pl-5 text-left text-3xl border-t border-gray-400"
+            >
+              Welcome to Earth.
+            </p>
             <p className="pt-3 pr-5 pl-5 text-left text-gray-400">
               <b>Who am I</b>? To properly introduce myself, my name is{" "}
               <b>John Seong</b>, and I am a high school student based in
@@ -63,9 +66,38 @@ export default function Developer() {
               app that really shows my skilled background as someone who
               typically ponders the question of order and disorder.
             </p>
-            <p className="pt-10 pr-5 pl-5 text-left text-3xl">Life is Hard, Babe. No Joke.</p>
+            <p className="pt-10 pr-5 pl-5 text-left text-3xl">
+              Life is Hard, and Solo Development is Equally as Hard.
+            </p>
             <p className="pt-5 pr-5 pl-5 text-left text-gray-400">
-              Life is difficult. That's right. Life can throw some challenges that seemed to be indeterminate; that's also correct. But I believe that this is where our programming skills may apply, as a "developer," not merely someone who "codes." Believe or not, there is a difference between these two.
+              Life is difficult. That's right. Life can throw some challenges
+              that seemed to be indeterminate; that's also correct. But I
+              believe that this is where our programming skills may apply, as a
+              "developer," not merely someone who "codes." Believe or not, there
+              is a difference between these two. The former being an universal
+              problem solver that is able to deal with all kinds of conudrums in
+              our daily lives, but the latter being an average Joe who just
+              learned how to code.
+            </p>
+            <p className="pt-5 pr-5 pl-5 text-left text-gray-400">
+              There were two hard-taught lessons from the development of this
+              project. As a solo developer of <b>ElectronVisualized</b>, the
+              first great hurdle that shattered my ego into pieces was the sheer
+              abstractness of all kinds of different libraries — mainly
+              libraries such as Redux — a state management tool for the React
+              front-end framework. (I will assume here that you know the
+              difference between front-end and back-end; back-end being the
+              client side of the website or an app)
+            </p>
+            <p className="pt-5 pr-5 pl-5 text-left text-gray-400">
+              To develop a computationally-rigour application, I had to come up
+              with a solution where the performance is ensured but also the gap
+              between real-life physics and the simulated environment isn't too
+              large. GPAW and ASE were perfect candidates for the foundation of
+              this website that utilizes the famous{" "}
+              <b>Density Functional Theory</b> that simplifies the n-dimensional
+              Shroödinger's Equation problem into something a lot more
+              digestible and can be handled efficiently.
             </p>
           </h2>
         </div>

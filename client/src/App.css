@@ -10,7 +10,7 @@ h3 {
   @apply text-2xl;
 }
 
-p {
+a, p {
   @apply text-xl;
 }
 
