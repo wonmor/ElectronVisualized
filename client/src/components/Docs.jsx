@@ -14,9 +14,9 @@ export default function Docs() {
 
   return (
     <div>
-      <div className="bg-gray-700" style={{ "min-height": "300vh" }}>
+      <div className="bg-gray-700" style={{ "min-height": "400vh" }}>
         <div className="text-white text-center pt-10 pl-5 pr-5 text-gray-400">
-          <h1 className="pb-5">
+          <h1 className="pb-5 ml-5 mr-5">
             <span className="text-white">Designed</span> and{" "}
             <span className="text-white">Manufactured</span>
             <br></br>
@@ -24,7 +24,7 @@ export default function Docs() {
           </h1>
 
           <h2 className="mt-5 p-5 leading-normal bg-gray-600 text-gray-400">
-            <span className="text-6xl">
+            <span className="text-6xl ml-5 mr-5">
               With a <span className="text-white">Great Program</span> Comes
               With a <span className="text-white">Great Documentation</span>.
             </span>

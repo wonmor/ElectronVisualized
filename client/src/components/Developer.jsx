@@ -102,7 +102,7 @@ export default function Developer() {
             <span className="text-white">Engineers</span>.
           </h2>
 
-          <p className="inline-block mb-0 sm:mb-5 max-w-fit text-rose-200 border border-rose-200 py-2 px-4 rounded">
+          <p className="inline-block ml-5 mr-5 mb-5 max-w-fit text-rose-200 border border-rose-200 py-2 px-4 rounded">
           https://electron-visualized.herokuapp.com/api/gpaw/H2
           </p>
 
