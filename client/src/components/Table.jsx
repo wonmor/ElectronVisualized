@@ -119,7 +119,7 @@ export default function Table() {
             }}
             onClick={() => {
               // This code runs after a global state change...
-              movePage(`/molecule/${globalSelectedElement["element"]}`);
+              movePage(`/renderer/${globalSelectedElement["element"]}`);
             }}
             title="Hydrogen"
           >
@@ -263,7 +263,7 @@ export default function Table() {
           </h2>
 
           <div className="bg-gray-600">
-            <h2 className="mt-5 pt-5 text-gray-400">Molecules</h2>
+            <h1 className="mt-5 pt-5 pl-5 pr-5 text-gray-400">Molecules</h1>
 
             <p className="p-5 text-gray-400">
               Visualize your favourite molecule using <b>GPAW</b> and <b>ASE</b> packages. Now available on the <b>Web</b>.
@@ -276,7 +276,7 @@ export default function Table() {
               }}
               onClick={() => {
                 // This code runs after a global state change...
-                movePage(`/molecule/${globalSelectedElement["element"]}`);
+                movePage(`/renderer/${globalSelectedElement["element"]}`);
               }}
               className="mb-5 sm:mt-0 bg-transparent hover:bg-blue-500 text-gray-400 hover:text-white py-2 px-4 border border-gray-400 hover:border-transparent rounded"
               type="button"
@@ -285,9 +285,9 @@ export default function Table() {
             </button>
           </div>
 
-          <h2 className="mt-5 text-gray-400">Periodic Table</h2>
+          <h1 className="mt-5 pl-5 pr-5 text-gray-400">Atoms</h1>
 
-          <p className="p-5 text-gray-400">
+          <p className="p-5 text-gray-400 border-b border-gray-500">
             Website still in the <b>development</b> phase. Only <b>Hydrogen</b>{" "}
             is available at the moment.
           </p>

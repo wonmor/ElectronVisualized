@@ -56,6 +56,16 @@ export default function API() {
         const res = response.data;
 
         setAtomInfo({
+          no_of_atoms: res.no_of_atoms,
+
+          atoms_x: res.atoms_x,
+          atoms_y: res.atoms_y,
+          atoms_z: res.atoms_z,
+
+          xdim: res.xdim,
+          ydim: res.ydim,
+          zdim: res.zdim,
+
           density_data: res.density_data,
         });
 
@@ -71,15 +81,17 @@ export default function API() {
     <div>
       <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
         <div className="text-white text-center pt-10 pl-5 pr-5 text-gray-400">
-
           <h1 className="pb-5">
-            <span className="text-white">Density Functional Theory</span> Meets the{" "}
-            <span className="text-white">Web</span>.
+            <span className="text-white">Density Functional Theory</span> Meets
+            the <span className="text-white">Web</span>.
           </h1>
 
           <h2 className="mt-5 p-5 leading-normal bg-gray-600 text-gray-400">
-            <span className="text-6xl">Introducing the <span className="text-white">World Engine</span>.</span><br></br>A <span className="text-white">REST API</span> Powered by the Industry-Leading{" "}
-            <span className="text-white">GPAW</span> and{" "}
+            <span className="text-6xl">
+              Introducing the <span className="text-white">World Engine</span>.
+            </span>
+            <br></br>A <span className="text-white">REST API</span> Powered by
+            the Industry-Leading <span className="text-white">GPAW</span> and{" "}
             <span className="text-white">ASE</span> Libaries.
           </h2>
 
@@ -91,7 +103,6 @@ export default function API() {
           </h2>
 
           {!disable ? (
-
             <div>
               <Dropdown />
               <button
@@ -106,16 +117,11 @@ export default function API() {
                 <span>Fetch Data from the API</span>
               </button>
             </div>
-
           ) : preRender ? (
-
-            <div
-              className={'text-gray-400'}
-            >
+            <div className={"text-gray-400"}>
               <h3>{statusText}</h3>
 
               {!serverError && (
-
                 <div className="scale-75 lds-roller">
                   <div></div>
                   <div></div>
@@ -126,30 +132,89 @@ export default function API() {
                   <div></div>
                   <div></div>
                 </div>
-                
               )}
-
             </div>
-
           ) : null}
 
           <div className="pt-5 pb-5">
-
             {preRender ? (
-              <img className="border-dotted border-2 border-white" src="/API.png" alt="Screenshot" />
+              <img
+                className="border-dotted border-2 border-white"
+                src="/API.png"
+                alt="Screenshot"
+              />
             ) : (
-
-              <div className="text-center">
-                <div className="inline-block text-xl text-left bg-gray-800 p-5 text-white">
-                    <span className="text-5xl text-gray-400">HYDROGEN GAS</span>
+              <div className="block sm:flex align-center justify-center">
+                <div className="text-xl max-h-min text-left bg-gray-900 p-5 text-white">
+                  <span className="text-5xl text-gray-400">HYDROGEN GAS</span>
+                  <br></br>
+                  <br></br>
+                  <span>
+                    <code className="text-gray-400">Density data is normalized<br></br>from range -255 to 255...</code>
                     <br></br><br></br>
-                    <span><code>density_data:</code></span>
+                    <code>density_data:</code>
+                  </span>
                   <pre>{JSON.stringify(atomInfo.density_data, null, 2)}</pre>
                 </div>
+
+                <div className="text-xl max-h-min text-left bg-gray-800 p-5 text-white">
+                  <span>
+                    <code>atom_x:</code>
+                  </span>
+
+                  <pre>
+                    {JSON.stringify(atomInfo.atoms_x, null, 2)}
+                    <br></br>
+
+                    <span>
+                      <code>atom_y:</code>
+                    </span>
+
+                    <br></br>
+                    {JSON.stringify(atomInfo.atoms_y, null, 2)}
+                    <br></br>
+
+                    <span>
+                      <code>atom_z:</code>
+                    </span>
+
+                    <br></br>
+                    {JSON.stringify(atomInfo.atoms_z, null, 2)}
+                    <br></br>
+
+                    <br></br>
+                    <span>
+                      <code>
+                        no_of_atoms: {JSON.stringify(atomInfo.no_of_atoms)}
+                      </code>
+                    </span>
+
+                    <pre>
+                      <br></br>
+                      <span>
+                        <code>xdim: </code>
+                      </span>
+
+                      {JSON.stringify(atomInfo.xdim, null, 2)}
+                      <br></br>
+
+                      <span>
+                        <code>ydim: </code>
+                      </span>
+
+                      {JSON.stringify(atomInfo.ydim, null, 2)}
+                      <br></br>
+
+                      <span>
+                        <code>zdim: </code>
+                      </span>
+
+                      {JSON.stringify(atomInfo.zdim, null, 2)}
+                    </pre>
+                  </pre>
+                </div>
               </div>
-
             )}
-
           </div>
         </div>
       </div>

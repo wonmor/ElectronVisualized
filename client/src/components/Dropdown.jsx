@@ -26,7 +26,7 @@ const classNames = (...classes) => {
 }
 
 const dataTypeConversion = {
-  "H2": "Hydrogen Gas — Density",
+  "H2": "Hydrogen Gas — H2",
 }
 
 export default function Dropdown() {
@@ -75,7 +75,7 @@ export default function Dropdown() {
                     "block px-4 py-2 text-sm"
                   )}
                 >
-                  Hydrogen Gas — Density
+                  {dataTypeConversion["H2"]}
                 </a>
               )}
 

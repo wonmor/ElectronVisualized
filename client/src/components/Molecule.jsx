@@ -24,6 +24,9 @@ import CANVAS from "./Constants";
 ░█▀▄▀█ ░█▀▀▀█ ░█─── ░█▀▀▀ ░█▀▀█ ░█─░█ ░█─── ░█▀▀▀ 
 ░█░█░█ ░█──░█ ░█─── ░█▀▀▀ ░█─── ░█─░█ ░█─── ░█▀▀▀ 
 ░█──░█ ░█▄▄▄█ ░█▄▄█ ░█▄▄▄ ░█▄▄█ ─▀▄▄▀ ░█▄▄█ ░█▄▄▄
+
+DEVELOPED AND DESIGNED BY JOHN SEONG.
+USES GPAW (DENSITY FUNCTIONAL THEORY) FOR COMPUTATION PURPOSES.
 */
 
 const normalizeData = (val, max, min) => {
@@ -241,7 +244,7 @@ export default function Molecule() {
           {globalSelectedElement["name"]} <span className="text-gray-400">Visualized.</span>
         </h1>
 
-        <h2 className="mt-5 pb-5 text-gray-400 border-b border-gray-400">
+        <h2 className="mt-5 pb-5 ml-5 mr-5 text-gray-400 border-b border-gray-500">
           Simulated <span className="text-white">Real-Time</span> using{" "}
           <span className="text-white">GPAW</span> and{" "}
           <span className="text-white">ASE</span>.

@@ -44,8 +44,8 @@ export default function App() {
         <Routes>
           <Route path="*" element={<NotFound />} />
           <Route exact path="/" element={<Table />} />
-          <Route path="/molecule" element={<Molecule />} />
-          <Route path={`/molecule/${globalSelectedElement["element"]}`} element={<Molecule />} />
+          <Route path="/renderer" element={<Molecule />} />
+          <Route path={`/renderer/${globalSelectedElement["element"]}`} element={<Molecule />} />
           <Route path="/api" element={<API />} />
         </Routes>
       </div>
