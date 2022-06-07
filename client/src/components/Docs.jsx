@@ -90,10 +90,10 @@ export default function Docs() {
             </p>
             <p className="pt-5 pr-5 pl-5 text-left text-gray-400">
               To develop a computationally-rigour and physically-accurate
-              application, I had to come up with a solution where the
+              core API, I had to come up with a solution where the
               performance is ensured but also the gap between real-life physics
               and the simulated environment isn't too large. GPAW and ASE were
-              perfect candidates for the foundation of this website that
+              perfect candidates for the very foundation of the World Engine REST API that
               utilizes the famous <b>Density Functional Theory</b> in QM that
               massively simplifies the N-dimensional Schrödinger's Equation
               problem into something a lot more digestible and can be handled
