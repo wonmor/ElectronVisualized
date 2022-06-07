@@ -14,7 +14,7 @@ export default function Docs() {
 
   return (
     <div>
-      <div className="bg-gray-700" style={{ "min-height": "200vh" }}>
+      <div className="bg-gray-700" style={{ "min-height": "300vh" }}>
         <div className="text-white text-center pt-10 pl-5 pr-5 text-gray-400">
           <h1 className="pb-5">
             <span className="text-white">Designed</span> and{" "}
@@ -81,23 +81,27 @@ export default function Docs() {
             </p>
             <p className="pt-5 pr-5 pl-5 text-left text-gray-400">
               There were two hard-taught lessons from the development of this
-              project. As a solo developer of <b>ElectronVisualized</b>, the
-              first great hurdle that shattered my ego into pieces was the sheer
-              abstractness of all kinds of different libraries — mainly
-              libraries such as Redux — a state management tool for the React
-              front-end framework. (I will assume here that you know the
-              difference between front-end and back-end; back-end being the
-              client side of the website or an app)
+              project. Being a solo developer of <b>ElectronVisualized</b>, the
+              first great hurdle that shattered my ego into pieces was the
+              sprawling nature of all kinds of different libraries — mainly
+              Redux — a state management tool for the React front-end framework.
+              (I will assume here that you know the difference between front-end
+              and back-end; back-end being the client side of the website or an
+              app)
             </p>
             <p className="pt-5 pr-5 pl-5 text-left text-gray-400">
-              To develop a computationally-rigour application, I had to come up
+              To develop a computationally-rigour and physically-accurate application, I had to come up
               with a solution where the performance is ensured but also the gap
               between real-life physics and the simulated environment isn't too
               large. GPAW and ASE were perfect candidates for the foundation of
               this website that utilizes the famous{" "}
-              <b>Density Functional Theory</b> that simplifies the n-dimensional
-              Shroödinger's Equation problem into something a lot more
-              digestible and can be handled efficiently.
+              <b>Density Functional Theory</b> in QM that massively simplifies the N-dimensional
+              Schrödinger's Equation problem into something a lot more
+              digestible and can be handled efficiently. The pure abstractness
+              of these theories that involve atoms and molecules came to me as
+              overwhelmingly complicated at first, but combining my AP Chemistry
+              background as well as taking Physics in my school boosted my
+              confidence into mastering it in relatively a short time of period.
             </p>
           </h2>
         </div>
