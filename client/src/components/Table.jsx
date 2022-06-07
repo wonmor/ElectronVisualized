@@ -263,7 +263,7 @@ export default function Table() {
     <div>
       <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
         <div className="text-white text-center p-5 text-gray-400">
-          <h1 className="ml-5 mr-5">
+          <h1 className="scale-90 sm:scale-100">
             Visualizing <span className="text-white">Electron Density</span>.
             Reimagined.
           </h1>
