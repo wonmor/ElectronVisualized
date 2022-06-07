@@ -50,7 +50,7 @@ export default function API() {
     */
     await axios({
       method: "GET",
-      url: "/api/molecule",
+      url: "/api/gpaw/H2",
     })
       .then((response) => {
         const res = response.data;

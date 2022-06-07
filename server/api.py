@@ -39,9 +39,9 @@ def serve():
     '''
     return bp.send_static_file('index.html')
 
-@bp.route('/api/molecule', methods=['GET'])
+@bp.route('/api/gpaw/<name>', methods=['GET'])
 @cross_origin()
-def plot():
+def plot(name):
     '''
     When API call is made, this function asyncronously executes
     the plot_hydrogen method which computes the
@@ -57,7 +57,7 @@ def plot():
         A JSONified dictionary that contains the electron density and coordinate data
     '''
     
-    data = molecule.plot_molecule()
+    data = molecule.plot_molecule(name)
     return data
 
 '''

@@ -1,4 +1,6 @@
 import { Routes, Route } from "react-router-dom";
+import { useSelector} from "react-redux";
+
 import './App.css';
 
 import Header from './components/Header';
@@ -33,6 +35,8 @@ export default function App() {
   DOM File
     A HTML markup that contains graphical elements
   */
+  const globalSelectedElement = useSelector((state) => state.selectedElement.globalSelectedElement);
+
   return (
     <div>
       <Header />
@@ -41,6 +45,7 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
           <Route exact path="/" element={<Table />} />
           <Route path="/molecule" element={<Molecule />} />
+          <Route path={`/molecule/${globalSelectedElement["element"]}`} element={<Molecule />} />
           <Route path="/api" element={<API />} />
         </Routes>
       </div>

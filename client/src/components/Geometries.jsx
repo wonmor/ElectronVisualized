@@ -9,9 +9,9 @@ import { Line2, LineGeometry, LineMaterial } from "three-fatline";
 import { RENDERER } from "./Constants";
 
 /*
-░█▀▀█ ░█▀▀▀ ░█▄─░█ ░█▀▀▄ ░█▀▀▀ ░█▀▀█ ░█▀▀▀ ░█▀▀█ 
-░█▄▄▀ ░█▀▀▀ ░█░█░█ ░█─░█ ░█▀▀▀ ░█▄▄▀ ░█▀▀▀ ░█▄▄▀ 
-░█─░█ ░█▄▄▄ ░█──▀█ ░█▄▄▀ ░█▄▄▄ ░█─░█ ░█▄▄▄ ░█─░█
+█▀▀▀ █▀▀ █▀▀█ █▀▄▀█ █▀▀ ▀▀█▀▀ █▀▀█ ─▀─ █▀▀ █▀▀ 
+█─▀█ █▀▀ █──█ █─▀─█ █▀▀ ──█── █▄▄▀ ▀█▀ █▀▀ ▀▀█ 
+▀▀▀▀ ▀▀▀ ▀▀▀▀ ▀───▀ ▀▀▀ ──▀── ▀─▀▀ ▀▀▀ ▀▀▀ ▀▀▀
 */
 
 extend({ LineGeometry, LineMaterial });
@@ -55,7 +55,7 @@ export function Atoms(props) {
   );
 }
 
-export function BondLine({ start, end }) {
+export function BondLine({coords}) {
   /*
   This is a component function in JSX
 
@@ -73,7 +73,7 @@ export function BondLine({ start, end }) {
   */
   const geometry = new LineGeometry();
 
-  geometry.setPositions(start.concat(end)); // [ x1, y1, z1,  x2, y2, z2, ... ] format
+  geometry.setPositions(coords); // [ x1, y1, z1,  x2, y2, z2, ... ] format
 
   const material = new LineMaterial({
     color: "hotpink",

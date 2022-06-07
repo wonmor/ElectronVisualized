@@ -8,6 +8,9 @@ from gpaw import GPAW, FermiDirac
 from ase.structure import molecule
 from ase.io import write
 
+from werkzeug.local import LocalProxy
+from flask import current_app
+
 '''
 ▒█▀▄▀█ █▀▀█ █░░ █▀▀ █▀▀ █░░█ █░░ █▀▀ 　 █▀▀█ █░░ █▀▀█ ▀▀█▀▀ ▀▀█▀▀ █▀▀ █▀▀█ 
 ▒█▒█▒█ █░░█ █░░ █▀▀ █░░ █░░█ █░░ █▀▀ 　 █░░█ █░░ █░░█ ░░█░░ ░░█░░ █▀▀ █▄▄▀ 
@@ -15,6 +18,8 @@ from ase.io import write
 
 DEVELOPED AND DESIGNED BY JOHN SEONG, WITH SOME HELP WITH STACKOVERFLOW, HEH
 '''
+
+logger = LocalProxy(lambda: current_app.logger)
 
 def _density_parser():
     '''
@@ -100,7 +105,7 @@ def _density_parser():
                 if not v < vmin or v > vmax:
                     density_data[f'{x}, {y}, {z}'] = v
 
-    print("Density data parsing completed!")
+    logger.info("Density data parsing completed!")
 
     with open('client/src/assets/density_data.json', 'w') as outfile:
         json.dump(density_data, outfile, sort_keys=True,
@@ -246,7 +251,7 @@ def _transfer_to_client():
     return return_value
 
 
-def plot_molecule(name='H2'):
+def plot_molecule(name):
     '''
     This is a function that applies the Density Functional Theory
     and generates the coordinates of probable locations of molecule's electrons

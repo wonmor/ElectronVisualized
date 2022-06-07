@@ -14,7 +14,7 @@ import axios from "axios";
 
 import { Canvas } from "@react-three/fiber";
 
-import { Atoms, BondLine } from "./Renderer";
+import { Atoms, BondLine } from "./Geometries";
 
 import Controls from "./Controls";
 
@@ -106,6 +106,8 @@ export default function Molecule() {
 
   const globalAtomInfo = useSelector((state) => state.atomInfo.globalAtomInfo);
 
+  const globalSelectedElement = useSelector((state) => state.selectedElement.globalSelectedElement);
+
   const globalRenderInfo = useSelector(
     (state) => state.renderInfo.globalRenderInfo
   );
@@ -179,7 +181,7 @@ export default function Molecule() {
     */
     await axios({
       method: "GET",
-      url: "/api/molecule",
+      url: `/api/gpaw/${globalSelectedElement["element"]}`,
     })
       .then((response) => {
         const res = response.data;
@@ -216,7 +218,7 @@ export default function Molecule() {
         }
       });
   };
-
+  
   const changeParticleRadius = (event, value) => {
     /*
     This function changes the state of individual particle radius...
@@ -236,7 +238,7 @@ export default function Molecule() {
     <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
       <div className="text-white text-center pt-10 pb-10">
         <h1>
-          Hydrogen Gas. <span className="text-gray-400">Visualized.</span>
+          {globalSelectedElement["name"]} <span className="text-gray-400">Visualized.</span>
         </h1>
 
         <h2 className="mt-5 pb-5 text-gray-400 border-b border-gray-400">
@@ -352,11 +354,12 @@ export default function Molecule() {
           <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
           <pointLight position={[-10, -10, -10]} />
 
-          {globalAtomInfo && (
+          {(globalAtomInfo && !preRender) && (
             <Provider store={store}>
               {globalAtomInfo["atoms_x"].map((value, index) => {
                 return (
-                  <>
+                  <mesh>
+
                     <Atoms
                       position={[
                         globalAtomInfo["atoms_x"][index],
@@ -364,7 +367,32 @@ export default function Molecule() {
                         globalAtomInfo["atoms_z"][index],
                       ]}
                     />
-                  </>
+
+                    {index !== globalAtomInfo["atoms_x"].length - 2 ? (
+                      <BondLine
+                        coords={[
+                          globalAtomInfo["atoms_x"][0],
+                          globalAtomInfo["atoms_y"][0],
+                          globalAtomInfo["atoms_z"][0],
+                          globalAtomInfo["atoms_x"][index],
+                          globalAtomInfo["atoms_y"][index],
+                          globalAtomInfo["atoms_z"][index],
+                        ]} // [ x1, y1, z1,  x2, y2, z2, ... ] format
+                      />
+                    ) : (
+                      <BondLine
+                        coords={[
+                          globalAtomInfo["atoms_x"][0],
+                          globalAtomInfo["atoms_y"][0],
+                          globalAtomInfo["atoms_z"][0],
+                          globalAtomInfo["atoms_x"][index],
+                          globalAtomInfo["atoms_y"][index],
+                          globalAtomInfo["atoms_z"][index],
+                        ]} // [ x1, y1, z1,  x2, y2, z2, ... ] format
+                      />
+                    )}
+
+                  </mesh>
                 );
               })}
 
@@ -398,19 +426,7 @@ export default function Molecule() {
                   </mesh>
                 );
               })}
-
-              <BondLine
-                start={[
-                  globalAtomInfo["atoms_x"][0],
-                  globalAtomInfo["atoms_y"][0],
-                  globalAtomInfo["atoms_z"][0],
-                ]}
-                end={[
-                  globalAtomInfo["atoms_x"][1],
-                  globalAtomInfo["atoms_y"][1],
-                  globalAtomInfo["atoms_z"][1],
-                ]}
-              />
+              
             </Provider>
           )}
 
