@@ -268,10 +268,9 @@ export default function Table() {
             Reimagined.
           </h1>
 
-          <h2 className="mt-5 text-gray-400">
-            Simulated <span className="text-white">Real-Time</span> using{" "}
-            <span className="text-white">GPAW</span> and{" "}
-            <span className="text-white">ASE</span>.
+          <h2 className="mt-5 pl-5 pr-5 text-gray-400">
+            Simulated <span className="text-white">Real Time</span> with the help of{" "}
+            <span className="text-white">Density Functional Theory</span>.
           </h2>
 
           <div className="bg-gray-600">

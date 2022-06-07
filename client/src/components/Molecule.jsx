@@ -248,9 +248,8 @@ export default function Molecule() {
         </h1>
 
         <h2 className="mt-5 pb-5 ml-5 mr-5 text-gray-400 border-b border-gray-500">
-          Simulated <span className="text-white">Real Time</span> using{" "}
-          <span className="text-white">GPAW</span> and{" "}
-          <span className="text-white">ASE</span>.
+        Simulated <span className="text-white">Real Time</span> with the help of{" "}
+            <span className="text-white">Density Functional Theory</span>.
         </h2>
 
         <p className="pt-5 pr-5 pl-5 text-gray-400">

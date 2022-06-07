@@ -49,7 +49,7 @@ export default function Header() {
   };
 
   return (
-    <nav className="flex items-center justify-between flex-wrap bg-rose-500 p-3">
+    <nav className="flex items-center justify-between flex-wrap bg-gray-800 p-3">
 
       <button onClick={() => {movePage("/")}}>
         <div className="flex items-center flex-shrink-0 text-white mr-6">
@@ -97,7 +97,7 @@ export default function Header() {
             </button>
 
             <button
-              onClick={() => {movePage("/api")}}
+              onClick={() => {movePage("/dev")}}
               className="block mt-4 lg:inline-block lg:mt-0 text-rose-200 hover:text-white mr-4"
             >
               API

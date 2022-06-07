@@ -9,7 +9,9 @@ import Footer from './components/Footer';
 import Table from './components/Table'
 import Molecule from './components/Molecule';
 import NotFound from './components/NotFound';
-import API from './components/API';
+
+import Developer from './components/Developer';
+import Docs from './components/Docs';
 
 /*
 ██████╗░░█████╗░██╗░░░██╗████████╗███████╗██████╗░░██████╗
@@ -46,7 +48,8 @@ export default function App() {
           <Route exact path="/" element={<Table />} />
           <Route path="/renderer" element={<Molecule />} />
           <Route path={`/renderer/${globalSelectedElement["element"]}`} element={<Molecule />} />
-          <Route path="/api" element={<API />} />
+          <Route path="/dev" element={<Developer />} />
+          <Route path="/docs" element={<Docs />} />
         </Routes>
       </div>
       <Footer />

@@ -13,7 +13,7 @@ import axios from "axios";
 ╚═╝░░╚═╝╚═╝░░░░░╚═╝  ╚═╝░░░░░╚═╝░░╚═╝░╚═════╝░╚══════╝
 */
 
-export default function API() {
+export default function Developer() {
   /*
   This is a component function in JSX that handles all the API-related events
 
@@ -91,7 +91,7 @@ export default function API() {
               Introducing the <span className="text-white">World Engine</span>.
             </span>
             <br></br>A <span className="text-white">REST API</span> Powered by
-            the Industry-Leading <span className="text-white">GPAW</span> and{" "}
+            the Industry-leading <span className="text-white">GPAW</span> and{" "}
             <span className="text-white">ASE</span> Libaries.
           </h2>
 
