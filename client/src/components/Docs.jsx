@@ -28,8 +28,7 @@ export default function Docs() {
               With a <span className="text-white">Great Program</span> Comes
               With a <span className="text-white">Great Documentation</span>.
             </span>
-            <br></br>A <span className="text-white">Beautiful</span>,{" "}
-            <span className="text-white">Elegant</span> Interaction Between the{" "}
+            <br></br>A Brilliant, Elegant Interaction Between the{" "}
             <span className="text-white">User</span> and the{" "}
             <span className="text-white">Developer</span>.
             <p className="pt-10 pr-5 pl-5 text-rose-100 text-3xl">
@@ -51,7 +50,7 @@ export default function Docs() {
               <b>Who am I</b>? To properly introduce myself, my name is{" "}
               <b>John Seong</b>, and I am a high school student based in
               Oakville, Canada. I am deeply interested in pursuing my dream as a
-              software engineer and a head of Human Interface Design at Apple
+              software engineer and the head of Human Interface Design at Apple
               Inc.
             </p>
             <p className="pt-5 pr-5 pl-5 text-left text-gray-400">
@@ -90,18 +89,19 @@ export default function Docs() {
               app)
             </p>
             <p className="pt-5 pr-5 pl-5 text-left text-gray-400">
-              To develop a computationally-rigour and physically-accurate application, I had to come up
-              with a solution where the performance is ensured but also the gap
-              between real-life physics and the simulated environment isn't too
-              large. GPAW and ASE were perfect candidates for the foundation of
-              this website that utilizes the famous{" "}
-              <b>Density Functional Theory</b> in QM that massively simplifies the N-dimensional
-              Schrödinger's Equation problem into something a lot more
-              digestible and can be handled efficiently. The pure abstractness
-              of these theories that involve atoms and molecules came to me as
-              overwhelmingly complicated at first, but combining my AP Chemistry
-              background as well as taking Physics in my school boosted my
-              confidence into mastering it in relatively a short time of period.
+              To develop a computationally-rigour and physically-accurate
+              application, I had to come up with a solution where the
+              performance is ensured but also the gap between real-life physics
+              and the simulated environment isn't too large. GPAW and ASE were
+              perfect candidates for the foundation of this website that
+              utilizes the famous <b>Density Functional Theory</b> in QM that
+              massively simplifies the N-dimensional Schrödinger's Equation
+              problem into something a lot more digestible and can be handled
+              efficiently. The pure abstractness of these theories that involve
+              atoms and molecules came to me as overwhelmingly complicated at
+              first, but combining my AP Chemistry background as well as taking
+              Physics in my school led me into mastering it in relatively a
+              short time of period.
             </p>
           </h2>
         </div>

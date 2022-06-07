@@ -67,7 +67,7 @@ export default function Header() {
 
         <button
           onClick={() => {setMenu(!showMenu)}}
-          className="flex items-center px-3 py-2 border rounded text-rose-200 border-rose-400 hover:text-white hover:border-white"
+          className="flex items-center px-3 py-2 border rounded text-rose-200 border-rose-200 hover:text-white hover:border-white"
         >
           <svg
             className="fill-current h-3 w-3"
