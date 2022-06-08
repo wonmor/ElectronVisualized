@@ -243,8 +243,8 @@ export default function Molecule() {
     <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
       <div className="text-white text-center pt-10 pb-10">
         <h1>
-          {globalSelectedElement["name"]}{" "}
-          <span className="text-gray-400">Visualized.</span>
+          {globalSelectedElement["name"]}
+          <span className="text-gray-400">. Visualized.</span>
         </h1>
 
         <h2 className="mt-5 pb-5 ml-5 mr-5 text-gray-400 border-b border-gray-500">

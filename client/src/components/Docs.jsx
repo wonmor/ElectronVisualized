@@ -28,7 +28,7 @@ export default function Docs() {
               With a <span className="text-white">Great Program</span> Comes
               With a <span className="text-white">Great Documentation</span>.
             </span>
-            <br></br>A Brilliant, Elegant Interaction Between the{" "}
+            <br></br>A Beautiful, Elegant Interaction Between the{" "}
             <span className="text-white">User</span> and the{" "}
             <span className="text-white">Developer</span>.
             <p className="pt-10 pr-5 pl-5 text-rose-100 text-3xl">
