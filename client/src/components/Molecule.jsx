@@ -18,7 +18,7 @@ import { Atoms, BondLine } from "./Geometries";
 
 import Controls from "./Controls";
 
-import CANVAS from "./Constants";
+import { CANVAS, getMoleculeColour, getMoleculeOpacity } from "./Globals";
 
 import { Background } from "./Geometries";
 
@@ -31,29 +31,9 @@ import useWindowSize from "../useWindowsSize";
 
 DEVELOPED AND DESIGNED BY JOHN SEONG.
 USES GPAW (DENSITY FUNCTIONAL THEORY) FOR COMPUTATION PURPOSES.
+
+HOW TO OPTIMIZE REACT + THREE-FIBER: https://docs.pmnd.rs/react-three-fiber/advanced/scaling-performance
 */
-
-const normalizeData = (val, max, min) => {
-  /*
-  This function normalizes a given dataset within a certain range that is defined
-
-  Parameters
-  ----------
-  val: Float
-    A value that has to be normalized within a range
-  max: Float
-    The desired upper limit of the value
-  min: Float
-    The desired lower limit of the value
-
-  Returns
-  -------
-  Float
-    Returns a normalized float value contained within the boundary set
-  */
-
-  return (val - min) / (max - min);
-};
 
 const useLazyInterval = (callback, delay) => {
   /*
@@ -101,7 +81,7 @@ export default function Molecule() {
   DOM File
     A HTML markup that contains graphical elements
   */
-  const [particleRadius, setParticleRadius] = useState(0.025);
+  const [particleRadius, setParticleRadius] = useState(0.015);
 
   const [reachedMaxPeak, setMaxPeak] = useState(false);
   const [reachedMinPeak, setMinPeak] = useState(true);
@@ -427,10 +407,8 @@ export default function Molecule() {
 
                         <meshBasicMaterial
                           transparent={true}
-                          opacity={normalizeData(volume, 1, 0) / 50}
-                          color={`rgb(255, ${Math.round(
-                            255.0 - volume * 2.5
-                          )}, ${Math.round(255.0 - volume * 2.5)})`}
+                          opacity={getMoleculeOpacity(globalSelectedElement["element"], volume)}
+                          color={getMoleculeColour(globalSelectedElement["element"], volume)}
                           attach="material"
                         />
                       </mesh>

@@ -49,7 +49,7 @@ export default function Table() {
       "Hydrogen is the first element in the periodic table. The atomic number is 1 and its mass is 1.01 g/mol. Its gas form consists of two Hydrogen atoms, forming a Sigma bond.",
     ],
     H2O: [
-      "Water [Beta]",
+      "Water",
       "Water is an inorganic, transparent, tasteless, odourless, and nearly colourless chemical substance, which is the main constituent of Earth's hydrosphere and the fluids of all known living organisms.",
     ],
   };
@@ -84,7 +84,7 @@ export default function Table() {
     */
     dispatch(
       setGlobalRenderInfo({
-        animation: true,
+        animation: false,
         disableButton: false,
         preRender: true,
         serverError: false,

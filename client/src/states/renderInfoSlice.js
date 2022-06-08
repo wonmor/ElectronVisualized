@@ -16,7 +16,7 @@ export const renderInfoSlice = createSlice({
     name: 'renderInfo',
     initialState: {
         globalRenderInfo: {
-            "animation": true,
+            "animation": false,
             "disableButton": false,
             "preRender": true,
             "serverError": false,
@@ -25,7 +25,9 @@ export const renderInfoSlice = createSlice({
     },
     reducers: {
         setGlobalRenderInfo: (state, action) => {
-            state.globalRenderInfo = action.payload
+            if (state.globalRenderInfo !== action.payload) {
+                state.globalRenderInfo = action.payload
+            }
         },
     },
 })

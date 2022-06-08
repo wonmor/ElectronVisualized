@@ -23,7 +23,9 @@ export const selectedElementSlice = createSlice({
     },
     reducers: {
         setGlobalSelectedElement: (state, action) => {
-            state.globalSelectedElement = action.payload;
+            if (state.globalSelectedElement !== action.payload) {
+                state.globalSelectedElement = action.payload;
+            }
         },
     },
 });

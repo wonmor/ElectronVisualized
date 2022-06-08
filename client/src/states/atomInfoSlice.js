@@ -19,7 +19,9 @@ export const atomInfoSlice = createSlice({
     },
     reducers: {
         setGlobalAtomInfo: (state, action) => {
-            state.globalAtomInfo = action.payload
+            if (state.globalAtomInfo !== action.payload) {
+                state.globalAtomInfo = action.payload;
+            }
         },
     },
 })
