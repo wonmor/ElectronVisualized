@@ -94,7 +94,7 @@ export default function Docs() {
               sprawling nature of all kinds of different libraries — mainly
               Redux — a state management tool for the React front-end framework.
               (I will assume here that you know the difference between front-end
-              and back-end; back-end being the client side of the website or an
+              and back-end; front-end being the client side of the website or an
               app)
             </p>
             <p className="pt-5 pr-5 pl-5 text-left text-gray-400">
