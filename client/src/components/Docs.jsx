@@ -79,7 +79,7 @@ export default function Docs() {
             </p>
             <p className="pt-5 pr-5 pl-5 text-left text-gray-400">
               Life is difficult. That's right. Life can throw some challenges
-              that seemed to be indeterminate; that's also correct. But I
+              that seem to be indeterminate; that's also correct. But I
               believe that this is where our programming skills may apply, as a
               "developer," not merely someone who "codes." Believe or not, there
               is a difference between these two. The former being an universal
