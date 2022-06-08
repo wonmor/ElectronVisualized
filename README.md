@@ -32,7 +32,7 @@ A **real-time** electron density simulation **single-handedly** developed by a *
 
 ## Project Sketches
 
-These sketches were drawn at an early stage of development.
+These sketches were drawn at the early stage of development.
 
 ![IMG_7647](https://user-images.githubusercontent.com/35755386/166985579-96c2d483-e74c-4802-ac92-762b2ccc8bc9.jpg)
 
