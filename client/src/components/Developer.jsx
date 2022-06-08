@@ -81,19 +81,25 @@ export default function Developer() {
     <div>
       <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
         <div className="text-white text-center pt-10 pl-5 pr-5 text-gray-400">
-          <h1 className="pb-5">
+          <h1 className="pb-5 text-ellipsis overflow-hidden">
             <span className="text-white">Density Functional Theory</span> Meets
-            the <span className="text-white">Web</span>.
+            the <span className="text-blue-200">Web</span>.
           </h1>
 
-          <h2 className="mt-5 p-5 leading-normal bg-gray-600 text-gray-400">
-            <span className="text-6xl">
-              Introducing the <span className="text-white">World Engine</span>.
-            </span>
-            <br></br>A <span className="text-white">REST API</span> Powered by
-            the Industry-leading <span className="text-white">GPAW</span> and{" "}
-            <span className="text-white">ASE</span> Libaries.
-          </h2>
+          <div className="bg-gray-600">
+            <h2 className="mt-5 pl-5 pr-5 pt-5 leading-normal text-gray-400">
+              <span className="text-5xl sm:text-6xl">
+                Introducing the{" "}
+                <span className="text-rose-200">World Engine</span>.
+              </span>
+            </h2>
+            
+            <h2 className="p-5 leading-normal text-gray-400">
+              A <span className="text-white">REST API</span> Powered by
+              the Industry-leading <span className="text-white">GPAW</span> and{" "}
+              <span className="text-white">ASE</span> Libaries.
+            </h2>
+          </div>
 
           <h2 id="api-description" className="p-5 leading-tight text-gray-400">
             An implementation that seemed to be impossible to be made.<br></br>
@@ -102,8 +108,8 @@ export default function Developer() {
             <span className="text-white">Engineers</span>.
           </h2>
 
-          <p className="inline-block scale-90 sm:scale-100 mb-5 max-w-fit text-rose-200 border border-rose-200 py-2 px-4 rounded">
-          https://electron-visualized.herokuapp.com/api/gpaw/H2
+          <p className="flex m-auto break-all scale-90 sm:scale-100 mb-5 p-3 max-w-fit text-rose-200 border border-rose-200 rounded">
+            https://electron-visualized.herokuapp.com/api/gpaw/H2
           </p>
 
           {!disable ? (
@@ -154,8 +160,12 @@ export default function Developer() {
                   <br></br>
                   <br></br>
                   <span>
-                    <code className="text-gray-400">Density data is normalized<br></br>from range -255 to 255...</code>
-                    <br></br><br></br>
+                    <code className="text-gray-400">
+                      Density data is normalized<br></br>from range -255 to
+                      255...
+                    </code>
+                    <br></br>
+                    <br></br>
                     <code>density_data:</code>
                   </span>
                   <pre>{JSON.stringify(atomInfo.density_data, null, 2)}</pre>

@@ -20,6 +20,8 @@ import Controls from "./Controls";
 
 import CANVAS from "./Constants";
 
+import useWindowSize from "../useWindowsSize";
+
 /*
 ░█▀▄▀█ ░█▀▀▀█ ░█─── ░█▀▀▀ ░█▀▀█ ░█─░█ ░█─── ░█▀▀▀ 
 ░█░█░█ ░█──░█ ░█─── ░█▀▀▀ ░█─── ░█─░█ ░█─── ░█▀▀▀ 
@@ -133,6 +135,8 @@ export default function Molecule() {
 
   const dispatch = useDispatch();
 
+  const size = useWindowSize();
+
   // Handles the breathing animation event... needs more memoryr optimization though!
   useLazyInterval(() => {
     if (animation) {
@@ -241,8 +245,8 @@ export default function Molecule() {
 
   return (
     <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
-      <div className="text-white text-center pt-10 pb-10">
-        <h1>
+      <div className="text-rose-200 text-center pt-10 pb-10">
+        <h1 className={`${(size.width < 350) ? "scale-75" : null}`}>
           {globalSelectedElement["name"]}
           <span className="text-gray-400">. Visualized.</span>
         </h1>

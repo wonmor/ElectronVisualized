@@ -67,7 +67,7 @@ export default function Header() {
 
         <button
           onClick={() => {setMenu(!showMenu)}}
-          className="flex items-center px-3 py-2 border rounded text-rose-200 border-rose-200 hover:text-white hover:border-white"
+          className="flex items-center mt-5 sm:mt-0 px-3 py-2 border rounded text-rose-200 border-rose-200 hover:text-white hover:border-white"
         >
           <svg
             className="fill-current h-3 w-3"
@@ -84,7 +84,7 @@ export default function Header() {
 
       </div>
 
-      {(showMenu || size.width > 1000) && (
+      {(showMenu || size.width > 1024) && (
 
         <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
           <div className="text-sm lg:flex-grow">

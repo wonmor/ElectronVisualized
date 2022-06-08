@@ -1,11 +1,14 @@
 import { useNavigate } from "react-router-dom";
-import "./Table.css";
 
 import { useSelector, useDispatch } from "react-redux";
 
 import { setGlobalRenderInfo } from "../states/renderInfoSlice";
 
 import { setGlobalSelectedElement } from "../states/selectedElementSlice";
+
+import useWindowSize from "../useWindowsSize";
+
+import "./Table.css";
 
 /*
 ░█▀▀█ ░█▀▀▀ ░█▀▀█ ▀█▀ ░█▀▀▀█ ░█▀▀▄ ▀█▀ ░█▀▀█ 　 ▀▀█▀▀ ─█▀▀█ ░█▀▀█ ░█─── ░█▀▀▀ 
@@ -33,6 +36,8 @@ export default function Table() {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
+
+  const size = useWindowSize();
 
   const moleculeDict = {
     H2: [
@@ -122,8 +127,8 @@ export default function Table() {
         A HTML markup that contains graphical elements
     */
     return (
-      <div className="m-10 scale-75 sm:scale-100" role="region" tabindex="0">
-        <ol id="periodic-table">
+      <div className={`m-10 scale-75 sm:scale-100 ${(size.width < 350) ? "scale-50" : null}`} role="region" tabindex="0">
+        <ol className="scale-90 sm:scale-100" id="periodic-table">
           <li
             onMouseDown={() => {
               // This code runs first...
@@ -263,18 +268,18 @@ export default function Table() {
     <div>
       <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
         <div className="text-white text-center p-5 text-gray-400">
-          <h1 className="scale-90 sm:scale-100">
-            Visualizing <span className="text-white">Electron Density</span>.
+          <h1 className={`scale-75 sm:scale-100 ${(size.width < 350) ? "truncate" : null}`}>
+            Visualizing <span className="text-rose-200">Electron Density</span>.
             Reimagined.
           </h1>
 
-          <h2 className="mt-5 pl-5 pr-5 text-gray-400">
+          <h2 className="sm:mt-5 pb-3 pl-5 pr-5 text-gray-400">
             Simulated <span className="text-white">Real Time</span> with the help of{" "}
             <span className="text-white">Density Functional Theory</span>.
           </h2>
 
           <div className="bg-gray-600">
-            <h1 className="mt-5 pt-5 pl-5 pr-5 text-gray-400">Molecules</h1>
+            <h1 className={`scale-90 sm:scale-100 mt-5 pt-5 pl-5 pr-5 text-blue-200 ${(size.width < 350) ? "truncate" : null}`}>Molecules</h1>
 
             <p className="p-5 text-gray-400">
               Visualize your favourite molecule using <b>GPAW</b> and <b>ASE</b>{" "}
@@ -303,7 +308,7 @@ export default function Table() {
             })}
           </div>
 
-          <h1 className="mt-5 pl-5 pr-5 text-gray-400">Atoms</h1>
+          <h1 className="scale-90 sm:scale-100 mt-5 pl-5 pr-5 text-gray-400">Atoms</h1>
 
           <p className="p-5 text-gray-400 border-b border-gray-500">
             Website still in the <b>development</b> phase. Only <b>Hydrogen</b>{" "}
