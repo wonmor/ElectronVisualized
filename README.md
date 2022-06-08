@@ -18,11 +18,15 @@ A **real-time** electron density simulation **single-handedly** developed by a *
 
 ---
 
-![IMG_8813](https://user-images.githubusercontent.com/35755386/172116220-edfac223-6fc5-425b-8e2e-dd0612dab2c7.png)
+<img width="1200" alt="Screen Shot 2022-06-07 at 9 20 02 PM" src="https://user-images.githubusercontent.com/35755386/172510822-876feff5-0ddd-4ff4-a7dc-babaa1752fbd.png">
 
-<img width="1200" alt="Screen Shot 2022-06-05 at 10 07 16 PM" src="https://user-images.githubusercontent.com/35755386/172083048-0cd08e5b-26fd-470f-a4bf-cb329644a5de.png">
+<img width="1200" alt="Screen Shot 2022-06-06 at 9 09 19 PM" src="https://user-images.githubusercontent.com/35755386/172510580-8b413bd9-e2fc-4f2c-99f0-510837b70f43.png">
 
-<img width="1200" alt="Screen Shot 2022-06-05 at 10 07 56 PM" src="https://user-images.githubusercontent.com/35755386/172083077-061157c6-6c0a-4c7b-b585-63228cf38dd1.png">
+<img width="1200" alt="Screen Shot 2022-06-07 at 9 19 26 PM" src="https://user-images.githubusercontent.com/35755386/172510882-df542bc9-38a0-4b5b-912c-f655c42da0d4.png">
+
+<img width="1200" alt="Screen Shot 2022-06-07 at 6 50 37 PM" src="https://user-images.githubusercontent.com/35755386/172510842-7e7d8f83-19c2-4353-824e-8205eb2b41bf.png">
+
+<img width="1200" alt="Screen Shot 2022-06-07 at 6 43 57 PM" src="https://user-images.githubusercontent.com/35755386/172510913-99206de7-b768-4c59-bf93-ec192ab9a685.png">
 
 ---
 
