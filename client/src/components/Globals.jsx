@@ -98,6 +98,19 @@ export const getMoleculeOpacity = (element, volume) => {
 }
 
 export const getCameraPosition = (element) => {
+    /*
+    Updating the camera position according to the element name
+  
+    Parameters
+    ----------
+    element: String
+        Name of the element
+  
+    Returns
+    -------
+    Dictionary
+        Contains the position values and the FOV of the camera
+    */
     switch (element) {
         case "H":
             return { fov: 15, position: [-5, 8, 8] };
