@@ -96,3 +96,19 @@ export const getMoleculeOpacity = (element, volume) => {
             return normalizeData(volume, 1, 0) / 50;
     }
 }
+
+export const getCameraPosition = (element) => {
+    switch (element) {
+        case "H":
+            return { fov: 15, position: [-5, 8, 8] };
+
+        case "H2":
+            return { fov: 20, position: [-5, 8, 8] };
+
+        case "H2O":
+            return { fov: 55, position: [-5, 8, 8] };
+
+        default:
+            return { fov: 35, position: [-5, 8, 8] };
+    }
+}

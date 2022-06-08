@@ -18,7 +18,7 @@ export default function Docs() {
     <div>
       <div className="bg-gray-700 pb-5" style={{ "min-height": "100vh" }}>
         <div className="text-white text-center sm:pt-10 pl-5 pr-5 text-gray-400">
-          <h1 className="mb-5 scale-75 sm:scale-100 break-all">
+          <h1 className="sm:pb-5 scale-75 sm:scale-100 break-all">
             <span className="text-white">Designed</span> and{" "}
             <span className="text-white">Manufactured</span>
             <br></br>
@@ -103,7 +103,7 @@ export default function Docs() {
               ensured but also the gap between real-life physics and the
               simulated environment isn't too large. GPAW and ASE were perfect
               candidates for the very foundation of the World Engine REST API
-              that utilizes the famous <b>Density Functional Theory</b> in QM
+              that utilizes the famous <b>Density Functional Theory</b> (DFT) and <b>Projector Augmented-wave</b> (PAW) method in QM
               that massively simplifies the N-dimensional Schrödinger's Equation
               problem into something a lot more digestible and can be handled
               efficiently. The pure abstractness of these theories that involve

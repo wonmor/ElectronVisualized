@@ -18,7 +18,7 @@ import { Atoms, BondLine } from "./Geometries";
 
 import Controls from "./Controls";
 
-import { CANVAS, getMoleculeColour, getMoleculeOpacity } from "./Globals";
+import { CANVAS, getMoleculeColour, getMoleculeOpacity, getCameraPosition } from "./Globals";
 
 import { Background } from "./Geometries";
 
@@ -229,15 +229,15 @@ export default function Molecule() {
     <div>
       <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
         <div className="text-rose-200 text-center pt-10 pb-10">
-          <h1 className={`${size.width < 350 ? "scale-75" : null}`}>
+          <h1 className={`mb-5 ${size.width < 350 ? "scale-75" : null}`}>
             {globalSelectedElement["name"]}
             <span className="text-gray-400">. Visualized.</span>
           </h1>
 
-          <h2 className="mt-5 pb-5 ml-5 mr-5 text-gray-400 border-b border-gray-500">
+          <h2 className="sm:mt-5 pb-3 pl-5 pr-5 text-gray-400">
             Simulated <span className="text-white">Real Time</span> with the
             help of{" "}
-            <span className="text-white">Density Functional Theory</span>.
+            <span className="text-white">Projector Augmented-wave</span> method.
           </h2>
 
           <p className="pt-5 pr-5 pl-5 text-gray-400">
@@ -338,7 +338,7 @@ export default function Molecule() {
         </div>
 
         <div style={{ width: CANVAS.WIDTH, height: CANVAS.HEIGHT }}>
-          <Canvas camera={{ fov: 35, position: [-5, 8, 8] }}>
+          <Canvas camera={getCameraPosition(globalSelectedElement["element"])}>
             <Controls />
 
             <ambientLight intensity={0.5} />

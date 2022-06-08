@@ -296,7 +296,7 @@ export default function Table() {
           <h2 className="sm:mt-5 pb-3 pl-5 pr-5 text-gray-400">
             Simulated <span className="text-white">Real Time</span> with the
             help of{" "}
-            <span className="text-white">Density Functional Theory</span>.
+            <span className="text-white">Projector Augmented-wave</span> method.
           </h2>
 
           <div className="bg-gray-600">
@@ -343,7 +343,17 @@ export default function Table() {
             Website still in the <b>development</b> phase. Only <b>Hydrogen</b>{" "}
             is available at the moment.
           </p>
+
           {displayPeriodicTable()}
+
+          <h2 className="p-5 text-gray-400 border-t border-gray-500">
+            "Compared to more traditional plane wave or localized basis set approaches, <span className="text-white">Projector Augmented-wave</span> method offers <span className="text-white">several advantages</span>, most notably good computational scalability and systematic convergence properties."
+          </h2>
+
+          <p className="p-5 text-gray-400">
+            — A Public Testimonial by  <span className="text-white">J Enkovaara et al. 2010</span> on their topical review <span className="text-blue-200"><i>Electronic structure calculations with GPAW</i></span>.
+          </p>
+
         </div>
         <Background />
       </div>

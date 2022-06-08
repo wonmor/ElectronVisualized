@@ -67,7 +67,7 @@ export default function Header() {
 
         <button
           onClick={() => {setMenu(!showMenu)}}
-          className={`flex items-center px-3 py-2 border rounded text-rose-200 border-rose-200 hover:text-white hover:border-white ${(size.width < 350 ? "mt-5" : null)}`}
+          className={`flex items-center px-3 py-2 border rounded text-rose-200 border-rose-200 hover:text-white hover:border-white ${(size.width < 350 ? "mt-5 mr-0" : "mr-5")}`}
         >
           <svg
             className="fill-current h-3 w-3"
@@ -105,9 +105,16 @@ export default function Header() {
 
             <button
               onClick={() => {movePage("/docs")}}
-              className="block mt-4 lg:inline-block lg:mt-0 text-rose-200 hover:text-white"
+              className="block mt-4 lg:inline-block lg:mt-0 text-rose-200 hover:text-white mr-4"
             >
               Docs
+            </button>
+
+            <button
+              onClick={() => {movePage("/extensions")}}
+              className="block mt-4 lg:inline-block lg:mt-0 text-rose-200 hover:text-white"
+            >
+              Extensions
             </button>
 
           </div>
