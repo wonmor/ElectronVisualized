@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { Background } from "./Geometries";
+
 import Dropdown from "./Dropdown";
 
 import axios from "axios";
@@ -232,6 +234,7 @@ export default function Developer() {
           </div>
         </div>
       </div>
+      <Background />
     </div>
   );
 }

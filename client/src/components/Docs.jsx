@@ -1,3 +1,5 @@
+import { Background } from "./Geometries";
+
 export default function Docs() {
   /*
   This is a component function in JSX
@@ -14,7 +16,7 @@ export default function Docs() {
 
   return (
     <div>
-      <div className="bg-gray-700 pb-5" style={{ "min-height": "200vh" }}>
+      <div className="bg-gray-700 pb-5" style={{ "min-height": "100vh" }}>
         <div className="text-white text-center sm:pt-10 pl-5 pr-5 text-gray-400">
           <h1 className="mb-5 scale-75 sm:scale-100 break-all">
             <span className="text-white">Designed</span> and{" "}
@@ -113,6 +115,7 @@ export default function Docs() {
           </h2>
         </div>
       </div>
+      <Background />
     </div>
   );
 }

@@ -20,6 +20,8 @@ import Controls from "./Controls";
 
 import CANVAS from "./Constants";
 
+import { Background } from "./Geometries";
+
 import useWindowSize from "../useWindowsSize";
 
 /*
@@ -244,199 +246,205 @@ export default function Molecule() {
   };
 
   return (
-    <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
-      <div className="text-rose-200 text-center pt-10 pb-10">
-        <h1 className={`${(size.width < 350) ? "scale-75" : null}`}>
-          {globalSelectedElement["name"]}
-          <span className="text-gray-400">. Visualized.</span>
-        </h1>
+    <div>
+      <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
+        <div className="text-rose-200 text-center pt-10 pb-10">
+          <h1 className={`${size.width < 350 ? "scale-75" : null}`}>
+            {globalSelectedElement["name"]}
+            <span className="text-gray-400">. Visualized.</span>
+          </h1>
 
-        <h2 className="mt-5 pb-5 ml-5 mr-5 text-gray-400 border-b border-gray-500">
-        Simulated <span className="text-white">Real Time</span> with the help of{" "}
+          <h2 className="mt-5 pb-5 ml-5 mr-5 text-gray-400 border-b border-gray-500">
+            Simulated <span className="text-white">Real Time</span> with the
+            help of{" "}
             <span className="text-white">Density Functional Theory</span>.
-        </h2>
+          </h2>
 
-        <p className="pt-5 pr-5 pl-5 text-gray-400">
-          {globalSelectedElement["description"]}
-        </p>
+          <p className="pt-5 pr-5 pl-5 text-gray-400">
+            {globalSelectedElement["description"]}
+          </p>
 
-        <div class="gap-3 flex items-center justify-center pt-5">
-          {!disableButton ? (
-            <button
-              disabled={disableButton}
-              onClick={() => {
-                update();
-                setDisableButton(true);
-              }}
-              className="absolute mt-10 bg-transparent hover:bg-blue-500 text-gray-400 hover:text-white py-2 px-4 border border-gray-400 hover:border-transparent rounded"
-              type="button"
-            >
-              <span>Start Rendering</span>
-            </button>
-          ) : preRender ? (
-            <div
-              className={`absolute text-gray-400 ${
-                serverError ? "mt-10" : "mt-40"
-              }`}
-            >
-              <h3>{statusText}</h3>
-
-              {!serverError && (
-                <div className="scale-75 lds-roller">
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                </div>
-              )}
-            </div>
-          ) : (
-            <Box
-              component="span"
-              sx={{
-                p: 2,
-                border: "1px dashed grey",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-              }}
-            >
-              {!animation && (
-                <div>
-                  <p className="text-gray-400">Particle Radius</p>
-
-                  <Slider
-                    className="ml-40 mr-40 mb-5"
-                    onClick={() => {
-                      setAnimation(false);
-                    }}
-                    sx={{
-                      width: 300,
-                      color: "gray",
-                    }}
-                    value={particleRadius}
-                    onChange={changeParticleRadius}
-                    min={0.01}
-                    max={0.07}
-                    step={0.001}
-                    valueLabelDisplay="auto"
-                  />
-                </div>
-              )}
-              <Button
+          <div class="gap-3 flex items-center justify-center pt-5">
+            {!disableButton ? (
+              <button
+                disabled={disableButton}
                 onClick={() => {
-                  setAnimation(!animation);
-
-                  if (!animation) {
-                    setParticleRadius(0.01);
-
-                    setMaxPeak(false);
-                    setMinPeak(true);
-                  }
+                  update();
+                  setDisableButton(true);
                 }}
-                variant="outlined"
+                className="absolute mt-10 bg-transparent hover:bg-blue-500 text-gray-400 hover:text-white py-2 px-4 border border-gray-400 hover:border-transparent rounded"
+                type="button"
+              >
+                <span>Start Rendering</span>
+              </button>
+            ) : preRender ? (
+              <div
+                className={`absolute text-gray-400 ${
+                  serverError ? "mt-10" : "mt-40"
+                }`}
+              >
+                <h3>{statusText}</h3>
+
+                {!serverError && (
+                  <div className="scale-75 lds-roller">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Box
+                component="span"
                 sx={{
-                  marginLeft: "7.5em",
-                  marginRight: "7.5em",
-                  color: "gray",
-                  borderColor: "gray",
+                  p: 2,
+                  border: "1px dashed grey",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
                 }}
               >
-                {!animation ? "Enable Animation" : "Disable Animation"}
-              </Button>
-            </Box>
-          )}
+                {!animation && (
+                  <div>
+                    <p className="text-gray-400">Particle Radius</p>
+
+                    <Slider
+                      className="ml-40 mr-40 mb-5"
+                      onClick={() => {
+                        setAnimation(false);
+                      }}
+                      sx={{
+                        width: 300,
+                        color: "gray",
+                      }}
+                      value={particleRadius}
+                      onChange={changeParticleRadius}
+                      min={0.01}
+                      max={0.07}
+                      step={0.001}
+                      valueLabelDisplay="auto"
+                    />
+                  </div>
+                )}
+                <Button
+                  onClick={() => {
+                    setAnimation(!animation);
+
+                    if (!animation) {
+                      setParticleRadius(0.01);
+
+                      setMaxPeak(false);
+                      setMinPeak(true);
+                    }
+                  }}
+                  variant="outlined"
+                  sx={{
+                    marginLeft: "7.5em",
+                    marginRight: "7.5em",
+                    color: "gray",
+                    borderColor: "gray",
+                  }}
+                >
+                  {!animation ? "Enable Animation" : "Disable Animation"}
+                </Button>
+              </Box>
+            )}
+          </div>
+        </div>
+
+        <div style={{ width: CANVAS.WIDTH, height: CANVAS.HEIGHT }}>
+          <Canvas camera={{ fov: 35, position: [-5, 8, 8] }}>
+            <Controls />
+
+            <ambientLight intensity={0.5} />
+            <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+            <pointLight position={[-10, -10, -10]} />
+
+            {globalAtomInfo && !preRender && (
+              <Provider store={store}>
+                {globalAtomInfo["atoms_x"].map((value, index) => {
+                  return (
+                    <mesh>
+                      <Atoms
+                        position={[
+                          globalAtomInfo["atoms_x"][index],
+                          globalAtomInfo["atoms_y"][index],
+                          globalAtomInfo["atoms_z"][index],
+                        ]}
+                      />
+
+                      {index !== globalAtomInfo["atoms_x"].length - 2 ? (
+                        <BondLine
+                          coords={[
+                            globalAtomInfo["atoms_x"][0],
+                            globalAtomInfo["atoms_y"][0],
+                            globalAtomInfo["atoms_z"][0],
+                            globalAtomInfo["atoms_x"][index],
+                            globalAtomInfo["atoms_y"][index],
+                            globalAtomInfo["atoms_z"][index],
+                          ]} // [ x1, y1, z1,  x2, y2, z2, ... ] format
+                        />
+                      ) : (
+                        <BondLine
+                          coords={[
+                            globalAtomInfo["atoms_x"][0],
+                            globalAtomInfo["atoms_y"][0],
+                            globalAtomInfo["atoms_z"][0],
+                            globalAtomInfo["atoms_x"][index],
+                            globalAtomInfo["atoms_y"][index],
+                            globalAtomInfo["atoms_z"][index],
+                          ]} // [ x1, y1, z1,  x2, y2, z2, ... ] format
+                        />
+                      )}
+                    </mesh>
+                  );
+                })}
+
+                {Object.keys(globalAtomInfo["density_data"]).map(
+                  (key, index) => {
+                    const coords = key.split(", ");
+                    const volume = globalAtomInfo["density_data"][key];
+
+                    return (
+                      // Generate particles...
+                      <mesh
+                        position={[
+                          coords[0] / 5 - 10.7,
+                          coords[1] / 5 - 10.7,
+                          coords[2] / 5 - 10.7,
+                        ]}
+                        scale={[1, 1, 1]}
+                      >
+                        <sphereBufferGeometry
+                          args={[particleRadius, 30, 30]}
+                          attach="geometry"
+                        />
+
+                        <meshBasicMaterial
+                          transparent={true}
+                          opacity={normalizeData(volume, 1, 0) / 50}
+                          color={`rgb(255, ${Math.round(
+                            255.0 - volume * 2.5
+                          )}, ${Math.round(255.0 - volume * 2.5)})`}
+                          attach="material"
+                        />
+                      </mesh>
+                    );
+                  }
+                )}
+              </Provider>
+            )}
+
+            <gridHelper args={[undefined, undefined, "white"]} />
+          </Canvas>
         </div>
       </div>
-
-      <div style={{ width: CANVAS.WIDTH, height: CANVAS.HEIGHT }}>
-        <Canvas camera={{ fov: 35, position: [-5, 8, 8] }}>
-          <Controls />
-
-          <ambientLight intensity={0.5} />
-          <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
-          <pointLight position={[-10, -10, -10]} />
-
-          {globalAtomInfo && !preRender && (
-            <Provider store={store}>
-              {globalAtomInfo["atoms_x"].map((value, index) => {
-                return (
-                  <mesh>
-                    <Atoms
-                      position={[
-                        globalAtomInfo["atoms_x"][index],
-                        globalAtomInfo["atoms_y"][index],
-                        globalAtomInfo["atoms_z"][index],
-                      ]}
-                    />
-
-                    {index !== globalAtomInfo["atoms_x"].length - 2 ? (
-                      <BondLine
-                        coords={[
-                          globalAtomInfo["atoms_x"][0],
-                          globalAtomInfo["atoms_y"][0],
-                          globalAtomInfo["atoms_z"][0],
-                          globalAtomInfo["atoms_x"][index],
-                          globalAtomInfo["atoms_y"][index],
-                          globalAtomInfo["atoms_z"][index],
-                        ]} // [ x1, y1, z1,  x2, y2, z2, ... ] format
-                      />
-                    ) : (
-                      <BondLine
-                        coords={[
-                          globalAtomInfo["atoms_x"][0],
-                          globalAtomInfo["atoms_y"][0],
-                          globalAtomInfo["atoms_z"][0],
-                          globalAtomInfo["atoms_x"][index],
-                          globalAtomInfo["atoms_y"][index],
-                          globalAtomInfo["atoms_z"][index],
-                        ]} // [ x1, y1, z1,  x2, y2, z2, ... ] format
-                      />
-                    )}
-                  </mesh>
-                );
-              })}
-
-              {Object.keys(globalAtomInfo["density_data"]).map((key, index) => {
-                const coords = key.split(", ");
-                const volume = globalAtomInfo["density_data"][key];
-
-                return (
-                  // Generate particles...
-                  <mesh
-                    position={[
-                      coords[0] / 5 - 10.7,
-                      coords[1] / 5 - 10.7,
-                      coords[2] / 5 - 10.7,
-                    ]}
-                    scale={[1, 1, 1]}
-                  >
-                    <sphereBufferGeometry
-                      args={[particleRadius, 30, 30]}
-                      attach="geometry"
-                    />
-
-                    <meshBasicMaterial
-                      transparent={true}
-                      opacity={normalizeData(volume, 1, 0) / 50}
-                      color={`rgb(255, ${Math.round(
-                        255.0 - volume * 2.5
-                      )}, ${Math.round(255.0 - volume * 2.5)})`}
-                      attach="material"
-                    />
-                  </mesh>
-                );
-              })}
-            </Provider>
-          )}
-
-          <gridHelper args={[undefined, undefined, "white"]} />
-        </Canvas>
-      </div>
+      <Background />
     </div>
   );
 }
