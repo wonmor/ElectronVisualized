@@ -94,9 +94,17 @@ def _density_parser():
         # Only display volumes that are below 160% * min value
         vmax = min + 0.6 * (max - min)
 
+    elif element_name == 'Cl2':
+        vmin = min + 0.0003 * (max - min)
+        vmax = min + 0.09 * (max - min)
+
     elif element_name == 'H2O':
         vmin = min + 0.002 * (max - min)
         vmax = min + 0.09 * (max - min)
+    
+    elif element_name == 'HCl':
+        vmin = min + 0.0002 * (max - min)
+        vmax = min + 0.9 * (max - min)
     
     else:
         vmin = min + 0.2 * (max - min)

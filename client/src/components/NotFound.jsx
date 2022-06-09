@@ -23,7 +23,7 @@ export default function NotFound() {
         <div className="text-white text-center pt-10 text-gray-400">
 
           <h1 className="leading-tight">
-            Oops, <span className="text-white">404</span> Error.
+            Oops, <span className="font-bold text-rose-200">404</span> Error.
           </h1>
 
           <h2 className="mt-5 pb-5 text-gray-400 border-b border-gray-400">

@@ -6,9 +6,11 @@ import { setGlobalRenderInfo } from "../states/renderInfoSlice";
 
 import { setGlobalSelectedElement } from "../states/selectedElementSlice";
 
-import useWindowSize from "../useWindowsSize";
-
 import { Background } from "./Geometries";
+
+import { moleculeDict } from "./Globals";
+
+import useWindowSize from "../useWindowsSize";
 
 import "./Table.css";
 
@@ -42,17 +44,6 @@ export default function Table() {
   const navigate = useNavigate();
 
   const size = useWindowSize();
-
-  const moleculeDict = {
-    H2: [
-      "Hydrogen Gas",
-      "Hydrogen is the first element in the periodic table. The atomic number is 1 and its mass is 1.01 g/mol. Its gas form consists of two Hydrogen atoms, forming a Sigma bond.",
-    ],
-    H2O: [
-      "Water",
-      "Water is an inorganic, transparent, tasteless, odourless, and nearly colourless chemical substance, which is the main constituent of Earth's hydrosphere and the fluids of all known living organisms.",
-    ],
-  };
 
   const movePage = (page) => {
     /*
@@ -146,7 +137,7 @@ export default function Table() {
                 appendNewRender(
                   "H",
                   "Hydrogen Atom",
-                  "Hydrogen is the first element in the periodic table. The atomic number is 1 and its mass is 1.01 g/mol. Its gas form consists of two Hydrogen atoms, forming a Sigma bond."
+                  "Hydrogen is the lightest element. At standard conditions hydrogen is a gas of diatomic molecules having the formula H2. It is colorless, odorless, tasteless, non-toxic, and highly combustible. Hydrogen is the most abundant chemical substance in the universe, constituting roughly 75% of all normal matter."
                 );
               }}
               onClick={() => {
@@ -299,7 +290,7 @@ export default function Table() {
             <span className="text-white">Projector Augmented-wave</span> method.
           </h2>
 
-          <div className="bg-gray-600">
+          <div className="bg-gray-600 pb-2">
             <h1
               className={`scale-90 sm:scale-100 mt-5 pt-5 pl-5 pr-5 text-blue-200 ${
                 size.width < 350 ? "truncate" : null
@@ -326,7 +317,7 @@ export default function Table() {
                     // This code runs after a global state change...
                     movePage(`/renderer/${globalSelectedElement["element"]}`);
                   }}
-                  className="mb-5 mr-2 sm:mt-0 bg-transparent hover:bg-blue-500 text-gray-400 hover:text-white py-2 px-4 border border-gray-400 hover:border-transparent rounded"
+                  className="mb-3 mr-2 sm:mt-0 bg-transparent hover:bg-blue-500 text-gray-400 hover:text-white py-2 px-4 border border-gray-400 hover:border-transparent rounded"
                   type="button"
                 >
                   <span>{value[0]}</span>

@@ -12,7 +12,26 @@ export const CANVAS = {
 export const RENDERER = {
     ATOM_RADIUS: "0.3",
     TUBE_RADIUS: "0.3",
-}
+};
+
+export const moleculeDict = {
+    H2: [
+      "Hydrogen Gas",
+      "Hydrogen is the lightest element. At standard conditions hydrogen is a gas of diatomic molecules having the formula H2. It is colorless, odorless, tasteless, non-toxic, and highly combustible. Hydrogen is the most abundant chemical substance in the universe, constituting roughly 75% of all normal matter.",
+    ],
+    H2O: [
+        "Water",
+        "Water is an inorganic, transparent, tasteless, odourless, and nearly colourless chemical substance, which is the main constituent of Earth's hydrosphere and the fluids of all known living organisms.",
+      ],
+    Cl2: [
+        "Chlorine Gas",
+        "Chlorine is a yellow-green gas at room temperature. Chlorine has a pungent, irritating odor similar to bleach that is detectable at low concentrations. The density of chlorine gas is approximately 2.5 times greater than air, which will cause it to initially remain near the ground in areas with little air movement.",
+    ],
+    HCl: [
+      "Hydrochloric Acid",
+      "Hydrochloric acid is the water-based, or aqueous, solution of hydrogen chloride gas. It is also the main component of gastric acid, an acid produced naturally in the human stomach to help digest food.",
+    ],
+};
 
 export const normalizeData = (val, max, min) => {
     /*
@@ -58,9 +77,17 @@ export const getMoleculeColour = (element, volume) => {
                     255.0 - volume * 2.5
                 )}, ${Math.round(255.0 - volume * 2.5)})`;
 
+        case "Cl2":
+            return `rgb(255, ${Math.round(Math.abs(volume)
+                ) / 2}, ${Math.round(Math.abs(volume)) / 2})`;
+
         case "H2O":
             return `rgb(255, ${Math.round(Math.abs(volume)
                 ) / 2}, ${Math.round(Math.abs(volume)) / 2})`;
+
+        case "HCl":
+            return `rgb(255, ${Math.round(Math.abs(volume)
+                ) / 3}, ${Math.round(Math.abs(volume)) / 3})`;
 
         default:
             return `rgb(255, ${Math.round(
@@ -89,8 +116,14 @@ export const getMoleculeOpacity = (element, volume) => {
         case "H2":
             return normalizeData(volume, 1, 0) / 50;
 
+        case "Cl2":
+            return normalizeData(255 - Math.abs(volume) * 1.004, 1, -1);
+
         case "H2O":
             return normalizeData(255 - Math.abs(volume) * 1.006, 1, -1);
+
+        case "HCl":
+            return normalizeData(255 - Math.abs(volume) * 1.003, 1, -1);
 
         default:
             return normalizeData(volume, 1, 0) / 50;
@@ -119,6 +152,9 @@ export const getCameraPosition = (element) => {
             return { fov: 20, position: [-5, 8, 8] };
 
         case "H2O":
+            return { fov: 55, position: [-5, 8, 8] };
+
+        case "HCl":
             return { fov: 55, position: [-5, 8, 8] };
 
         default:

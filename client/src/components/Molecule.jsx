@@ -240,7 +240,7 @@ export default function Molecule() {
             <span className="text-white">Projector Augmented-wave</span> method.
           </h2>
 
-          <p className="pt-5 pr-5 pl-5 text-gray-400">
+          <p className="pt-5 pr-5 pl-5 md:pl-60 md:pr-60 text-gray-400">
             {globalSelectedElement["description"]}
           </p>
 
