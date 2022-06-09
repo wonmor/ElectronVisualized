@@ -113,7 +113,7 @@ export default function Docs() {
               and back-end; front-end being the client side of the website or an
               app)
             </p>
-            <p className="pt-5 pr-5 pl-5 text-left text-gray-400">
+            <p className="p-5 text-left text-gray-400 border-b border-gray-400">
               To develop a computationally-rigour and physically-accurate core
               API, I had to come up with a solution where the performance is
               ensured but also the gap between real-life physics and the
@@ -128,6 +128,9 @@ export default function Docs() {
               well as taking Physics in my school led me into mastering the
               discipline in a relatively short time of period.
             </p>
+            <p className="p-5 text-left text-gray-400">
+              Special Thanks to <b>Samar C.</b> for their Contribution by Providing Us With the Name: Project <b>Atomizer</b>.
+              </p>
           </h2>
         </div>
       </div>
