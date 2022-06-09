@@ -118,7 +118,7 @@ export default function Docs() {
               API, I had to come up with a solution where the performance is
               ensured but also the gap between real-life physics and the
               simulated environment isn't too large. GPAW and ASE were perfect
-              candidates for the very foundation of the World Engine REST API.
+              candidates for the very foundation of the <b>World Engine</b> REST API.
               It utilizes the famous <b>Density Functional Theory</b> (DFT) and{" "}
               <b>Projector Augmented-wave</b> (PAW) method in QM that massively
               simplifies the N-dimensional Schrödinger's Equation problem. The
