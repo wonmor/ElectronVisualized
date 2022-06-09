@@ -2,7 +2,7 @@
 
 # ElectronVisualized
 
-A **real-time** electron density simulation **single-handedly** developed by a **high school student**. Displayed based upon the internal calculations performed that involve the state-of-the-art **Projector Augmented-wave** (PAW) method and **Density Functional Theory** (DFT): describing the **probable locations of electrons** by simplifying the N-body Schrödinger's Equation into a N single-body problem.
+A **real-time** electron density simulation **single-handedly** developed by a **high school student**. Displayed based upon the internal calculations performed that involve the state-of-the-art **Projector Augmented-wave** (PAW) method and **Density Functional Theory** (DFT): describing the **probable locations of electrons** by simplifying the N-body Schrödinger's Equation into a relatively easier-to-compute N single-body problem.
 
 ---
 
