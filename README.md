@@ -2,7 +2,7 @@
 
 # ElectronVisualized
 
-A **real-time** electron density simulation **single-handedly** developed by a **high school student** (with some help with libraries written by **multiple** PhD holders; thank you). Displayed based upon the internal calculations performed that involve the famous **Density Functional Theory**, which describes the probable locations of electrons by approximating the wavefunction.
+A **real-time** electron density simulation **single-handedly** developed by a **high school student** (with some help with libraries written by **multiple** PhD holders; thank you). Displayed based upon the internal calculations performed that involve the state-of-the-art **Density Functional Theory**, which describes the **probable locations of electrons** by simplifying the N-body Schrödinger's Equation into a N single-body problem.
 
 ---
 
