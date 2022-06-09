@@ -40,7 +40,7 @@ These sketches were drawn at the early stage of development.
 
 ---
 
-## Technologies Used (A Sh*t Ton, You're Welcome)
+## Technologies Used (A Ton, You're Welcome)
 
 ### Front-End: ```./client```
 - **React**: Front-End Javascript Library
