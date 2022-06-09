@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch, Provider } from "react-redux";
 
-import { Box, Slider, Button } from "@mui/material";
+import { Slider, Button } from "@mui/material";
 
 import store from "../store";
 
@@ -228,10 +228,10 @@ export default function Molecule() {
   return (
     <div>
       <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
-        <div className="text-rose-200 text-center pt-10 pb-10">
-          <h1 className={`mb-5 ${size.width < 350 ? "scale-75" : null}`}>
+        <div className="text-rose-200 text-center pt-10 pb-10 ml-5 mr-5">
+          <h1 className={`font-bold mb-5 ${size.width < 350 ? "scale-75" : null}`}>
             {globalSelectedElement["name"]}
-            <span className="text-gray-400">. Visualized.</span>
+            <span className="font-thin text-gray-400">. Visualized.</span>
           </h1>
 
           <h2 className="sm:mt-5 pb-3 pl-5 pr-5 text-gray-400">
@@ -244,7 +244,7 @@ export default function Molecule() {
             {globalSelectedElement["description"]}
           </p>
 
-          <div class="gap-3 flex items-center justify-center pt-5">
+          <div class="flex items-center justify-center pt-5">
             {!disableButton ? (
               <button
                 disabled={disableButton}
@@ -279,16 +279,7 @@ export default function Molecule() {
                 )}
               </div>
             ) : (
-              <Box
-                component="span"
-                sx={{
-                  p: 2,
-                  border: "1px dashed grey",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                }}
-              >
+              <div className="p-5">
                 {!animation && (
                   <div>
                     <p className="text-gray-400">Particle Radius</p>
@@ -332,7 +323,7 @@ export default function Molecule() {
                 >
                   {!animation ? "Enable Animation" : "Disable Animation"}
                 </Button>
-              </Box>
+              </div>
             )}
           </div>
         </div>

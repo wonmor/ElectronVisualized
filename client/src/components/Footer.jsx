@@ -12,8 +12,10 @@ export default function Footer() {
         A HTML markup that contains graphical elements
     */
     return (
-        <div className="footer-copyright p-3 text-white text-center bg-gray-600">
-            © 2022 Licensed under <b>MIT</b>. Developed by <b>John Seong</b>.
+        <div className="p-3 text-white text-center bg-gray-600">
+            <span className="text-xl">
+                © 2022 Licensed under <b>MIT</b>. Developed by <a className="hover:underline" href="https://github.com/wonmor"><b>John Seong</b></a>.
+            </span>
         </div>
     );
 }

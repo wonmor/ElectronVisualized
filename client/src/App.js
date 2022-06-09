@@ -12,6 +12,7 @@ import NotFound from './components/NotFound';
 
 import Developer from './components/Developer';
 import Docs from './components/Docs';
+import Extensions from './components/Extensions';
 
 /*
 ██████╗░░█████╗░██╗░░░██╗████████╗███████╗██████╗░░██████╗
@@ -50,6 +51,7 @@ export default function App() {
           <Route path={`/renderer/${globalSelectedElement["element"]}`} element={<Molecule />} />
           <Route path="/dev" element={<Developer />} />
           <Route path="/docs" element={<Docs />} />
+          <Route path="/extensions" element={<Extensions />} />
         </Routes>
       </div>
       <Footer />

@@ -5,7 +5,7 @@
 */
 
 export const CANVAS = {
-    WIDTH: "100vw",
+    WIDTH: "fit-parent",
     HEIGHT: "85vh"
 };
 

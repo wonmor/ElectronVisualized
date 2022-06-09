@@ -22,15 +22,17 @@ export default function Docs() {
             <span className="text-white">Designed</span> and{" "}
             <span className="text-white">Manufactured</span>
             <br></br>
-            by a fellow <span className="text-blue-200">Earthling</span>.
+            by a fellow{" "}
+            <span className="font-bold text-blue-200">Earthling</span>.
           </h1>
 
           <h2 className="mt-5 pl-5 pr-5 pt-5 leading-normal bg-gray-600 text-gray-400">
-            <span className="text-5xl sm:text-6xl break-all">
+            <span className="text-5xl break-all">
               With a <span className="text-white">Great Program</span> Comes
               With a{" "}
               <span className="text-white">
-                Great <span className="text-rose-200">Documentation</span>
+                Great{" "}
+                <span className="font-bold text-rose-200">Documentation</span>
               </span>
               .
             </span>
@@ -40,7 +42,7 @@ export default function Docs() {
             A Beautiful, Elegant Interaction Between the{" "}
             <span className="text-white">User</span> and the{" "}
             <span className="text-white">Developer</span>.
-            <p className="pt-10 pr-5 pl-5 text-rose-100 text-3xl">
+            <p className="font-bold pt-10 pb-3 pr-5 pl-5 text-rose-100 text-3xl">
               Table of Contents
             </p>
             <a
@@ -49,9 +51,23 @@ export default function Docs() {
             >
               Introduction
             </a>
+            <br></br>
+            <a
+              href="https://github.com/wonmor/ElectronVisualized"
+              className="mt-5 sm:mt-0 ml-2 bg-transparent hover:bg-blue-500 text-rose-100 hover:text-white py-2 px-4 border border-rose-100 hover:border-transparent rounded"
+            >
+              <b>GitHub</b> Page
+            </a>
+            <br></br>
+            <a
+              href="https://github.com/wonmor/ElectronVisualized/blob/main/docs/John%20Seong%20-%20ICS3%20Project%20Scope%20Statement%20-%20ElectronVisualized.pdf"
+              className="mt-5 sm:mt-0 ml-2 bg-transparent hover:bg-blue-500 text-rose-100 hover:text-white py-2 px-4 border border-rose-100 hover:border-transparent rounded"
+            >
+              Project Scope
+            </a>
             <p
               id="introduction"
-              className="mt-10 pt-5 pr-5 pl-5 text-left text-3xl border-t border-gray-400"
+              className="font-bold mt-10 pt-5 pr-5 pl-5 text-left text-3xl border-t border-gray-400"
             >
               Welcome to Earth.
             </p>
@@ -74,13 +90,13 @@ export default function Docs() {
               app that really shows my skilled background as someone who
               typically ponders the question of order and disorder.
             </p>
-            <p className="pt-10 pr-5 pl-5 text-left text-3xl">
+            <p className="font-bold pt-10 pr-5 pl-5 text-left text-3xl">
               Life is Hard, and Solo Development is Equally as Hard.
             </p>
             <p className="pt-5 pr-5 pl-5 text-left text-gray-400">
               Life is difficult. That's right. Life can throw some challenges
-              that seem to be indeterminate; that's also correct. But I
-              believe that this is where our programming skills may apply, as a
+              that seem to be indeterminate; that's also correct. But I believe
+              that this is where our programming skills may apply, as a
               "developer," not merely someone who "codes." Believe or not, there
               is a difference between these two. The former being an universal
               problem solver that is able to deal with all kinds of conudrums in
@@ -102,15 +118,15 @@ export default function Docs() {
               API, I had to come up with a solution where the performance is
               ensured but also the gap between real-life physics and the
               simulated environment isn't too large. GPAW and ASE were perfect
-              candidates for the very foundation of the World Engine REST API
-              that utilizes the famous <b>Density Functional Theory</b> (DFT) and <b>Projector Augmented-wave</b> (PAW) method in QM
-              that massively simplifies the N-dimensional Schrödinger's Equation
-              problem into something a lot more digestible and can be handled
-              efficiently. The pure abstractness of these theories that involve
-              atoms and molecules came to me as overwhelmingly complicated at
-              first, but combining my AP Chemistry background as well as taking
-              Physics in my school led me into mastering it in a relatively
-              short time of period.
+              candidates for the very foundation of the World Engine REST API.
+              It utilizes the famous <b>Density Functional Theory</b> (DFT) and{" "}
+              <b>Projector Augmented-wave</b> (PAW) method in QM that massively
+              simplifies the N-dimensional Schrödinger's Equation problem. The
+              pure abstractness of these theories that involve complex
+              undergrad, or even grad-level studies came to me as overwhelmingly
+              complicated at first, but thanks to my AP Chemistry background as
+              well as taking Physics in my school led me into mastering the
+              discipline in a relatively short time of period.
             </p>
           </h2>
         </div>

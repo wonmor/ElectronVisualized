@@ -289,7 +289,7 @@ export default function Table() {
               size.width < 350 ? "truncate" : null
             }`}
           >
-            Visualizing <span className="text-rose-200">Electron Density</span>.
+            Visualizing <span className="text-rose-200"><b>Electron Density</b></span>.
             Reimagined.
           </h1>
 
@@ -305,7 +305,7 @@ export default function Table() {
                 size.width < 350 ? "truncate" : null
               }`}
             >
-              Molecules
+              <b>Molecules</b>
             </h1>
 
             <p className="p-5 text-gray-400">
@@ -336,7 +336,7 @@ export default function Table() {
           </div>
 
           <h1 className="scale-90 sm:scale-100 mt-5 pl-5 pr-5 text-gray-400">
-            Atoms
+            <b>Atoms</b>
           </h1>
 
           <p className="p-5 text-gray-400 border-b border-gray-500">
@@ -351,7 +351,7 @@ export default function Table() {
           </h2>
 
           <p className="p-5 text-gray-400">
-            — A Public Testimonial by  <span className="text-white">J Enkovaara et al. 2010</span> on their topical review <span className="text-blue-200"><i>Electronic structure calculations with GPAW</i></span>.
+            — A public testimonial by  <span className="text-white">J Enkovaara et al. 2010</span> on their topical review <a href="https://iopscience.iop.org/article/10.1088/0953-8984/22/25/253202" className="hover:underline text-blue-200"><i>Electronic structure calculations with <b>GPAW</b></i></a>.
           </p>
 
         </div>
