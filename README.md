@@ -18,7 +18,7 @@ Developed and Designed by **John Seong**. Served under the **MIT** License.
 
 [View the **Project Scope Statement**](https://github.com/wonmor/ElectronVisualized/blob/main/docs/John%20Seong%20-%20ICS3%20Project%20Scope%20Statement%20-%20ElectronVisualized.pdf)
 
-[Contact Me via LinkedIn](https://www.linkedin.com/in/john-seong-9194321a9)
+[Contact Me via **LinkedIn**](https://www.linkedin.com/in/john-seong-9194321a9)
 
 ---
 
@@ -68,13 +68,11 @@ These sketches were drawn at the early stage of development.
 
 ---
 
-## How to Run Locally (Extremely Complicated, but Totally Worth it Boys)
+## How to Run Locally
 
 **DISCLAIMER**: The reason it's unnecessarily convoluted is due to one of the dependencies: **GPAW** not being designed for web-based apps but only for local builds. There was no documentation, support, or previous cases of deployments on the web, so I had to come up with my own solution. I did not give up until the very end where I succeeded to make the whole computation process **real-time** (for real, no joke)
 
 ---
-
-### Steps: Bon Appétit
 
 1. Install **C-based dependencies** BLAS and Libxc globally, e.g. using ```brew``` on macOS or other package managers like ```APT``` on Linux or ```Chocolatey``` on Windows (Heroku runs on top of Ubuntu by default, so in this case, I set up a ```Dockerfile``` to ```apt-get install```. A bit of trial and error were involved in the process of finding the right method, as Heroku's official ```APT buildpack``` was not suitable for deploying applications that involve scientific computing (modules such as SciPy or GPAW)
 2. Setup the **client-side**: ```cd client && npm install```
@@ -84,10 +82,3 @@ These sketches were drawn at the early stage of development.
 6. Run ```export GPAW_SETUP_PATH=~/gpaw-setups-<version>``` to direct the API to the GPAW datasets that are rendered in **step 5** (or use the one that is already included in this repo)
 7. Just as a side note, **Step 6** when deploying on Heroku can be replaced by setting an environment variable in the ```CONFIG_VAR``` menu on the dashboard (Just set it to ```GPAW_SETUP_PATH=server/datasets/gpaw-setups-0.9.20000``` if you don't know what you're doing)
 8. Execute ```pip3 install requirements.txt && cd client && yarn start-api``` to download all the **PyPi dependencies** as well as running the Flask server (Optionally, you can go to the ```root``` folder and execute ```flask run``` instead)
-
----
-
-## Final Words Before I Dip
-
-![Sparrow-Welcome](https://user-images.githubusercontent.com/35755386/171761156-270884a3-75f6-4487-ba09-43622403a5df.gif)
-![Mr-Bean-GIF](https://user-images.githubusercontent.com/35755386/171760980-8d553501-64b4-4601-bd6c-2c7ca3d7fe23.gif)
