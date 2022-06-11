@@ -18,6 +18,8 @@ Developed and Designed by **John Seong**. Served under the **MIT** License.
 
 [View the **Project Scope Statement**](https://github.com/wonmor/ElectronVisualized/blob/main/docs/John%20Seong%20-%20ICS3%20Project%20Scope%20Statement%20-%20ElectronVisualized.pdf)
 
+[Contact Me via LinkedIn](https://www.linkedin.com/in/john-seong-9194321a9)
+
 ---
 
 <img width="1200" alt="Screen Shot 2022-06-07 at 9 20 02 PM" src="https://user-images.githubusercontent.com/35755386/172510822-876feff5-0ddd-4ff4-a7dc-babaa1752fbd.png">
