@@ -22,6 +22,8 @@ Developed and Designed by **John Seong**. Served under the **MIT** License.
 
 ---
 
+![ElectronVisualPromo](https://user-images.githubusercontent.com/35755386/173193444-2ce2a70c-fd07-421b-98bd-c787badbcd8b.png)
+
 <img width="1200" alt="Screen Shot 2022-06-07 at 9 20 02 PM" src="https://user-images.githubusercontent.com/35755386/172510822-876feff5-0ddd-4ff4-a7dc-babaa1752fbd.png">
 
 <img width="1200" alt="Screen Shot 2022-06-06 at 9 09 19 PM" src="https://user-images.githubusercontent.com/35755386/172510580-8b413bd9-e2fc-4f2c-99f0-510837b70f43.png">
