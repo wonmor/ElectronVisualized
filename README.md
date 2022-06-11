@@ -70,7 +70,7 @@ These sketches were drawn at the early stage of development.
 
 ## How to Run Locally
 
-**DISCLAIMER**: The reason it's unnecessarily convoluted is due to one of the dependencies: **GPAW** not being designed for web-based apps but only for local builds. There was no documentation, support, or previous cases of deployments on the web, so I had to come up with my own solution. I did not give up until the very end where I succeeded to make the whole computation process **real-time** (for real, no joke)
+**DISCLAIMER**: The reason it's unnecessarily convoluted is due to one of the dependencies: **GPAW** not being designed for web-based apps but only for local builds. There was no documentation, support, or previous cases of deployments on the web, so I had to come up with my own solution. 
 
 ---
 
