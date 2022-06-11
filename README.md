@@ -55,7 +55,7 @@ These sketches were drawn at the early stage of development.
 ---
 
 ### Back-End: ```./server```
-- **Flask**: Microframework for Web — *INSTALL VIA **PIP***
+- **Flask**: Python Microframework for Web — *INSTALL VIA **PIP***
 - **Docker**: OS-level Virtualization — *INSTALL ON THEIR **WEBSITE** THROUGH GUI INSTALLER* *(FOR **HEROKU** DEPLOYMENT ONLY)*
 - **NumPy** and **SciPy**: Core Libraries for Scientific Computing — *INSTALL VIA **PIP***
 - **ASE**: Atomic Simulation Environment — *INSTALL VIA **PIP***
