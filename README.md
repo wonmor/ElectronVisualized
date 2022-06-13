@@ -1,6 +1,4 @@
-<img width="100" alt="e_logo" src="https://user-images.githubusercontent.com/35755386/171070068-7c1150cc-e908-4c1e-ab11-e05f6e439057.png">
-
-# ElectronVisualized
+![ElectronVisualPromo](https://user-images.githubusercontent.com/35755386/173193444-2ce2a70c-fd07-421b-98bd-c787badbcd8b.png)
 
 A **real-time** electron density simulation **single-handedly** developed by a **high school student**. Displayed based upon the internal calculations performed that involve the state-of-the-art **Projector Augmented-wave** (PAW) method and **Density Functional Theory** (DFT): describing the **probable locations of electrons** by simplifying the N-body Schrödinger's Equation into a relatively easier-to-compute N single-body problem.
 
@@ -10,13 +8,15 @@ A **real-time** electron density simulation **single-handedly** developed by a *
 
 Developed and Designed by **John Seong**. Served under the **MIT** License.
 
-### [Launch Website](https://electron-visualized.herokuapp.com/)
+### [Launch Website](https://electronvisual.org)
 
 ---
 
 ## Useful Links
 
 [View the **Project Scope Statement**](https://github.com/wonmor/ElectronVisualized/blob/main/docs/John%20Seong%20-%20ICS3%20Project%20Scope%20Statement%20-%20ElectronVisualized.pdf)
+
+[Contact Me via **LinkedIn**](https://www.linkedin.com/in/john-seong-9194321a9)
 
 ---
 
@@ -42,11 +42,11 @@ These sketches were drawn at the early stage of development.
 
 ---
 
-## Technologies Used (A Ton, You're Welcome)
+## Technologies Used
 
 ### Front-End: ```./client```
 - **React**: Front-End Javascript Library
-- **Redux**: An Open-Source JavaScript Library for Managing and Centralizing Application State — *ANNOYING **AF** PLUGIN, BUT I HAD NO OTHER OPTIONS...*
+- **Redux**: An Open-Source JavaScript Library for Managing and Centralizing Application State
 - **ThreeJS**: JavaScript 3D Library
 - **Tailwind CSS**: A Utility-First Cascading Style Sheets Framework
 - **Headless UI**: UI Component Library
@@ -55,7 +55,7 @@ These sketches were drawn at the early stage of development.
 ---
 
 ### Back-End: ```./server```
-- **Flask**: Microframework for Web — *INSTALL VIA **PIP***
+- **Flask**: Python Microframework for Web — *INSTALL VIA **PIP***
 - **Docker**: OS-level Virtualization — *INSTALL ON THEIR **WEBSITE** THROUGH GUI INSTALLER* *(FOR **HEROKU** DEPLOYMENT ONLY)*
 - **NumPy** and **SciPy**: Core Libraries for Scientific Computing — *INSTALL VIA **PIP***
 - **ASE**: Atomic Simulation Environment — *INSTALL VIA **PIP***
@@ -66,13 +66,11 @@ These sketches were drawn at the early stage of development.
 
 ---
 
-## How to Run Locally (Extremely Complicated, but Totally Worth it Boys)
+## How to Run Locally
 
-**DISCLAIMER**: The reason it's unnecessarily convoluted is due to one of the dependencies: **GPAW** not being designed for web-based apps but only for local builds. There was no documentation, support, or previous cases of deployments on the web, so I had to come up with my own solution. I did not give up until the very end where I succeeded to make the whole computation process **real-time** (for real, no joke)
+**DISCLAIMER**: The reason it's unnecessarily convoluted is due to one of the dependencies: **GPAW** not being designed for web-based apps but only for local builds. There was no documentation, support, or previous cases of deployments on the web, so I had to come up with my own solution. 
 
 ---
-
-### Steps: Bon Appétit
 
 1. Install **C-based dependencies** BLAS and Libxc globally, e.g. using ```brew``` on macOS or other package managers like ```APT``` on Linux or ```Chocolatey``` on Windows (Heroku runs on top of Ubuntu by default, so in this case, I set up a ```Dockerfile``` to ```apt-get install```. A bit of trial and error were involved in the process of finding the right method, as Heroku's official ```APT buildpack``` was not suitable for deploying applications that involve scientific computing (modules such as SciPy or GPAW)
 2. Setup the **client-side**: ```cd client && npm install```
@@ -82,10 +80,3 @@ These sketches were drawn at the early stage of development.
 6. Run ```export GPAW_SETUP_PATH=~/gpaw-setups-<version>``` to direct the API to the GPAW datasets that are rendered in **step 5** (or use the one that is already included in this repo)
 7. Just as a side note, **Step 6** when deploying on Heroku can be replaced by setting an environment variable in the ```CONFIG_VAR``` menu on the dashboard (Just set it to ```GPAW_SETUP_PATH=server/datasets/gpaw-setups-0.9.20000``` if you don't know what you're doing)
 8. Execute ```pip3 install requirements.txt && cd client && yarn start-api``` to download all the **PyPi dependencies** as well as running the Flask server (Optionally, you can go to the ```root``` folder and execute ```flask run``` instead)
-
----
-
-## Final Words Before I Dip
-
-![Sparrow-Welcome](https://user-images.githubusercontent.com/35755386/171761156-270884a3-75f6-4487-ba09-43622403a5df.gif)
-![Mr-Bean-GIF](https://user-images.githubusercontent.com/35755386/171760980-8d553501-64b4-4601-bd6c-2c7ca3d7fe23.gif)
