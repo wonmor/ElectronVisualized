@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import useWindowSize from "../useWindowsSize";
+import { useWindowSize } from "./Globals";
 
 import "./Header.css";
 import Logo from "../assets/e_logo.svg";

@@ -8,9 +8,7 @@ import { setGlobalSelectedElement } from "../states/selectedElementSlice";
 
 import { Background } from "./Geometries";
 
-import { moleculeDict } from "./Globals";
-
-import useWindowSize from "../useWindowsSize";
+import { moleculeDict, useWindowSize } from "./Globals";
 
 import "./Table.css";
 
@@ -75,7 +73,7 @@ export default function Table() {
     */
     dispatch(
       setGlobalRenderInfo({
-        animation: false,
+        animation: true,
         disableButton: false,
         preRender: true,
         serverError: false,

@@ -111,7 +111,7 @@ export default function Developer() {
           </h2>
 
           <p className="flex m-auto break-all scale-90 sm:scale-100 mb-5 p-3 max-w-fit text-rose-200 border border-rose-200 rounded">
-            https://electron-visualized.herokuapp.com/api/gpaw/H2
+            https://electronvisual.org/api/gpaw/H2
           </p>
 
           {!disable ? (

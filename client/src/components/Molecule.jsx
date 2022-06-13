@@ -18,11 +18,9 @@ import { Atoms, BondLine } from "./Geometries";
 
 import Controls from "./Controls";
 
-import { CANVAS, getMoleculeColour, getMoleculeOpacity, getCameraPosition } from "./Globals";
+import { Particles } from "./Instances";
 
-import { Background } from "./Geometries";
-
-import useWindowSize from "../useWindowsSize";
+import { CANVAS, getCameraPosition, useWindowSize } from "./Globals";
 
 /*
 ░█▀▄▀█ ░█▀▀▀█ ░█─── ░█▀▀▀ ░█▀▀█ ░█─░█ ░█─── ░█▀▀▀ 
@@ -123,15 +121,15 @@ export default function Molecule() {
   useLazyInterval(() => {
     if (animation) {
       if (!reachedMaxPeak || reachedMinPeak) {
-        setParticleRadius(particleRadius + 0.01);
+        setParticleRadius(particleRadius + 0.001);
       } else {
-        setParticleRadius(particleRadius - 0.01);
+        setParticleRadius(particleRadius - 0.001);
       }
       if (particleRadius < 0.01) {
         setMinPeak(true);
         setMaxPeak(false);
       }
-      if (particleRadius > 0.04) {
+      if (particleRadius > 0.03) {
         setMinPeak(false);
         setMaxPeak(true);
       }
@@ -139,7 +137,7 @@ export default function Molecule() {
       // Clear the interval when animation event is not triggered...
       clearInterval();
     }
-  }, 1500); // Execute every 1.5 seconds
+  }, 500); // Execute every 1.5 seconds
 
   /*
   Whenever the state information regarding DOM element
@@ -375,37 +373,7 @@ export default function Molecule() {
                     </mesh>
                   );
                 })}
-
-                {Object.keys(globalAtomInfo["density_data"]).map(
-                  (key, index) => {
-                    const coords = key.split(", ");
-                    const volume = globalAtomInfo["density_data"][key];
-
-                    return (
-                      // Generate particles...
-                      <mesh
-                        position={[
-                          coords[0] / 5 - 10.7,
-                          coords[1] / 5 - 10.7,
-                          coords[2] / 5 - 10.7,
-                        ]}
-                        scale={[1, 1, 1]}
-                      >
-                        <sphereBufferGeometry
-                          args={[particleRadius, 30, 30]}
-                          attach="geometry"
-                        />
-
-                        <meshBasicMaterial
-                          transparent={true}
-                          opacity={getMoleculeOpacity(globalSelectedElement["element"], volume)}
-                          color={getMoleculeColour(globalSelectedElement["element"], volume)}
-                          attach="material"
-                        />
-                      </mesh>
-                    );
-                  }
-                )}
+              <Particles particleRadius={particleRadius} />
               </Provider>
             )}
 
@@ -413,7 +381,6 @@ export default function Molecule() {
           </Canvas>
         </div>
       </div>
-      <Background />
     </div>
   );
 }

@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 /*
 ░█▀▀█ ░█─── ░█▀▀▀█ ░█▀▀█ ─█▀▀█ ░█─── ░█▀▀▀█ 
 ░█─▄▄ ░█─── ░█──░█ ░█▀▀▄ ░█▄▄█ ░█─── ─▀▀▀▄▄ 
@@ -73,26 +75,28 @@ export const getMoleculeColour = (element, volume) => {
     */
     switch (element) {
         case "H2":
-            return `rgb(255, ${Math.round(
-                    255.0 - volume * 2.5
-                )}, ${Math.round(255.0 - volume * 2.5)})`;
+            console.log("H2 is running")
+            return [255, Math.round(
+                    255.0 - volume * 2.5)
+                , Math.round(255.0 - volume * 2.5)];
 
         case "Cl2":
-            return `rgb(255, ${Math.round(Math.abs(volume)
-                ) / 2}, ${Math.round(Math.abs(volume)) / 2})`;
+            return [255, Math.round(Math.abs(volume)
+                ) / 2, Math.round(Math.abs(volume)) / 2];
 
         case "H2O":
-            return `rgb(255, ${Math.round(Math.abs(volume)
-                ) / 2}, ${Math.round(Math.abs(volume)) / 2})`;
+            console.log("H2O is running")
+            return [255, Math.round(Math.abs(volume)
+                ) / 2, Math.round(Math.abs(volume)) / 2];
 
         case "HCl":
-            return `rgb(255, ${Math.round(Math.abs(volume)
-                ) / 3}, ${Math.round(Math.abs(volume)) / 3})`;
+            return [255, Math.round(Math.abs(volume)
+                ) / 3, Math.round(Math.abs(volume)) / 3];
 
         default:
-            return `rgb(255, ${Math.round(
+            return [255, Math.round(
                 255.0 - volume * 2.5
-            )}, ${Math.round(255.0 - volume * 2.5)})`;
+            ), Math.round(255.0 - volume * 2.5)];
     }
 }
 
@@ -160,4 +164,48 @@ export const getCameraPosition = (element) => {
         default:
             return { fov: 35, position: [-5, 8, 8] };
     }
+}
+
+export function useWindowSize() {
+    /*
+    Initialize state with undefined width/height so server and client renders match
+
+    Parameters
+    ----------
+    None
+
+    Returns
+    -------
+    Array
+        Contains the x and y sizes of the current window
+    */
+
+    const [windowSize, setWindowSize] = useState({
+        width: undefined,
+        height: undefined
+    });
+
+    useEffect(() => {
+        // only execute all the code below in client side
+        if (typeof window !== "undefined") {
+            // Handler to call on window resize
+            function handleResize() {
+                // Set window width/height to state
+                setWindowSize({
+                    width: window.innerWidth,
+                    height: window.innerHeight
+                });
+            }
+
+            // Add event listener
+            window.addEventListener("resize", handleResize);
+
+            // Call handler right away so state gets updated with initial window size
+            handleResize();
+
+            // Remove event listener on cleanup
+            return () => window.removeEventListener("resize", handleResize);
+        }
+    }, []); // Empty array ensures that effect is only run on mount
+    return windowSize;
 }
