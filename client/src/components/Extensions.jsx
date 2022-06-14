@@ -19,11 +19,8 @@ export default function Docs() {
       <div className="bg-gray-700 pb-5" style={{ "min-height": "100vh" }}>
         <div className="ml-5 mr-5 text-white text-center sm:pt-10 text-gray-400">
           <h1 className="sm:mb-5 scale-75 sm:scale-90 break-all">
-            <span className="font-bold text-rose-200">Extensions</span> play a pivotal
-            role in promoting the{" "}
-            <span className="text-white">ease of use</span> of our website,
-            making it more <span className="text-white">accessible</span> to
-            users of all ages.
+            <span className="font-bold text-rose-200">Extensions</span> make it
+            more <span className="text-white">accessible</span>.
           </h1>
 
           <h2 className="pt-5 leading-normal text-gray-400 border-t border-gray-500">
@@ -40,13 +37,17 @@ export default function Docs() {
           </p>
 
           <a
-              href="https://github.com/wonmor/ElectronVisualized"
-              className="ml-2 bg-transparent hover:bg-blue-500 text-blue-200 hover:text-white py-2 px-4 border border-blue-200 hover:border-transparent rounded"
-            >
-              <b>GitHub</b> page
-            </a>
+            href="https://github.com/wonmor/ElectronVisualized"
+            className="ml-2 bg-transparent hover:bg-blue-500 text-blue-200 hover:text-white py-2 px-4 border border-blue-200 hover:border-transparent rounded"
+          >
+            <b>GitHub</b> page
+          </a>
 
-        <img className="flex m-auto mt-20 mb-5 opacity-50" src="https://cdn.sparkfun.com/assets/5/2/d/c/c/microbit-logo-white.png" alt="microbit-img"></img>
+          <img
+            className="flex m-auto mt-20 mb-5 opacity-50"
+            src="https://cdn.sparkfun.com/assets/5/2/d/c/c/microbit-logo-white.png"
+            alt="microbit-img"
+          ></img>
         </div>
       </div>
       <Background />

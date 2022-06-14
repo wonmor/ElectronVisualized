@@ -162,12 +162,6 @@ export default function Developer() {
                   <br></br>
                   <br></br>
                   <span>
-                    <code className="text-gray-400">
-                      Density data is normalized<br></br>from range -255 to
-                      255...
-                    </code>
-                    <br></br>
-                    <br></br>
                     <code>density_data:</code>
                   </span>
                   <pre>{JSON.stringify(atomInfo.density_data, null, 2)}</pre>

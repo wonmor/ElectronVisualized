@@ -1,16 +1,7 @@
 import * as THREE from "three";
 import React, { useRef, useMemo, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { getMoleculeColour } from "./Globals";
-
-const ColorToHex = (color) => {
-  var hexadecimal = color.toString(16);
-  return hexadecimal.length === 1 ? "0" + hexadecimal : hexadecimal;
-};
-
-const ConvertRGBtoHex = (red, green, blue) => {
-  return "#" + ColorToHex(red) + ColorToHex(green) + ColorToHex(blue);
-};
+import { getMoleculeColour, normalizeData } from "./Globals";
 
 export function Particles({ particleRadius }) {
   const mesh = useRef();
@@ -26,7 +17,7 @@ export function Particles({ particleRadius }) {
     const temp = [];
     for (const [key, value] of Object.entries(globalAtomInfo["density_data"])) {
       const coords = key.split(", ");
-      const volume = value;
+      const volume = normalizeData(value, globalAtomInfo["vmax"], globalAtomInfo["vmin"]);
 
       const x = coords[0] / 5 - 10.7;
       const y = coords[1] / 5 - 10.7;
@@ -66,12 +57,12 @@ export function Particles({ particleRadius }) {
       mesh.current.setMatrixAt(index, dummy.matrix);
       mesh.current.setColorAt(
         index,
-        dummyColour.set(ConvertRGBtoHex(...colours))
+        dummyColour.set(colours)
       );
-      mesh.current.material.needsUpdate = true;
     });
     mesh.current.instanceMatrix.needsUpdate = true;
     mesh.current.instanceColor.needsUpdate = true;
+    mesh.current.material.needsUpdate = true;
   });
 
   return (

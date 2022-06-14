@@ -1,7 +1,5 @@
 import React, { useRef, useState } from "react";
 
-import { useSelector } from "react-redux";
-
 import * as THREE from "three";
 
 import { extend } from "@react-three/fiber";
@@ -9,8 +7,6 @@ import { extend } from "@react-three/fiber";
 import { Line2, LineGeometry, LineMaterial } from "three-fatline";
 
 import { RENDERER } from "./Globals";
-
-import { getMoleculeColour, getMoleculeOpacity } from "./Globals";
 
 /*
 █▀▀▀ █▀▀ █▀▀█ █▀▄▀█ █▀▀ ▀▀█▀▀ █▀▀█ ─▀─ █▀▀ █▀▀ 
@@ -93,28 +89,6 @@ export function BondLine({coords}) {
   lineSegment.computeLineDistances();
 
   return <primitive object={lineSegment} position={[0, 0, 0]} />;
-}
-
-export function Particles(particleRadius, volume) {
-  const globalSelectedElement = useSelector(
-    (state) => state.selectedElement.globalSelectedElement
-  );
-  
-  return (
-    <mesh>
-      <sphereBufferGeometry
-        args={[particleRadius, 30, 30]}
-        attach="geometry"
-      />
-
-      <meshBasicMaterial
-        transparent={true}
-        opacity={getMoleculeOpacity(globalSelectedElement["element"], volume)}
-        color={getMoleculeColour(globalSelectedElement["element"], volume)}
-        attach="material"
-      />
-    </mesh>
-  )
 }
 
 export function Background() {

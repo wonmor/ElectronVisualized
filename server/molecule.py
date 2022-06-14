@@ -79,9 +79,6 @@ def _density_parser():
 
     data = np.fromstring(str, sep=' ')
 
-    # Normalize the data into range from -255 to 255
-    data = 510.0 * (data - np.min(data)) / np.ptp(data) - 255.0
-
     data.shape = (xdim, ydim, zdim)
 
     min = data.min()
@@ -103,7 +100,7 @@ def _density_parser():
         vmax = min + 0.09 * (max - min)
     
     elif element_name == 'HCl':
-        vmin = min + 0.0002 * (max - min)
+        vmin = min + 0.00022 * (max - min)
         vmax = min + 0.9 * (max - min)
     
     else:

@@ -73,7 +73,7 @@ export default function Table() {
     */
     dispatch(
       setGlobalRenderInfo({
-        animation: true,
+        animation: false,
         disableButton: false,
         preRender: true,
         serverError: false,
@@ -285,7 +285,7 @@ export default function Table() {
           <h2 className="sm:mt-5 pb-3 pl-5 pr-5 text-gray-400">
             Simulated <span className="text-white">Real Time</span> with the
             help of{" "}
-            <span className="text-white">Projector Augmented-wave</span> method.
+            <span className="text-white">Density Functional Theory</span>.
           </h2>
 
           <div className="bg-gray-600 pb-2">

@@ -137,7 +137,7 @@ export default function Molecule() {
       // Clear the interval when animation event is not triggered...
       clearInterval();
     }
-  }, 500); // Execute every 1.5 seconds
+  }, 100); // Execute every 1.5 seconds
 
   /*
   Whenever the state information regarding DOM element
@@ -235,7 +235,7 @@ export default function Molecule() {
           <h2 className="sm:mt-5 pb-3 pl-5 pr-5 text-gray-400">
             Simulated <span className="text-white">Real Time</span> with the
             help of{" "}
-            <span className="text-white">Projector Augmented-wave</span> method.
+            <span className="text-white">Density Functional Theory</span>.
           </h2>
 
           <p className="pt-5 pr-5 pl-5 md:pl-60 md:pr-60 text-gray-400">

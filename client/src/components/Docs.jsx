@@ -130,7 +130,12 @@ export default function Docs() {
             </p>
             <p className="p-5 text-left text-gray-400">
               Special Thanks to <b>Samar C.</b> for their Contribution by Providing Us With the Name: Project <b>Atomizer</b>.
-              </p>
+            </p>
+            <div class="grid grid-cols-3 gap-4">
+              <img style={{width: "500px"}} src="Graphics.png" alt="Graphics"></img>
+              <img style={{width: "500px"}} src="Sketch1.jpg" alt="Sketch1"></img>
+              <img style={{width: "500px"}} src="Sketch2.png" alt="Sketch2"></img>
+            </div>
           </h2>
         </div>
       </div>
