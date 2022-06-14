@@ -1,10 +1,36 @@
-import * as THREE from "three";
 import React, { useRef, useMemo, useEffect } from "react";
 import { useSelector } from "react-redux";
+
+import * as THREE from "three";
+
 import { getMoleculeColour, normalizeData } from "./Globals";
 
+/*
+▀█▀ █▀▀▄ █▀▀ ▀▀█▀▀ █▀▀█ █▀▀▄ █▀▀ █▀▀ █▀▀ 
+▒█░ █░░█ ▀▀█ ░░█░░ █▄▄█ █░░█ █░░ █▀▀ ▀▀█ 
+▄█▄ ▀░░▀ ▀▀▀ ░░▀░░ ▀░░▀ ▀░░▀ ▀▀▀ ▀▀▀ ▀▀▀
+
+DEVELOPED AND DESIGNED BY JOHN SEONG.
+SERVED UNDER THE MIT LICENSE.
+*/
+
 export function Particles({ particleRadius }) {
-  const mesh = useRef();
+  /*
+  This is a component of React that generates multiple instances of sphere (individual particles)
+  depending on the parameters that are recorded on its blueprint, which is defined in this function
+
+  Parameters
+  ----------
+  particleRadius: Float
+    Contains the desired radius of the particles as a group
+
+  Returns
+  -------
+  DOM File
+    A HTML markup that contains graphical elements; in this case,
+    containing instanced mesh that can be replicated throughout the canvas
+  */
+  const meshRef = useRef();
 
   const globalAtomInfo = useSelector((state) => state.atomInfo.globalAtomInfo);
 
@@ -12,69 +38,74 @@ export function Particles({ particleRadius }) {
     (state) => state.selectedElement.globalSelectedElement
   );
 
-  // Generate some random positions, speed factors and timings
+  // Write the coordinates based upon its parent JSON data stored in the Redux global state...
   const particles = useMemo(() => {
     const temp = [];
+
     for (const [key, value] of Object.entries(globalAtomInfo["density_data"])) {
       const coords = key.split(", ");
-      const volume = normalizeData(value, globalAtomInfo["vmax"], globalAtomInfo["vmin"]);
+      // Normalize the density data in range from 0 to 1...
+      const volume = normalizeData(
+        value,
+        globalAtomInfo["vmax"],
+        globalAtomInfo["vmin"]
+      );
 
+      // Phase shift and scale the coordinates to match the existing molecule shape that is already generated....
       const x = coords[0] / 5 - 10.7;
       const y = coords[1] / 5 - 10.7;
       const z = coords[2] / 5 - 10.7;
 
       temp.push({ x, y, z, volume });
     }
+
     return temp;
   }, [globalAtomInfo]);
 
-  const dummy = useMemo(() => new THREE.Object3D(), []);
-  const dummyColour = useMemo(() => new THREE.Color(), []);
-
-  // const tint = useMemo(() => new THREE.InstancedBufferAttribute( new Uint8Array( 100 * 3 ), 3, true ), []);
+  // Anonymous states for instances...
+  const anonymousObject = useMemo(() => new THREE.Object3D(), []);
+  const anonymousColour = useMemo(() => new THREE.Color(), []);
 
   useEffect(() => {
-    // Run through the randomized data to calculate some movement
     particles.forEach((particle, index) => {
       const { x, y, z, volume } = particle;
 
-      const colours = getMoleculeColour(
+      const currentColour = getMoleculeColour(
         globalSelectedElement["element"],
         volume
       );
 
       console.log(globalSelectedElement["element"]);
 
-      // Update the particle position based on the time
-      // This is mostly random trigonometry functions to oscillate around the (x, y, z) point
-      dummy.position.set(x, y, z);
+      anonymousObject.position.set(x, y, z);
 
-      // Derive an oscillating value which will be used
-      // for the particle size and rotation
-      dummy.updateMatrix();
+      anonymousObject.updateMatrix();
 
-      // And apply the matrix to the instanced item
-      mesh.current.setMatrixAt(index, dummy.matrix);
-      mesh.current.setColorAt(
-        index,
-        dummyColour.set(colours)
-      );
+      // Apply the matrix to the instanced item...
+      meshRef.current.setMatrixAt(index, anonymousObject.matrix);
+      meshRef.current.setColorAt(index, anonymousColour.set(currentColour));
     });
-    mesh.current.instanceMatrix.needsUpdate = true;
-    mesh.current.instanceColor.needsUpdate = true;
-    mesh.current.material.needsUpdate = true;
+    /*
+    The lines below are arguably the most important part in this code.
+    Without them, the changes will not be applied
+    and the instances will not be updated accordingly.
+    */
+    meshRef.current.instanceMatrix.needsUpdate = true;
+    meshRef.current.instanceColor.needsUpdate = true;
+    meshRef.current.material.needsUpdate = true;
   });
 
   return (
     <>
       <instancedMesh
-        ref={mesh}
+        ref={meshRef}
         args={[null, null, Object.keys(globalAtomInfo["density_data"]).length]}
       >
         <sphereBufferGeometry
           args={[particleRadius, 30, 30]}
           attach="geometry"
         />
+
         <meshPhongMaterial attach="material" />
       </instancedMesh>
     </>

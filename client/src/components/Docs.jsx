@@ -18,7 +18,7 @@ export default function Docs() {
     <div>
       <div className="bg-gray-700 pb-5" style={{ "min-height": "100vh" }}>
         <div className="text-white text-center sm:pt-10 pl-5 pr-5 text-gray-400">
-          <h1 className="sm:pb-5 scale-75 sm:scale-100 break-all">
+          <h1 className="sm:pb-5 scale-75 sm:scale-100">
             <span className="text-white">Designed</span> and{" "}
             <span className="text-white">Manufactured</span>
             <br></br>
@@ -27,7 +27,7 @@ export default function Docs() {
           </h1>
 
           <h2 className="mt-5 pl-5 pr-5 pt-5 leading-normal bg-gray-600 text-gray-400">
-            <span className="text-5xl break-all">
+            <span className="text-5xl">
               With a <span className="text-white">Great Program</span> Comes
               With a{" "}
               <span className="text-white">
@@ -131,7 +131,7 @@ export default function Docs() {
             <p className="p-5 text-left text-gray-400">
               Special Thanks to <b>Samar C.</b> for their Contribution by Providing Us With the Name: Project <b>Atomizer</b>.
             </p>
-            <div class="grid grid-cols-3 gap-4">
+            <div class="grid grid-row-3 sm:grid-cols-3 gap-4">
               <img style={{width: "500px"}} src="Graphics.png" alt="Graphics"></img>
               <img style={{width: "500px"}} src="Sketch1.jpg" alt="Sketch1"></img>
               <img style={{width: "500px"}} src="Sketch2.png" alt="Sketch2"></img>

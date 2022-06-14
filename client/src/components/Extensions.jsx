@@ -18,13 +18,13 @@ export default function Docs() {
     <div>
       <div className="bg-gray-700 pb-5" style={{ "min-height": "100vh" }}>
         <div className="ml-5 mr-5 text-white text-center sm:pt-10 text-gray-400">
-          <h1 className="sm:mb-5 scale-75 sm:scale-90 break-all">
+          <h1 className="sm:mb-5 scale-75 sm:scale-90">
             <span className="font-bold text-rose-200">Extensions</span> make it
             more <span className="text-white">accessible</span>.
           </h1>
 
           <h2 className="pt-5 leading-normal text-gray-400 border-t border-gray-500">
-            <span className="text-5xl break-all">
+            <span className="text-5xl">
               Project <b className="text-blue-200">Atomizer</b>
             </span>
           </h2>
