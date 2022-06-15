@@ -1,7 +1,5 @@
 ![ElectronVisualPromo](https://user-images.githubusercontent.com/35755386/173193444-2ce2a70c-fd07-421b-98bd-c787badbcd8b.png)
 
-![Heroku](https://heroku-badge.herokuapp.com/?app=ElectronVisualized)
-
 A **real-time** electron density simulation **single-handedly** developed by a **high school student**. Displayed based upon the internal calculations performed that involve the state-of-the-art **Projector Augmented-wave** (PAW) method and **Density Functional Theory** (DFT): describing the **probable locations of electrons** by simplifying the N-body Schrödinger's Equation into a relatively easier-to-compute N single-body problem.
 
 ---
@@ -9,6 +7,8 @@ A **real-time** electron density simulation **single-handedly** developed by a *
 ## Official Build 3.1
 
 Developed and Designed by **John Seong**. Served under the **MIT** License.
+
+![Heroku](https://heroku-badge.herokuapp.com/?app=ElectronVisualized)
 
 ### [Launch Website](https://electronvisual.org)
 
