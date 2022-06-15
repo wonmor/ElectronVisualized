@@ -114,7 +114,7 @@ export default function Docs() {
               app)
             </p>
             <p className="p-5 text-left text-gray-400 border-b border-gray-400">
-              To develop a computationally-rigour and physically-accurate core
+              To develop a computationally rigorous and physically accurate core
               API, I had to come up with a solution where the performance is
               ensured but also the gap between real-life physics and the
               simulated environment isn't too large. GPAW and ASE were perfect

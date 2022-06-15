@@ -106,7 +106,7 @@ export function Particles({ particleRadius }) {
           attach="geometry"
         />
 
-        <meshPhongMaterial attach="material" />
+        <meshBasicMaterial attach="material" />
       </instancedMesh>
     </>
   );
