@@ -9,7 +9,6 @@ A **real-time** electron density simulation **single-handedly** developed by a *
 Developed and Designed by **John Seong**. Served under the **MIT** License.
 
 ![Heroku](https://heroku-badge.herokuapp.com/?app=ElectronVisualized)
-
 ### [Launch Website](https://electronvisual.org)
 
 ---
