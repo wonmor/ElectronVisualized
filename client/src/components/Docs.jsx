@@ -118,23 +118,36 @@ export default function Docs() {
               API, I had to come up with a solution where the performance is
               ensured but also the gap between real-life physics and the
               simulated environment isn't too large. GPAW and ASE were perfect
-              candidates for the very foundation of the <b>World Engine</b> REST API.
-              It utilizes the famous <b>Density Functional Theory</b> (DFT) and{" "}
-              <b>Projector Augmented-wave</b> (PAW) method in QM that massively
-              simplifies the N-dimensional Schrödinger's Equation problem. The
-              pure abstractness of these theories that involve complex
-              undergrad, or even grad-level studies came to me as overwhelmingly
-              complicated at first, but thanks to my AP Chemistry background as
-              well as taking Physics in my school led me into mastering the
-              discipline in a relatively short time of period.
+              candidates for the very foundation of the <b>World Engine</b> REST
+              API. They utilize the famous <b>Density Functional Theory</b>{" "}
+              (DFT) and <b>Projector Augmented-wave</b> (PAW) method in QM that
+              massively simplify the N-dimensional Schrödinger's Equation
+              problem. The pure abstractness of these theories that involve
+              complex undergrad, or even grad-level studies came to me as
+              overwhelmingly complicated at first, but thanks to my AP Chemistry
+              background as well as taking Physics in my school led me into
+              grasping them in a relatively short time of period.
             </p>
             <p className="p-5 text-left text-gray-400">
-              Special Thanks to <b>Samar C.</b> for their Contribution by Providing Us With the Name: Project <b>Atomizer</b>.
+              Special Thanks to <b>Samar C.</b> for their Contribution by
+              Providing Us With the Name: Project <b>Atomizer</b>.
             </p>
             <div class="grid grid-row-3 sm:grid-cols-3 gap-4">
-              <img style={{width: "500px"}} src="Graphics.png" alt="Graphics"></img>
-              <img style={{width: "500px"}} src="Sketch1.jpg" alt="Sketch1"></img>
-              <img style={{width: "500px"}} src="Sketch2.png" alt="Sketch2"></img>
+              <img
+                style={{ width: "500px" }}
+                src="Graphics.png"
+                alt="Graphics"
+              ></img>
+              <img
+                style={{ width: "500px" }}
+                src="Sketch1.jpg"
+                alt="Sketch1"
+              ></img>
+              <img
+                style={{ width: "500px" }}
+                src="Sketch2.png"
+                alt="Sketch2"
+              ></img>
             </div>
           </h2>
         </div>
