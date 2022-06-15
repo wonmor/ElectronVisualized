@@ -20,15 +20,12 @@ Developed and Designed by **John Seong**. Served under the **MIT** License.
 
 ---
 
-<img width="1200" alt="Screen Shot 2022-06-07 at 9 20 02 PM" src="https://user-images.githubusercontent.com/35755386/172510822-876feff5-0ddd-4ff4-a7dc-babaa1752fbd.png">
+<img width="1200" alt="Screen Shot 2022-06-14 at 1 41 20 PM" src="https://user-images.githubusercontent.com/35755386/173644405-2393fac0-56f7-4a65-9619-e2ae4e561452.png">
 
-<img width="1200" alt="Screen Shot 2022-06-06 at 9 09 19 PM" src="https://user-images.githubusercontent.com/35755386/172510580-8b413bd9-e2fc-4f2c-99f0-510837b70f43.png">
+<img width="1728" alt="Screen Shot 2022-06-14 at 1 38 26 PM" src="https://user-images.githubusercontent.com/35755386/173641984-e52deac1-2930-4a66-8693-2564242a766b.png">
 
-<img width="1200" alt="Screen Shot 2022-06-07 at 9 19 26 PM" src="https://user-images.githubusercontent.com/35755386/172510882-df542bc9-38a0-4b5b-912c-f655c42da0d4.png">
 
-<img width="1200" alt="Screen Shot 2022-06-07 at 6 50 37 PM" src="https://user-images.githubusercontent.com/35755386/172510842-7e7d8f83-19c2-4353-824e-8205eb2b41bf.png">
-
-<img width="1200" alt="Screen Shot 2022-06-07 at 6 43 57 PM" src="https://user-images.githubusercontent.com/35755386/172510913-99206de7-b768-4c59-bf93-ec192ab9a685.png">
+<img width="1200" alt="Screen Shot 2022-06-14 at 1 37 51 PM" src="https://user-images.githubusercontent.com/35755386/173641815-9876aaf1-465f-4f58-98a7-36bd390b1948.png">
 
 ---
 
