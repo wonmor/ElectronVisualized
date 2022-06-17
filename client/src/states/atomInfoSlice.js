@@ -26,7 +26,8 @@ export const atomInfoSlice = createSlice({
 
         appendGlobalAtomInfo: (state, action) => {
             if (state.globalAtomInfo !== action.payload) {
-                state.globalAtomInfo = Object.assign({}, state.globalAtomInfo, action.payload);
+                state.globalAtomInfo = {...state.globalAtomInfo, ...action.payload };
+                console.log(state.globalAtomInfo);
             }
         }
     },

@@ -66,26 +66,27 @@ export function Particles({ particleRadius }) {
       Somehow let the server know that this is the second render,
       and contraint the data little more than normal? or maybe leave it like this...
       */
-      for (const [key, value] of Object.entries(globalAtomInfo["density_data2"])) {
-        const coords = key.split(", ");
+      // for (const [key, value] of Object.entries(globalAtomInfo["density_data2"])) {
+      //   const coords = key.split(", ");
         
-        // Normalize the density data in range from 0 to 1...
-        const volume = normalizeData(
-          value,
-          globalAtomInfo["vmax"],
-          globalAtomInfo["vmin"]
-        );
+      //   // Normalize the density data in range from 0 to 1...
+      //   const volume = normalizeData(
+      //     value,
+      //     globalAtomInfo["vmax"],
+      //     globalAtomInfo["vmin"]
+      //   );
   
-        // Phase shift and scale the coordinates to match the existing molecule shape that is already generated....
-        const x = coords[0] / 5 - 10.7;
-        const y = coords[1] / 5 - 10.7;
-        const z = coords[2] / 5 - 10.7;
+      //   // Phase shift and scale the coordinates to match the existing molecule shape that is already generated....
+      //   const x = coords[0] / 5 - 10.7;
+      //   const y = coords[1] / 5 - 10.7;
+      //   const z = coords[2] / 5 - 10.7;
         
-        temp2.push({ x, y, z, volume });
-      }
+      //   temp2.push({ x, y, z, volume });
+      // }
     }
     // Remove all the duplicate subarrays between temp and temp2 arrays
-    return temp.filter(val => !temp2.includes(val));
+    // return temp.filter(val => !temp2.includes(val));
+    return temp;
   }, [globalAtomInfo, globalSelectedElement]);
 
   // Anonymous states for instances...

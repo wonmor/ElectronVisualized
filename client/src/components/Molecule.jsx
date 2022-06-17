@@ -162,8 +162,8 @@ export default function Molecule() {
   }, [animation, disableButton, dispatch, preRender, serverError, statusText]);
 
   const update = async (
-    selectedElement = globalSelectedElement["element"],
-    secondRender = false
+    selectedElement,
+    secondRender
   ) => {
     /*
     This is an asyncronous function that sends HTML requests to the server, ran by Flask (Python)
@@ -284,14 +284,14 @@ export default function Molecule() {
                 disabled={disableButton}
                 onClick={() => {
                   if (globalSelectedElement["element"] === "H2O") {
-                    update();
+                    update("H2O", false);
                     /*
                     Save oxygen atom's coordinates to subtract it
                     from the water's coordinates to visualize the lone pairs...
                     */
-                    update("O2", true);
+                    // update("O2", true);
                   } else {
-                    update();
+                    update(globalSelectedElement["element"], false);
                   }
                   setDisableButton(true);
                 }}
