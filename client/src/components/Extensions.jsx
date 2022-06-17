@@ -1,4 +1,8 @@
+import { useState } from "react";
+
 import { Background } from "./Geometries";
+import { uBitConnectDevice } from "../utilities/serial";
+import { getBrowser } from "../utilities/platform";
 
 export default function Docs() {
   /*
@@ -13,6 +17,74 @@ export default function Docs() {
   DOM File
     Contains HTML properties that each represent the graphic element on the website
   */
+  const [browserError, setBrowserError] = useState();
+
+  const consolePrintln = (message) => {
+    console.log(message);
+  };
+
+  // List of connected devices (a single value could be used if only connecting to one device)
+  let connectedDevices = [];
+
+  // Example event call-back handler
+  const uBitEventHandler = (reason, device, data) => {
+    switch (reason) {
+      case "connected":
+        consolePrintln("Connected");
+        connectedDevices.push(device);
+        break;
+
+      case "disconnected":
+        consolePrintln("Disconnected");
+        connectedDevices = connectedDevices.filter((v) => v !== device);
+        break;
+
+      case "connection failure":
+        consolePrintln("Connection Failure");
+        break;
+
+      case "error":
+        consolePrintln("Error");
+        break;
+
+      case "console":
+        consolePrintln("Console Data: " + data.data);
+        break;
+
+      case "graph-event":
+        consolePrintln(
+          `Graph Event:  ${data.data} (for ${data.graph}${
+            data.series.length ? " / series " + data.series : ""
+          })`
+        );
+        break;
+
+      case "graph-data":
+        consolePrintln(
+          `Graph Data: ${data.data} (for ${data.graph}${
+            data.series.length ? " / series " + data.series : ""
+          })`
+        );
+        break;
+
+      default:
+        consolePrintln("<b>Connected!</b>");
+        connectedDevices.push(device);
+        break;
+    }
+  };
+
+  const connectMicroBit = () => {
+    let browser = getBrowser(window);
+    console.log(browser);
+
+    if (browser === "Google Chrome") {
+      uBitConnectDevice(uBitEventHandler);
+      setBrowserError(false);
+    } else {
+      setBrowserError(true);
+    }
+  };
 
   return (
     <div>
@@ -29,21 +101,38 @@ export default function Docs() {
             </span>
           </h2>
 
-          <p className="p-5 mb-5 text-gray-400">
-            An Universal Solution to <b>Controlling</b> and <b>Manipulating</b>{" "}
-            3D Objects.<br></br>
+          <p className="p-5 text-gray-400">
+            An Universal Solution to Controlling and Manipulating 3D Objects.
+            <br></br>
             <b>iOS</b> and <b>Android</b>, as well as <b>micro:bit</b> versions
             are in <b>development</b>.
           </p>
 
-          <a
-            href="https://github.com/wonmor/ElectronVisualized"
+          <button
+            onClick={() => {
+              connectMicroBit();
+            }}
             className="ml-2 bg-transparent hover:bg-blue-500 text-blue-200 hover:text-white py-2 px-4 border border-blue-200 hover:border-transparent rounded"
           >
-            <b>GitHub</b> page
-          </a>
+            <span>
+              Communicate with <b>Micro:bit</b>
+            </span>
+          </button>
 
-          <img className="flex m-auto mt-20 mb-5" style={{width: "1000px"}} src="Sketch3.jpg" alt="Sketch3"></img>
+          {browserError && (
+            <div>
+              <h3 className="mt-5">
+                <b>Incompatible</b> browser. Please use <b>Google Chrome</b>.
+              </h3>
+            </div>
+          )}
+
+          <img
+            className="flex m-auto mt-5 mb-5"
+            style={{ width: "1000px" }}
+            src="Sketch3.jpg"
+            alt="Sketch3"
+          ></img>
         </div>
       </div>
       <Background />

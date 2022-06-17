@@ -12,8 +12,10 @@ import speech
 state = 'INIT';
 
 while True:
+    
     if state == 'INIT':
         display.scroll('ATOMIZER', wait=False, loop=True)
+        print('HELLO WORLD!');
         state = 'IDLE'
         
     if state == 'IDLE':
