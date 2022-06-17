@@ -41,6 +41,7 @@ export function Particles({ particleRadius }) {
   // Write the coordinates based upon its parent JSON data stored in the Redux global state...
   const particles = useMemo(() => {
     const temp = [];
+    const temp2 = [];
 
     for (const [key, value] of Object.entries(globalAtomInfo["density_data"])) {
       const coords = key.split(", ");
@@ -56,21 +57,32 @@ export function Particles({ particleRadius }) {
       const y = coords[1] / 5 - 10.7;
       const z = coords[2] / 5 - 10.7;
 
-      if (globalSelectedElement["element"] === "H2O") {
-        const coords2 = globalAtomInfo["density_data2"][addkey].split(", ");
+      temp.filter(val => !temp2.includes(val));
 
-        const x2 = coords2[0] / 5 - 10.7;
-        const y2 = coords2[1] / 5 - 10.7;
-        const z2 = coords2[2] / 5 - 10.7;
+      temp.push({ x, y, z, volume });
+    }
 
-        // Only push when two coordinates do NOT overlap each other...
-        if (x2 !== x && y2 !== y && z2 !== z) {
-          temp.push({ x, y, z, volume });
-        }
-      } else {
+    if (globalSelectedElement["element"] === "H2O") {
+      for (const [key, value] of Object.entries(globalAtomInfo["density_data"])) {
+        const coords = key.split(", ");
+        // Normalize the density data in range from 0 to 1...
+        const volume = normalizeData(
+          value,
+          globalAtomInfo["vmax"],
+          globalAtomInfo["vmin"]
+        );
+  
+        // Phase shift and scale the coordinates to match the existing molecule shape that is already generated....
+        const x = coords[0] / 5 - 10.7;
+        const y = coords[1] / 5 - 10.7;
+        const z = coords[2] / 5 - 10.7;
+  
+        temp.filter(val => !temp2.includes(val));
+  
         temp.push({ x, y, z, volume });
       }
     }
+
     return temp;
   }, [globalAtomInfo, globalSelectedElement]);
 
