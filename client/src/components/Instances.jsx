@@ -41,7 +41,7 @@ export function Particles({ particleRadius }) {
   // Write the coordinates based upon its parent JSON data stored in the Redux global state...
   const particles = useMemo(() => {
     const temp = [];
-    const temp2 = [];
+    // const temp2 = [];
 
     for (const [key, value] of Object.entries(globalAtomInfo["density_data"])) {
       const coords = key.split(", ");
