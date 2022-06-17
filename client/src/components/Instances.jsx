@@ -62,6 +62,10 @@ export function Particles({ particleRadius }) {
     }
 
     if (globalSelectedElement["element"] === "H2O") {
+      /*
+      Somehow let the server know that this is the second render,
+      and contraint the data little more than normal? or maybe leave it like this...
+      */
       for (const [key, value] of Object.entries(globalAtomInfo["density_data2"])) {
         const coords = key.split(", ");
         
