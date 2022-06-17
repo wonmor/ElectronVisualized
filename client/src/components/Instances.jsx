@@ -45,6 +45,7 @@ export function Particles({ particleRadius }) {
 
     for (const [key, value] of Object.entries(globalAtomInfo["density_data"])) {
       const coords = key.split(", ");
+      
       // Normalize the density data in range from 0 to 1...
       const volume = normalizeData(
         value,
@@ -57,14 +58,13 @@ export function Particles({ particleRadius }) {
       const y = coords[1] / 5 - 10.7;
       const z = coords[2] / 5 - 10.7;
 
-      temp.filter(val => !temp2.includes(val));
-
       temp.push({ x, y, z, volume });
     }
 
     if (globalSelectedElement["element"] === "H2O") {
-      for (const [key, value] of Object.entries(globalAtomInfo["density_data"])) {
+      for (const [key, value] of Object.entries(globalAtomInfo["density_data2"])) {
         const coords = key.split(", ");
+        
         // Normalize the density data in range from 0 to 1...
         const volume = normalizeData(
           value,
@@ -76,14 +76,11 @@ export function Particles({ particleRadius }) {
         const x = coords[0] / 5 - 10.7;
         const y = coords[1] / 5 - 10.7;
         const z = coords[2] / 5 - 10.7;
-  
-        temp.filter(val => !temp2.includes(val));
-  
-        temp.push({ x, y, z, volume });
+        
+        temp2.push({ x, y, z, volume });
       }
     }
-
-    return temp;
+    return temp.filter(val => !temp2.includes(val));
   }, [globalAtomInfo, globalSelectedElement]);
 
   // Anonymous states for instances...
