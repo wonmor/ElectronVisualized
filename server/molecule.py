@@ -95,7 +95,7 @@ def _density_parser():
         vmin = min + 0.0003 * (max - min)
         vmax = min + 0.09 * (max - min)
 
-    elif element_name == 'H2O':
+    elif element_name == 'H2O' or element_name == 'O':
         vmin = min + 0.002 * (max - min)
         vmax = min + 0.09 * (max - min)
     

@@ -6,7 +6,10 @@ import { Slider, Button } from "@mui/material";
 import store from "../store";
 
 // A MUST — MAKE SURE THAT YOU WRITE CURLY BRACKETS NEXT TO IMPORT!
-import { setGlobalAtomInfo } from "../states/atomInfoSlice";
+import {
+  setGlobalAtomInfo,
+  appendGlobalAtomInfo,
+} from "../states/atomInfoSlice";
 
 import { setGlobalRenderInfo } from "../states/renderInfoSlice";
 
@@ -109,6 +112,8 @@ export default function Molecule() {
 
   const [preRender, setPreRender] = useState(globalRenderInfo["preRender"]);
 
+  // const [currentElementArray, setCurrentElementArray] = useState(null);
+
   const [serverError, setServerError] = useState(
     globalRenderInfo["serverError"]
   );
@@ -156,7 +161,10 @@ export default function Molecule() {
     );
   }, [animation, disableButton, dispatch, preRender, serverError, statusText]);
 
-  const update = async () => {
+  const update = async (
+    selectedElement = globalSelectedElement["element"],
+    secondRender = false
+  ) => {
     /*
     This is an asyncronous function that sends HTML requests to the server, ran by Flask (Python)
 
@@ -170,30 +178,56 @@ export default function Molecule() {
     */
     await axios({
       method: "GET",
-      url: `/api/gpaw/${globalSelectedElement["element"]}`,
+      url: `/api/gpaw/${selectedElement}`,
     })
       .then((response) => {
         const res = response.data;
-        dispatch(
-          setGlobalAtomInfo({
-            no_of_atoms: res.no_of_atoms,
-            atomic_colors: res.atomic_colors,
-            elements: res.elements,
 
-            atoms_x: res.atoms_x,
-            atoms_y: res.atoms_y,
-            atoms_z: res.atoms_z,
+        if (secondRender === false) {
+          dispatch(
+            setGlobalAtomInfo({
+              no_of_atoms: res.no_of_atoms,
+              atomic_colors: res.atomic_colors,
+              elements: res.elements,
 
-            xdim: res.xdim,
-            ydim: res.ydim,
-            zdim: res.zdim,
+              atoms_x: res.atoms_x,
+              atoms_y: res.atoms_y,
+              atoms_z: res.atoms_z,
 
-            vmax: res.vmax,
-            vmin: res.vmin,
+              xdim: res.xdim,
+              ydim: res.ydim,
+              zdim: res.zdim,
 
-            density_data: res.density_data,
-          }) || null
-        );
+              vmax: res.vmax,
+              vmin: res.vmin,
+
+              density_data: res.density_data,
+            }) || null
+          );
+        } else {
+          dispatch(
+            appendGlobalAtomInfo({
+              no_of_atoms2: res.no_of_atoms,
+              atomic_colors2: res.atomic_colors,
+              elements2: res.elements,
+
+              atoms_x2: res.atoms_x,
+              atoms_y2: res.atoms_y,
+              atoms_z2: res.atoms_z,
+
+              xdim2: res.xdim,
+              ydim2: res.ydim,
+              zdim2: res.zdim,
+
+              vmax2: res.vmax,
+              vmin2: res.vmin,
+
+              density_data2: res.density_data,
+            }) || null
+          );
+        }
+
+        // setCurrentElementArray(globalAtomInfo["elements"]);
         setPreRender(false);
       })
       .catch((error) => {
@@ -227,7 +261,9 @@ export default function Molecule() {
     <div>
       <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
         <div className="text-rose-200 text-center pt-10 pb-10 ml-5 mr-5">
-          <h1 className={`font-bold mb-5 ${size.width < 350 ? "scale-75" : null}`}>
+          <h1
+            className={`font-bold mb-5 ${size.width < 350 ? "scale-75" : null}`}
+          >
             {globalSelectedElement["name"]}
             <span className="font-thin text-gray-400">. Visualized.</span>
           </h1>
@@ -247,10 +283,19 @@ export default function Molecule() {
               <button
                 disabled={disableButton}
                 onClick={() => {
-                  update();
+                  if (globalSelectedElement["element"] === "H2O") {
+                    update();
+                    /*
+                    Save oxygen atom's coordinates to subtract it
+                    from the water's coordinates to visualize the lone pairs...
+                    */
+                    update("O2", true);
+                  } else {
+                    update();
+                  }
                   setDisableButton(true);
                 }}
-                className="absolute mt-10 bg-transparent hover:bg-blue-500 text-gray-400 hover:text-white py-2 px-4 border border-gray-400 hover:border-transparent rounded"
+                className="absolute mt-10 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
                 type="button"
               >
                 <span>Start Rendering</span>
@@ -345,6 +390,8 @@ export default function Molecule() {
                           globalAtomInfo["atoms_y"][index],
                           globalAtomInfo["atoms_z"][index],
                         ]}
+
+                        // colour={globalAtomInfo["atomic_color"][currentElementArray[index]]}
                       />
 
                       {index !== globalAtomInfo["atoms_x"].length - 2 ? (
@@ -373,7 +420,7 @@ export default function Molecule() {
                     </mesh>
                   );
                 })}
-              <Particles particleRadius={particleRadius} />
+                <Particles particleRadius={particleRadius} />
               </Provider>
             )}
 

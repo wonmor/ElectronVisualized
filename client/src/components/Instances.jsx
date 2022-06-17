@@ -56,11 +56,23 @@ export function Particles({ particleRadius }) {
       const y = coords[1] / 5 - 10.7;
       const z = coords[2] / 5 - 10.7;
 
-      temp.push({ x, y, z, volume });
-    }
+      if (globalSelectedElement["element"] === "H2O") {
+        const coords2 = globalAtomInfo["density_data2"][addkey].split(", ");
 
+        const x2 = coords2[0] / 5 - 10.7;
+        const y2 = coords2[1] / 5 - 10.7;
+        const z2 = coords2[2] / 5 - 10.7;
+
+        // Only push when two coordinates do NOT overlap each other...
+        if (x2 !== x && y2 !== y && z2 !== z) {
+          temp.push({ x, y, z, volume });
+        }
+      } else {
+        temp.push({ x, y, z, volume });
+      }
+    }
     return temp;
-  }, [globalAtomInfo]);
+  }, [globalAtomInfo, globalSelectedElement]);
 
   // Anonymous states for instances...
   const anonymousObject = useMemo(() => new THREE.Object3D(), []);

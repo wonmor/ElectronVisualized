@@ -23,10 +23,16 @@ export const atomInfoSlice = createSlice({
                 state.globalAtomInfo = action.payload;
             }
         },
+
+        appendGlobalAtomInfo: (state, action) => {
+            if (state.globalAtomInfo !== action.payload) {
+                state.globalAtomInfo = Object.assign({}, state.globalAtomInfo, action.payload);
+            }
+        }
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { setGlobalAtomInfo } = atomInfoSlice.actions
+export const { setGlobalAtomInfo, appendGlobalAtomInfo } = atomInfoSlice.actions
 
 export default atomInfoSlice.reducer

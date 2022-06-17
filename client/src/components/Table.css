@@ -36,7 +36,13 @@
   grid-column: 18;
 }
 
+#periodic-table li:nth-of-type(8) {
+  cursor: pointer;
+  color: white;
+}
+
 #periodic-table li:nth-of-type(5),
+
 #periodic-table li:nth-of-type(13) {
   grid-column: 13;
 }

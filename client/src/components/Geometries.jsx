@@ -46,7 +46,8 @@ export function Atoms(props) {
       />
 
       <meshBasicMaterial
-        color={0xfff1ef}
+        // color={`rgb(${colour[0]}, ${colour[1]}, ${colour[2]})`}
+        color={"#FFFFFF"}
         opacity={0.2}
         transparent={true}
         attach="material"

@@ -77,6 +77,9 @@ export const getMoleculeColour = (element, volume) => {
     case "H":
       return `hsl(${volume * 100.0 + 800.0}, 100%, 60%)`;
 
+    case "O":
+      return `hsl(${volume * 1500.0 + 200.0}, 100%, 60%)`;
+
     case "H2":
       return `hsl(${volume * 100.0 + 800.0}, 100%, 60%)`;
 
