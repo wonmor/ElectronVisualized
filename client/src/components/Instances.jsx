@@ -84,6 +84,7 @@ export function Particles({ particleRadius }) {
         temp2.push({ x, y, z, volume });
       }
     }
+    // Remove all the duplicate subarrays between temp and temp2 arrays
     return temp.filter(val => !temp2.includes(val));
   }, [globalAtomInfo, globalSelectedElement]);
 
