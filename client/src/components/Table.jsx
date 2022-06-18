@@ -152,7 +152,23 @@ export default function Table() {
             <li title="Boron">B</li>
             <li title="Carbon">C</li>
             <li title="Nitrogen">N</li>
-            <li title="Oxygen">O</li>
+            <li
+              onMouseDown={() => {
+                // This code runs first...
+                appendNewRender(
+                  "O",
+                  "Oxygen Atom",
+                  "Oxygen is a colourless, odourless, tasteless gas essential to living organisms, being taken up by animals, which convert it to carbon dioxide; plants, in turn, utilize carbon dioxide as a source of carbon and return the oxygen to the atmosphere."
+                );
+              }}
+              onClick={() => {
+                // This code runs after a global state change...
+                movePage(`/renderer/${globalSelectedElement["element"]}`);
+              }}
+              title="Oxygen"
+            >
+              O
+            </li>
             <li title="Fluorine">F</li>
             <li title="Neon">Ne</li>
             <li title="Sodium">Na</li>
@@ -315,7 +331,7 @@ export default function Table() {
                     // This code runs after a global state change...
                     movePage(`/renderer/${globalSelectedElement["element"]}`);
                   }}
-                  className="mb-3 mr-2 sm:mt-0 bg-transparent hover:bg-blue-500 text-gray-400 hover:text-white py-2 px-4 border border-gray-400 hover:border-transparent rounded"
+                  className="mb-3 mr-2 sm:mt-0 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
                   type="button"
                 >
                   <span>{value[0]}</span>
@@ -330,7 +346,7 @@ export default function Table() {
 
           <p className="p-5 text-gray-400 border-b border-gray-500">
             Website still in the <b>development</b> phase. Only <b>Hydrogen</b>{" "}
-            is available at the moment.
+            and <b>Oxygen</b> are available at the moment.
           </p>
 
           {displayPeriodicTable()}

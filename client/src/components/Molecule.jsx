@@ -6,7 +6,10 @@ import { Slider, Button } from "@mui/material";
 import store from "../store";
 
 // A MUST — MAKE SURE THAT YOU WRITE CURLY BRACKETS NEXT TO IMPORT!
-import { setGlobalAtomInfo } from "../states/atomInfoSlice";
+import {
+  setGlobalAtomInfo,
+  appendGlobalAtomInfo,
+} from "../states/atomInfoSlice";
 
 import { setGlobalRenderInfo } from "../states/renderInfoSlice";
 
@@ -109,6 +112,8 @@ export default function Molecule() {
 
   const [preRender, setPreRender] = useState(globalRenderInfo["preRender"]);
 
+  // const [currentElementArray, setCurrentElementArray] = useState(null);
+
   const [serverError, setServerError] = useState(
     globalRenderInfo["serverError"]
   );
@@ -121,15 +126,15 @@ export default function Molecule() {
   useLazyInterval(() => {
     if (animation) {
       if (!reachedMaxPeak || reachedMinPeak) {
-        setParticleRadius(particleRadius + 0.001);
+        setParticleRadius(particleRadius + 0.0025);
       } else {
-        setParticleRadius(particleRadius - 0.001);
+        setParticleRadius(particleRadius - 0.0025);
       }
       if (particleRadius < 0.01) {
         setMinPeak(true);
         setMaxPeak(false);
       }
-      if (particleRadius > 0.03) {
+      if (particleRadius > 0.04) {
         setMinPeak(false);
         setMaxPeak(true);
       }
@@ -156,7 +161,37 @@ export default function Molecule() {
     );
   }, [animation, disableButton, dispatch, preRender, serverError, statusText]);
 
-  const update = async () => {
+  const fetchSecondRenderElement = async (secondRenderElement) => {
+    await axios({
+      method: "GET",
+      url: `/api/gpaw/${secondRenderElement}`,
+    })
+      .then((response) => {
+        const res = response.data;
+
+        dispatch(
+          appendGlobalAtomInfo({
+            density_data2: res.density_data,
+          }) || null
+        );
+        
+        setPreRender(false);
+      })
+      .catch((error) => {
+        if (error.response) {
+          setStatusText("Server communication error has occured!");
+          setServerError(true);
+
+          console.log(error.response);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+
+          return;
+        }
+      });
+  }
+
+  const fetchCombinedRenderElement = async (firstRenderElement, secondRenderElement = null) => {
     /*
     This is an asyncronous function that sends HTML requests to the server, ran by Flask (Python)
 
@@ -168,12 +203,14 @@ export default function Molecule() {
     -------
     None
     */
+
     await axios({
       method: "GET",
-      url: `/api/gpaw/${globalSelectedElement["element"]}`,
+      url: `/api/gpaw/${firstRenderElement}`,
     })
       .then((response) => {
         const res = response.data;
+
         dispatch(
           setGlobalAtomInfo({
             no_of_atoms: res.no_of_atoms,
@@ -194,7 +231,13 @@ export default function Molecule() {
             density_data: res.density_data,
           }) || null
         );
-        setPreRender(false);
+
+        if (secondRenderElement !== null) {
+          // Nested AXIOS method...
+          fetchSecondRenderElement(secondRenderElement);
+        } else {
+          setPreRender(false);
+        }
       })
       .catch((error) => {
         if (error.response) {
@@ -204,6 +247,8 @@ export default function Molecule() {
           console.log(error.response);
           console.log(error.response.status);
           console.log(error.response.headers);
+
+          return;
         }
       });
   };
@@ -227,7 +272,9 @@ export default function Molecule() {
     <div>
       <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
         <div className="text-rose-200 text-center pt-10 pb-10 ml-5 mr-5">
-          <h1 className={`font-bold mb-5 ${size.width < 350 ? "scale-75" : null}`}>
+          <h1
+            className={`font-bold mb-5 ${size.width < 350 ? "scale-75" : null}`}
+          >
             {globalSelectedElement["name"]}
             <span className="font-thin text-gray-400">. Visualized.</span>
           </h1>
@@ -247,10 +294,18 @@ export default function Molecule() {
               <button
                 disabled={disableButton}
                 onClick={() => {
-                  update();
+                  if (globalSelectedElement["element"] === "H2O") {
+                    fetchCombinedRenderElement("H2O", "O");
+                    /*
+                    Save oxygen atom's coordinates to subtract it
+                    from the water's coordinates to visualize the lone pairs...
+                    */
+                  } else {
+                    fetchCombinedRenderElement(globalSelectedElement["element"]);
+                  }
                   setDisableButton(true);
                 }}
-                className="absolute mt-10 bg-transparent hover:bg-blue-500 text-gray-400 hover:text-white py-2 px-4 border border-gray-400 hover:border-transparent rounded"
+                className="absolute mt-10 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
                 type="button"
               >
                 <span>Start Rendering</span>
@@ -345,6 +400,8 @@ export default function Molecule() {
                           globalAtomInfo["atoms_y"][index],
                           globalAtomInfo["atoms_z"][index],
                         ]}
+
+                        // colour={globalAtomInfo["atomic_color"][currentElementArray[index]]}
                       />
 
                       {index !== globalAtomInfo["atoms_x"].length - 2 ? (
@@ -373,7 +430,7 @@ export default function Molecule() {
                     </mesh>
                   );
                 })}
-              <Particles particleRadius={particleRadius} />
+                <Particles particleRadius={particleRadius} />
               </Provider>
             )}
 

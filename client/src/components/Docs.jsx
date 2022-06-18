@@ -71,14 +71,14 @@ export default function Docs() {
             >
               Welcome to Earth.
             </p>
-            <p className="pt-3 pr-5 pl-5 text-left text-gray-400">
+            <p className="pt-3 pr-5 pl-5 text-left text-white">
               <b>Who am I</b>? To properly introduce myself, my name is{" "}
               <b>John Seong</b>, and I am a high school student based in
               Oakville, Canada. I am deeply interested in pursuing my dream as a
               software engineer and the head of Human Interface Design at Apple
               Inc.
             </p>
-            <p className="pt-5 pr-5 pl-5 text-left text-gray-400">
+            <p className="pt-5 pr-5 pl-5 text-left text-white">
               Building this website called <b>ElectronVisualized</b> from
               scratch has truly been an unique and a life-changing experience,
               leading me to this point where I see one object and see lines of
@@ -93,7 +93,7 @@ export default function Docs() {
             <p className="font-bold pt-10 pr-5 pl-5 text-left text-3xl">
               Life is Hard, and Solo Development is Equally as Hard.
             </p>
-            <p className="pt-5 pr-5 pl-5 text-left text-gray-400">
+            <p className="pt-5 pr-5 pl-5 text-left text-white">
               Life is difficult. That's right. Life can throw some challenges
               that seem to be indeterminate; that's also correct. But I believe
               that this is where our programming skills may apply, as a
@@ -103,7 +103,7 @@ export default function Docs() {
               our daily lives, but the latter being an average Joe who just
               learned how to code.
             </p>
-            <p className="pt-5 pr-5 pl-5 text-left text-gray-400">
+            <p className="pt-5 pr-5 pl-5 text-left text-white">
               There were two hard-taught lessons from the development of this
               project. Being a solo developer of <b>ElectronVisualized</b>, the
               first great hurdle that shattered my ego into pieces was the
@@ -113,7 +113,7 @@ export default function Docs() {
               and back-end; front-end being the client side of the website or an
               app)
             </p>
-            <p className="p-5 text-left text-gray-400 border-b border-gray-400">
+            <p className="p-5 text-left text-white border-b border-gray-400">
               To develop a computationally rigorous and physically accurate core
               API, I had to come up with a solution where the performance is
               ensured but also the gap between real-life physics and the

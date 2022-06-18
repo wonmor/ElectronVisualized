@@ -95,7 +95,7 @@ def _density_parser():
         vmin = min + 0.0003 * (max - min)
         vmax = min + 0.09 * (max - min)
 
-    elif element_name == 'H2O':
+    elif element_name == 'H2O' or element_name == 'O':
         vmin = min + 0.002 * (max - min)
         vmax = min + 0.09 * (max - min)
     
@@ -119,7 +119,7 @@ def _density_parser():
                 if not v < vmin or v > vmax:
                     density_data[f'{x}, {y}, {z}'] = v
 
-    logger.info("Density data parsing completed!")
+    logger.info(f"Density data parsing completed for {element_name}!")
 
     with open('client/src/assets/density_data.json', 'w') as outfile:
         json.dump(density_data, outfile, sort_keys=True,

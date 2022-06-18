@@ -17,13 +17,13 @@ export const RENDERER = {
 };
 
 export const moleculeDict = {
-  H2: [
-    "Hydrogen Gas",
-    "Hydrogen is the lightest element. At standard conditions hydrogen is a gas of diatomic molecules having the formula H2. It is colorless, odorless, tasteless, non-toxic, and highly combustible. Hydrogen is the most abundant chemical substance in the universe, constituting roughly 75% of all normal matter.",
-  ],
   H2O: [
     "Water",
     "Water is an inorganic, transparent, tasteless, odourless, and nearly colourless chemical substance, which is the main constituent of Earth's hydrosphere and the fluids of all known living organisms.",
+  ],
+  H2: [
+    "Hydrogen Gas",
+    "Hydrogen is the lightest element. At standard conditions hydrogen is a gas of diatomic molecules having the formula H2. It is colorless, odorless, tasteless, non-toxic, and highly combustible. Hydrogen is the most abundant chemical substance in the universe, constituting roughly 75% of all normal matter.",
   ],
   Cl2: [
     "Chlorine Gas",
@@ -57,7 +57,7 @@ export const normalizeData = (val, max, min) => {
   return (val - min) / (max - min);
 };
 
-export const getMoleculeColour = (element, volume) => {
+export const getMoleculeColour = (element, volume, lonePairHighlight = false) => {
   /*
     Getting the molecule colour based upon the element name and the volume information
   
@@ -77,6 +77,9 @@ export const getMoleculeColour = (element, volume) => {
     case "H":
       return `hsl(${volume * 100.0 + 800.0}, 100%, 60%)`;
 
+    case "O":
+      return `hsl(${volume * 1500.0 + 200.0}, 100%, 60%)`;
+
     case "H2":
       return `hsl(${volume * 100.0 + 800.0}, 100%, 60%)`;
 
@@ -84,7 +87,7 @@ export const getMoleculeColour = (element, volume) => {
       return `hsl(${volume * 2000.0 + 200.0}, 100%, 60%)`;
 
     case "H2O":
-      return `hsl(${volume * 1500.0 + 200.0}, 100%, 60%)`;
+      return lonePairHighlight ? `hsl(${volume * 1500.0 + 200.0}, 100%, 60%)` : `hsl(${volume * 5000.0 + 180.0}, 100%, 60%)`;
 
     case "HCl":
       return `hsl(${volume * 24000.0 + 200.0}, 100%, 60%)`;

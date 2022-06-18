@@ -12,6 +12,12 @@ import { getMoleculeColour, normalizeData } from "./Globals";
 
 DEVELOPED AND DESIGNED BY JOHN SEONG.
 SERVED UNDER THE MIT LICENSE.
+
+TIPS & TRICKS
+
+Cannot convert undefined or null to object in react + redux FIX:
+https://stackoverflow.com/questions/43641685/cannot-convert-undefined-or-null-to-object-in-react
+
 */
 
 export function Particles({ particleRadius }) {
@@ -38,27 +44,45 @@ export function Particles({ particleRadius }) {
     (state) => state.selectedElement.globalSelectedElement
   );
 
+  useEffect(() => {
+    console.log(globalAtomInfo)
+  });
+
   // Write the coordinates based upon its parent JSON data stored in the Redux global state...
   const particles = useMemo(() => {
-    const temp = [];
+    let temp = [];
+    let isColourException = false;
+    
+    if (globalAtomInfo["density_data"]) {
+      for (const [key, value] of Object.entries(globalAtomInfo["density_data"])) {
+        if (globalAtomInfo["density_data2"]) {
 
-    for (const [key, value] of Object.entries(globalAtomInfo["density_data"])) {
-      const coords = key.split(", ");
-      // Normalize the density data in range from 0 to 1...
-      const volume = normalizeData(
-        value,
-        globalAtomInfo["vmax"],
-        globalAtomInfo["vmin"]
-      );
+          if (key in globalAtomInfo["density_data2"]) {
+            isColourException = true;
+          }
 
-      // Phase shift and scale the coordinates to match the existing molecule shape that is already generated....
-      const x = coords[0] / 5 - 10.7;
-      const y = coords[1] / 5 - 10.7;
-      const z = coords[2] / 5 - 10.7;
+          else {
+            isColourException = false;
+          }
+          
+        }
+        const coords = key.split(", ");
+        
+        // Normalize the density data in range from 0 to 1...
+        const volume = normalizeData(
+          value,
+          globalAtomInfo["vmax"],
+          globalAtomInfo["vmin"]
+        );
 
-      temp.push({ x, y, z, volume });
+        // Phase shift and scale the coordinates to match the existing molecule shape that is already generated....
+        const x = coords[0] / 5 - 10.7;
+        const y = coords[1] / 5 - 10.7;
+        const z = coords[2] / 5 - 10.7;
+
+        temp.push({ x, y, z, volume, isColourException });
+      }
     }
-
     return temp;
   }, [globalAtomInfo]);
 
@@ -68,15 +92,21 @@ export function Particles({ particleRadius }) {
 
   useEffect(() => {
     particles.forEach((particle, index) => {
-      const { x, y, z, volume } = particle;
+      const { x, y, z, volume, isColourException } = particle;
 
-      const currentColour = getMoleculeColour(
+      let currentColour = getMoleculeColour(
         globalSelectedElement["element"],
         volume
       );
 
-      console.log(globalSelectedElement["element"]);
-
+      if (isColourException) {
+        currentColour = getMoleculeColour(
+          globalSelectedElement["element"],
+          volume,
+          true
+        );
+      }
+      
       anonymousObject.position.set(x, y, z);
 
       anonymousObject.updateMatrix();
@@ -85,11 +115,13 @@ export function Particles({ particleRadius }) {
       meshRef.current.setMatrixAt(index, anonymousObject.matrix);
       meshRef.current.setColorAt(index, anonymousColour.set(currentColour));
     });
+
     /*
     The lines below are arguably the most important part in this code.
     Without them, the changes will not be applied
     and the instances will not be updated accordingly.
     */
+   
     meshRef.current.instanceMatrix.needsUpdate = true;
     meshRef.current.instanceColor.needsUpdate = true;
     meshRef.current.material.needsUpdate = true;
