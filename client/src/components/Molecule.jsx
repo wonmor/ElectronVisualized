@@ -1,6 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch, Provider } from "react-redux";
 
+import {
+  EffectComposer,
+  SelectiveBloom,
+} from "@react-three/postprocessing";
+
 import { Slider, Button } from "@mui/material";
 
 import { Switch } from "@headlessui/react";
@@ -84,12 +89,17 @@ export default function Molecule() {
   DOM File
     A HTML markup that contains graphical elements
   */
+
+  const lightRef = useRef();
+  const particleRef = useRef();
+
   const [particleRadius, setParticleRadius] = useState(0.015);
 
   const [reachedMaxPeak, setMaxPeak] = useState(false);
   const [reachedMinPeak, setMinPeak] = useState(true);
 
   const [lonePairEnabled, setLonePairEnabled] = useState(true);
+  const [addCoolEffects, setAddCoolEffects] = useState(false);
 
   /*
   Define that React and Redux states: former being used locally, and the latter being used globally.
@@ -287,8 +297,7 @@ export default function Molecule() {
           </h1>
 
           <h2 className="sm:mt-5 pb-3 pl-5 pr-5 text-gray-400">
-            Simulated with the
-            help of{" "}
+            Simulated with the help of{" "}
             <span className="text-white">Density Functional Theory</span>.
           </h2>
 
@@ -302,7 +311,10 @@ export default function Molecule() {
                 <button
                   disabled={disableButton}
                   onClick={() => {
-                    if (globalSelectedElement["element"] === "H2O" && lonePairEnabled) {
+                    if (
+                      globalSelectedElement["element"] === "H2O" &&
+                      lonePairEnabled
+                    ) {
                       fetchCombinedRenderElement("H2O", "O");
                       /*
                         Save oxygen atom's coordinates to subtract it
@@ -323,7 +335,8 @@ export default function Molecule() {
                 {globalSelectedElement["element"] === "H2O" && (
                   <>
                     <p className="text-gray-400 mt-5 ml-5 mr-5">
-                      Enable <span className="text-white">Lone Pair</span> Rendering
+                      Enable <span className="text-white">Lone Pair</span>{" "}
+                      Rendering
                     </p>
 
                     <Switch
@@ -462,13 +475,49 @@ export default function Molecule() {
                     </mesh>
                   );
                 })}
-                <Particles particleRadius={particleRadius} />
+                <Particles
+                  particleRef={particleRef}
+                  lightRef={lightRef}
+                  particleRadius={particleRadius}
+                />
+
+                {addCoolEffects && (
+                  <EffectComposer>
+                    <SelectiveBloom
+                      selection={[particleRef]}
+                      intensity={2.0}
+                      luminanceThreshold={0}
+                      luminanceSmoothing={0.9}
+                      height={300}
+                      lights={[lightRef]}
+                    />
+                  </EffectComposer>
+                )}
               </Provider>
             )}
 
-            <gridHelper args={[undefined, undefined, "white"]} />
+            <gridHelper args={[undefined, undefined, "gray"]} />
           </Canvas>
         </div>
+        {!preRender && (
+          <div className="flex justify-center items-center w-full p-5">
+            <p className="text-gray-400 mr-5">Add Cool Effects for Gamers</p>
+
+            <Switch
+              checked={addCoolEffects}
+              onChange={setAddCoolEffects}
+              className={`${
+                addCoolEffects ? "bg-blue-600" : "bg-gray-400"
+              } relative inline-flex h-6 w-11 items-center rounded-full`}
+            >
+              <span
+                className={`${
+                  addCoolEffects ? "translate-x-6" : "translate-x-1"
+                } inline-block h-4 w-4 transform rounded-full bg-white`}
+              />
+            </Switch>
+          </div>
+        )}
       </div>
     </div>
   );

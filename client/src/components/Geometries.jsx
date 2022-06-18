@@ -1,8 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState } from 'react'
+
+import { extend } from '@react-three/fiber'
 
 import * as THREE from "three";
-
-import { extend } from "@react-three/fiber";
 
 import { Line2, LineGeometry, LineMaterial } from "three-fatline";
 

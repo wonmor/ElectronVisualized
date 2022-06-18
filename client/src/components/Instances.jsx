@@ -1,4 +1,4 @@
-import React, { useRef, useMemo, useEffect } from "react";
+import React, { useMemo, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import * as THREE from "three";
@@ -20,7 +20,7 @@ https://stackoverflow.com/questions/43641685/cannot-convert-undefined-or-null-to
 
 */
 
-export function Particles({ particleRadius }) {
+export function Particles({ particleRef, lightRef, particleRadius }) {
   /*
   This is a component of React that generates multiple instances of sphere (individual particles)
   depending on the parameters that are recorded on its blueprint, which is defined in this function
@@ -36,7 +36,7 @@ export function Particles({ particleRadius }) {
     A HTML markup that contains graphical elements; in this case,
     containing instanced mesh that can be replicated throughout the canvas
   */
-  const meshRef = useRef();
+  const meshRef = particleRef;
 
   const globalAtomInfo = useSelector((state) => state.atomInfo.globalAtomInfo);
 
@@ -48,22 +48,20 @@ export function Particles({ particleRadius }) {
   const particles = useMemo(() => {
     let temp = [];
     let isColourException = false;
-    
-    if (globalAtomInfo["density_data"]) {
-      for (const [key, value] of Object.entries(globalAtomInfo["density_data"])) {
-        if (globalAtomInfo["density_data2"]) {
 
+    if (globalAtomInfo["density_data"]) {
+      for (const [key, value] of Object.entries(
+        globalAtomInfo["density_data"]
+      )) {
+        if (globalAtomInfo["density_data2"]) {
           if (key in globalAtomInfo["density_data2"]) {
             isColourException = true;
-          }
-
-          else {
+          } else {
             isColourException = false;
           }
-          
         }
         const coords = key.split(", ");
-        
+
         // Normalize the density data in range from 0 to 1...
         const volume = normalizeData(
           value,
@@ -102,7 +100,7 @@ export function Particles({ particleRadius }) {
           true
         );
       }
-      
+
       anonymousObject.position.set(x, y, z);
 
       anonymousObject.updateMatrix();
@@ -117,25 +115,23 @@ export function Particles({ particleRadius }) {
     Without them, the changes will not be applied
     and the instances will not be updated accordingly.
     */
-   
+
     meshRef.current.instanceMatrix.needsUpdate = true;
     meshRef.current.instanceColor.needsUpdate = true;
     meshRef.current.material.needsUpdate = true;
   });
 
   return (
-    <>
-      <instancedMesh
-        ref={meshRef}
-        args={[null, null, Object.keys(globalAtomInfo["density_data"]).length]}
-      >
+    <instancedMesh
+      ref={meshRef}
+      args={[null, null, Object.keys(globalAtomInfo["density_data"]).length]}
+    >
+        <ambientLight ref={lightRef} />
         <sphereBufferGeometry
           args={[particleRadius, 30, 30]}
           attach="geometry"
         />
-
         <meshBasicMaterial attach="material" />
-      </instancedMesh>
-    </>
+    </instancedMesh>
   );
 }
