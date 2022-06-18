@@ -322,7 +322,7 @@ export default function Molecule() {
                 </button>
                 {globalSelectedElement["element"] === "H2O" && (
                   <>
-                    <p className="text-gray-400 mt-5">
+                    <p className="text-gray-400 mt-5 ml-5 mr-5">
                       Enable <span className="text-white">Lone Pair</span> Rendering
                     </p>
 
