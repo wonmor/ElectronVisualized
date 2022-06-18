@@ -1,4 +1,5 @@
 import json
+import os
 from flask import Blueprint, jsonify, request, send_from_directory
 from flask_cors import CORS, cross_origin
 
@@ -18,6 +19,8 @@ bp = Blueprint('main', __name__, static_folder='../client/build', static_url_pat
 # WHAT IS CORS: https://flask-cors.readthedocs.io/en/latest/
 
 CORS(bp, resources={r'/api/*': {'origins': '*'}})
+
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # For React Router Redirection Purposes...
 @bp.app_errorhandler(404)   
@@ -81,7 +84,7 @@ def load(name):
     JSON Object
         A JSONified dictionary that contains the electron density and coordinate data
     '''
-    output = f'client/src/datasets/{name}.json'
+    output = os.path.join(PROJECT_ROOT, f'client/src/datasets/{name}.json')
 
     multipart_download_boto3(name, output)
     

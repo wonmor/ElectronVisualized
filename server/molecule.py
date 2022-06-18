@@ -1,4 +1,5 @@
 import json
+import os
 from flask import jsonify
 
 import numpy as np
@@ -24,6 +25,8 @@ DEVELOPED AND DESIGNED BY JOHN SEONG, WITH SOME HELP WITH STACKOVERFLOW, HEH
 '''
 
 logger = LocalProxy(lambda: current_app.logger)
+
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def _density_parser():
     '''
@@ -309,10 +312,10 @@ def plot_molecule(name):
 
     return_value = _transfer_to_client()
 
-    with open(f'client/src/datasets/{element_name}.json', 'w+') as outfile:
+    with open(os.path.join(PROJECT_ROOT, f'client/src/datasets/{element_name}.json'), 'w+') as outfile:
         json.dump(return_value, outfile, sort_keys=True,
                   indent=4, separators=(',', ': '))
 
-    multipart_upload_boto3(element_name, f'client/src/datasets/{element_name}.json')
+    multipart_upload_boto3(element_name, os.path.join(PROJECT_ROOT, f'client/src/datasets/{element_name}.json'))
 
     return jsonify(return_value)
