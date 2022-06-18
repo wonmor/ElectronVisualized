@@ -44,10 +44,6 @@ export function Particles({ particleRadius }) {
     (state) => state.selectedElement.globalSelectedElement
   );
 
-  useEffect(() => {
-    console.log(globalAtomInfo)
-  });
-
   // Write the coordinates based upon its parent JSON data stored in the Redux global state...
   const particles = useMemo(() => {
     let temp = [];

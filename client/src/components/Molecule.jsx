@@ -3,6 +3,8 @@ import { useSelector, useDispatch, Provider } from "react-redux";
 
 import { Slider, Button } from "@mui/material";
 
+import { Switch } from "@headlessui/react";
+
 import store from "../store";
 
 // A MUST — MAKE SURE THAT YOU WRITE CURLY BRACKETS NEXT TO IMPORT!
@@ -86,6 +88,8 @@ export default function Molecule() {
 
   const [reachedMaxPeak, setMaxPeak] = useState(false);
   const [reachedMinPeak, setMinPeak] = useState(true);
+
+  const [lonePairEnabled, setLonePairEnabled] = useState(true);
 
   /*
   Define that React and Redux states: former being used locally, and the latter being used globally.
@@ -174,7 +178,7 @@ export default function Molecule() {
             density_data2: res.density_data,
           }) || null
         );
-        
+
         setPreRender(false);
       })
       .catch((error) => {
@@ -189,9 +193,12 @@ export default function Molecule() {
           return;
         }
       });
-  }
+  };
 
-  const fetchCombinedRenderElement = async (firstRenderElement, secondRenderElement = null) => {
+  const fetchCombinedRenderElement = async (
+    firstRenderElement,
+    secondRenderElement = null
+  ) => {
     /*
     This is an asyncronous function that sends HTML requests to the server, ran by Flask (Python)
 
@@ -291,25 +298,50 @@ export default function Molecule() {
 
           <div class="flex items-center justify-center pt-5">
             {!disableButton ? (
-              <button
-                disabled={disableButton}
-                onClick={() => {
-                  if (globalSelectedElement["element"] === "H2O") {
-                    fetchCombinedRenderElement("H2O", "O");
-                    /*
-                    Save oxygen atom's coordinates to subtract it
-                    from the water's coordinates to visualize the lone pairs...
-                    */
-                  } else {
-                    fetchCombinedRenderElement(globalSelectedElement["element"]);
-                  }
-                  setDisableButton(true);
-                }}
-                className="absolute mt-10 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
-                type="button"
-              >
-                <span>Start Rendering</span>
-              </button>
+              <div class="grid grid-row-2 gap-4 content-center justify-items-center">
+                <button
+                  disabled={disableButton}
+                  onClick={() => {
+                    if (globalSelectedElement["element"] === "H2O" && lonePairEnabled) {
+                      fetchCombinedRenderElement("H2O", "O");
+                      /*
+                        Save oxygen atom's coordinates to subtract it
+                        from the water's coordinates to visualize the lone pairs...
+                        */
+                    } else {
+                      fetchCombinedRenderElement(
+                        globalSelectedElement["element"]
+                      );
+                    }
+                    setDisableButton(true);
+                  }}
+                  className="bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
+                  type="button"
+                >
+                  <span>Start Rendering</span>
+                </button>
+                {globalSelectedElement["element"] === "H2O" && (
+                  <>
+                    <p className="text-gray-400 mt-5">
+                      Enable <span className="text-white">Lone Pair</span> Rendering
+                    </p>
+
+                    <Switch
+                      checked={lonePairEnabled}
+                      onChange={setLonePairEnabled}
+                      className={`${
+                        lonePairEnabled ? "bg-blue-600" : "bg-gray-400"
+                      } relative inline-flex h-6 w-11 items-center rounded-full`}
+                    >
+                      <span
+                        className={`${
+                          lonePairEnabled ? "translate-x-6" : "translate-x-1"
+                        } inline-block h-4 w-4 transform rounded-full bg-white`}
+                      />
+                    </Switch>
+                  </>
+                )}
+              </div>
             ) : preRender ? (
               <div
                 className={`absolute text-gray-400 ${
