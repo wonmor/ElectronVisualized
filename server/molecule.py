@@ -9,7 +9,11 @@ from ase.structure import molecule
 from ase.io import write
 
 from werkzeug.local import LocalProxy
+from werkzeug.utils import secure_filename
+
 from flask import current_app
+
+from server.extensions import multipart_upload_boto3
 
 '''
 ▒█▀▄▀█ █▀▀█ █░░ █▀▀ █▀▀ █░░█ █░░ █▀▀ 　 █▀▀█ █░░ █▀▀█ ▀▀█▀▀ ▀▀█▀▀ █▀▀ █▀▀█ 
@@ -120,11 +124,7 @@ def _density_parser():
                     density_data[f'{x}, {y}, {z}'] = v
 
     logger.info(f"Density data parsing completed for {element_name}!")
-
-    with open('client/src/assets/density_data.json', 'w') as outfile:
-        json.dump(density_data, outfile, sort_keys=True,
-                  indent=4, separators=(',', ': '))
-
+    
     # Add legend to plot
     # vol.lut_manager.show_scalar_bar = True
     # vol.lut_manager.scalar_bar.orientation = 'vertical'
@@ -308,5 +308,11 @@ def plot_molecule(name):
     np.save('server/grid.npy', grid)
 
     return_value = _transfer_to_client()
+
+    with open(f'client/src/datasets/{element_name}.json', 'w+') as outfile:
+        json.dump(return_value, outfile, sort_keys=True,
+                  indent=4, separators=(',', ': '))
+
+    multipart_upload_boto3(element_name, f'client/src/datasets/{element_name}.json')
 
     return jsonify(return_value)

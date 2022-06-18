@@ -1,7 +1,8 @@
+import json
 from flask import Blueprint, jsonify, request, send_from_directory
 from flask_cors import CORS, cross_origin
 
-from server.extensions import db
+from server.extensions import multipart_download_boto3
 
 from . import molecule
 
@@ -41,24 +42,52 @@ def serve():
 
 @bp.route('/api/gpaw/<name>', methods=['GET'])
 @cross_origin()
-def plot(name):
+def compute(name):
     '''
-    When API call is made, this function asyncronously executes
+    When API call is made, this function executes
     the plot_hydrogen method which computes the
-    electron density data for hydrogen atom
+    electron density data for hydrogen atom.
+    Not only that, it also automatically saves all the data
+    on the Amazon S3 server.
     
     Parameters
     ----------
-    None
+    name: String
+        Contains the name of the element
 
     Returns
     -------
-    JSON Array
+    JSON Object
         A JSONified dictionary that contains the electron density and coordinate data
     '''
     
     data = molecule.plot_molecule(name)
     return data
+
+@bp.route('/api/load/<name>', methods=['GET'])
+@cross_origin()
+def load(name):
+    '''
+    When API call is made, this function loads
+    the JSON data from the Amazon S3 server
+    
+    Parameters
+    ----------
+    name: String
+        Contains the name of the element
+
+    Returns
+    -------
+    JSON Object
+        A JSONified dictionary that contains the electron density and coordinate data
+    '''
+    output = f'client/src/datasets/{name}.json'
+
+    multipart_download_boto3(name, output)
+    
+    with open(output, 'r') as f:
+        data = json.load(f)
+        return data
 
 '''
 ----------------------------------------------------------------

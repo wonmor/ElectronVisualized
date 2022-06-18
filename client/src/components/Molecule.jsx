@@ -168,7 +168,7 @@ export default function Molecule() {
   const fetchSecondRenderElement = async (secondRenderElement) => {
     await axios({
       method: "GET",
-      url: `/api/gpaw/${secondRenderElement}`,
+      url: `/api/load/${secondRenderElement}`,
     })
       .then((response) => {
         const res = response.data;
@@ -213,7 +213,7 @@ export default function Molecule() {
 
     await axios({
       method: "GET",
-      url: `/api/gpaw/${firstRenderElement}`,
+      url: `/api/load/${firstRenderElement}`,
     })
       .then((response) => {
         const res = response.data;
@@ -287,7 +287,7 @@ export default function Molecule() {
           </h1>
 
           <h2 className="sm:mt-5 pb-3 pl-5 pr-5 text-gray-400">
-            Simulated <span className="text-white">Real Time</span> with the
+            Simulated with the
             help of{" "}
             <span className="text-white">Density Functional Theory</span>.
           </h2>

@@ -299,7 +299,7 @@ export default function Table() {
           </h1>
 
           <h2 className="sm:mt-5 pb-3 pl-5 pr-5 text-gray-400">
-            Simulated <span className="text-white">Real Time</span> with the
+            Simulated with the
             help of{" "}
             <span className="text-white">Density Functional Theory</span>.
           </h2>
