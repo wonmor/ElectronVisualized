@@ -84,7 +84,7 @@ def load(name):
     JSON Object
         A JSONified dictionary that contains the electron density and coordinate data
     '''
-    output = os.path.join(PROJECT_ROOT, f'client/src/datasets/{name}.json')
+    output = os.path.join(PROJECT_ROOT, f'client/src/assets/{name}.json')
 
     multipart_download_boto3(name, output)
     

@@ -312,10 +312,10 @@ def plot_molecule(name):
 
     return_value = _transfer_to_client()
 
-    with open(os.path.join(PROJECT_ROOT, f'client/src/datasets/{element_name}.json'), 'w+') as outfile:
+    with open(os.path.join(PROJECT_ROOT, f'client/src/assets/{element_name}.json'), 'w+') as outfile:
         json.dump(return_value, outfile, sort_keys=True,
                   indent=4, separators=(',', ': '))
 
-    multipart_upload_boto3(element_name, os.path.join(PROJECT_ROOT, f'client/src/datasets/{element_name}.json'))
+    multipart_upload_boto3(element_name, os.path.join(PROJECT_ROOT, f'client/src/assets/{element_name}.json'))
 
     return jsonify(return_value)
