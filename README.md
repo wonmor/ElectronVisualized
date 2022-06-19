@@ -1,6 +1,6 @@
 ![ElectronVisualPromo](https://user-images.githubusercontent.com/35755386/173193444-2ce2a70c-fd07-421b-98bd-c787badbcd8b.png)
 
-A **real-time** electron density simulation **single-handedly** developed by a **high school student**. Displayed based upon the internal calculations performed that involve the state-of-the-art **Projector Augmented-wave** (PAW) method and **Density Functional Theory** (DFT): describing the **probable locations of electrons** by simplifying the N-body Schrödinger's Equation into a relatively easier-to-compute N single-body problem.
+**Web**-based **electron density simulation** single-handedly developed by a **high school student**. Displayed based upon the internal calculations performed that involve the state-of-the-art **Projector Augmented-wave** (PAW) method and **Density Functional Theory** (DFT): describing the **probable locations of electrons** by simplifying the N-body Schrödinger's Equation into a relatively easier-to-compute N single-body problem.
 
 ---
 
@@ -41,12 +41,11 @@ These sketches were drawn at the early stage of development.
 ## Technologies Used
 
 ### Front-End: ```./client```
-- **React**: Front-End Javascript Library
-- **Redux**: An Open-Source JavaScript Library for Managing and Centralizing Application State
-- **ThreeJS**: JavaScript 3D Library
+- **React**: A Front-End Javascript Library
+- **React Three Fiber** and **Postprocessing**: WebGL 3D Libraries for React
+- **React Redux**: An Open-Source JavaScript Library for Managing and Centralizing Application State
 - **Tailwind CSS**: A Utility-First Cascading Style Sheets Framework
-- **Headless UI**: UI Component Library
-- **MUI**: Another UI Component Library (LOL)
+- **Headless UI** and **Material UI**: UI Component Libraries
 
 ---
 
@@ -55,18 +54,14 @@ These sketches were drawn at the early stage of development.
 - **Docker**: OS-level Virtualization — *INSTALL ON THEIR **WEBSITE** THROUGH GUI INSTALLER* *(FOR **HEROKU** DEPLOYMENT ONLY)*
 - **NumPy** and **SciPy**: Core Libraries for Scientific Computing — *INSTALL VIA **PIP***
 - **ASE**: Atomic Simulation Environment — *INSTALL VIA **PIP***
-- *A **MUST** INSTALL BEFORE **GPAW*** — **Libxc**: The Electronic Structure Library for DFT (Density Functional Theory) — *INSTALL VIA **BREW**, **APT**, OR **CHOCOLATEY***
-- *A **MUST** INSTALL BEFORE **GPAW*** — **BLAS**: Basic Linear Algebra Subprograms — *INSTALL VIA **BREW**, **APT**, OR **CHOCOLATEY***
+- **Libxc**: The Electronic Structure Library for DFT (Density Functional Theory) — *INSTALL VIA **BREW**, **APT**, OR **CHOCOLATEY***
+- **BLAS**: Basic Linear Algebra Subprograms — *INSTALL VIA **BREW**, **APT**, OR **CHOCOLATEY***
 - **GPAW**: Projector-Augmented Wave Extension for ASE (Pseudo Wave Function Generator) — *INSTALL VIA **PIP***
 - **SQLAlchemy**: An Open-Source SQL Toolkit — *INSTALL VIA **PIP***
 
 ---
 
 ## How to Run Locally
-
-**DISCLAIMER**: The reason it's unnecessarily convoluted is due to one of the dependencies: **GPAW** not being designed for web-based apps but only for local builds. There was no documentation, support, or previous cases of deployments on the web, so I had to come up with my own solution. 
-
----
 
 1. Install **C-based dependencies** BLAS and Libxc globally, e.g. using ```brew``` on macOS or other package managers like ```APT``` on Linux or ```Chocolatey``` on Windows (Heroku runs on top of Ubuntu by default, so in this case, I set up a ```Dockerfile``` to ```apt-get install```. A bit of trial and error were involved in the process of finding the right method, as Heroku's official ```APT buildpack``` was not suitable for deploying applications that involve scientific computing (modules such as SciPy or GPAW)
 2. Setup the **client-side**: ```cd client && npm install```
