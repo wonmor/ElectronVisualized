@@ -63,10 +63,6 @@ These sketches were drawn at the early stage of development.
 
 ## How to Run Locally
 
-**DISCLAIMER**: The reason it's unnecessarily convoluted is due to one of the dependencies: **GPAW** not being designed for web-based apps but only for local builds. There was no documentation, support, or previous cases of deployments on the web, so I had to come up with my own solution. 
-
----
-
 1. Install **C-based dependencies** BLAS and Libxc globally, e.g. using ```brew``` on macOS or other package managers like ```APT``` on Linux or ```Chocolatey``` on Windows (Heroku runs on top of Ubuntu by default, so in this case, I set up a ```Dockerfile``` to ```apt-get install```. A bit of trial and error were involved in the process of finding the right method, as Heroku's official ```APT buildpack``` was not suitable for deploying applications that involve scientific computing (modules such as SciPy or GPAW)
 2. Setup the **client-side**: ```cd client && npm install```
 3. ```yarn build``` to convert React ```*.JSX``` into production files that Flask (our back-end) can read
