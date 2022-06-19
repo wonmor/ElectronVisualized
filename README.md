@@ -43,7 +43,7 @@ These sketches were drawn at the early stage of development.
 ### Front-End: ```./client```
 - **React**: Front-End Javascript Library
 - **Redux**: An Open-Source JavaScript Library for Managing and Centralizing Application State
-- **ThreeJS**: JavaScript 3D Library
+- **React-Three-Fiber**: JavaScript 3D Library for React
 - **Tailwind CSS**: A Utility-First Cascading Style Sheets Framework
 - **Headless UI**: UI Component Library
 - **MUI**: Another UI Component Library (LOL)
