@@ -4,7 +4,7 @@ import { Background } from "./Geometries";
 import { uBitConnectDevice } from "../utilities/serial";
 import { getBrowser } from "../utilities/platform";
 
-export default function Docs() {
+export default function Extensions() {
   /*
   This is a component function in JSX
 
@@ -101,7 +101,7 @@ export default function Docs() {
             </span>
           </h2>
 
-          <p className="p-5 text-gray-400">
+          <p className="p-5 text-white">
             An Universal Solution to Controlling and Manipulating 3D Objects.
             <br></br>
             <b>iOS</b> and <b>Android</b>, as well as <b>micro:bit</b> versions
@@ -112,12 +112,22 @@ export default function Docs() {
             onClick={() => {
               connectMicroBit();
             }}
-            className="ml-2 bg-transparent hover:bg-blue-500 text-blue-200 hover:text-white py-2 px-4 border border-blue-200 hover:border-transparent rounded"
+            className="ml-2 mb-2 bg-transparent hover:bg-blue-500 text-blue-200 hover:text-white py-2 px-4 border border-blue-200 hover:border-transparent rounded"
           >
             <span>
               Communicate with <b>Micro:bit</b>
             </span>
           </button>
+
+          <a href="https://github.com/wonmor/Project-Atomizer">
+            <button
+              className="ml-2 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
+            >
+              <span>
+                Check out the <b>GitHub</b> Repo
+              </span>
+            </button>
+          </a>
 
           {browserError && (
             <div>
@@ -133,6 +143,20 @@ export default function Docs() {
             src="Sketch3.jpg"
             alt="Sketch3"
           ></img>
+
+          <p
+            id="introduction"
+            className="font-bold text-center text-3xl"
+          >
+            What does this extension do? Who is it made for?
+          </p>
+
+          <div className="pl-0 pr-0 lg:pl-60 lg:pr-60 flex justify-center">
+            <p className="p-5 text-left text-white">
+              Project <b>Atomizer</b> started as a small idea to develop a way to introduce other students who seemingly avoid Chemistry at all costs to the world of atoms and molecules.{" "}
+              We have achieved this by developing a module slash program that enable users to interact with the 3D models on the computer screen, by feeling and touching them using a controller or a mobile phone as if you are in a science museum.
+            </p>
+          </div>
         </div>
       </div>
       <Background />

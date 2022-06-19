@@ -21,7 +21,7 @@ h3 {
   @apply text-2xl;
 }
 
-a, p {
+p {
   @apply text-xl;
 }
 
