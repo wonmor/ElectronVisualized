@@ -115,7 +115,7 @@ export function DefaultModel(props) {
 
   useEffect(() => {
     actions["TOY FREDDY MAGIC"]?.play();
-  })
+  });
 
   return (
     <group ref={group} {...props} dispose={null}>
