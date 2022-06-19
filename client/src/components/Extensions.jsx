@@ -124,7 +124,7 @@ export default function Extensions() {
               className="ml-2 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
             >
               <span>
-                Check out the <b>GitHub</b> Repo
+                Check out the <b>GitHub</b> Page
               </span>
             </button>
           </a>
@@ -154,7 +154,7 @@ export default function Extensions() {
           <div className="pl-0 pr-0 lg:pl-60 lg:pr-60 flex justify-center">
             <p className="p-5 text-left text-white">
               Project <b>Atomizer</b> started as a small idea to develop a way to introduce other students who seemingly avoid Chemistry at all costs to the world of atoms and molecules.{" "}
-              We have achieved this by developing a module slash program that enable users to interact with the 3D models on the computer screen, by feeling and touching them using a controller or a mobile phone as if you are in a science museum.
+              We have achieved this by developing a module slash program that enables users to freely interact with the 3D models — by feeling and touching them using a <b>microcontroller</b> or a <b>phone</b> — as if you are in a science museum.
             </p>
           </div>
         </div>
