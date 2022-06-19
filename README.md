@@ -42,7 +42,7 @@ These sketches were drawn at the early stage of development.
 
 ### Front-End: ```./client```
 - **React**: A Front-End Javascript Library
-- **React Three Fiber** and **Postprocessing**: A WebGL 3D Libraries for React
+- **React Three Fiber** and **Postprocessing**: WebGL 3D Libraries for React
 - **React Redux**: An Open-Source JavaScript Library for Managing and Centralizing Application State
 - **Tailwind CSS**: A Utility-First Cascading Style Sheets Framework
 - **Headless UI** and **Material UI**: UI Component Libraries
