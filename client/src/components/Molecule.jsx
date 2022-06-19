@@ -388,7 +388,7 @@ export default function Molecule() {
                     <p className="text-gray-400">Particle Radius</p>
 
                     <Slider
-                      className="ml-40 mr-40 mb-5"
+                      className="ml-40 mr-40 scale-90 sm:scale-100 mb-5"
                       onClick={() => {
                         setAnimation(false);
                       }}
@@ -530,7 +530,7 @@ export default function Molecule() {
                 >
                   <span>Zoom In</span>
                 </button>
-                
+
                 <button
                   onMouseDown={() => {
                     setZoomCameraConstant(zoomCameraConstant - 0.1);
