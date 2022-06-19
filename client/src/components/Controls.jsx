@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { useDispatch } from "react-redux";
 import { extend, useThree } from "@react-three/fiber";
@@ -31,7 +31,9 @@ export default function Controls() {
 
   const dispatch = useDispatch();
 
-  dispatch(setCameraInfo(camera));
+  useEffect(() => {
+    dispatch(setCameraInfo(camera));
+  }, [camera, dispatch]);
 
   return (
     <orbitControls

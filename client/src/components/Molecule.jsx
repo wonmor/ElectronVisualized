@@ -519,21 +519,23 @@ export default function Molecule() {
           <>
             <div className="flex flex-row justify-center items-center w-full p-5">
               <button
-                  onClick={() => {
-                    // This code runs after a global state change...
+                  onMouseDown={() => {
                     setZoomCameraConstant(zoomCameraConstant + 0.1);
+                  }}
+                  onClick={() => {
                     zoomInCamera(globalCameraInfo, zoomCameraConstant);
-
                   }}
                   className="mr-2 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
                   type="button"
                 >
                   <span>Zoom In</span>
                 </button>
+                
                 <button
-                  onClick={() => {
-                    // This code runs after a global state change...
+                  onMouseDown={() => {
                     setZoomCameraConstant(zoomCameraConstant - 0.1);
+                  }}
+                  onClick={() => {
                     zoomOutCamera(globalCameraInfo, zoomCameraConstant);
                   }}
                   className="mr-2 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
