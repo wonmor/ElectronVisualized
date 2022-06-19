@@ -318,26 +318,28 @@ export default function Table() {
               packages. Now available on the <b>Web</b>.
             </p>
 
-            {Object.keys(moleculeDict).map((key, index) => {
-              const value = moleculeDict[key];
+            <div className="ml-5 mr-5">
+              {Object.keys(moleculeDict).map((key, index) => {
+                const value = moleculeDict[key];
 
-              return (
-                <button
-                  onMouseDown={() => {
-                    // This code runs first...
-                    appendNewRender(key, value[0], value[1]);
-                  }}
-                  onClick={() => {
-                    // This code runs after a global state change...
-                    movePage(`/renderer/${globalSelectedElement["element"]}`);
-                  }}
-                  className="mb-3 mr-2 sm:mt-0 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
-                  type="button"
-                >
-                  <span>{value[0]}</span>
-                </button>
-              );
-            })}
+                return (
+                  <button
+                    onMouseDown={() => {
+                      // This code runs first...
+                      appendNewRender(key, value[0], value[1]);
+                    }}
+                    onClick={() => {
+                      // This code runs after a global state change...
+                      movePage(`/renderer/${globalSelectedElement["element"]}`);
+                    }}
+                    className="mb-2 mr-2 sm:mt-0 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
+                    type="button"
+                  >
+                    <span>{value[0]}</span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
           <h1 className="scale-90 sm:scale-100 mt-5 pl-5 pr-5 text-gray-400">
