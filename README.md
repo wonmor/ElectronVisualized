@@ -45,7 +45,7 @@ These sketches were drawn at the early stage of development.
 - **React Three Fiber**: A WebGL 3D Library for React
 - **React Redux**: An Open-Source JavaScript Library for Managing and Centralizing Application State
 - **Tailwind CSS**: A Utility-First Cascading Style Sheets Framework
-- **Headless UI** and **MUI**: UI Component Libraries
+- **Headless UI** and **Material UI**: UI Component Libraries
 
 ---
 
