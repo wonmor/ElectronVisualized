@@ -11,6 +11,7 @@
         "@heroicons/react": "^1.0.6",
         "@mui/icons-material": "^5.8.2",
         "@mui/material": "^5.8.2",
+        "@react-three/drei": "^9.13.2",
         "@react-three/fiber": "^8.0.21",
         "@react-three/postprocessing": "^2.3.2",
         "@reduxjs/toolkit": "^1.8.2",

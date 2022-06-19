@@ -1,6 +1,8 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import { extend } from '@react-three/fiber'
+
+import { useGLTF, useAnimations } from '@react-three/drei'
 
 import * as THREE from "three";
 
@@ -90,6 +92,36 @@ export function BondLine({coords}) {
   lineSegment.computeLineDistances();
 
   return <primitive object={lineSegment} position={[0, 0, 0]} />;
+}
+
+export function DefaultModel(props) {
+  /*
+  This is a component function in JSX that contains the HTML markup that represent each graphical element on the webpage
+
+  Parameters
+  ----------
+  props: React element
+    Represents all the other properties that have to be rendered prior to this operation
+
+  Returns
+  -------
+  DOM File
+      A HTML markup that contains graphical elements
+  */
+  const group = useRef();
+
+  const { scene, animations } = useGLTF('/default/scene.gltf')
+  const { actions } = useAnimations(animations, scene)
+
+  useEffect(() => {
+    actions["TOY FREDDY MAGIC"]?.play();
+  })
+
+  return (
+    <group ref={group} {...props} dispose={null}>
+      <primitive castShadow receiveShadow object={scene} />
+    </group>
+  )
 }
 
 export function Background() {

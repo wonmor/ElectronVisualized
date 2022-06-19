@@ -1,6 +1,10 @@
 # SQLAlchemy is designed to accommodate developers with a easy-to-use database model
 from flask_sqlalchemy import SQLAlchemy
 
+import os
+import boto3
+from boto3.s3.transfer import TransferConfig
+
 '''
 ╭━━━┳━╮╭━┳━━━━┳━━━┳━╮╱╭┳━━━┳━━┳━━━┳━╮╱╭┳━━━╮
 ┃╭━━┻╮╰╯╭┫╭╮╭╮┃╭━━┫┃╰╮┃┃╭━╮┣┫┣┫╭━╮┃┃╰╮┃┃╭━╮┃
@@ -14,10 +18,6 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 # From here, Flask is linked with the AWS S3 server with the credentials defined as environmental variables...
-import os
-import boto3
-from boto3.s3.transfer import TransferConfig
-
 aws_access_key_id = os.environ.get("AWS_ACCESS_KEY_ID")
 aws_secret_access_key = os.environ.get("AWS_SECRET_ACCESS_KEY")
 region_name = os.environ.get("AWS_DEFAULT_REGION")

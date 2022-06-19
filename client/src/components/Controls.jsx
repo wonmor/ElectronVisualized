@@ -1,7 +1,10 @@
+import React from "react";
+
+import { useDispatch } from "react-redux";
 import { extend, useThree } from "@react-three/fiber";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
-import React from "react";
+import { setCameraInfo } from "../states/cameraInfoSlice";
 
 /*
 ░█▀▀█ ─█▀▀█ ░█▀▄▀█ ░█▀▀▀ ░█▀▀█ ─█▀▀█ 　 ░█▀▀█ ░█▀▀▀█ ░█▄─░█ ▀▀█▀▀ ░█▀▀█ ░█▀▀▀█ ░█─── ░█▀▀▀█ 
@@ -26,10 +29,14 @@ export default function Controls() {
   */
   const { camera, gl } = useThree();
 
+  const dispatch = useDispatch();
+
+  dispatch(setCameraInfo(camera));
+
   return (
     <orbitControls
       enableZoom={true}
-      minDistance={5}
+      minDistance={0.1}
       maxDistance={30}
       args={[camera, gl.domElement]}
     />

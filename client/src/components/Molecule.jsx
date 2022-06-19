@@ -1,10 +1,7 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import { useSelector, useDispatch, Provider } from "react-redux";
 
-import {
-  EffectComposer,
-  SelectiveBloom,
-} from "@react-three/postprocessing";
+import { EffectComposer, SelectiveBloom } from "@react-three/postprocessing";
 
 import { Slider, Button } from "@mui/material";
 
@@ -24,13 +21,19 @@ import axios from "axios";
 
 import { Canvas } from "@react-three/fiber";
 
-import { Atoms, BondLine } from "./Geometries";
+import { Atoms, BondLine, DefaultModel } from "./Geometries";
 
 import Controls from "./Controls";
 
 import { Particles } from "./Instances";
 
-import { CANVAS, getCameraPosition, useWindowSize } from "./Globals";
+import {
+  CANVAS,
+  getCameraPosition,
+  useWindowSize,
+  zoomInCamera,
+  zoomOutCamera
+} from "./Globals";
 
 /*
 ░█▀▄▀█ ░█▀▀▀█ ░█─── ░█▀▀▀ ░█▀▀█ ░█─░█ ░█─── ░█▀▀▀ 
@@ -101,6 +104,8 @@ export default function Molecule() {
   const [lonePairEnabled, setLonePairEnabled] = useState(true);
   const [addCoolEffects, setAddCoolEffects] = useState(false);
 
+  const [zoomCameraConstant, setZoomCameraConstant] = useState(1.0);
+
   /*
   Define that React and Redux states: former being used locally, and the latter being used globally.
   The purpose of using constants is due to its high efficiency when it comes to memory management.
@@ -114,6 +119,10 @@ export default function Molecule() {
 
   const globalRenderInfo = useSelector(
     (state) => state.renderInfo.globalRenderInfo
+  );
+
+  const globalCameraInfo = useSelector(
+    (state) => state.cameraInfo.globalCameraInfo
   );
 
   const [animation, setAnimation] = useState(globalRenderInfo["animation"]);
@@ -356,11 +365,7 @@ export default function Molecule() {
                 )}
               </div>
             ) : preRender ? (
-              <div
-                className={`absolute text-gray-400 ${
-                  serverError ? "mt-10" : "mt-40"
-                }`}
-              >
+              <div className="text-gray-400 mt-5">
                 <h3>{statusText}</h3>
 
                 {!serverError && (
@@ -426,9 +431,20 @@ export default function Molecule() {
           </div>
         </div>
 
-        <div style={{ width: CANVAS.WIDTH, height: CANVAS.HEIGHT }}>
+        <div
+          className="bg-gray-800 ml-10 mr-10"
+          style={{ width: CANVAS.WIDTH, height: CANVAS.HEIGHT }}
+        >
           <Canvas camera={getCameraPosition(globalSelectedElement["element"])}>
-            <Controls />
+            {!preRender ? (
+              <Provider store={store}>
+                <Controls />
+              </Provider>
+            ) : (
+              <Suspense fallback={null}>
+                <DefaultModel />
+              </Suspense>
+            )}
 
             <ambientLight intensity={0.5} />
             <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
@@ -499,24 +515,54 @@ export default function Molecule() {
             <gridHelper args={[undefined, undefined, "gray"]} />
           </Canvas>
         </div>
-        {!preRender && (
-          <div className="flex justify-center items-center w-full p-5">
-            <p className="text-gray-400 mr-5">Add Cool Effects for Gamers</p>
+        {!preRender ? (
+          <>
+            <div className="flex flex-row justify-center items-center w-full p-5">
+              <button
+                  onClick={() => {
+                    // This code runs after a global state change...
+                    setZoomCameraConstant(zoomCameraConstant + 0.1);
+                    zoomInCamera(globalCameraInfo, zoomCameraConstant);
 
-            <Switch
-              checked={addCoolEffects}
-              onChange={setAddCoolEffects}
-              className={`${
-                addCoolEffects ? "bg-blue-600" : "bg-gray-400"
-              } relative inline-flex h-6 w-11 items-center rounded-full`}
-            >
-              <span
+                  }}
+                  className="mr-2 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
+                  type="button"
+                >
+                  <span>Zoom In</span>
+                </button>
+                <button
+                  onClick={() => {
+                    // This code runs after a global state change...
+                    setZoomCameraConstant(zoomCameraConstant - 0.1);
+                    zoomOutCamera(globalCameraInfo, zoomCameraConstant);
+                  }}
+                  className="mr-2 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
+                  type="button"
+                >
+                  <span>Zoom Out</span>
+                </button>
+            </div>
+
+            <div className="flex justify-center items-center w-full pl-5 pr-5 pb-5">
+              <p className="text-gray-400 mr-5">Add Cool Effects for Gamers</p>
+
+              <Switch
+                checked={addCoolEffects}
+                onChange={setAddCoolEffects}
                 className={`${
-                  addCoolEffects ? "translate-x-6" : "translate-x-1"
-                } inline-block h-4 w-4 transform rounded-full bg-white`}
-              />
-            </Switch>
-          </div>
+                  addCoolEffects ? "bg-blue-600" : "bg-gray-400"
+                } relative inline-flex h-6 w-11 items-center rounded-full`}
+              >
+                <span
+                  className={`${
+                    addCoolEffects ? "translate-x-6" : "translate-x-1"
+                  } inline-block h-4 w-4 transform rounded-full bg-white`}
+                />
+              </Switch>
+            </div>
+          </>
+        ) : (
+          <div class="p-5" />
         )}
       </div>
     </div>

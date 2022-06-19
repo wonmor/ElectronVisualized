@@ -207,4 +207,15 @@ export function useWindowSize() {
   return windowSize;
 }
 
+export const zoomInCamera = (camera, constant) => {
+  camera.position.x = camera.position.x / constant;
+  camera.position.y = camera.position.y / constant;
+  camera.position.z = camera.position.z / constant;
+};
+
+export const zoomOutCamera = (camera, constant) => {
+  camera.position.x = camera.position.x * constant;
+  camera.position.y = camera.position.y * constant;
+  camera.position.z = camera.position.z * constant;
+};
 

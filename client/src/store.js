@@ -3,6 +3,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import counterReducer from './states/counterSlice'
 import atomInfoReducer from './states/atomInfoSlice'
 import renderInfoReducer from './states/renderInfoSlice'
+import cameraInfoReducer from './states/cameraInfoSlice'
 import selectedElementReducer from './states/selectedElementSlice'
 
 /*
@@ -32,6 +33,7 @@ export default configureStore({
         counter: counterReducer,
         atomInfo: atomInfoReducer,
         renderInfo: renderInfoReducer,
-        selectedElement: selectedElementReducer
+        selectedElement: selectedElementReducer,
+        cameraInfo: cameraInfoReducer
     },
 })

@@ -10,7 +10,6 @@ from ase.structure import molecule
 from ase.io import write
 
 from werkzeug.local import LocalProxy
-from werkzeug.utils import secure_filename
 
 from flask import current_app
 
