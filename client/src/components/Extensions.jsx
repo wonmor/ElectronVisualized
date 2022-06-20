@@ -95,14 +95,14 @@ export default function Extensions() {
             more <span className="text-white">accessible</span>.
           </h1>
 
-          <h2 className="pt-5 leading-normal text-gray-400 border-t border-gray-500">
-          <img
-            className="flex m-auto mt-5"
-            style={{ width: "500px" }}
-            src="atomizer_logo_blue.svg"
-            alt="Atomizer"
-          ></img>
-          </h2>
+          <div className="pt-5 leading-normal text-gray-400 border-t border-gray-500">
+            <img
+              className="flex m-auto mt-5"
+              style={{ width: "500px" }}
+              src="atomizer_logo_blue.svg"
+              alt="Atomizer"
+            ></img>
+          </div>
 
           <p className="p-5 text-white">
             An Universal Solution to Controlling and Manipulating 3D Objects.
