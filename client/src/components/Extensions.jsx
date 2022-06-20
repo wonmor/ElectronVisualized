@@ -96,9 +96,12 @@ export default function Extensions() {
           </h1>
 
           <h2 className="pt-5 leading-normal text-gray-400 border-t border-gray-500">
-            <span className="text-5xl">
-              Project <b className="text-blue-200">Atomizer</b>
-            </span>
+          <img
+            className="flex m-auto mt-5"
+            style={{ width: "500px" }}
+            src="atomizer_logo_blue.svg"
+            alt="Atomizer"
+          ></img>
           </h2>
 
           <p className="p-5 text-white">
