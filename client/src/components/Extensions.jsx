@@ -123,9 +123,7 @@ export default function Extensions() {
           </button>
 
           <a href="https://github.com/wonmor/Project-Atomizer">
-            <button
-              className="ml-2 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
-            >
+            <button className="ml-2 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded">
               <span>
                 Check out the <b>GitHub</b> Page
               </span>
@@ -147,17 +145,48 @@ export default function Extensions() {
             alt="Sketch3"
           ></img>
 
-          <p
-            id="introduction"
-            className="font-bold text-center text-3xl"
-          >
+          <p className="font-bold text-center text-3xl">
             What does this extension do? Who is it made for?
           </p>
 
           <div className="pl-0 pr-0 lg:pl-60 lg:pr-60 flex justify-center">
             <p className="p-5 text-left text-white">
-              Project <b>Atomizer</b> started as a small idea to develop a way to introduce other students who seemingly avoid Chemistry at all costs to the world of atoms and molecules.{" "}
-              We have achieved this by developing a module slash program that enables users to freely interact with the 3D models — by feeling and touching them using a <b>microcontroller</b> or a <b>phone</b> — as if you are in a science museum.
+              Project <b>Atomizer</b> started as a small idea to develop a way
+              to introduce other students who seemingly avoid Chemistry at all
+              costs to the world of atoms and molecules. We have achieved this
+              by developing a module slash program that enables users to freely
+              interact with the 3D models — by feeling and touching them using a{" "}
+              <b>microcontroller</b> or a <b>phone</b> — as if you are in a
+              science museum.
+            </p>
+          </div>
+
+          <p className="p-5 font-bold text-center text-3xl border-t border-gray-400">
+            Steps to Flash the Code to Your{" "}
+            <span className="text-white font-bold"> Micro:bit</span> Controller
+          </p>
+
+          <div className="pl-0 pr-0 lg:pl-60 lg:pr-60 flex justify-center">
+            <p className="pl-5 pr-5 text-left text-white">
+              <b>1.</b> Install <b>Thonny</b> IDE on their <a href="https://thonny.org/"><span className="font-bold text-blue-200 hover:underline">official website</span></a>
+              <div className="p-2" />
+              <b>2.</b> Download the <code>main.py</code> file located in the <code>microbit</code> folder in the{" "}
+              <code>root</code> directory, and open it using <b>Thonny</b>
+              <div className="p-2" />
+              <b>3.</b> Navigate to the options, select intrepreter, and change the
+              settings to use <b>MicroPython</b> (BBC <b>micro:bit</b>) instead of the default
+              Python 3.7 (Everything is pre-packaged, so you don't have to worry
+              about installing an extension or anything like that)
+              <div className="p-2" />
+              <b>4.</b> Press the green arrow button on the top to compile the code and
+              push it into your microbit board; make sure the right port is
+              selected for Serial communication between your computer and the
+              microcontroller
+              <div className="p-2" />
+              <b>5.</b> Now, last but not least, go to the Extensions page on the
+              official website of <b>ElectronVisualized</b> on <b>Google Chrome</b> that
+              supports <b>WebUSB</b> API, and press the "Communicate with <b>micro:bit</b>"
+              button
             </p>
           </div>
         </div>
