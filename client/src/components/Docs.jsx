@@ -69,11 +69,11 @@ export default function Docs() {
               id="introduction"
               className="font-bold mt-10 pt-5 pr-5 pl-5 text-left text-3xl border-t border-gray-400"
             >
-              Welcome to Earth.
+              By the Lead Developer of ElectronVisualized.
             </p>
             <p className="pt-3 pr-5 pl-5 text-left text-white">
               <b>Who am I</b>? To properly introduce myself, my name is{" "}
-              <b>John Seong</b>, and I am a high school student based in
+              <b>John Seong</b>, and I am a <b>high school student</b> based in{" "}
               Oakville, Canada. I am deeply interested in pursuing my dream as a
               software engineer and the head of Human Interface Design at Apple
               Inc.
@@ -90,7 +90,26 @@ export default function Docs() {
               app that really shows my skilled background as someone who
               typically ponders the question of order and disorder.
             </p>
-            <p className="font-bold pt-10 pr-5 pl-5 text-left text-3xl">
+
+            <div class="p-5 grid grid-row-3 sm:grid-cols-3 gap-4">
+              <img
+                style={{ width: "500px" }}
+                src="john.jpg"
+                alt="John"
+              ></img>
+              <img
+                style={{ width: "500px" }}
+                src="john2.jpg"
+                alt="John2"
+              ></img>
+              <img
+                style={{ width: "500px" }}
+                src="john3.png"
+                alt="John3"
+              ></img>
+            </div>
+
+            <p className="font-bold pr-5 pl-5 text-left text-3xl">
               Life is Hard, and Solo Development is Equally as Hard.
             </p>
             <p className="pt-5 pr-5 pl-5 text-left text-white">
@@ -127,6 +146,8 @@ export default function Docs() {
               overwhelmingly complicated at first, but thanks to my AP Chemistry
               background as well as taking Physics in my school led me into
               grasping them in a relatively short time of period.
+              <div className="p-2" />
+              <i className="text-rose-200">Check out my <a href="https://johnseong.info"><span className="font-bold hover:underline">official blog</span></a> and <a href="https://github.com/wonmor"><span className="font-bold hover:underline">GitHub</span></a> page for more information</i>
             </p>
             <p className="p-5 text-left text-gray-400">
               Special Thanks to <b>Samar C.</b> for their Contribution by

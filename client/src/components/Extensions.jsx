@@ -168,21 +168,29 @@ export default function Extensions() {
 
           <div className="pl-0 pr-0 lg:pl-60 lg:pr-60 flex justify-center">
             <p className="pl-5 pr-5 text-left text-white">
-              <b>1.</b> Install <b>Thonny</b> IDE on their <a href="https://thonny.org/"><span className="font-bold text-blue-200 hover:underline">official website</span></a>
+              <b>1.</b> Install <b>Thonny</b> IDE through their <a href="https://thonny.org/"><span className="font-bold text-blue-200 hover:underline">official website</span></a>
+              
               <div className="p-2" />
+
               <b>2.</b> Download the <code>main.py</code> file located in the <code>microbit</code> folder in the{" "}
               <code>root</code> directory, and open it using <b>Thonny</b>
+
               <div className="p-2" />
+
               <b>3.</b> Navigate to the options, select intrepreter, and change the
               settings to use <b>MicroPython</b> (BBC <b>micro:bit</b>) instead of the default
               Python 3.7 (Everything is pre-packaged, so you don't have to worry
               about installing an extension or anything like that)
+              
               <div className="p-2" />
+
               <b>4.</b> Press the green arrow button on the top to compile the code and
               push it into your microbit board; make sure the right port is
               selected for Serial communication between your computer and the
               microcontroller
+
               <div className="p-2" />
+
               <b>5.</b> Now, last but not least, go to the Extensions page on the
               official website of <b>ElectronVisualized</b> on <b>Google Chrome</b> that
               supports <b>WebUSB</b> API, and press the "Communicate with <b>micro:bit</b>"
