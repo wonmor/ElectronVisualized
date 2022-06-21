@@ -197,6 +197,13 @@ export default function Extensions() {
               button
             </p>
           </div>
+          <a href="https://github.com/wonmor/Project-Atomizer/blob/main/microbit/main.py">
+            <button className="mt-5 ml-5 mr-5 ml-2 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded">
+              <span>
+                <b>Download</b> <code>main.py</code>
+              </span>
+            </button>
+          </a>
         </div>
       </div>
       <Background />

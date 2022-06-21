@@ -95,10 +95,10 @@ export default function Developer() {
                 <span className="font-bold text-rose-200">World Engine</span>.
               </span>
             </h2>
-            
+
             <h2 className="p-5 leading-normal text-gray-400">
-              A <span className="text-white">REST API</span> Powered by
-              the Industry-leading <span className="text-white">GPAW</span> and{" "}
+              A <span className="text-white">REST API</span> Powered by the
+              Industry-leading <span className="text-white">GPAW</span> and{" "}
               <span className="text-white">ASE</span> Libaries.
             </h2>
           </div>
@@ -148,17 +148,39 @@ export default function Developer() {
             </div>
           ) : null}
 
-          <div className="pt-5 pb-5">
+          <div className="flex flex-col pt-5 pb-5">
             {preRender ? (
-              <img
-                className="border-dotted border-2 border-white"
-                src="/API.png"
-                alt="Screenshot"
-              />
+              <>
+                <img
+                  className="border-dotted border-2 border-white m-auto"
+                  src="/API.png"
+                  style={{ width: "1000px" }}
+                  alt="Screenshot"
+                />
+
+                <h2 className="ml-5 mr-5 mt-5">
+                  This is an{" "}
+                  <span className="text-white">Open Source Project</span>.
+                </h2>
+
+                <p className="text-left ml-5 mr-5 lg:ml-60 lg:mr-60 mt-2">
+                  The nature of being <b>open source</b> is that anyone can jump in and
+                  contribute to our project. This means you, you, and you over
+                  there! You guys can all be a part of the <b>ElectronVisualized</b>{" "}
+                  Dev team. If you would like to contact me personally, however,
+                  please shoot an email to{" "}
+                  <span className="text-rose-200">
+                    cascademusicbusiness@gmail.com
+                  </span>
+                  .
+                </p>
+              </>
             ) : (
               <div className="block sm:flex align-center justify-center">
                 <div className="text-xl max-h-min text-left bg-gray-900 p-5 text-white">
-                  <span className="font-bold text-5xl text-gray-400">HYDROGEN GAS</span>
+                  <span className="font-bold text-5xl text-gray-400">
+                    HYDROGEN GAS
+                  </span>
                   <br></br>
                   <br></br>
                   <span>
