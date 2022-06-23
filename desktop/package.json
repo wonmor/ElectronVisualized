@@ -1,0 +1,23 @@
+{
+    "name": "electronvisualized-desktop",
+    "productName": "ElectronVisualized",
+    "version": "1.0.0",
+    "description": "ElectronVisualized allows users to freely interact with the 3D models of atoms and molecules generated based upon the internal DFT calculations.",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron ."
+    },
+    "repository": "https://github.com/electron/electron-quick-start",
+    "keywords": [
+        "Electron",
+        "quick",
+        "start",
+        "tutorial",
+        "demo"
+    ],
+    "author": "John Seong",
+    "license": "CC0-1.0",
+    "devDependencies": {
+        "electron": "^19.0.6"
+    }
+}
