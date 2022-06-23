@@ -1,4 +1,4 @@
-# ElectronVisualized for Desktop
+# ElectronVisualized Studio
 
 Major **Pun** Alert: Powered by the **Electron** Cross-platform Desktop App Framework.
 
