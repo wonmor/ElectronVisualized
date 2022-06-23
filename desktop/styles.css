@@ -10,17 +10,29 @@
   padding: 5%
 }
 
-h1, p {
+h1, h2, h3, p, span {
     font-family: "Quicksand";
+}
+
+.bigger-p {
+  font-size: 24px;
+}
+
+#molecule {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
 }
 
 #icon {
     width: 100px;
 }
 
-#icon:hover {
-    filter: drop-shadow(4px 8px 0.75rem gray);
-    transform: translateY(-2px);
+#start {
+  width: 200px;
 }
 
 /* CSS */

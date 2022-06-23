@@ -4,8 +4,26 @@
     "version": "1.0.0",
     "description": "ElectronVisualized allows users to freely interact with the 3D models of atoms and molecules generated based upon the internal DFT calculations.",
     "main": "main.js",
+    "build": {
+        "appId": "com.johnseong.electronvisualized",
+        "mac": {
+            "target": [
+                "mas"
+            ]
+        },
+        "mas": {
+            "hardenedRuntime": false,
+            "provisioningProfile": "build/embedded.provisionprofile",
+            "entitlements": "build/entitlements.mas.plist",
+            "entitlementsInherit": "build/entitlements.mas.inherit.plist",
+            "gatekeeperAssess": false,
+            "asarUnpack": []
+        }
+    },
     "scripts": {
-        "start": "electron ."
+        "start": "electron .",
+        "pack": "electron-builder --dir",
+        "dist": "electron-builder"
     },
     "repository": "https://github.com/electron/electron-quick-start",
     "keywords": [
