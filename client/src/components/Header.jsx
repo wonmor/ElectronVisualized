@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Adsense } from '@ctrl/react-adsense';
 
 import { useWindowSize } from "./Globals";
 

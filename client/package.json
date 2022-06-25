@@ -5,7 +5,6 @@
     "private": true,
     "proxy": "http://localhost:5000",
     "dependencies": {
-        "@ctrl/react-adsense": "^1.6.0",
         "@emotion/react": "^11.9.0",
         "@emotion/styled": "^11.8.1",
         "@headlessui/react": "^1.6.4",

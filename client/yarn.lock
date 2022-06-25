@@ -1195,13 +1195,6 @@
   "resolved" "https://registry.npmjs.org/@csstools/selector-specificity/-/selector-specificity-1.0.0.tgz"
   "version" "1.0.0"
 
-"@ctrl/react-adsense@^1.6.0":
-  "integrity" "sha512-FlekDNpaSkXpxVH9ic9p3fue3FTQl/Cwqv/DG8ZbN00XL6aujHsArCPo0ElnBBB3imGLtnL3q01L/PrB+5NahA=="
-  "resolved" "https://registry.npmjs.org/@ctrl/react-adsense/-/react-adsense-1.6.0.tgz"
-  "version" "1.6.0"
-  dependencies:
-    "tslib" "^2.4.0"
-
 "@emotion/babel-plugin@^11.7.1":
   "integrity" "sha512-Pr/7HGH6H6yKgnVFNEj2MVlreu3ADqftqjqwUvDy/OJzKFgxKeTQ+eeUf20FOTuHVkDON2iNa25rAXVYtWJCjw=="
   "resolved" "https://registry.npmjs.org/@emotion/babel-plugin/-/babel-plugin-11.9.2.tgz"
@@ -9073,7 +9066,7 @@
   "resolved" "https://registry.npmjs.org/tslib/-/tslib-1.14.1.tgz"
   "version" "1.14.1"
 
-"tslib@^2.0.3", "tslib@^2.4.0":
+"tslib@^2.0.3":
   "integrity" "sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ=="
   "resolved" "https://registry.npmjs.org/tslib/-/tslib-2.4.0.tgz"
   "version" "2.4.0"
