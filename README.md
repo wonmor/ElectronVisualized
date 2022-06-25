@@ -59,7 +59,7 @@ These sketches were drawn at the early stage of development.
 - **Libxc**: The Electronic Structure Library for DFT (Density Functional Theory) — *INSTALL VIA **BREW**, **APT**, OR **CHOCOLATEY***
 - **BLAS**: Basic Linear Algebra Subprograms — *INSTALL VIA **BREW**, **APT**, OR **CHOCOLATEY***
 - **GPAW**: Projector-Augmented Wave Extension for ASE (Pseudo Wave Function Generator) — *INSTALL VIA **PIP***
-- **SQLAlchemy**: An Open-Source SQL Toolkit — *INSTALL VIA **PIP***
+- **WebRTC**: Real-time Communication — *INSTALL VIA **PIP***
 
 ---
 

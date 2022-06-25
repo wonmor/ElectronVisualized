@@ -1,6 +1,7 @@
-from flask_cors import CORS
-from .extensions import db
 from flask import Flask
+from flask_cors import CORS
+from flask_socketio import SocketIO, emit, join_room
+
 from dotenv import load_dotenv
 
 import os
@@ -19,6 +20,8 @@ SUPPORTED PLATFORMS: WEB(REACT + FLASK STACK), IOS & MACOS (IN DEV)
 ----------------------------------------------------------------
 '''
 
+socketio = SocketIO()
+
 def create_app():
     '''
     Initializes the Flask REST API that handles most of the mathematical operations
@@ -34,32 +37,15 @@ def create_app():
     app = Flask(__name__, static_folder='../client/build', static_url_path='/')
     
     from . import api
-
     load_dotenv()
 
     app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
-
     app.register_blueprint(api.bp)
-
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
-
-    register_extensions(app)
-
-    return app
-
-
-def register_extensions(app):
-    '''
-    Initializes the SQLAlchemy database that stores the data safety on the server-side
     
-    Parameters
-    ----------
-    app: Object
-        An object that stores the Flask app instance
-    -------
-    None
-    '''
-    db.init_app(app)
+    global socketio
+    socketio.init_app(app)
+    
+    return app
 
 
 # Created a global variable that runs the create_app function, in order to import it from the terminal

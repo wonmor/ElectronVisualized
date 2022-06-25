@@ -1,6 +1,3 @@
-# SQLAlchemy is designed to accommodate developers with a easy-to-use database model
-from flask_sqlalchemy import SQLAlchemy
-
 import os
 import boto3
 from boto3.s3.transfer import TransferConfig
@@ -14,13 +11,14 @@ from boto3.s3.transfer import TransferConfig
 ╰━━━┻━╯╰━╯╱╰╯╱╰━━━┻╯╱╰━┻━━━┻━━┻━━━┻╯╱╰━┻━━━╯
 '''
 
-# Set up the database
-db = SQLAlchemy()
-
-# From here, Flask is linked with the AWS S3 server with the credentials defined as environmental variables...
 aws_access_key_id = os.environ.get("AWS_ACCESS_KEY_ID")
 aws_secret_access_key = os.environ.get("AWS_SECRET_ACCESS_KEY")
 region_name = os.environ.get("AWS_DEFAULT_REGION")
+
+'''
+From here, Flask is linked with the AWS S3 server 
+with the credentials defined as environmental variables...
+'''
 
 session = boto3.Session(
     aws_access_key_id=aws_access_key_id,
@@ -38,12 +36,44 @@ config = TransferConfig(multipart_threshold=1024 * 25,
 BUCKET_NAME='electronvisualized'
 
 def multipart_upload_boto3(key, file_path):
+    '''
+    When API call is made, this function uploads
+    the JSON data to the Amazon S3 server
+    
+    Parameters
+    ----------
+    key: String
+        Contains the name of the element
+
+    file_path: String
+        Contains the path of the JSON file
+
+    Returns
+    -------
+    None
+    '''
     s3_resource.Object(BUCKET_NAME, key).upload_file(file_path,
                             ExtraArgs={'ContentType': 'application/json'},
                             Config=config
                             )
 
 def multipart_download_boto3(key, file_path):
+    '''
+    When API call is made, this function downloads
+    the JSON data to the Amazon S3 server
+    
+    Parameters
+    ----------
+    key: String
+        Contains the name of the element
+
+    file_path: String
+        Contains the path of the JSON file
+
+    Returns
+    -------
+    None
+    '''
     s3_resource.Object(BUCKET_NAME, key).download_file(file_path,
                             Config=config
                             )

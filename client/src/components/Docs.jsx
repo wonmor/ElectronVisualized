@@ -1,4 +1,4 @@
-import { Background } from "./Geometries";
+import React, { Background } from "./Geometries";
 
 export default function Docs() {
   /*

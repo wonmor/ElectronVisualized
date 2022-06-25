@@ -126,15 +126,6 @@ def _density_parser():
                     density_data[f'{x}, {y}, {z}'] = v
 
     logger.info(f"Density data parsing completed for {element_name}!")
-    
-    # Add legend to plot
-    # vol.lut_manager.show_scalar_bar = True
-    # vol.lut_manager.scalar_bar.orientation = 'vertical'
-    # vol.lut_manager.scalar_bar.width = 0.001
-    # vol.lut_manager.scalar_bar.height = 0.04
-    # vol.lut_manager.scalar_bar.position = (0.01, 0.15)
-    # vol.lut_manager.number_of_labels = 5
-    # vol.lut_manager.data_name = "ED"
 
     return_value = {
         "atoms_x_coords_in_density": atoms_x_coords_in_density,
@@ -239,15 +230,6 @@ def _transfer_to_client():
     Plotting atoms and the bond between them;
     Atoms, in particular, are plotted with their atomic number color.
     '''
-
-    for _ in range(no_of_atoms):
-        color = atomic_colors[elements[_]]
-        color = (color[0], color[1], color[2])
-        # mlab.points3d(atoms_x[_], atoms_y[_], atoms_z[_],
-        #               scale_factor=0.5,
-        #               resolution=20,
-        #               color=color,
-        #               scale_mode='none')
 
     return_value = {
         'no_of_atoms': no_of_atoms,

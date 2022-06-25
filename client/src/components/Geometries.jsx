@@ -90,6 +90,7 @@ export function BondLine({coords}) {
   const lineSegment = new Line2(geometry, material);
 
   lineSegment.computeLineDistances();
+  // To Do: add a functionality to plot the bond line based upon the bond length
 
   return <primitive object={lineSegment} position={[0, 0, 0]} />;
 }

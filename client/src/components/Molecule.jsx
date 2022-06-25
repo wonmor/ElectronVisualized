@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, Suspense } from "react";
+import React, { useState, useEffect, useRef, Suspense } from "react";
 import { useSelector, useDispatch, Provider } from "react-redux";
 
 import { EffectComposer, SelectiveBloom } from "@react-three/postprocessing";

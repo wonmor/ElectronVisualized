@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function Footer() {
     /*
     This is a component function in JSX that contains the HTML markup that represent each graphical element on the webpage

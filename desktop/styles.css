@@ -1,7 +1,7 @@
 /* styles.css */
 @font-face {
     font-family: "Quicksand";
-    src: "./assets/fonts/Quicksand-VariableFont_wght.ttf";
+    src: "assets/fonts/Quicksand-VariableFont_wght.ttf";
 }
 
 .container {
