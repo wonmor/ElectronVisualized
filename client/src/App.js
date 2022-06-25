@@ -1,3 +1,5 @@
+import React, { useEffect } from "react";
+
 import { Routes, Route } from "react-router-dom";
 import { useSelector} from "react-redux";
 
@@ -14,6 +16,8 @@ import Developer from './components/Developer';
 import Docs from './components/Docs';
 import Extensions from './components/Extensions';
 
+import ReactGA from 'react-ga';
+
 /*
 ██████╗░░█████╗░██╗░░░██╗████████╗███████╗██████╗░░██████╗
 ██╔══██╗██╔══██╗██║░░░██║╚══██╔══╝██╔════╝██╔══██╗██╔════╝
@@ -22,6 +26,10 @@ import Extensions from './components/Extensions';
 ██║░░██║╚█████╔╝╚██████╔╝░░░██║░░░███████╗██║░░██║██████╔╝
 ╚═╝░░╚═╝░╚════╝░░╚═════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝╚═════╝░
 */
+
+const TRACKING_ID = "G-15Q6HNH1D8"; // Google Analytics Tracking ID
+
+ReactGA.initialize(TRACKING_ID);
 
 export default function App() {
   /*
@@ -38,7 +46,12 @@ export default function App() {
   DOM File
     A HTML markup that contains graphical elements
   */
+
   const globalSelectedElement = useSelector((state) => state.selectedElement.globalSelectedElement);
+  
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
 
   return (
     <div>

@@ -32,7 +32,8 @@ import {
   getCameraPosition,
   useWindowSize,
   zoomInCamera,
-  zoomOutCamera
+  zoomOutCamera,
+  useAnalyticsEventTracker
 } from "./Globals";
 
 /*
@@ -294,6 +295,8 @@ export default function Molecule() {
     setParticleRadius(value);
   };
 
+  const gaEventTracker = useAnalyticsEventTracker('Molecule Renderer');
+
   return (
     <div>
       <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
@@ -320,6 +323,7 @@ export default function Molecule() {
                 <button
                   disabled={disableButton}
                   onClick={() => {
+                    gaEventTracker("Molecule Renderer", "Render");
                     if (
                       globalSelectedElement["element"] === "H2O" &&
                       lonePairEnabled

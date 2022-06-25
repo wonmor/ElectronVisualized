@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import ReactGA from "react-ga";
 
 /*
 ░█▀▀█ ░█─── ░█▀▀▀█ ░█▀▀█ ─█▀▀█ ░█─── ░█▀▀▀█ 
@@ -218,4 +219,11 @@ export const zoomOutCamera = (camera, constant) => {
   camera.position.y = camera.position.y * constant;
   camera.position.z = camera.position.z * constant;
 };
+
+export const useAnalyticsEventTracker = (category="Renderer") => {
+  const eventTracker = (action = "Initiate Rendering Process", label = "Renderer") => {
+    ReactGA.event({category, action, label});
+  }
+  return eventTracker;
+}
 
