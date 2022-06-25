@@ -25,7 +25,6 @@ export default function Extensions() {
 
   useEffect(() => {
     if (enableiOSComms) {
-      
     }
   }, [enableiOSComms]);
 
@@ -35,6 +34,37 @@ export default function Extensions() {
 
   // List of connected devices (a single value could be used if only connecting to one device)
   let connectedDevices = [];
+
+  const isElectron = () => {
+    // Renderer process
+    if (
+      typeof window !== "undefined" &&
+      typeof window.process === "object" &&
+      window.process.type === "renderer"
+    ) {
+      return true;
+    }
+
+    // Main process
+    if (
+      typeof process !== "undefined" &&
+      typeof process.versions === "object" &&
+      !!process.versions.electron
+    ) {
+      return true;
+    }
+
+    // Detect the user agent when the `nodeIntegration` option is set to true
+    if (
+      typeof navigator === "object" &&
+      typeof navigator.userAgent === "string" &&
+      navigator.userAgent.indexOf("Electron") >= 0
+    ) {
+      return true;
+    }
+
+    return false;
+  };
 
   // Example event call-back handler
   const uBitEventHandler = (reason, device, data) => {
@@ -88,7 +118,7 @@ export default function Extensions() {
     let browser = getBrowser(window);
     console.log(browser);
 
-    if (browser === "Google Chrome") {
+    if (browser === "Google Chrome" && isElectron() === false) {
       uBitConnectDevice(uBitEventHandler);
       setBrowserError(false);
     } else {
@@ -164,7 +194,17 @@ export default function Extensions() {
           {browserError && (
             <div>
               <h3 className="mt-5">
-                <b>Incompatible</b> browser. Please use <b>Google Chrome</b>.
+                {!isElectron() ? (
+                  <>
+                    <b>Incompatible</b> browser. Please use <b>Google Chrome</b>
+                    .
+                  </>
+                ) : (
+                  <>
+                    You're on the <b>Desktop</b> app. Please use the <b>Web</b>{" "}
+                    version to unlock this feature.
+                  </>
+                )}
               </h3>
             </div>
           )}
