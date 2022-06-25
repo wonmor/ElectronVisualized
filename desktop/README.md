@@ -1,6 +1,6 @@
 <img width="100" alt="Icon-MacOS-512x512@1x" src="assets/icon.png">
 
-# ElectronVisualized Studio
+# ElectronVisualized Desktop
 
 Major **Pun** Alert: Powered by the **Electron** Cross-platform Desktop App Framework.
 
