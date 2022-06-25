@@ -52,7 +52,7 @@ export default function Developer() {
     */
     await axios({
       method: "GET",
-      url: "/api/gpaw/H2",
+      url: "/api/molecule/H2",
     })
       .then((response) => {
         const res = response.data;
@@ -111,7 +111,7 @@ export default function Developer() {
           </h2>
 
           <p className="flex m-auto break-all scale-90 sm:scale-100 mb-5 p-3 max-w-fit text-rose-200 border border-rose-200 rounded">
-            https://electronvisual.org/api/gpaw/H2
+            https://electronvisual.org/api/molecule/H2
           </p>
 
           {!disable ? (

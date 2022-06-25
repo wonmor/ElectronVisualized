@@ -148,7 +148,7 @@ def _density_parser():
     return return_value
 
 
-def _transfer_to_client():
+def _transfer_to_client(distances):
     '''
     This is a function that generates the coordinates for all plausible locations where electrons might reside in
 
@@ -233,6 +233,7 @@ def _transfer_to_client():
 
     return_value = {
         'no_of_atoms': no_of_atoms,
+        'bond_lengths': distances,
         'atomic_colors': atomic_colors.tolist(),
         'elements': elements,
         'xdim': xdim,
@@ -283,6 +284,8 @@ def plot_molecule(name):
 
     mol.get_potential_energy()
 
+    distances = mol.get_all_distances()
+
     density = calc.get_all_electron_density(gridrefinement=gridrefinement)
 
     write('server/density.cube', mol, data=density)
@@ -291,7 +294,7 @@ def plot_molecule(name):
 
     np.save('server/grid.npy', grid)
 
-    return_value = _transfer_to_client()
+    return_value = _transfer_to_client(distances)
 
     with open(os.path.join(PROJECT_ROOT, f'client/src/assets/{element_name}.json'), 'w+') as outfile:
         json.dump(return_value, outfile, sort_keys=True,

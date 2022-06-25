@@ -8,6 +8,7 @@ from flask_socketio import SocketIO, emit, join_room
 from server.extensions import multipart_download_boto3
 
 from . import molecule
+from . import atom
 from . import socketio
 
 '''
@@ -117,9 +118,34 @@ def serve():
     '''
     return bp.send_static_file('index.html')
 
-@bp.route('/api/gpaw/<name>', methods=['GET'])
+@bp.route('/api/atom/<name>', methods=['GET'])
 @cross_origin()
-def compute(name):
+def compute_atom(name):
+    '''
+    When API call is made, this function executes
+    the plot_hydrogen method which computes the
+    electron density data for hydrogen atom.
+    Not only that, it also automatically saves all the data
+    on the Amazon S3 server.
+    
+    Parameters
+    ----------
+    name: String
+        Contains the name of the element
+
+    Returns
+    -------
+    JSON Object
+        A JSONified dictionary that contains
+        the electron density and coordinate data
+    '''
+    
+    data = atom.plot_atomic_orbital()
+    return data
+
+@bp.route('/api/molecule/<name>', methods=['GET'])
+@cross_origin()
+def compute_molecule(name):
     '''
     When API call is made, this function executes
     the plot_hydrogen method which computes the
@@ -144,7 +170,7 @@ def compute(name):
 
 @bp.route('/api/load/<name>', methods=['GET'])
 @cross_origin()
-def load(name):
+def load_from_s3(name):
     '''
     When API call is made, this function loads
     the JSON data from the Amazon S3 server
@@ -170,7 +196,7 @@ def load(name):
 
 @bp.route('/api/connect', methods=['POST'])
 @cross_origin()
-def connect():
+def connect_to_socket():
     '''
     When API call is made, this function opens the SocketIO connection
     

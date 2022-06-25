@@ -1,0 +1,63 @@
+import numpy as np
+import scipy.integrate as integrate
+import scipy.special as spe
+
+'''
+CODE RETRIEVED FROM:
+https://dpotoyan.github.io/Chem324/H-atom-wavef.html
+'''
+
+nmax = 10
+lmax = nmax-1
+
+def _psi_R(r,n=1,l=0):
+    coeff = np.sqrt((2.0 / n) ** 3 * spe.factorial(n-l-1) / (2.0*n*spe.factorial(n+l)))
+    
+    laguerre = spe.assoc_laguerre(2.0*r/n,n-l-1,2*l+1)
+    
+    return coeff * np.exp(-r / n) * (2.0 * r / n) ** l * laguerre
+
+def _psi_ang(phi,theta,l=0,m=0):
+    
+    sphHarm = spe.sph_harm(m,l,phi,theta)
+    
+    return sphHarm.real
+
+def _HFunc(r,theta,phi,n,l,m):
+    '''
+    INPUT
+        r: Radial coordinate
+        theta: Polar coordinate
+        phi: Azimuthal coordinate
+        n: Principle quantum number
+        l: Angular momentum quantum number
+        m: Magnetic quantum number
+
+    OUTPUT
+        Value of wavefunction
+    '''
+
+    return _psi_R(r,n,l) * _psi_ang(phi,theta,l,m)
+
+def plot_atomic_orbital(n=2, l=1, m=1):
+    maxi = 60
+    resolution = 160
+
+    base = np.linspace(-maxi, maxi, resolution)[:,np.newaxis,np.newaxis]
+
+    x2 = np.tile(base, (1,resolution,resolution))
+    y2 = np.swapaxes(x2,0,1)
+    z2 = np.swapaxes(x2,0,2)
+
+    total = np.concatenate((x2[np.newaxis,:],y2[np.newaxis,:],z2[np.newaxis,:]), axis=0)
+
+    r2 = np.linalg.norm(total, axis=0)
+
+    np.seterr(all='ignore')
+
+    phi2 = np.arctan(np.divide(total[2],np.linalg.norm(total[:2], axis=0))) + np.pi / 2
+    theta2 = np.arctan2(total[1],total[0])
+
+    psi = _HFunc(r2, theta2, phi2, n, l, m)
+
+    return r2 ** 2 * np.sin(phi2) * psi ** 2

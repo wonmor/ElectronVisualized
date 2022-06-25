@@ -316,7 +316,7 @@ export default function Table() {
             </h1>
 
             <p className="p-5 text-gray-400">
-              Visualize your favourite molecule using <b>GPAW</b> and <b>ASE</b>{" "}
+              Visualize your favourite molecules using <b>GPAW</b> and <b>ASE</b>{" "}
               packages. Now available on the <b>Web</b>.
             </p>
 
