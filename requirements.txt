@@ -22,8 +22,10 @@ jmespath==1.0.0
 joblib==1.1.0
 kiwisolver==1.4.2
 MarkupSafe==2.1.1
-numpy==1.22.4
+matplotlib==3.5.2
+numpy==1.23.0
 packaging==21.3
+Pillow==9.1.1
 pycodestyle==2.8.0
 pyface==7.4.1
 pyparsing==3.0.9
