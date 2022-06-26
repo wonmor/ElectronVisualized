@@ -147,7 +147,7 @@ export default function Extensions() {
           <p className="p-5 text-white">
             An Universal Solution to Controlling and Manipulating 3D Objects.
             <br></br>
-            <b>iOS</b> and <b>Android</b>, as well as <b>micro:bit</b> versions
+            <b>iOS</b>, as well as <b>micro:bit</b> versions
             are in <b>development</b>.
           </p>
 
