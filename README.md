@@ -16,6 +16,17 @@ Developed and Designed by **John Seong**. Served under the **MIT** License.
 
 ## Useful Links
 
+<p>Now Available on the Mac App Store</p>
+<div
+  class="store-badge"
+  data-name="ElectronVisualized"
+  data-app-store-url="https://apps.apple.com/us/app/electronvisualized/id1631246652?mt=12"
+></div>
+<script
+  async
+  src="https://cdn.jsdelivr.net/npm/store-badge@1/build/bundle.js"
+></script>
+
 [View the **Project Scope Statement**](https://github.com/wonmor/ElectronVisualized/blob/main/docs/John%20Seong%20-%20ICS3%20Project%20Scope%20Statement%20-%20ElectronVisualized.pdf)
 
 [Contact Me via **LinkedIn**](https://www.linkedin.com/in/john-seong-9194321a9)
