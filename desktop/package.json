@@ -1,7 +1,7 @@
 {
     "name": "electronvisualized-desktop",
     "productName": "ElectronVisualized",
-    "version": "1.0.3",
+    "version": "1.1.0",
     "description": "ElectronVisualized allows users to freely interact with the 3D models of atoms and molecules generated based upon the internal DFT calculations.",
     "main": "main.js",
     "build": {

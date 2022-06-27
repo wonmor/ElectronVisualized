@@ -10,7 +10,7 @@ import { setGlobalSelectedElement } from "../states/selectedElementSlice";
 
 import { Background } from "./Geometries";
 
-import { moleculeDict, useWindowSize } from "./Globals";
+import { moleculeDict, useWindowSize, isElectron } from "./Globals";
 
 import "./Table.css";
 
@@ -296,15 +296,42 @@ export default function Table() {
               size.width < 350 ? "truncate" : null
             }`}
           >
-            Visualizing <span className="text-rose-200"><b>Electron Density</b></span>.
-            Reimagined.
+            Visualizing{" "}
+            <span className="text-rose-200">
+              <b>Electron Density</b>
+            </span>
+            . Reimagined.
           </h1>
 
-          <h2 className="sm:mt-5 pb-3 pl-5 pr-5 text-gray-400">
-            Simulated with the
-            help of{" "}
+          <h2 className="sm:mt-5 mb-2 pb-3 pl-5 pr-5 text-gray-400">
+            Simulated with the help of{" "}
             <span className="text-white">Density Functional Theory</span>.
           </h2>
+
+          {!isElectron() && (
+            <a
+              href="https://apps.apple.com/us/app/electronvisualized/id1631246652?mt=12"
+              type="button"
+              class="text-white bg-[#050708] hover:bg-[#050708]/90 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#050708]/50 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+            >
+              <svg
+                class="w-5 h-5 mr-2 -ml-1"
+                aria-hidden="true"
+                focusable="false"
+                data-prefix="fab"
+                data-icon="apple"
+                role="img"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 384 512"
+              >
+                <path
+                  fill="currentColor"
+                  d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"
+                ></path>
+              </svg>
+              Now Available on the Mac App Store
+            </a>
+          )}
 
           <div className="bg-gray-600 pb-2">
             <h1
@@ -316,8 +343,8 @@ export default function Table() {
             </h1>
 
             <p className="p-5 text-gray-400">
-              Visualize your favourite molecules using <b>GPAW</b> and <b>ASE</b>{" "}
-              packages. Now available on the <b>Web</b>.
+              Visualize your favourite molecules using <b>GPAW</b> and{" "}
+              <b>ASE</b> packages. Now available on the <b>Web</b>.
             </p>
 
             <div className="ml-5 mr-5">
@@ -356,13 +383,28 @@ export default function Table() {
           {displayPeriodicTable()}
 
           <h2 className="p-5 text-gray-400 border-t border-gray-500">
-            "Compared to more traditional plane wave or localized basis set approaches, <span className="text-white">Projector Augmented-wave</span> method offers <span className="text-white">several advantages</span>, most notably good computational scalability and systematic convergence properties."
+            "Compared to more traditional plane wave or localized basis set
+            approaches,{" "}
+            <span className="text-white">Projector Augmented-wave</span> method
+            offers <span className="text-white">several advantages</span>, most
+            notably good computational scalability and systematic convergence
+            properties."
           </h2>
 
           <p className="p-5 text-gray-400">
-            — A public testimonial by  <span className="text-white">J Enkovaara et al. 2010</span> on their topical review <a href="https://iopscience.iop.org/article/10.1088/0953-8984/22/25/253202" className="hover:underline text-blue-200"><i>Electronic structure calculations with <b>GPAW</b></i></a>.
+            — A public testimonial by{" "}
+            <span className="text-white">J Enkovaara et al. 2010</span> on their
+            topical review{" "}
+            <a
+              href="https://iopscience.iop.org/article/10.1088/0953-8984/22/25/253202"
+              className="hover:underline text-blue-200"
+            >
+              <i>
+                Electronic structure calculations with <b>GPAW</b>
+              </i>
+            </a>
+            .
           </p>
-
         </div>
         <Background />
       </div>
