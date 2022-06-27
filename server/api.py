@@ -1,15 +1,17 @@
 import json
 import os
 
-from flask import Blueprint, jsonify, request, send_from_directory, current_app
+from flask import Blueprint, request, current_app
+
 from flask_cors import CORS, cross_origin
 from flask_socketio import SocketIO, emit, join_room
 
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+
 from server.extensions import multipart_download_boto3
 
-from . import molecule
-from . import atom
-from . import socketio
+from . import molecule, atom, socketio
 
 '''
 █▀█ █▀▀ █▀ ▀█▀   ▄▀█ █▀█ █
@@ -19,6 +21,12 @@ DEVELOPED AND DESIGNED BY JOHN SEONG
 '''
 
 bp = Blueprint('main', __name__, static_folder='../client/build', static_url_path='/')
+
+limiter = Limiter(
+    current_app,
+    key_func=get_remote_address,
+    default_limits=["200 per day", "50 per hour"]
+)
 
 # WHAT IS CORS: https://flask-cors.readthedocs.io/en/latest/
 
@@ -85,6 +93,7 @@ def default_error_handler(e):
 
 # For React Router Redirection Purposes...
 @bp.app_errorhandler(404)   
+@limiter.exempt
 def not_found(e):   
     '''
     This function is used to redirect the user to the React Router page
@@ -102,6 +111,7 @@ def not_found(e):
     return bp.send_static_file('index.html')
 
 @bp.route('/') 
+@limiter.exempt
 def serve():
     '''
     This function is executed in root directory,
@@ -119,6 +129,7 @@ def serve():
     return bp.send_static_file('index.html')
 
 @bp.route('/api/atom/<name>', methods=['GET'])
+@limiter.exempt
 @cross_origin()
 def compute_atom(name):
     '''
@@ -144,6 +155,7 @@ def compute_atom(name):
     return data
 
 @bp.route('/api/molecule/<name>', methods=['GET'])
+@limiter.limit("5 per minute")
 @cross_origin()
 def compute_molecule(name):
     '''
@@ -169,6 +181,7 @@ def compute_molecule(name):
     return data
 
 @bp.route('/api/load/<name>', methods=['GET'])
+@limiter.exempt
 @cross_origin()
 def load_from_s3(name):
     '''
@@ -195,6 +208,7 @@ def load_from_s3(name):
         return data
 
 @bp.route('/api/connect', methods=['POST'])
+@limiter.exempt
 @cross_origin()
 def connect_to_socket():
     '''

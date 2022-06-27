@@ -1,6 +1,5 @@
 import json
 import os
-from flask import jsonify
 
 import numpy as np
 from ase.data.colors import jmol_colors as atomic_colors
@@ -11,7 +10,7 @@ from ase.io import write
 
 from werkzeug.local import LocalProxy
 
-from flask import current_app
+from flask import jsonify, current_app
 
 from server.extensions import multipart_upload_boto3
 
@@ -233,7 +232,7 @@ def _transfer_to_client(distances):
 
     return_value = {
         'no_of_atoms': no_of_atoms,
-        'bond_lengths': distances,
+        'bond_lengths': distances.tolist(),
         'atomic_colors': atomic_colors.tolist(),
         'elements': elements,
         'xdim': xdim,

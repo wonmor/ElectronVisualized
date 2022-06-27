@@ -68,7 +68,9 @@ export default function Developer() {
           ydim: res.ydim,
           zdim: res.zdim,
 
+          bond_lengths: res.bond_lengths,
           density_data: res.density_data,
+
         });
 
         setPreRender(false);
@@ -212,6 +214,14 @@ export default function Developer() {
 
                     <br></br>
                     {JSON.stringify(atomInfo.atoms_z, null, 2)}
+                    <br></br>
+
+                    <span>
+                      <code>bond_lengths:</code>
+                    </span>
+
+                    <br></br>
+                    {JSON.stringify(atomInfo.bond_lengths, null, 2)}
                     <br></br>
 
                     <br></br>
