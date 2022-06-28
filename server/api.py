@@ -129,7 +129,7 @@ def serve():
     return bp.send_static_file('index.html')
 
 @bp.route('/api/atom/<name>', methods=['GET'])
-@limiter.exempt
+@limiter.limit("5 per minute")
 @cross_origin()
 def compute_atom(name):
     '''
@@ -150,9 +150,12 @@ def compute_atom(name):
         A JSONified dictionary that contains
         the electron density and coordinate data
     '''
-    
-    data = atom.plot_atomic_orbital()
-    return data
+    with open('server/quantum_num.json', 'r') as f:
+        name_dict = json.load(f)
+        current_name = name_dict[name]
+
+        data = atom.plot_atomic_orbital(current_name["n"], current_name["l"], current_name["m"])
+        return data
 
 @bp.route('/api/molecule/<name>', methods=['GET'])
 @limiter.limit("5 per minute")

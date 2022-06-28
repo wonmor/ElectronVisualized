@@ -27,18 +27,17 @@
     opacity: 0.5;
 }
 
-#periodic-table li:nth-of-type(1) {
+#periodic-table li:nth-of-type(1),
+
+#periodic-table li:nth-of-type(8),
+
+#periodic-table li:nth-of-type(29) {
     cursor: pointer;
     color: white;
 }
 
 #periodic-table li:nth-of-type(2) {
   grid-column: 18;
-}
-
-#periodic-table li:nth-of-type(8) {
-  cursor: pointer;
-  color: white;
 }
 
 #periodic-table li:nth-of-type(5),

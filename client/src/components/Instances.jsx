@@ -49,7 +49,7 @@ export function Particles({ particleRef, lightRef, particleRadius }) {
     let temp = [];
     let isColourException = false;
 
-    if (globalAtomInfo["density_data"]) {
+    if (globalSelectedElement["type"] === "Molecule" && globalAtomInfo["density_data"]) {
       for (const [key, value] of Object.entries(
         globalAtomInfo["density_data"]
       )) {
@@ -76,9 +76,21 @@ export function Particles({ particleRef, lightRef, particleRadius }) {
 
         temp.push({ x, y, z, volume, isColourException });
       }
+      
+    } else if (globalSelectedElement["type"] === "Atom" && globalAtomInfo["z_coords"]) {
+      for (let i = 0; i < globalAtomInfo["z_coords"].length; i++) {
+        const x = globalAtomInfo["x_coords"][i] / 10 - 8;
+        const y = globalAtomInfo["y_coords"][i] / 10 - 8;
+        const z = globalAtomInfo["z_coords"][i] / 10 - 8;
+
+        const volume = 0;
+
+        temp.push({ x, y, z, volume, isColourException });
+      }
     }
+
     return temp;
-  }, [globalAtomInfo]);
+  }, [globalAtomInfo, globalSelectedElement]);
 
   // Anonymous states for instances...
   const anonymousObject = useMemo(() => new THREE.Object3D(), []);
@@ -124,7 +136,7 @@ export function Particles({ particleRef, lightRef, particleRadius }) {
   return (
     <instancedMesh
       ref={meshRef}
-      args={[null, null, Object.keys(globalAtomInfo["density_data"]).length]}
+      args={[null, null, globalSelectedElement["type"] === "Molecule" ? Object.keys(globalAtomInfo["density_data"]).length : globalAtomInfo["z_coords"].length]}
     >
         <ambientLight ref={lightRef} />
         <sphereBufferGeometry

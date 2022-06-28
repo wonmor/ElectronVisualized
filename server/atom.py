@@ -1,9 +1,13 @@
+from flask import jsonify
 import numpy as np
 import scipy.special as spe
 
 '''
-CODE RETRIEVED FROM:
+SPHERICAL HARMONICS CALCULATIONS WERE BASED UPON:
 https://dpotoyan.github.io/Chem324/H-atom-wavef.html
+https://towardsdatascience.com/quantum-physics-visualization-with-python-35df8b365ff
+
+TO DO: ADD A FUNCTIONALITY WHERE THE USER CAN ACTIVELY TINKER WITH THE MAGNETIC QUANTUM NUMBER
 '''
 
 nmax = 10
@@ -59,4 +63,35 @@ def plot_atomic_orbital(n=2, l=1, m=1):
 
     psi = _HFunc(r2, theta2, phi2, n, l, m)
 
-    return r2 ** 2 * np.sin(phi2) * psi ** 2
+    density = r2 ** 2 * np.sin(phi2) * psi ** 2
+
+    elements = []
+    probability = []
+
+    for ix in range(resolution):
+        for iy in range(resolution):
+            for iz in range(resolution):
+                #Serialize into 1D object
+                elements.append(str((ix,iy,iz)))
+                probability.append(density[ix][iy][iz])
+
+    #Ensure sum of probability is 1
+    probability = probability / sum(probability)
+
+    # Getting electron coordinates based on probabiliy
+    coord = np.random.choice(elements, size=100000, replace=True, p=probability)
+
+    elem_mat = [i.split(',') for i in coord]
+    elem_mat = np.matrix(elem_mat)
+    
+    x_coords = [float(i.item()[1:]) for i in elem_mat[:,0]] 
+    y_coords = [float(i.item()) for i in elem_mat[:,1]] 
+    z_coords = [float(i.item()[0:-1]) for i in elem_mat[:,2]]
+
+    return_value = {
+        "x_coords": x_coords,
+        "y_coords": y_coords,
+        "z_coords": z_coords
+    }
+
+    return jsonify(return_value)

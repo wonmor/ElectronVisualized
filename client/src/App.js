@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 import { Routes, Route } from "react-router-dom";
-import { useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
 import './App.css';
 
@@ -9,7 +9,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 
 import Table from './components/Table'
-import Molecule from './components/Molecule';
+import Renderer from './components/Renderer';
 import NotFound from './components/NotFound';
 
 import Developer from './components/Developer';
@@ -60,8 +60,8 @@ export default function App() {
         <Routes>
           <Route path="*" element={<NotFound />} />
           <Route exact path="/" element={<Table />} />
-          <Route path="/renderer" element={<Molecule />} />
-          <Route path={`/renderer/${globalSelectedElement["element"]}`} element={<Molecule />} />
+          <Route path="/renderer" element={<Renderer />} />
+          <Route path={`/renderer/${globalSelectedElement["element"]}`} element={<Renderer />} />
           <Route path="/dev" element={<Developer />} />
           <Route path="/docs" element={<Docs />} />
           <Route path="/extensions" element={<Extensions />} />

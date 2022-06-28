@@ -18,6 +18,7 @@ export const selectedElementSlice = createSlice({
         globalSelectedElement: {
             element: "H2",
             name: "Hydrogen Gas",
+            type: "Molecule",
             description: "Hydrogen is the first element in the periodic table. The atomic number is 1 and its mass is 1.01 g/mol. Its gas form consists of two Hydrogen atoms, forming a Sigma bond.",
         },
     },

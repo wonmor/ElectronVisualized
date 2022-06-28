@@ -33,14 +33,10 @@ import {
   useWindowSize,
   zoomInCamera,
   zoomOutCamera,
-  useAnalyticsEventTracker
+  useAnalyticsEventTracker,
 } from "./Globals";
 
 /*
-░█▀▄▀█ ░█▀▀▀█ ░█─── ░█▀▀▀ ░█▀▀█ ░█─░█ ░█─── ░█▀▀▀ 
-░█░█░█ ░█──░█ ░█─── ░█▀▀▀ ░█─── ░█─░█ ░█─── ░█▀▀▀ 
-░█──░█ ░█▄▄▄█ ░█▄▄█ ░█▄▄▄ ░█▄▄█ ─▀▄▄▀ ░█▄▄█ ░█▄▄▄
-
 DEVELOPED AND DESIGNED BY JOHN SEONG.
 USES GPAW (DENSITY FUNCTIONAL THEORY) FOR COMPUTATION PURPOSES.
 
@@ -80,7 +76,7 @@ const useLazyInterval = (callback, delay) => {
   }, [delay]);
 };
 
-export default function Molecule() {
+export default function Renderer() {
   /*
   This is a component function in JSX that also handles the HTTP requests from the server by using AJAX
 
@@ -185,7 +181,7 @@ export default function Molecule() {
     );
   }, [animation, disableButton, dispatch, preRender, serverError, statusText]);
 
-  const fetchSecondRenderElement = async (secondRenderElement) => {
+  const fetchMoleculeSecondRenderElement = async (secondRenderElement) => {
     await axios({
       method: "GET",
       url: `/api/load/${secondRenderElement}`,
@@ -215,7 +211,7 @@ export default function Molecule() {
       });
   };
 
-  const fetchCombinedRenderElement = async (
+  const fetchMoleculeCombinedRenderElement = async (
     firstRenderElement,
     secondRenderElement = null
   ) => {
@@ -261,10 +257,54 @@ export default function Molecule() {
 
         if (secondRenderElement !== null) {
           // Nested AXIOS method...
-          fetchSecondRenderElement(secondRenderElement);
+          fetchMoleculeSecondRenderElement(secondRenderElement);
         } else {
           setPreRender(false);
         }
+      })
+      .catch((error) => {
+        if (error.response) {
+          setStatusText("Server communication error has occured!");
+          setServerError(true);
+
+          console.log(error.response);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+
+          return;
+        }
+      });
+  };
+
+  const fetchAtomRenderElement = async (renderElement) => {
+    /*
+    This is an asyncronous function that sends HTML requests to the server, ran by Flask (Python)
+
+    Parameters
+    ----------
+    None
+
+    Returns
+    -------
+    None
+    */
+
+    await axios({
+      method: "GET",
+      url: `/api/atom/${renderElement}`,
+    })
+      .then((response) => {
+        const res = response.data;
+
+        dispatch(
+          setGlobalAtomInfo({
+            x_coords: res.x_coords,
+            y_coords: res.y_coords,
+            z_coords: res.z_coords,
+          }) || null
+        );
+
+        setPreRender(false);
       })
       .catch((error) => {
         if (error.response) {
@@ -295,7 +335,7 @@ export default function Molecule() {
     setParticleRadius(value);
   };
 
-  const gaEventTracker = useAnalyticsEventTracker('Molecule Renderer');
+  const gaEventTracker = useAnalyticsEventTracker("Molecule Renderer");
 
   return (
     <div>
@@ -323,20 +363,25 @@ export default function Molecule() {
                 <button
                   disabled={disableButton}
                   onClick={() => {
-                    gaEventTracker("Molecule Renderer", "Render");
-                    if (
-                      globalSelectedElement["element"] === "H2O" &&
-                      lonePairEnabled
-                    ) {
-                      fetchCombinedRenderElement("H2O", "O");
-                      /*
+                    if (globalSelectedElement["type"] === "Molecule") {
+                      gaEventTracker("Molecule Renderer", "Render");
+
+                      if (
+                        globalSelectedElement["element"] === "H2O" &&
+                        lonePairEnabled
+                      ) {
+                        fetchMoleculeCombinedRenderElement("H2O", "O");
+                        /*
                         Save oxygen atom's coordinates to subtract it
                         from the water's coordinates to visualize the lone pairs...
                         */
+                      } else if (globalSelectedElement["type"] === "Atom") {
+                        fetchMoleculeCombinedRenderElement(
+                          globalSelectedElement["element"]
+                        );
+                      }
                     } else {
-                      fetchCombinedRenderElement(
-                        globalSelectedElement["element"]
-                      );
+                      fetchAtomRenderElement(globalSelectedElement["element"]);
                     }
                     setDisableButton(true);
                   }}
@@ -456,7 +501,7 @@ export default function Molecule() {
 
             {globalAtomInfo && !preRender && (
               <Provider store={store}>
-                {globalAtomInfo["atoms_x"].map((value, index) => {
+                {globalSelectedElement["type"] === "Molecule" && globalAtomInfo["atoms_x"].map((value, index) => {
                   return (
                     <mesh>
                       <Atoms
@@ -523,30 +568,30 @@ export default function Molecule() {
           <>
             <div className="flex flex-row justify-center items-center w-full p-5">
               <button
-                  onMouseDown={() => {
-                    setZoomCameraConstant(zoomCameraConstant + 0.1);
-                  }}
-                  onClick={() => {
-                    zoomInCamera(globalCameraInfo, zoomCameraConstant);
-                  }}
-                  className="mr-2 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
-                  type="button"
-                >
-                  <span>Zoom In</span>
-                </button>
+                onMouseDown={() => {
+                  setZoomCameraConstant(zoomCameraConstant + 0.1);
+                }}
+                onClick={() => {
+                  zoomInCamera(globalCameraInfo, zoomCameraConstant);
+                }}
+                className="mr-2 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
+                type="button"
+              >
+                <span>Zoom In</span>
+              </button>
 
-                <button
-                  onMouseDown={() => {
-                    setZoomCameraConstant(zoomCameraConstant - 0.1);
-                  }}
-                  onClick={() => {
-                    zoomOutCamera(globalCameraInfo, zoomCameraConstant);
-                  }}
-                  className="mr-2 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
-                  type="button"
-                >
-                  <span>Zoom Out</span>
-                </button>
+              <button
+                onMouseDown={() => {
+                  setZoomCameraConstant(zoomCameraConstant - 0.1);
+                }}
+                onClick={() => {
+                  zoomOutCamera(globalCameraInfo, zoomCameraConstant);
+                }}
+                className="mr-2 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
+                type="button"
+              >
+                <span>Zoom Out</span>
+              </button>
             </div>
 
             <div className="flex justify-center items-center w-full pl-5 pr-5 pb-5">

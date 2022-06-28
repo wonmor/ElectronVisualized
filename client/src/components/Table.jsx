@@ -84,7 +84,7 @@ export default function Table() {
     );
   };
 
-  const appendNewRender = (element, name, description) => {
+  const appendNewRender = (element, name, type, description) => {
     /*
     This function clears the previous render
     and append a new information to Redux global state
@@ -101,6 +101,7 @@ export default function Table() {
       setGlobalSelectedElement({
         element: element,
         name: name,
+        type: type,
         description: description,
       })
     );
@@ -137,6 +138,7 @@ export default function Table() {
                 appendNewRender(
                   "H",
                   "Hydrogen Atom",
+                  "Atom",
                   "Hydrogen is the lightest element. At standard conditions hydrogen is a gas of diatomic molecules having the formula H2. It is colorless, odorless, tasteless, non-toxic, and highly combustible. Hydrogen is the most abundant chemical substance in the universe, constituting roughly 75% of all normal matter."
                 );
               }}
@@ -160,6 +162,7 @@ export default function Table() {
                 appendNewRender(
                   "O",
                   "Oxygen Atom",
+                  "Atom",
                   "Oxygen is a colourless, odourless, tasteless gas essential to living organisms, being taken up by animals, which convert it to carbon dioxide; plants, in turn, utilize carbon dioxide as a source of carbon and return the oxygen to the atmosphere."
                 );
               }}
@@ -191,7 +194,24 @@ export default function Table() {
             <li title="Iron">Fe</li>
             <li title="Cobalt">Co</li>
             <li title="Nickel">Ni</li>
-            <li title="Copper">Cu</li>
+            <li
+              onMouseDown={() => {
+                // This code runs first...
+                appendNewRender(
+                  "Cu",
+                  "Copper Atom",
+                  "Atom",
+                  "Copper is a chemical element with the symbol Cu (from Latin: cuprum) and atomic number 29. It is a soft, malleable, and ductile metal with very high thermal and electrical conductivity."
+                );
+              }}
+              onClick={() => {
+                // This code runs after a global state change...
+                movePage(`/renderer/${globalSelectedElement["element"]}`);
+              }}
+              title="Copper"
+            >
+              Cu
+            </li>
             <li title="Zinc">Zn</li>
             <li title="Gallium">Ga</li>
             <li title="Germanium">Ge</li>
@@ -355,7 +375,7 @@ export default function Table() {
                   <button
                     onMouseDown={() => {
                       // This code runs first...
-                      appendNewRender(key, value[0], value[1]);
+                      appendNewRender(key, value[0], "Molecule", value[1]);
                     }}
                     onClick={() => {
                       // This code runs after a global state change...
@@ -376,8 +396,8 @@ export default function Table() {
           </h1>
 
           <p className="p-5 text-gray-400 border-b border-gray-500">
-            Website still in the <b>development</b> phase. Only <b>Hydrogen</b>{" "}
-            and <b>Oxygen</b> are available at the moment.
+            <b>Spherical Harmonics</b> have now been implemented! <b>Hydrogen</b>,{" "}
+            <b>Copper</b>, and <b>Oxygen</b> Atoms are available at the moment.
           </p>
 
           {displayPeriodicTable()}
