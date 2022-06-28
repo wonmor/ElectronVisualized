@@ -22,14 +22,14 @@ Developed and Designed by **John Seong**. Served under the **MIT** License.
 
 ---
 
-## Atoms
+# Atoms
 <img width="1200" alt="Screenshot 2022-06-28 at 2 54 02 AM" src="https://user-images.githubusercontent.com/35755386/176113368-36ec8126-9570-4938-9bc1-eb9aa294f747.png">
 
 <img width="1200" alt="Screenshot 2022-06-28 at 2 53 32 AM" src="https://user-images.githubusercontent.com/35755386/176113513-fe8f4f3f-206d-4614-b0ad-e80f99b179e9.png">
 
 ---
 
-## Molecules
+# Molecules
 
 <img width="1200" alt="Screen Shot 2022-06-18 at 3 00 56 AM" src="https://user-images.githubusercontent.com/35755386/174426800-9100bc8e-6158-4668-b1b2-d741b9ded6c5.png">
 
