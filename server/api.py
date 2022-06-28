@@ -154,7 +154,7 @@ def compute_atom(name):
         name_dict = json.load(f)
         current_name = name_dict[name]
 
-        data = atom.plot_atomic_orbital(current_name["n"], current_name["l"], current_name["m"])
+        data = atom.plot_atomic_orbital(name, current_name["n"], current_name["l"], current_name["m"])
         return data
 
 @bp.route('/api/molecule/<name>', methods=['GET'])
@@ -205,6 +205,33 @@ def load_from_s3(name):
     output = os.path.join(PROJECT_ROOT, f'client/src/assets/{name}.json')
 
     multipart_download_boto3(name, output)
+    
+    with open(output, 'r') as f:
+        data = json.load(f)
+        return data
+
+@bp.route('/api/loadSPH/<name>', methods=['GET'])
+@limiter.exempt
+@cross_origin()
+def loadSPH_from_s3(name):
+    '''
+    When API call is made, this function loads
+    the JSON data from the Amazon S3 server
+    
+    Parameters
+    ----------
+    name: String
+        Contains the name of the element
+
+    Returns
+    -------
+    JSON Object
+        A JSONified dictionary that contains
+        the electron density and coordinate data
+    '''
+    output = os.path.join(PROJECT_ROOT, f'client/src/assets/SPH_{name}.json')
+
+    multipart_download_boto3("SPH_" + name, output)
     
     with open(output, 'r') as f:
         data = json.load(f)

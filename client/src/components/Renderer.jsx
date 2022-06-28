@@ -291,7 +291,7 @@ export default function Renderer() {
 
     await axios({
       method: "GET",
-      url: `/api/atom/${renderElement}`,
+      url: `/api/loadSPH/${renderElement}`,
     })
       .then((response) => {
         const res = response.data;

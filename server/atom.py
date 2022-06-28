@@ -1,6 +1,10 @@
+import json
+import os
 from flask import jsonify
 import numpy as np
 import scipy.special as spe
+
+from server.extensions import multipart_upload_boto3
 
 '''
 SPHERICAL HARMONICS CALCULATIONS WERE BASED UPON:
@@ -12,6 +16,8 @@ TO DO: ADD A FUNCTIONALITY WHERE THE USER CAN ACTIVELY TINKER WITH THE MAGNETIC 
 
 nmax = 10
 lmax = nmax-1
+
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def _psi_R(r,n=1,l=0):
     coeff = np.sqrt((2.0 / n) ** 3 * spe.factorial(n-l-1) / (2.0*n*spe.factorial(n+l)))
@@ -42,7 +48,7 @@ def _HFunc(r,theta,phi,n,l,m):
 
     return _psi_R(r,n,l) * _psi_ang(phi,theta,l,m)
 
-def plot_atomic_orbital(n=2, l=1, m=1):
+def plot_atomic_orbital(element_name, n, l, m):
     maxi = 60
     resolution = 160
 
@@ -93,5 +99,11 @@ def plot_atomic_orbital(n=2, l=1, m=1):
         "y_coords": y_coords,
         "z_coords": z_coords
     }
+
+    with open(os.path.join(PROJECT_ROOT, f'client/src/assets/SPH_{element_name}.json'), 'w+') as outfile:
+        json.dump(return_value, outfile, sort_keys=True,
+                  indent=4, separators=(',', ': '))
+
+    multipart_upload_boto3("SPH_" + element_name, os.path.join(PROJECT_ROOT, f'client/src/assets/SPH_{element_name}.json'))
 
     return jsonify(return_value)
