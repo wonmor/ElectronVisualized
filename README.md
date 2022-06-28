@@ -16,9 +16,9 @@ Developed and Designed by **John Seong**. Served under the **MIT** License.
 
 ## Useful Links
 
-[**Mac App Store**](https://apps.apple.com/us/app/electronvisualized/id1631246652?mt=12)
+[Download on the **Mac App Store**](https://apps.apple.com/us/app/electronvisualized/id1631246652?mt=12)
 
-[**LinkedIn**](https://www.linkedin.com/in/john-seong-9194321a9)
+[Check out my **LinkedIn**](https://www.linkedin.com/in/john-seong-9194321a9)
 
 ---
 
