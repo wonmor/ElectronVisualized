@@ -24,7 +24,7 @@ Developed and Designed by **John Seong**. Served under the **MIT** License.
 
 # Atoms
 
-**ElectronVisualized** uses the **spherical harmonics** formula to accurately depict the shape of each atomic orbital based upon its four quantum numbers.
+**ElectronVisualized** uses the **spherical harmonics** formula to accurately depict the shape of each atomic orbital based upon its four quantum numbers. Each dot represent a probable location of where electron might be.
 
 <img width="1200" alt="Screenshot 2022-06-28 at 2 59 12 AM" src="https://user-images.githubusercontent.com/35755386/176114204-8c2b936a-45c5-4f0b-a507-0aaddb252943.png">
 
