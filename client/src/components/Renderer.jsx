@@ -376,6 +376,10 @@ export default function Renderer() {
                         from the water's coordinates to visualize the lone pairs...
                         */
                       } else if (globalSelectedElement["type"] === "Atom") {
+                        fetchAtomRenderElement(
+                          globalSelectedElement["element"]
+                        );
+                      } else {
                         fetchMoleculeCombinedRenderElement(
                           globalSelectedElement["element"]
                         );
