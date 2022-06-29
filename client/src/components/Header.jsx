@@ -169,15 +169,18 @@ export default function Header() {
           </div>
         </Transition>
 
+        {/* Reponsive Search Bar... */}
         {size.width > 1024 && (
-          <form className="justify-self-end m-5 break-all overflow-auto scale-90 sm:scale-100 mb-5 p-3 max-w-fit text-white border border-gray-400 rounded">
+          <form className="justify-self-end m-5 break-all overflow-auto scale-90 sm:scale-100 mb-5 p-3 max-w-fit text-white border border-gray-400">
             <label>
-              <input
-                className="bg-transparent"
-                type="text"
-                onChange={setSearchKeyword}
-                placeholder="Search by any keyword..."
-              />
+              <span>
+                <input
+                  className="bg-transparent"
+                  type="text"
+                  onChange={setSearchKeyword}
+                  placeholder="Search by any keyword..."
+                />
+              </span>
             </label>
           </form>
         )}
