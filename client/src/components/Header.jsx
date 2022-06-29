@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+
+import { Transition } from "@headlessui/react";
 
 import { useWindowSize } from "./Globals";
 
 import "./Header.css";
 import Logo from "../assets/e_logo.svg";
+import { useEffect } from "react";
 
 /*
 ███████████████████████████████████
@@ -28,7 +31,10 @@ export default function Header() {
   */
   const size = useWindowSize();
 
+  const location = useLocation();
+
   const [showMenu, setMenu] = useState(false);
+  const [showMenuAlreadyTriggered, setMenuAlreadyTriggered] = useState(false);
 
   const navigate = useNavigate();
 
@@ -48,6 +54,17 @@ export default function Header() {
     setMenu(false);
     navigate(page);
   };
+
+  // Responsive Menu Design
+  useEffect(() => {
+    if (size.width > 1024) {
+      setMenu(true);
+      setMenuAlreadyTriggered(true);
+    } else if (showMenuAlreadyTriggered) {
+      setMenu(false);
+      setMenuAlreadyTriggered(false);
+    }
+  }, [showMenu, showMenuAlreadyTriggered, size.width]);
 
   return (
     <nav className="flex items-center justify-between flex-wrap bg-gray-800 p-3">
@@ -87,15 +104,26 @@ export default function Header() {
           </svg>
         </button>
       </div>
-
-      {(showMenu || size.width > 1024) && (
-        <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+      <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+        <Transition
+          show={showMenu}
+          enter="transition ease-out duration-100"
+          enterFrom="transform opacity-0 scale-95"
+          enterTo="transform opacity-100 scale-100"
+          leave="transition ease-in duration-200"
+          leaveFrom="transform opacity-100 scale-100"
+          leaveTo="transform opacity-0 scale-95"
+        >
           <div className="text-sm lg:flex-grow">
             <button
               onClick={() => {
                 movePage("/renderer");
               }}
-              className="block mt-4 lg:inline-block lg:mt-0 text-rose-200 hover:text-white mr-4"
+              className={`block mt-4 lg:inline-block lg:mt-0 mr-4 ${
+                location.pathname === "/renderer"
+                  ? "text-gray-400"
+                  : "text-rose-200"
+              } hover:text-white`}
             >
               <span>Renderer</span>
             </button>
@@ -104,7 +132,9 @@ export default function Header() {
               onClick={() => {
                 movePage("/dev");
               }}
-              className="block mt-4 lg:inline-block lg:mt-0 text-rose-200 hover:text-white mr-4"
+              className={`block mt-4 lg:inline-block lg:mt-0 ${
+                location.pathname === "/dev" ? "text-gray-400" : "text-rose-200"
+              } hover:text-white mr-4`}
             >
               <span>API</span>
             </button>
@@ -113,7 +143,11 @@ export default function Header() {
               onClick={() => {
                 movePage("/docs");
               }}
-              className="block mt-4 lg:inline-block lg:mt-0 text-rose-200 hover:text-white mr-4"
+              className={`block mt-4 lg:inline-block lg:mt-0 ${
+                location.pathname === "/docs"
+                  ? "text-gray-400"
+                  : "text-rose-200"
+              } hover:text-white mr-4`}
             >
               <span>Docs</span>
             </button>
@@ -122,13 +156,17 @@ export default function Header() {
               onClick={() => {
                 movePage("/extensions");
               }}
-              className="block mt-4 lg:inline-block lg:mt-0 text-rose-200 hover:text-white"
+              className={`block mt-4 lg:inline-block lg:mt-0 ${
+                location.pathname === "/extensions"
+                  ? "text-gray-400"
+                  : "text-rose-200"
+              } hover:text-white`}
             >
               <span>Extensions</span>
             </button>
           </div>
-        </div>
-      )}
+        </Transition>
+      </div>
     </nav>
   );
 }

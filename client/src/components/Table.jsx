@@ -367,7 +367,7 @@ export default function Table() {
             </h1>
 
             <p className="p-5 text-gray-400">
-              Visualize your favourite molecules using <b>GPAW</b> and{" "}
+              Visualize your favourite molecules' electron density using <b>GPAW</b> and{" "}
               <b>ASE</b> packages. Now available on the <b>Web</b>.
             </p>
 
@@ -400,7 +400,7 @@ export default function Table() {
           </h1>
 
           <p className="p-5 text-gray-400 border-b border-gray-500">
-            <b>Spherical Harmonics</b> have now been implemented! <b>Hydrogen</b>,{" "}
+            Using <b>spherical harmonics</b>, view the atomic orbital structure of your choice. <b>Hydrogen</b>,{" "}
             <b>Copper</b>, and <b>Oxygen</b> Atoms are available at the moment.
           </p>
 
