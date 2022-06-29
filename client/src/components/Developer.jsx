@@ -112,7 +112,7 @@ export default function Developer() {
             <span className="text-white">Engineers</span>.
           </h2>
 
-          <p className="flex m-auto break-all overflow-auto scale-90 sm:scale-100 mb-5 p-3 max-w-fit text-rose-200 border border-rose-200 rounded">
+          <p id="api-url" className="flex m-auto break-all overflow-auto scale-90 sm:scale-100 mb-5 p-3 max-w-fit text-rose-200 border border-rose-200 rounded">
             https://electronvisual.org/api/molecule/H2
           </p>
 

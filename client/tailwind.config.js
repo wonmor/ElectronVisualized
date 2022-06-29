@@ -3,7 +3,11 @@ module.exports = {
         "./src/**/*.{js,jsx,ts,tsx}"
     ],
     theme: {
-        extend: {},
+        extend: {
+            dropShadow: {
+                'white': '0 25px 25px rgba(255, 255, 255, 0.25)',
+            }
+        },
     },
     plugins: []
 }

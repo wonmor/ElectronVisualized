@@ -2,6 +2,8 @@ import React, { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 
+import { moleculeDict } from "./Globals";
+
 /*
 ████████████████████████████████████████████████████████████████████████████████████
 █▄─▄▄▀█▄─▄▄▀█─▄▄─█▄─▄▄─█▄─▄▄▀█─▄▄─█▄─█▀▀▀█─▄█▄─▀█▄─▄███▄─▀█▀─▄█▄─▄▄─█▄─▀█▄─▄█▄─██─▄█
@@ -25,10 +27,6 @@ const classNames = (...classes) => {
   return classes.filter(Boolean).join(" ");
 }
 
-const dataTypeConversion = {
-  "H2": "Hydrogen Gas — H2",
-}
-
 export default function Dropdown() {
   /*
   This is a component function in JSX that handles all the dropdown menu-related events
@@ -48,7 +46,7 @@ export default function Dropdown() {
 
         <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
           <span className="font-bold">
-            {dataTypeConversion["H2"]}
+            {moleculeDict["H2"][0]}
           </span>
           
           <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
@@ -71,13 +69,13 @@ export default function Dropdown() {
 
               {({ active }) => (
                 <a
-                  href="#api-description"
+                  href="#api-url"
                   className={classNames(
                     active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                     "block px-4 py-2 text-sm"
                   )}
                 >
-                  {dataTypeConversion["H2"]}
+                  {moleculeDict["H2"][0]}
                 </a>
               )}
 
