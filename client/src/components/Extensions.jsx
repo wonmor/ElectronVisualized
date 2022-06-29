@@ -145,7 +145,7 @@ export default function Extensions() {
                 </span>
               </button>
 
-              <a href="https://github.com/wonmor/Project-Atomizer">
+              <a href="https://github.com/wonmor/Project-Atomizer" target="_blank" rel="noopener noreferrer">
                 <button className="ml-2 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded">
                   <span>
                     Check out the <b>GitHub</b> Page
@@ -210,7 +210,7 @@ export default function Extensions() {
           <div className="pl-0 pr-0 lg:pl-60 lg:pr-60 flex justify-center">
             <p className="pl-5 pr-5 text-left text-white">
               <b>1.</b> Install <b>Thonny</b> IDE through their{" "}
-              <a href="https://thonny.org/">
+              <a href="https://thonny.org/" target="_blank" rel="noopener noreferrer">
                 <span className="font-bold text-blue-200 hover:underline">
                   official website
                 </span>
@@ -237,7 +237,7 @@ export default function Extensions() {
               the "Communicate with <b>micro:bit</b>" button
             </p>
           </div>
-          <a href="https://github.com/wonmor/Project-Atomizer/blob/main/microbit/main.py">
+          <a href="https://github.com/wonmor/Project-Atomizer/blob/main/microbit/main.py" target="_blank" rel="noopener noreferrer">
             <button className="mt-5 ml-5 mr-5 ml-2 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded">
               <span>
                 <b>Download</b> <code>main.py</code>

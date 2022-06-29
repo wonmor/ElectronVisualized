@@ -38,7 +38,7 @@ export default function Developer() {
 
   const [statusText, setStatusText] = useState("Fetching in Progress...");
 
-  const fetchData = async () => {
+  const fetchData = async (elementName = "H2") => {
     /*
     This is an asyncronous function that sends HTML requests to the server, ran by Flask (Python)
 
@@ -52,7 +52,7 @@ export default function Developer() {
     */
     await axios({
       method: "GET",
-      url: "/api/molecule/H2",
+      url: `/api/load/${elementName}`,
     })
       .then((response) => {
         const res = response.data;

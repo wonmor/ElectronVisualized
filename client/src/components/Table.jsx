@@ -334,6 +334,8 @@ export default function Table() {
             <a
               href="https://apps.apple.com/us/app/electronvisualized/id1631246652?mt=12"
               type="button"
+              target="_blank"
+              rel="noopener noreferrer"
               class="text-white bg-[#050708] hover:bg-[#050708]/90 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#050708]/50 dark:hover:bg-[#050708]/30 mr-2 mb-2"
             >
               <svg
@@ -419,6 +421,8 @@ export default function Table() {
             topical review{" "}
             <a
               href="https://iopscience.iop.org/article/10.1088/0953-8984/22/25/253202"
+              target="_blank"
+              rel="noopener noreferrer"
               className="hover:underline text-blue-200"
             >
               <i>

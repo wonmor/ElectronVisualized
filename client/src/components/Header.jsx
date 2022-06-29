@@ -45,6 +45,7 @@ export default function Header() {
     -------
     None
     */
+    setMenu(false);
     navigate(page);
   };
 
