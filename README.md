@@ -16,13 +16,15 @@ Developed and Designed by **John Seong**. Served under the **MIT** License.
 
 ## Useful Links
 
-[**Mac App Store**](https://apps.apple.com/us/app/electronvisualized/id1631246652?mt=12)
+[Download on the **Mac App Store**](https://apps.apple.com/us/app/electronvisualized/id1631246652?mt=12)
 
-[**LinkedIn**](https://www.linkedin.com/in/john-seong-9194321a9)
+[Check out my **LinkedIn**](https://www.linkedin.com/in/john-seong-9194321a9)
 
 ---
 
-# Atoms
+## Atoms
+
+**ElectronVisualized** uses the **spherical harmonics** formula to accurately depict the shape of each atomic orbital based upon its four quantum numbers. Each dot represent a probable location of where an electron might be.
 
 <img width="1200" alt="Screenshot 2022-06-28 at 2 59 12 AM" src="https://user-images.githubusercontent.com/35755386/176114204-8c2b936a-45c5-4f0b-a507-0aaddb252943.png">
 
@@ -30,7 +32,9 @@ Developed and Designed by **John Seong**. Served under the **MIT** License.
 
 ---
 
-# Molecules
+## Molecules
+
+Thanks to **Density Functional Theory** and **GPAW** library, we were able to derive the electron density of a molecule without going through complex steps of solving a N-dimensional Schrödinger's Equation.
 
 <img width="1200" alt="Screen Shot 2022-06-18 at 3 00 56 AM" src="https://user-images.githubusercontent.com/35755386/174426800-9100bc8e-6158-4668-b1b2-d741b9ded6c5.png">
 
