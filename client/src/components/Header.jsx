@@ -106,7 +106,7 @@ export default function Header() {
           </svg>
         </button>
       </div>
-      <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+      <div className="w-full block flex lg:items-center lg:w-auto">
         <Transition
           show={showMenu}
           enter="transition ease-out duration-100"
@@ -175,7 +175,7 @@ export default function Header() {
             <label>
               <span>
                 <input
-                  className="bg-transparent"
+                  className="bg-transparent truncate ..."
                   type="text"
                   onChange={setSearchKeyword}
                   placeholder="Search by any keyword..."
