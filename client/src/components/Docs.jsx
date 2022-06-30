@@ -54,6 +54,8 @@ export default function Docs() {
             <br></br>
             <a
               href="https://github.com/wonmor/ElectronVisualized"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-xl mt-5 sm:mt-0 ml-2 bg-transparent hover:bg-blue-500 text-rose-100 hover:text-white py-2 px-4 border border-rose-100 hover:border-transparent rounded"
             >
               <b>GitHub</b> Page
@@ -61,6 +63,8 @@ export default function Docs() {
             <br></br>
             <a
               href="https://github.com/wonmor/ElectronVisualized/blob/main/docs/John%20Seong%20-%20ICS3%20Project%20Scope%20Statement%20-%20ElectronVisualized.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-xl mt-5 sm:mt-0 ml-2 bg-transparent hover:bg-blue-500 text-rose-100 hover:text-white py-2 px-4 border border-rose-100 hover:border-transparent rounded"
             >
               Project Scope
@@ -147,7 +151,7 @@ export default function Docs() {
               background as well as taking Physics in my school led me into
               grasping them in a relatively short time of period.
               <div className="p-2" />
-              <i className="text-rose-200">Check out my <a href="https://johnseong.info"><span className="font-bold hover:underline">official blog</span></a> and <a href="https://github.com/wonmor"><span className="font-bold hover:underline">GitHub</span></a> page for more information</i>
+              <i className="text-rose-200">Check out my <a href="https://johnseong.info"><span target="_blank" rel="noopener noreferrer" className="font-bold hover:underline">official blog</span></a> and <a href="https://github.com/wonmor" target="_blank" rel="noopener noreferrer"><span className="font-bold hover:underline">GitHub</span></a> page for more information</i>
             </p>
             <p className="p-5 text-left text-gray-400">
               Special Thanks to <b>Samar C.</b> for their Contribution by
