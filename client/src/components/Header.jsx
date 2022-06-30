@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
 import { useNavigate, useLocation } from "react-router-dom";
 
 import { Transition } from "@headlessui/react";
@@ -6,8 +7,8 @@ import { Transition } from "@headlessui/react";
 import { useWindowSize } from "./Globals";
 
 import "./Header.css";
+
 import Logo from "../assets/e_logo.svg";
-import { useEffect } from "react";
 
 /*
 ███████████████████████████████████
