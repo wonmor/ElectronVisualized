@@ -151,7 +151,7 @@ export default function Docs() {
               background as well as taking Physics in my school led me into
               grasping them in a relatively short time of period.
               <div className="p-2" />
-              <i className="text-rose-200">Check out my <a href="https://johnseong.info"><span target="_blank" rel="noopener noreferrer" className="font-bold hover:underline">official blog</span></a> and <a href="https://github.com/wonmor" target="_blank" rel="noopener noreferrer"><span className="font-bold hover:underline">GitHub</span></a> page for more information</i>
+              <i className="text-rose-200">Check out my <a href="https://johnseong.info" target="_blank" rel="noopener noreferrer"><span className="font-bold hover:underline">official blog</span></a> and <a href="https://github.com/wonmor" target="_blank" rel="noopener noreferrer"><span className="font-bold hover:underline">GitHub</span></a> page for more information</i>
             </p>
             <p className="p-5 text-left text-gray-400">
               Special Thanks to <b>Samar C.</b> for their Contribution by
