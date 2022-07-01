@@ -14,7 +14,7 @@
         "@react-three/drei": "^9.13.2",
         "@react-three/fiber": "^8.0.21",
         "@react-three/postprocessing": "^2.3.2",
-        "@reduxjs/toolkit": "^1.8.2",
+        "@reduxjs/toolkit": "^1.8.3",
         "@testing-library/jest-dom": "^5.16.4",
         "@testing-library/react": "^13.2.0",
         "@testing-library/user-event": "^13.5.0",

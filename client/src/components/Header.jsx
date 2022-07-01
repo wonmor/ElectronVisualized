@@ -34,7 +34,7 @@ export default function Header() {
 
   const location = useLocation();
 
-  const [searchKeyword, setSearchKeyword] = useState();
+  const [localSearchKeyword, setLocalSearchKeyword] = useState("");
 
   const [showMenu, setMenu] = useState(false);
   const [showMenuAlreadyTriggered, setMenuAlreadyTriggered] = useState(false);
@@ -172,17 +172,22 @@ export default function Header() {
 
         {/* Reponsive Search Bar... */}
         {size.width > 1024 && (
-          <form className="justify-self-end m-5 break-all overflow-auto scale-90 sm:scale-100 mb-5 p-3 max-w-fit text-white border border-gray-400">
+          <form className="flex flex-cols justify-self-end m-5 overflow-auto scale-90 sm:scale-100 mb-5 p-3 max-w-fit text-white border border-gray-400">
             <label>
               <span>
                 <input
                   className="bg-transparent truncate ..."
                   type="text"
-                  onChange={setSearchKeyword}
-                  placeholder="Search by any keyword..."
+                  onChange={setLocalSearchKeyword}
+                  placeholder="Type any keyword..."
                 />
               </span>
             </label>
+            <button type="submit">
+              <span>
+                SEARCH
+              </span>
+            </button>
           </form>
         )}
       </div>
