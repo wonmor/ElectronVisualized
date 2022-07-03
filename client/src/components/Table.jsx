@@ -10,7 +10,7 @@ import { setGlobalSelectedElement } from "../states/selectedElementSlice";
 
 import { Background } from "./Geometries";
 
-import { moleculeDict, useWindowSize, isElectron } from "./Globals";
+import { moleculeDict, atomDict, useWindowSize, isElectron } from "./Globals";
 
 import "./Table.css";
 
@@ -135,12 +135,7 @@ export default function Table() {
             <li
               onMouseDown={() => {
                 // This code runs first...
-                appendNewRender(
-                  "H",
-                  "Hydrogen Atom",
-                  "Atom",
-                  "Hydrogen is the lightest element. At standard conditions hydrogen is a gas of diatomic molecules having the formula H2. It is colorless, odorless, tasteless, non-toxic, and highly combustible. Hydrogen is the most abundant chemical substance in the universe, constituting roughly 75% of all normal matter."
-                );
+                appendNewRender(...atomDict["H"]);
               }}
               onClick={() => {
                 // This code runs after a global state change...
@@ -159,12 +154,7 @@ export default function Table() {
             <li
               onMouseDown={() => {
                 // This code runs first...
-                appendNewRender(
-                  "O",
-                  "Oxygen Atom",
-                  "Atom",
-                  "Oxygen is a colourless, odourless, tasteless gas essential to living organisms, being taken up by animals, which convert it to carbon dioxide; plants, in turn, utilize carbon dioxide as a source of carbon and return the oxygen to the atmosphere."
-                );
+                appendNewRender(...atomDict["O"]);
               }}
               onClick={() => {
                 // This code runs after a global state change...
@@ -197,12 +187,7 @@ export default function Table() {
             <li
               onMouseDown={() => {
                 // This code runs first...
-                appendNewRender(
-                  "Cu",
-                  "Copper Atom",
-                  "Atom",
-                  "Copper is a chemical element with the symbol Cu (from Latin: cuprum) and atomic number 29. It is a soft, malleable, and ductile metal with very high thermal and electrical conductivity."
-                );
+                appendNewRender(...atomDict["Cu"]);
               }}
               onClick={() => {
                 // This code runs after a global state change...
@@ -326,8 +311,11 @@ export default function Table() {
           <h2 className="sm:mt-5 mb-2 pb-3 pl-5 pr-5 text-gray-400">
             Simulated with the help of{" "}
             {globalSelectedElement["type"] === "Molecule" ? (
-            <span className="text-white">Density Functional Theory</span>
-            ) : (<span className="text-white">Spherical Harmonics</span>)}.
+              <span className="text-white">Density Functional Theory</span>
+            ) : (
+              <span className="text-white">Spherical Harmonics</span>
+            )}
+            .
           </h2>
 
           {!isElectron() && (
@@ -367,8 +355,9 @@ export default function Table() {
             </h1>
 
             <p className="p-5 text-gray-400">
-              Visualize your favourite molecules' electron density using <b>GPAW</b> and{" "}
-              <b>ASE</b> packages. Now available on the <b>Web</b>.
+              Visualize your favourite molecules' electron density using{" "}
+              <b>GPAW</b> and <b>ASE</b> packages. Now available on the{" "}
+              <b>Web</b>.
             </p>
 
             <div className="ml-5 mr-5">
@@ -400,8 +389,9 @@ export default function Table() {
           </h1>
 
           <p className="p-5 text-gray-400 border-b border-gray-500">
-            Using <b>spherical harmonics</b>, view the atomic orbital structure of your choice. <b>Hydrogen</b>,{" "}
-            <b>Copper</b>, and <b>Oxygen</b> Atoms are available at the moment.
+            Using <b>spherical harmonics</b>, view the atomic orbital structure
+            of your choice. <b>Hydrogen</b>, <b>Copper</b>, and <b>Oxygen</b>{" "}
+            Atoms are available at the moment.
           </p>
 
           {displayPeriodicTable()}

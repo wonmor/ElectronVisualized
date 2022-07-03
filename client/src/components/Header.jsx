@@ -38,6 +38,8 @@ export default function Header() {
 
   const [showMenu, setMenu] = useState(false);
   const [showMenuAlreadyTriggered, setMenuAlreadyTriggered] = useState(false);
+  const [showDropDown, setDropDown] = useState(false);
+  const [showSearchResults, setSearchResults] = useState(false);
 
   const navigate = useNavigate();
 
@@ -68,6 +70,11 @@ export default function Header() {
       setMenuAlreadyTriggered(false);
     }
   }, [showMenu, showMenuAlreadyTriggered, size.width]);
+
+  useEffect(() => {
+    if (localSearchKeyword !== "" && showSearchResults) {
+    }
+  }, [localSearchKeyword, showSearchResults]);
 
   return (
     <nav className="flex items-center justify-between flex-wrap bg-gray-800 p-3">
@@ -172,23 +179,51 @@ export default function Header() {
 
         {/* Reponsive Search Bar... */}
         {size.width > 1024 && (
-          <form className="flex flex-cols justify-self-end m-5 overflow-auto scale-90 sm:scale-100 mb-5 p-3 max-w-fit text-white border border-gray-400">
-            <label>
-              <span>
-                <input
-                  className="bg-transparent truncate ..."
-                  type="text"
-                  onChange={setLocalSearchKeyword}
-                  placeholder="Type any keyword..."
-                />
-              </span>
-            </label>
-            <button type="submit">
-              <span>
-                SEARCH
-              </span>
-            </button>
-          </form>
+          <div className="flex flex-cols">
+            <form
+              onClick={() => setDropDown(true)}
+              onMouseLeave={() => setDropDown(false)}
+              onSubmit={(e) => {
+                e.preventDefault(); // Else the page will be reloaded which is the default DOM behaviour in forms and its submit button...
+                setSearchResults(true);
+              }}
+              className="flex flex-cols justify-self-end m-5 overflow-auto scale-90 sm:scale-100 mb-5 p-3 max-w-fit text-white border border-gray-400 rounded"
+            >
+              <label>
+                <span>
+                  <input
+                    className="bg-transparent truncate ..."
+                    type="text"
+                    onChange={setLocalSearchKeyword}
+                    placeholder="Type any keyword..."
+                  />
+                </span>
+              </label>
+              <button className="ml-3" type="submit">
+                <span>Search</span>
+              </button>
+            </form>
+            <div className="absolute mt-20 mr-10" style={{ "z-index": "10" }}>
+              <Transition
+                show={showDropDown}
+                enter="transition ease-out duration-100"
+                enterFrom="transform opacity-0 scale-95"
+                enterTo="transform opacity-100 scale-100"
+                leave="transition ease-in duration-200"
+                leaveFrom="transform opacity-100 scale-100"
+                leaveTo="transform opacity-0 scale-95"
+              >
+                <div className="bg-black text-white p-5">
+                  <h3 className="mb-5">
+                    I can help you with whatever you need.
+                  </h3>
+                  <p>
+                    <i>Try searching "H2O"...</i>
+                  </p>
+                </div>
+              </Transition>
+            </div>
+          </div>
         )}
       </div>
     </nav>

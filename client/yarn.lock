@@ -1904,6 +1904,11 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
+"@socket.io/component-emitter@~3.1.0":
+  "integrity" "sha512-+9jVqKhRSpsc591z5vX+X5Yyw+he/HCB4iQ/RYxw35CEPaY1gnsNE43nf9n9AaYjAQrTiI/mOwKUKdUs9vf7Xg=="
+  "resolved" "https://registry.npmjs.org/@socket.io/component-emitter/-/component-emitter-3.1.0.tgz"
+  "version" "3.1.0"
+
 "@surma/rollup-plugin-off-main-thread@^2.2.3":
   "integrity" "sha512-lR8q/9W7hZpMWweNiAKU7NQerBnzQQLvi8qnTDU/fxItPhtZVMbPV3lbCwjhIlNBe9Bbr5V+KHshvWmVSG9cxQ=="
   "resolved" "https://registry.npmjs.org/@surma/rollup-plugin-off-main-thread/-/rollup-plugin-off-main-thread-2.2.3.tgz"
@@ -3913,7 +3918,7 @@
   dependencies:
     "ms" "^2.1.1"
 
-"debug@^4.1.0", "debug@^4.1.1", "debug@^4.3.2", "debug@^4.3.4", "debug@4":
+"debug@^4.1.0", "debug@^4.1.1", "debug@^4.3.2", "debug@^4.3.4", "debug@~4.3.1", "debug@~4.3.2", "debug@4":
   "integrity" "sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ=="
   "resolved" "https://registry.npmjs.org/debug/-/debug-4.3.4.tgz"
   "version" "4.3.4"
@@ -4231,6 +4236,22 @@
   "integrity" "sha512-TPJXq8JqFaVYm2CWmPvnP2Iyo4ZSM7/QKcSmuMLDObfpH5fi7RUGmd/rTDf+rut/saiDiQEeVTNgAmJEdAOx0w=="
   "resolved" "https://registry.npmjs.org/encodeurl/-/encodeurl-1.0.2.tgz"
   "version" "1.0.2"
+
+"engine.io-client@~6.2.1":
+  "integrity" "sha512-8ZQmx0LQGRTYkHuogVZuGSpDqYZtCM/nv8zQ68VZ+JkOpazJ7ICdsSpaO6iXwvaU30oFg5QJOJWj8zWqhbKjkQ=="
+  "resolved" "https://registry.npmjs.org/engine.io-client/-/engine.io-client-6.2.2.tgz"
+  "version" "6.2.2"
+  dependencies:
+    "@socket.io/component-emitter" "~3.1.0"
+    "debug" "~4.3.1"
+    "engine.io-parser" "~5.0.3"
+    "ws" "~8.2.3"
+    "xmlhttprequest-ssl" "~2.0.0"
+
+"engine.io-parser@~5.0.3":
+  "integrity" "sha512-+nVFp+5z1E3HcToEnO7ZIj3g+3k9389DvWtvJZz0T6/eOCPIyyxehFcedoYrZQrp0LgQbD9pPXhpMBKMd5QURg=="
+  "resolved" "https://registry.npmjs.org/engine.io-parser/-/engine.io-parser-5.0.4.tgz"
+  "version" "5.0.4"
 
 "enhanced-resolve@^5.9.3":
   "integrity" "sha512-Bq9VSor+kjvW3f9/MiiR4eE3XYgOl7/rS8lnSxbRbF3kS0B2r+Y9w5krBWxZgDxASVZbdYrn5wT4j/Wb0J9qow=="
@@ -8474,6 +8495,24 @@
   "resolved" "https://registry.npmjs.org/slash/-/slash-4.0.0.tgz"
   "version" "4.0.0"
 
+"socket.io-client@^4.5.1":
+  "integrity" "sha512-e6nLVgiRYatS+AHXnOnGi4ocOpubvOUCGhyWw8v+/FxW8saHkinG6Dfhi9TU0Kt/8mwJIAASxvw6eujQmjdZVA=="
+  "resolved" "https://registry.npmjs.org/socket.io-client/-/socket.io-client-4.5.1.tgz"
+  "version" "4.5.1"
+  dependencies:
+    "@socket.io/component-emitter" "~3.1.0"
+    "debug" "~4.3.2"
+    "engine.io-client" "~6.2.1"
+    "socket.io-parser" "~4.2.0"
+
+"socket.io-parser@~4.2.0":
+  "integrity" "sha512-V4GrkLy+HeF1F/en3SpUaM+7XxYXpuMUWLGde1kSSh5nQMN4hLrbPIkD+otwh6q9R6NOQBN4AMaOZ2zVjui82g=="
+  "resolved" "https://registry.npmjs.org/socket.io-parser/-/socket.io-parser-4.2.1.tgz"
+  "version" "4.2.1"
+  dependencies:
+    "@socket.io/component-emitter" "~3.1.0"
+    "debug" "~4.3.1"
+
 "sockjs@^0.3.24":
   "integrity" "sha512-GJgLTZ7vYb/JtPSSZ10hsOYIvEYsjbNU+zPdIHcUaWVNUEPivzxku31865sSSud0Da0W4lEeOPlmw93zLQchuQ=="
   "resolved" "https://registry.npmjs.org/sockjs/-/sockjs-0.3.24.tgz"
@@ -9715,6 +9754,11 @@
   "resolved" "https://registry.npmjs.org/ws/-/ws-8.7.0.tgz"
   "version" "8.7.0"
 
+"ws@~8.2.3":
+  "integrity" "sha512-wBuoj1BDpC6ZQ1B7DWQBYVLphPWkm8i9Y0/3YdHjHKHiohOJ1ws+3OccDWtH+PoC9DZD5WOTrJvNbWvjS6JWaA=="
+  "resolved" "https://registry.npmjs.org/ws/-/ws-8.2.3.tgz"
+  "version" "8.2.3"
+
 "xml-name-validator@^3.0.0":
   "integrity" "sha512-A5CUptxDsvxKJEU3yO6DuWBSJz/qizqzJKOMIfUJHETbBw/sFaDxgd6fxm1ewUaM0jZ444Fc5vC5ROYurg/4Pw=="
   "resolved" "https://registry.npmjs.org/xml-name-validator/-/xml-name-validator-3.0.0.tgz"
@@ -9724,6 +9768,11 @@
   "integrity" "sha512-JZnDKK8B0RCDw84FNdDAIpZK+JuJw+s7Lz8nksI7SIuU3UXJJslUthsi+uWBUYOwPFwW7W7PRLRfUKpxjtjFCw=="
   "resolved" "https://registry.npmjs.org/xmlchars/-/xmlchars-2.2.0.tgz"
   "version" "2.2.0"
+
+"xmlhttprequest-ssl@~2.0.0":
+  "integrity" "sha512-QKxVRxiRACQcVuQEYFsI1hhkrMlrXHPegbbd1yn9UHOmRxY+si12nQYzri3vbzt8VdTTRviqcKxcyllFas5z2A=="
+  "resolved" "https://registry.npmjs.org/xmlhttprequest-ssl/-/xmlhttprequest-ssl-2.0.0.tgz"
+  "version" "2.0.0"
 
 "xtend@^4.0.2":
   "integrity" "sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ=="

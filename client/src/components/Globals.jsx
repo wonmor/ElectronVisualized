@@ -36,6 +36,27 @@ export const moleculeDict = {
   ],
 };
 
+export const atomDict = {
+  H: [
+    "H",
+    "Hydrogen Atom",
+    "Atom",
+    "Hydrogen is the lightest element. At standard conditions hydrogen is a gas of diatomic molecules having the formula H2. It is colorless, odorless, tasteless, non-toxic, and highly combustible. Hydrogen is the most abundant chemical substance in the universe, constituting roughly 75% of all normal matter.",
+  ],
+  O: [
+    "O",
+    "Oxygen Atom",
+    "Atom",
+    "Oxygen is a colourless, odourless, tasteless gas essential to living organisms, being taken up by animals, which convert it to carbon dioxide; plants, in turn, utilize carbon dioxide as a source of carbon and return the oxygen to the atmosphere.",
+  ],
+  Cu: [
+    "Cu",
+    "Copper Atom",
+    "Atom",
+    "Copper is a chemical element with the symbol Cu (from Latin: cuprum) and atomic number 29. It is a soft, malleable, and ductile metal with very high thermal and electrical conductivity.",
+  ],
+};
+
 export const normalizeData = (val, max, min) => {
   /*
     This function normalizes a given dataset within a certain range that is defined
@@ -58,7 +79,11 @@ export const normalizeData = (val, max, min) => {
   return (val - min) / (max - min);
 };
 
-export const getMoleculeColour = (element, volume, lonePairHighlight = false) => {
+export const getMoleculeColour = (
+  element,
+  volume,
+  lonePairHighlight = false
+) => {
   /*
     Getting the molecule colour based upon the element name and the volume information
   
@@ -88,13 +113,15 @@ export const getMoleculeColour = (element, volume, lonePairHighlight = false) =>
       return `hsl(${volume * 2000.0 + 200.0}, 100%, 60%)`;
 
     case "H2O":
-      return lonePairHighlight ? `hsl(${volume * 1500.0 + 200.0}, 100%, 60%)` : `hsl(${volume * 5000.0 + 180.0}, 100%, 60%)`;
+      return lonePairHighlight
+        ? `hsl(${volume * 1500.0 + 200.0}, 100%, 60%)`
+        : `hsl(${volume * 5000.0 + 180.0}, 100%, 60%)`;
 
     case "HCl":
       return `hsl(${volume * 24000.0 + 200.0}, 100%, 60%)`;
 
     default:
-        return `hsl(${volume * 100.0 + 800.0}, 100%, 60%)`;
+      return `hsl(${volume * 100.0 + 800.0}, 100%, 60%)`;
   }
 };
 
@@ -220,12 +247,15 @@ export const zoomOutCamera = (camera, constant) => {
   camera.position.z = camera.position.z * constant;
 };
 
-export const useAnalyticsEventTracker = (category="Renderer") => {
-  const eventTracker = (action = "Initiate Rendering Process", label = "Renderer") => {
-    ReactGA.event({category, action, label});
-  }
+export const useAnalyticsEventTracker = (category = "Renderer") => {
+  const eventTracker = (
+    action = "Initiate Rendering Process",
+    label = "Renderer"
+  ) => {
+    ReactGA.event({ category, action, label });
+  };
   return eventTracker;
-}
+};
 
 export const isElectron = () => {
   // Renderer process
