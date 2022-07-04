@@ -487,7 +487,7 @@ export default function Renderer() {
         </div>
 
         <div
-          className="bg-gray-800 ml-10 mr-10 md:ml-40 md:mr-40"
+          className="bg-gray-800 ml-10 mr-10 md:ml-40 md:mr-40 rounded"
           style={{ width: CANVAS.WIDTH, height: CANVAS.HEIGHT }}
         >
           <Canvas camera={getCameraPosition(globalSelectedElement["element"])}>

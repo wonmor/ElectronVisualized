@@ -70,7 +70,6 @@ export default function Developer() {
 
           bond_lengths: res.bond_lengths,
           density_data: res.density_data,
-
         });
 
         setPreRender(false);
@@ -90,7 +89,7 @@ export default function Developer() {
             the <span className="font-bold text-blue-200">Web</span>.
           </h1>
 
-          <div className="bg-gray-600">
+          <div className="bg-gray-600 rounded ml-0 mr-0 lg:ml-60 lg:mr-60">
             <h2 className="mt-5 pl-5 pr-5 pt-5 leading-normal text-gray-400">
               <span className="text-5xl sm:text-6xl">
                 Introducing the{" "}
@@ -112,7 +111,10 @@ export default function Developer() {
             <span className="text-white">Engineers</span>.
           </h2>
 
-          <p id="api-url" className="flex m-auto break-all overflow-auto scale-90 sm:scale-100 mb-5 p-3 max-w-fit text-rose-200 border border-rose-200 rounded">
+          <p
+            id="api-url"
+            className="flex m-auto break-all overflow-auto scale-90 sm:scale-100 mb-5 p-3 max-w-fit text-rose-200 border border-rose-200 rounded"
+          >
             https://electronvisual.org/api/load/H2
           </p>
 
@@ -154,28 +156,30 @@ export default function Developer() {
             {preRender ? (
               <>
                 <img
-                  className="border-dotted border-2 border-white m-auto"
+                  className="border-dotted border-2 border-white m-auto rounded"
                   src="/API.png"
                   style={{ width: "1000px" }}
                   alt="Screenshot"
                 />
 
-                <h2 className="ml-5 mr-5 mt-5">
-                  This is an{" "}
-                  <span className="text-white">Open Source Project</span>.
-                </h2>
+                <div className="bg-gray-800 mt-5 p-5 ml-0 mr-0 lg:ml-60 lg:mr-60 rounded">
+                  <h2>
+                    This is an{" "}
+                    <span className="text-white">Open Source Project</span>.
+                  </h2>
 
-                <p className="text-left ml-5 mr-5 lg:ml-60 lg:mr-60 mt-2">
-                  The nature of being <b>open source</b> is that anyone can jump in and
-                  contribute to our project. This means you, you, and you over
-                  there! You guys can all be a part of the <b>ElectronVisualized</b>{" "}
-                  Dev team. If you would like to contact me personally, however,
-                  please shoot an email to{" "}
-                  <span className="text-rose-200">
-                    cascademusicbusiness@gmail.com
-                  </span>
-                  .
-                </p>
+                  <p className="text-left mt-2">
+                    The nature of being <b>open source</b> is that anyone can
+                    jump in and contribute to our project. This means you, you,
+                    and you over there! You guys can all be a part of the{" "}
+                    <b>ElectronVisualized</b> Dev team. If you would like to
+                    contact me personally, however, please shoot an email to{" "}
+                    <span className="text-rose-200">
+                      cascademusicbusiness@gmail.com
+                    </span>
+                    .
+                  </p>
+                </div>
               </>
             ) : (
               <div className="block sm:flex align-center justify-center">

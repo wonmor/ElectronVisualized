@@ -218,7 +218,7 @@ export default function Header() {
                     I can help you with whatever you need.
                   </h3>
                   <p>
-                    <i>Try searching "H2O"...</i>
+                    <i className="font-semibold">Try searching "H2O"...</i>
                   </p>
                 </div>
               </Transition>

@@ -26,7 +26,7 @@ export default function Docs() {
             <span className="font-bold text-blue-200">Earthling</span>.
           </h1>
 
-          <h2 className="mt-5 pl-5 pr-5 pt-5 leading-normal bg-gray-600 text-gray-400">
+          <h2 className="mt-5 pl-5 pr-5 pt-5 leading-normal bg-gray-600 text-gray-400 rounded">
             <span className="text-5xl">
               With a <span className="text-white">Great Program</span> Comes
               With a{" "}
@@ -38,7 +38,7 @@ export default function Docs() {
             </span>
           </h2>
 
-          <h2 className="p-5 leading-normal bg-gray-600 text-gray-400">
+          <h2 className="p-5 leading-normal bg-gray-600 text-gray-400 rounded">
             A Beautiful, Elegant Interaction Between the{" "}
             <span className="text-white">User</span> and the{" "}
             <span className="text-white">Developer</span>.
@@ -97,16 +97,19 @@ export default function Docs() {
 
             <div class="p-5 grid grid-row-3 sm:grid-cols-3 gap-4">
               <img
+                className="rounded"
                 style={{ width: "500px" }}
                 src="john.jpg"
                 alt="John"
               ></img>
               <img
+                className="rounded"
                 style={{ width: "500px" }}
                 src="john2.jpg"
                 alt="John2"
               ></img>
               <img
+                className="rounded"
                 style={{ width: "500px" }}
                 src="john3.png"
                 alt="John3"
@@ -159,16 +162,19 @@ export default function Docs() {
             </p>
             <div class="grid grid-row-3 sm:grid-cols-3 gap-4">
               <img
+                className="rounded"
                 style={{ width: "500px" }}
                 src="Graphics.png"
                 alt="Graphics"
               ></img>
               <img
+                className="rounded"
                 style={{ width: "500px" }}
                 src="Sketch1.jpg"
                 alt="Sketch1"
               ></img>
               <img
+                className="rounded"
                 style={{ width: "500px" }}
                 src="Sketch2.png"
                 alt="Sketch2"

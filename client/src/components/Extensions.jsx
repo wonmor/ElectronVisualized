@@ -180,7 +180,7 @@ export default function Extensions() {
           )}
 
           <img
-            className="flex m-auto mt-5 mb-5"
+            className="flex m-auto mt-5 mb-5 rounded"
             style={{ width: "1000px" }}
             src="Sketch3.jpg"
             alt="Sketch3"
