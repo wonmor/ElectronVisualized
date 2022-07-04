@@ -349,11 +349,11 @@ export default function Table() {
 
           <div className="bg-gray-600 rounded pb-2">
             <h1
-              className={`scale-90 sm:scale-100 mt-5 pt-5 pl-5 pr-5 text-blue-200 ${
-                size.width < 350 ? "truncate" : null
+              className={`scale-90 sm:scale-100 mt-5 pt-5 pl-5 pr-5 font-bold text-blue-200 ${
+                size.width < 350 ? "truncate ..." : null
               }`}
             >
-              <b>Molecules</b>
+              Molecules
             </h1>
 
             <p className="p-5 text-gray-400">

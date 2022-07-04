@@ -213,7 +213,7 @@ export default function Header() {
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
               >
-                <div className="bg-black text-white p-5">
+                <div className="bg-black text-white p-5 rounded">
                   <h3 className="mb-5">
                     I can help you with whatever you need.
                   </h3>
