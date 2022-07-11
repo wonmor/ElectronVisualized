@@ -326,7 +326,7 @@ export default function Table() {
                 rel="noopener noreferrer"
                 className="w-fit text-white bg-[#050708]/30 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 mb-2"
               >
-                <img className="mr-2" style={{width : "15px"}} src="web.svg" alt="web" />
+                <img className="mr-3" style={{width : "15px"}} src="web.svg" alt="web" />
                 <span>
                   Runs Natively on the Web
                 </span>
