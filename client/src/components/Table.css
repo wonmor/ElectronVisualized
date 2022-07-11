@@ -36,6 +36,14 @@
     color: white;
 }
 
+#periodic-table li:nth-of-type(1):hover,
+
+#periodic-table li:nth-of-type(8):hover,
+
+#periodic-table li:nth-of-type(29):hover {
+  color: #D3D3D3;
+}
+
 #periodic-table li:nth-of-type(2) {
   grid-column: 18;
 }
