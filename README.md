@@ -44,7 +44,7 @@ Thanks to **Density Functional Theory** and **GPAW** library, we were able to de
 
 ---
 
-## API Guide
+## World Engine REST API Guide
 
 ### ```https://electronvisual.org/api/load/<molecule_name_goes_here>```
 
