@@ -54,7 +54,7 @@ Loads the x, y, and z coordinates of a **molecule** based upon the **DFT** calcu
 
 Retrieves the x, y, and z coordinates of an individual **atom** derived from the **Spherical Harmonics** formula. This might take a little more time as it is more precise and contains significantly more information.
 
-P/S: Remove the '<>' brackets upon its actual usage!
+***P/S: Remove the '<>' brackets upon its actual usage!***
 
 ---
 
