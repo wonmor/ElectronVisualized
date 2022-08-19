@@ -46,13 +46,15 @@ Thanks to **Density Functional Theory** and **GPAW** library, we were able to de
 
 ## API Guide
 
-### ```https://electronvisual.org/api/load/H2O```
+### ```https://electronvisual.org/api/load/<molecule_name_goes_here>```
 
 Loads the x, y, and z coordinates of a **molecule** based upon the **DFT** calculations, all from the Amazon S3 server with blazingly fast speed guaranteed.
 
-### ```https://electronvisual.org/api/loadSPH/Cu```
+### ```https://electronvisual.org/api/loadSPH/<atom_name_goes_here>```
 
 Retrieves the x, y, and z coordinates of an individual **atom** derived from the **Spherical Harmonics** formula. This might take a little more time as it is more precise and contains significantly more information.
+
+P/S: Remove the '<>' brackets upon its actual usage!
 
 ---
 
