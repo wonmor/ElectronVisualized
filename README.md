@@ -22,7 +22,7 @@ Developed and Designed by **John Seong**. Served under the **MIT** License.
 
 ---
 
-## Atoms
+## Atomic Orbitals
 
 **ElectronVisualized** uses the **spherical harmonics** formula to accurately depict the shape of each atomic orbital based upon its four quantum numbers. Each dot represent a probable location of where an electron might be.
 
@@ -32,7 +32,7 @@ Developed and Designed by **John Seong**. Served under the **MIT** License.
 
 ---
 
-## Molecules
+## Molecular Orbitals
 
 Thanks to **Density Functional Theory** and **GPAW** library, we were able to derive the electron density of a molecule without going through complex steps of solving a N-dimensional Schrödinger's Equation.
 
