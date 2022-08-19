@@ -44,16 +44,6 @@ Thanks to **Density Functional Theory** and **GPAW** library, we were able to de
 
 ---
 
-## Project Sketches
-
-These sketches were drawn at the early stage of development.
-
-![IMG_7647](https://user-images.githubusercontent.com/35755386/166985579-96c2d483-e74c-4802-ac92-762b2ccc8bc9.jpg)
-
-<img width="1200" alt="Screen Shot 2022-06-05 at 10 10 18 PM" src="https://user-images.githubusercontent.com/35755386/172083147-e11ab873-f156-4dda-8d26-71652a1de0c8.png">
-
----
-
 ## API Guide
 
 ### ```https://electronvisual.org/api/load/H2O```
@@ -63,6 +53,16 @@ Loads the x, y, and z coordinates of a **molecule** based upon the **DFT** calcu
 ### ```https://electronvisual.org/api/loadSPH/Cu```
 
 Retrieves the x, y, and z coordinates of an individual **atom** derived from the **Spherical Harmonics** formula. This might take a little more time as it is more precise and contains significantly more information.
+
+---
+
+## Project Sketches
+
+These sketches were drawn at the early stage of development.
+
+![IMG_7647](https://user-images.githubusercontent.com/35755386/166985579-96c2d483-e74c-4802-ac92-762b2ccc8bc9.jpg)
+
+<img width="1200" alt="Screen Shot 2022-06-05 at 10 10 18 PM" src="https://user-images.githubusercontent.com/35755386/172083147-e11ab873-f156-4dda-8d26-71652a1de0c8.png">
 
 ---
 
