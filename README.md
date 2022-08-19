@@ -54,6 +54,18 @@ These sketches were drawn at the early stage of development.
 
 ---
 
+## API Guide
+
+### ```https://electronvisual.org/api/load/H2O```
+
+Loads the x, y, and z coordinates of a **molecule** based upon the **DFT** calculations, all from the Amazon S3 server with blazingly fast speed guaranteed.
+
+### ```https://electronvisual.org/api/loadSPH/Cu```
+
+Retrieves the x, y, and z coordinates of an individual **atom** derived from the **Spherical Harmonics** formula. This might take a little more time as it is more precise and contains significantly more information.
+
+---
+
 ## Technologies Used
 
 ### Front-End: ```./client```
