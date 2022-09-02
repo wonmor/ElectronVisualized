@@ -36,6 +36,13 @@ export const moleculeDict = {
   ],
 };
 
+export const bondShapeDict = {
+  H2O: [[0, 1], [0, 2]],
+  H2: [[0, 1]],
+  Cl2: [[0, 1]],
+  HCl: [[0, 1]],
+};
+
 export const atomDict = {
   H: [
     "H",

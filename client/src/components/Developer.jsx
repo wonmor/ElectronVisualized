@@ -113,7 +113,7 @@ export default function Developer() {
 
           <p
             id="api-url"
-            className="flex m-auto break-all overflow-auto scale-90 sm:scale-100 mb-5 p-3 max-w-fit text-rose-200 border border-rose-200 rounded"
+            className="flex m-auto overflow-auto scale-90 sm:scale-100 mb-5 p-3 max-w-fit text-rose-200 border border-rose-200 rounded"
           >
             https://electronvisual.org/api/load/H2
           </p>

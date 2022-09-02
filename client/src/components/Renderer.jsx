@@ -27,6 +27,8 @@ import Controls from "./Controls";
 
 import { Particles } from "./Instances";
 
+import { bondShapeDict } from "./Globals";
+
 import {
   CANVAS,
   getCameraPosition,
@@ -252,6 +254,7 @@ export default function Renderer() {
             vmin: res.vmin,
 
             density_data: res.density_data,
+            bond_lengths: res.bond_lengths,
           }) || null
         );
 
@@ -351,7 +354,7 @@ export default function Renderer() {
           <h2 className="sm:mt-5 pb-3 pl-5 pr-5 text-gray-400">
             Simulated with the help of{" "}
             {globalSelectedElement["type"] === "Molecule" ? (
-            <span className="text-white">Density Functional Theory</span>
+              <span className="text-white">Density Functional Theory</span>
             ) : (<span className="text-white">Spherical Harmonics</span>)}.
           </h2>
 
@@ -406,14 +409,12 @@ export default function Renderer() {
                     <Switch
                       checked={lonePairEnabled}
                       onChange={setLonePairEnabled}
-                      className={`${
-                        lonePairEnabled ? "bg-blue-600" : "bg-gray-400"
-                      } relative inline-flex h-6 w-11 items-center rounded-full`}
+                      className={`${lonePairEnabled ? "bg-blue-600" : "bg-gray-400"
+                        } relative inline-flex h-6 w-11 items-center rounded-full`}
                     >
                       <span
-                        className={`${
-                          lonePairEnabled ? "translate-x-6" : "translate-x-1"
-                        } inline-block h-4 w-4 transform rounded-full bg-white`}
+                        className={`${lonePairEnabled ? "translate-x-6" : "translate-x-1"
+                          } inline-block h-4 w-4 transform rounded-full bg-white`}
                       />
                     </Switch>
                   </>
@@ -517,32 +518,25 @@ export default function Renderer() {
                           globalAtomInfo["atoms_z"][index],
                         ]}
 
-                        // colour={globalAtomInfo["atomic_color"][currentElementArray[index]]}
+                      // colour={globalAtomInfo["atomic_color"][currentElementArray[index]]}
                       />
 
-                      {index !== globalAtomInfo["atoms_x"].length - 2 ? (
-                        <BondLine
-                          coords={[
-                            globalAtomInfo["atoms_x"][0],
-                            globalAtomInfo["atoms_y"][0],
-                            globalAtomInfo["atoms_z"][0],
-                            globalAtomInfo["atoms_x"][index],
-                            globalAtomInfo["atoms_y"][index],
-                            globalAtomInfo["atoms_z"][index],
-                          ]} // [ x1, y1, z1,  x2, y2, z2, ... ] format
-                        />
-                      ) : (
-                        <BondLine
-                          coords={[
-                            globalAtomInfo["atoms_x"][0],
-                            globalAtomInfo["atoms_y"][0],
-                            globalAtomInfo["atoms_z"][0],
-                            globalAtomInfo["atoms_x"][index],
-                            globalAtomInfo["atoms_y"][index],
-                            globalAtomInfo["atoms_z"][index],
-                          ]} // [ x1, y1, z1,  x2, y2, z2, ... ] format
-                        />
-                      )}
+                      {Object.values(bondShapeDict[globalSelectedElement["element"]]).map((value) => {
+                        return (
+                          <>
+                            <BondLine
+                              coords={[
+                                globalAtomInfo["atoms_x"][value[0]],
+                                globalAtomInfo["atoms_y"][value[0]],
+                                globalAtomInfo["atoms_z"][value[0]],
+                                globalAtomInfo["atoms_x"][value[1]],
+                                globalAtomInfo["atoms_y"][value[1]],
+                                globalAtomInfo["atoms_z"][value[1]],
+                              ]}
+                            />
+                          </>
+                        );
+                      })}
                     </mesh>
                   );
                 })}
@@ -606,14 +600,12 @@ export default function Renderer() {
               <Switch
                 checked={addCoolEffects}
                 onChange={setAddCoolEffects}
-                className={`${
-                  addCoolEffects ? "bg-blue-600" : "bg-gray-400"
-                } relative inline-flex h-6 w-11 items-center rounded-full`}
+                className={`${addCoolEffects ? "bg-blue-600" : "bg-gray-400"
+                  } relative inline-flex h-6 w-11 items-center rounded-full`}
               >
                 <span
-                  className={`${
-                    addCoolEffects ? "translate-x-6" : "translate-x-1"
-                  } inline-block h-4 w-4 transform rounded-full bg-white`}
+                  className={`${addCoolEffects ? "translate-x-6" : "translate-x-1"
+                    } inline-block h-4 w-4 transform rounded-full bg-white`}
                 />
               </Switch>
             </div>

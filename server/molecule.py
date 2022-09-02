@@ -147,7 +147,7 @@ def _density_parser():
     return return_value
 
 
-def _transfer_to_client(distances):
+def _transfer_to_client():
     '''
     This is a function that generates the coordinates for all plausible locations where electrons might reside in
 
@@ -225,6 +225,8 @@ def _transfer_to_client(distances):
         atoms_z += [0.5 + image_minz + (z - grid_minz) *
                     (image_maxz - image_minz) / (grid_maxz - grid_minz)]
 
+    distances = mol.get_all_distances()
+
     '''
     Plotting atoms and the bond between them;
     Atoms, in particular, are plotted with their atomic number color.
@@ -271,6 +273,7 @@ def plot_molecule(name):
                 txt='server/GPAW_log.txt',
                 occupations=FermiDirac(0.1))
 
+    global mol
     mol = molecule(element_name)
 
     mol.set_cell((5.0, 5.1, 5.2))
@@ -283,8 +286,6 @@ def plot_molecule(name):
 
     mol.get_potential_energy()
 
-    distances = mol.get_all_distances()
-
     density = calc.get_all_electron_density(gridrefinement=gridrefinement)
 
     write('server/density.cube', mol, data=density)
@@ -293,7 +294,7 @@ def plot_molecule(name):
 
     np.save('server/grid.npy', grid)
 
-    return_value = _transfer_to_client(distances)
+    return_value = _transfer_to_client()
 
     with open(os.path.join(PROJECT_ROOT, f'client/src/assets/{element_name}.json'), 'w+') as outfile:
         json.dump(return_value, outfile, sort_keys=True,
