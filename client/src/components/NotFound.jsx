@@ -19,7 +19,7 @@ export default function NotFound() {
         A HTML markup that contains graphical elements
   */
   return (
-    <div>
+    <>
       <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
         <div className="text-white text-center pt-10 text-gray-400">
 
@@ -43,6 +43,6 @@ export default function NotFound() {
 
         </div>
       </div>
-    </div>
+    </>
   );
 }

@@ -1,4 +1,5 @@
 import React, { Background } from "./Geometries";
+import MetaTag from "./MetaTag";
 
 export default function Docs() {
   /*
@@ -15,7 +16,13 @@ export default function Docs() {
   */
 
   return (
-    <div>
+    <>
+      <MetaTag title={"ElectronVisualized"}
+        description={"View Electron Density, Molecular and Atomic Orbitals"}
+        keywords={"electron, electron density, chemistry, computational chemistry"}
+        imgsrc={"cover.png"}
+        url={"https://electronvisual.org"} />
+
       <div className="bg-gray-700 pb-5" style={{ "min-height": "100vh" }}>
         <div className="text-white text-center sm:pt-10 pl-5 pr-5 text-gray-400">
           <h1 className="sm:pb-5 scale-75 sm:scale-100">
@@ -184,6 +191,6 @@ export default function Docs() {
         </div>
       </div>
       <Background />
-    </div>
+    </>
   );
 }

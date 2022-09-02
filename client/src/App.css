@@ -4,7 +4,7 @@ body {
   overflow-x: clip;
 }
 
-h1, h2, h3, a, p, span {
+h1, h2, h3, a, p, span, li {
   font-family: 'Quicksand', sans-serif;
   font-weight: 400;
   -webkit-hyphens: auto;

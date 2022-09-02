@@ -25,6 +25,8 @@ import { Atoms, BondLine, DefaultModel } from "./Geometries";
 
 import Controls from "./Controls";
 
+import MetaTag from "./MetaTag";
+
 import { Particles } from "./Instances";
 
 import { bondShapeDict } from "./Globals";
@@ -341,7 +343,13 @@ export default function Renderer() {
   const gaEventTracker = useAnalyticsEventTracker("Molecule Renderer");
 
   return (
-    <div>
+    <>
+      <MetaTag title={"ElectronVisualized"}
+        description={"View Electron Density, Molecular and Atomic Orbitals"}
+        keywords={"electron, electron density, chemistry, computational chemistry"}
+        imgsrc={"cover.png"}
+        url={"https://electronvisual.org"} />
+
       <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
         <div className="text-rose-200 text-center pt-10 pb-10 ml-5 mr-5">
           <h1
@@ -614,6 +622,6 @@ export default function Renderer() {
           <div class="p-5" />
         )}
       </div>
-    </div>
+    </>
   );
 }

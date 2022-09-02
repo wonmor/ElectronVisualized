@@ -12,6 +12,8 @@ import { Background } from "./Geometries";
 
 import { moleculeDict, atomDict, useWindowSize, isElectron } from "./Globals";
 
+import MetaTag from "./MetaTag";
+
 import "./Table.css";
 
 import "./Background.css";
@@ -123,11 +125,10 @@ export default function Table() {
         A HTML markup that contains graphical elements
     */
     return (
-      <div className="">
+      <>
         <div
-          className={`m-10 scale-75 sm:scale-100 ${
-            size.width < 350 ? "scale-50" : null
-          }`}
+          className={`m-10 scale-75 sm:scale-100 ${size.width < 350 ? "scale-50" : null
+            }`}
           role="region"
           tabindex="0"
         >
@@ -288,18 +289,23 @@ export default function Table() {
             <li title="Oganesson">Og</li>
           </ol>
         </div>
-      </div>
+      </>
     );
   };
 
   return (
-    <div>
+    <>
+      <MetaTag title={"ElectronVisualized"}
+        description={"View Electron Density, Molecular and Atomic Orbitals"}
+        keywords={"electron, electron density, chemistry, computational chemistry"}
+        imgsrc={"cover.png"}
+        url={"https://electronvisual.org"} />
+
       <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
         <div className="text-white text-center p-5 text-gray-400">
           <h1
-            className={`scale-75 sm:scale-100 ${
-              size.width < 350 ? "truncate" : null
-            }`}
+            className={`scale-75 sm:scale-100 ${size.width < 350 ? "truncate" : null
+              }`}
           >
             Visualizing{" "}
             <span className="text-rose-200">
@@ -326,7 +332,7 @@ export default function Table() {
                 rel="noopener noreferrer"
                 className="w-fit text-white bg-[#050708]/30 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 mb-2"
               >
-                <img className="mr-3" style={{width : "15px"}} src="web.svg" alt="web" />
+                <img className="mr-3" style={{ width: "15px" }} src="web.svg" alt="web" />
                 <span>
                   Runs Natively on the Web
                 </span>
@@ -363,9 +369,8 @@ export default function Table() {
 
           <div className="bg-gray-600 rounded pb-2">
             <h1
-              className={`scale-90 sm:scale-100 mt-5 pt-5 pl-5 pr-5 font-bold text-blue-200 ${
-                size.width < 350 ? "truncate ..." : null
-              }`}
+              className={`scale-90 sm:scale-100 mt-5 pt-5 pl-5 pr-5 font-bold text-blue-200 ${size.width < 350 ? "truncate ..." : null
+                }`}
             >
               Molecules
             </h1>
@@ -439,6 +444,6 @@ export default function Table() {
         </div>
         <Background />
       </div>
-    </div>
+    </>
   );
 }

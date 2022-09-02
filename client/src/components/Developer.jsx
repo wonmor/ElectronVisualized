@@ -4,6 +4,8 @@ import { Background } from "./Geometries";
 
 import Dropdown from "./Dropdown";
 
+import MetaTag from "./MetaTag";
+
 import axios from "axios";
 
 /*
@@ -81,7 +83,13 @@ export default function Developer() {
   };
 
   return (
-    <div>
+    <>
+      <MetaTag title={"ElectronVisualized"}
+        description={"View Electron Density, Molecular and Atomic Orbitals"}
+        keywords={"electron, electron density, chemistry, computational chemistry"}
+        imgsrc={"cover.png"}
+        url={"https://electronvisual.org"} />
+
       <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
         <div className="text-white text-center pt-10 pl-5 pr-5 text-gray-400">
           <h1 className="pb-5 text-ellipsis overflow-hidden">
@@ -265,6 +273,6 @@ export default function Developer() {
         </div>
       </div>
       <Background />
-    </div>
+    </>
   );
 }
