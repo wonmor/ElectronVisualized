@@ -183,7 +183,7 @@ export default function Developer() {
                     <b>ElectronVisualized</b> Dev team. If you would like to
                     contact me personally, however, please shoot an email to{" "}
                     <span className="text-rose-200">
-                      cascademusicbusiness@gmail.com
+                      business@johnseong.info
                     </span>
                     .
                   </p>
