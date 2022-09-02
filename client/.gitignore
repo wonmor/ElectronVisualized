@@ -24,3 +24,5 @@ yarn-error.log*
 
 # Dataset files
 src/assets/*.json
+
+package-lock.json
