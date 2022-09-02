@@ -22,7 +22,7 @@ Developed and Designed by **John Seong**. Served under the **MIT** License.
 
 ---
 
-## Atoms
+## Atomic Orbitals
 
 **ElectronVisualized** uses the **spherical harmonics** formula to accurately depict the shape of each atomic orbital based upon its four quantum numbers. Each dot represent a probable location of where an electron might be.
 
@@ -32,7 +32,7 @@ Developed and Designed by **John Seong**. Served under the **MIT** License.
 
 ---
 
-## Molecules
+## Molecular Orbitals
 
 Thanks to **Density Functional Theory** and **GPAW** library, we were able to derive the electron density of a molecule without going through complex steps of solving a N-dimensional Schrödinger's Equation.
 
@@ -41,6 +41,20 @@ Thanks to **Density Functional Theory** and **GPAW** library, we were able to de
 <img width="1200" alt="Screen Shot 2022-06-14 at 1 38 26 PM" src="https://user-images.githubusercontent.com/35755386/173641984-e52deac1-2930-4a66-8693-2564242a766b.png">
 
 <img width="1200" alt="Screen Shot 2022-06-14 at 1 37 51 PM" src="https://user-images.githubusercontent.com/35755386/173641815-9876aaf1-465f-4f58-98a7-36bd390b1948.png">
+
+---
+
+## World Engine REST API Guide
+
+### ```https://electronvisual.org/api/load/<molecule_name_goes_here>```
+
+Loads the x, y, and z coordinates of a **molecule** based upon the **DFT** calculations, all from the Amazon S3 server with blazingly fast speed guaranteed.
+
+### ```https://electronvisual.org/api/loadSPH/<atom_name_goes_here>```
+
+Retrieves the x, y, and z coordinates of an individual **atom** derived from the **Spherical Harmonics** formula. This might take a little more time as it is more precise and contains significantly more information.
+
+***P/S: Remove the '<>' brackets upon its actual usage!***
 
 ---
 
