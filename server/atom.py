@@ -85,7 +85,7 @@ def plot_atomic_orbital(element_name, n, l, m):
     probability = probability / sum(probability)
 
     # Getting electron coordinates based on probabiliy
-    coord = np.random.choice(elements, size=20000, replace=True, p=probability)
+    coord = np.random.choice(elements, size=8000, replace=True, p=probability)
 
     elem_mat = [i.split(',') for i in coord]
     elem_mat = np.matrix(elem_mat)
