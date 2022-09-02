@@ -77,15 +77,15 @@ def plot_atomic_orbital(element_name, n, l, m):
     for ix in range(resolution):
         for iy in range(resolution):
             for iz in range(resolution):
-                #Serialize into 1D object
+                # Serialize into 1D object
                 elements.append(str((ix,iy,iz)))
                 probability.append(density[ix][iy][iz])
 
-    #Ensure sum of probability is 1
+    # Ensure sum of probability is 1
     probability = probability / sum(probability)
 
     # Getting electron coordinates based on probabiliy
-    coord = np.random.choice(elements, size=100000, replace=True, p=probability)
+    coord = np.random.choice(elements, size=20000, replace=True, p=probability)
 
     elem_mat = [i.split(',') for i in coord]
     elem_mat = np.matrix(elem_mat)
