@@ -29,6 +29,8 @@ import Controls from "./Controls";
 
 import MetaTag from "./MetaTag";
 
+import { Mount } from "./Transitions";
+
 import { Particles } from "./Instances";
 
 import { bondShapeDict } from "./Globals";
@@ -400,14 +402,14 @@ export default function Renderer() {
         url={"https://electronvisual.org"} />
 
       <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
-        <div className="text-rose-200 text-center pt-10 pb-10 ml-5 mr-5">
+        <Mount content={<div className="text-rose-200 text-center pt-10 pb-10 ml-5 mr-5">
           <h1
             className={`font-bold mb-5 ${size.width < 350 ? "scale-75" : null}`}
           >
             {globalSelectedElement["name"]}
             <span className="font-thin text-gray-400">. Visualized.</span>
           </h1>
-
+          
           <h2 className="sm:mt-5 pb-3 pl-5 pr-5 text-gray-400">
             Electron Density with the help of{" "}
             {globalSelectedElement["type"] === "Molecule" ? (
@@ -542,7 +544,7 @@ export default function Renderer() {
               </div>
             )}
           </div>
-        </div>
+        </div>} show={true} />
 
         <div
           className="bg-gray-800 ml-10 mr-10 md:ml-40 md:mr-40 rounded"

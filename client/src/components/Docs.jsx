@@ -1,5 +1,6 @@
 import React, { Background } from "./Geometries";
 import MetaTag from "./MetaTag";
+import { Mount } from "./Transitions";
 
 export default function Docs() {
   /*
@@ -25,13 +26,13 @@ export default function Docs() {
 
       <div className="bg-gray-700 pb-5" style={{ "min-height": "100vh" }}>
         <div className="text-white text-center sm:pt-10 pl-5 pr-5 text-gray-400">
-          <h1 className="sm:pb-5 scale-75 sm:scale-100">
+          <Mount content={<h1 className="sm:pb-5 scale-75 sm:scale-100">
             <span className="text-white">Designed</span> and{" "}
             <span className="text-white">Manufactured</span>
             <br></br>
             by a fellow{" "}
             <span className="font-bold text-blue-200">Earthling</span>.
-          </h1>
+          </h1>} show={true} />
 
           <h2 className="mt-5 pl-5 pr-5 pt-5 leading-normal bg-gray-600 text-gray-400 rounded">
             <span className="text-5xl">
