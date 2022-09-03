@@ -1,7 +1,7 @@
 /* styles.css */
 @font-face {
-    font-family: "Quicksand";
-    src: "assets/fonts/Quicksand-VariableFont_wght.ttf";
+    font-family: "Outfit";
+    src: url("./assets/fonts/Outfit-VariableFont_wght.ttf");
 }
 
 .container {
@@ -11,7 +11,7 @@
 }
 
 h1, h2, h3, p, span {
-    font-family: "Quicksand";
+    font-family: "Outfit";
 }
 
 .bigger-p {
