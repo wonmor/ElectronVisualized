@@ -97,7 +97,10 @@ def plot_atomic_orbital(element_name, n, l, m):
     return_value = {
         "x_coords": x_coords,
         "y_coords": y_coords,
-        "z_coords": z_coords
+        "z_coords": z_coords,
+        "n_value": n,
+        "l_value": l,
+        "m_value": m
     }
 
     with open(os.path.join(PROJECT_ROOT, f'client/src/assets/SPH_{element_name}.json'), 'w+') as outfile:

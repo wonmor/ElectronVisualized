@@ -7,6 +7,8 @@ import { Slider, Button } from "@mui/material";
 
 import { Switch } from "@headlessui/react";
 
+import quantumNumberData from './quantum_num.json';
+
 import store from "../store";
 
 // A MUST — MAKE SURE THAT YOU WRITE CURLY BRACKETS NEXT TO IMPORT!
@@ -78,6 +80,10 @@ const useLazyInterval = (callback, delay) => {
     // Clear the interval to conserve memory
     return () => clearInterval(id);
   }, [delay]);
+};
+
+const getKeyByValue = (object, value) => {
+  return Object.keys(object).find(key => object[key] === value);
 };
 
 export default function Renderer() {
@@ -281,6 +287,43 @@ export default function Renderer() {
       });
   };
 
+  async function fetchNthAtomRenderElement(renderElement, index) {
+    // Get the element that has one less n quantum number...
+    const newRenderElement = getKeyByValue(quantumNumberData, {"n": index, "l": quantumNumberData[renderElement]["l"], "m": quantumNumberData[renderElement]["m"]});
+
+    await axios({
+      method: "GET",
+      url: `/api/loadSPH/${newRenderElement}`,
+    })
+      .then((response) => {
+        const res = response.data;
+
+        let returnDict = {};
+
+        returnDict[`x_coords_${index}`] = res.x_coords;
+        returnDict[`y_coords_${index}`] = res.y_coords;
+        returnDict[`z_coords_${index}`] = res.z_coords;
+
+        dispatch(
+          appendGlobalAtomInfo(returnDict) || null
+        );
+
+        setPreRender(false);
+      })
+      .catch((error) => {
+        if (error.response) {
+          setStatusText("Server communication error has occured!");
+          setServerError(true);
+
+          console.log(error.response);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+
+          return;
+        }
+      });
+  }
+
   const fetchAtomRenderElement = async (renderElement) => {
     /*
     This is an asyncronous function that sends HTML requests to the server, ran by Flask (Python)
@@ -308,6 +351,12 @@ export default function Renderer() {
             z_coords: res.z_coords,
           }) || null
         );
+
+        if (res.n_value > 1) {
+          for (let i = 1; i < res.n_value; i++) {
+            fetchNthAtomRenderElement(renderElement, i);
+          }
+        }
 
         setPreRender(false);
       })

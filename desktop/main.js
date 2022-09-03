@@ -2,6 +2,8 @@
 const { ipcMain, app, BrowserWindow, TouchBar, nativeImage } = require('electron')
 const { TouchBarButton } = TouchBar
 
+// electron-builder --universal to deploy the app on macOS...
+
 const path = require('path')
 
 let isSuccess = false

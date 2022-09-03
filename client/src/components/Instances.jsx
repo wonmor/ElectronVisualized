@@ -115,6 +115,8 @@ export function Particles({ particleRef, lightRef, particleRadius }) {
 
       anonymousObject.position.set(x, y, z);
 
+      // Add code to differentiate the boundaries between the shells...
+
       anonymousObject.updateMatrix();
 
       // Apply the matrix to the instanced item...
