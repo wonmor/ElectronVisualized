@@ -309,13 +309,13 @@ export default function Table() {
           >
             Visualizing{" "}
             <span className="text-rose-200">
-              <b>Electron Density</b>
+              <b>Orbitals</b>
             </span>
             . Reimagined.
           </h1>
 
           <h2 className="sm:mt-5 mb-2 pb-3 pl-5 pr-5 text-gray-400">
-            Simulated with the help of{" "}
+            Electron Density with the help of{" "}
             {globalSelectedElement["type"] === "Molecule" ? (
               <span className="text-white">Density Functional Theory</span>
             ) : (

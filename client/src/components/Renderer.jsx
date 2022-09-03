@@ -360,7 +360,7 @@ export default function Renderer() {
           </h1>
 
           <h2 className="sm:mt-5 pb-3 pl-5 pr-5 text-gray-400">
-            Simulated with the help of{" "}
+            Electron Density with the help of{" "}
             {globalSelectedElement["type"] === "Molecule" ? (
               <span className="text-white">Density Functional Theory</span>
             ) : (<span className="text-white">Spherical Harmonics</span>)}.
