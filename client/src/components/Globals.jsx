@@ -62,6 +62,24 @@ export const atomDict = {
     "Atom",
     "Copper is a chemical element with the symbol Cu (from Latin: cuprum) and atomic number 29. It is a soft, malleable, and ductile metal with very high thermal and electrical conductivity.",
   ],
+  Li: [
+    "Li",
+    "Lithium Atom",
+    "Atom",
+    "A lithium atom is an atom of the chemical element lithium. Stable lithium is composed of three electrons bound by the electromagnetic force to a nucleus containing three protons along with either three or four neutrons, depending on the isotope, held together by the strong force."
+  ],
+  Na: [
+    "Na",
+    "Sodium Atom",
+    "Atom",
+    "Sodium is a very soft silvery-white metal. Sodium is the most common alkali metal and the sixth most abundant element on Earth, comprising 2.8 percent of Earth’s crust. It occurs abundantly in nature in compounds, especially common salt—sodium chloride (NaCl)—which forms the mineral halite and constitutes about 80 percent of the dissolved constituents of seawater."
+  ],
+  K: [
+    "K",
+    "Potassium Atom",
+    "Atom",
+    "Potassium is a silvery-white metal that is soft enough to be cut with a knife with little force. Potassium metal reacts rapidly with atmospheric oxygen to form flaky white potassium peroxide in only seconds of exposure. "
+  ]
 };
 
 export const normalizeData = (val, max, min) => {
@@ -132,6 +150,49 @@ export const getMoleculeColour = (
   }
 };
 
+export const getAtomColour = (
+  element
+) => {
+  /*
+    Getting the atom colour based upon the element name
+    and the colour it emits while combusting
+  
+    Parameters
+    ----------
+    element: String
+        Name of the element
+    volume: Float
+        Volume that correspond with each coordinate of the Canvas
+  
+    Returns
+    -------
+    String
+        Contains the HEX information of the generated colour
+    */
+  switch (element) {
+    case "H":
+      return '#ADD8E6';
+
+    case "Li":
+      return '#FFC0CB';
+
+    case "Na":
+      return "#FFFF00";
+
+    case "K":
+      return "#C8A2C8";
+
+    case "O":
+      return "#FFA500";
+
+    case "Cu":
+      return '#00CC99';
+
+    default:
+      return "#FFFF00";
+  }
+};
+
 export const getMoleculeOpacity = (element, volume) => {
   /*
     Getting the molecule opacity based upon the element name and the volume information
@@ -183,6 +244,12 @@ export const getCameraPosition = (element) => {
   switch (element) {
     case "H":
       return { fov: 15, position: [-5, 8, 8] };
+
+    case "Na":
+      return { fov: 55, position: [-5, 8, 8] };
+
+    case "K":
+      return { fov: 65, position: [-5, 8, 8] };
 
     case "H2":
       return { fov: 20, position: [-5, 8, 8] };
@@ -293,4 +360,29 @@ export const isElectron = () => {
   }
 
   return false;
+};
+
+export const invertColor = (hex) => {
+  if (hex.indexOf('#') === 0) {
+      hex = hex.slice(1);
+  }
+  // convert 3-digit hex to 6-digits.
+  if (hex.length === 3) {
+      hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+  }
+  if (hex.length !== 6) {
+      throw new Error('Invalid HEX color.');
+  }
+  // invert color components
+  var r = (255 - parseInt(hex.slice(0, 2), 16)).toString(16),
+      g = (255 - parseInt(hex.slice(2, 4), 16)).toString(16),
+      b = (255 - parseInt(hex.slice(4, 6), 16)).toString(16);
+  // pad each with zeros and return
+  return '#' + padZero(r) + padZero(g) + padZero(b);
+};
+
+export const padZero = (str, len) => {
+  len = len || 2;
+  var zeros = new Array(len).join('0');
+  return (zeros + str).slice(-len);
 };

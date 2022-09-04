@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import * as THREE from "three";
 
-import { getMoleculeColour, normalizeData } from "./Globals";
+import { getMoleculeColour, normalizeData, getAtomColour } from "./Globals";
 
 /*
 ▀█▀ █▀▀▄ █▀▀ ▀▀█▀▀ █▀▀█ █▀▀▄ █▀▀ █▀▀ █▀▀ 
@@ -79,16 +79,21 @@ export function Particles({ particleRef, lightRef, particleRadius }) {
       
     } else if (globalSelectedElement["type"] === "Atom" && globalAtomInfo["z_coords"]) {
       for (let i = 0; i < globalAtomInfo["z_coords"].length; i++) {
-        const x = globalAtomInfo["x_coords"][i] / 10 - 8;
-        const y = globalAtomInfo["y_coords"][i] / 10 - 8;
-        const z = globalAtomInfo["z_coords"][i] / 10 - 8;
+        const currentXCoords = globalAtomInfo["x_coords"][i];
+        const currentYCoords = globalAtomInfo["y_coords"][i];
+        const currentZCoords = globalAtomInfo["z_coords"][i];
+        
+        const x = currentXCoords / 10 - 8;
+        const y = currentYCoords / 10 - 8;
+        const z = currentZCoords / 10 - 8;
 
         const volume = 0;
-
+        
         temp.push({ x, y, z, volume, isColourException });
       }
     }
 
+    console.log(temp)
     return temp;
   }, [globalAtomInfo, globalSelectedElement]);
 
@@ -99,18 +104,29 @@ export function Particles({ particleRef, lightRef, particleRadius }) {
   useEffect(() => {
     particles.forEach((particle, index) => {
       const { x, y, z, volume, isColourException } = particle;
+      let currentColour;
 
-      let currentColour = getMoleculeColour(
-        globalSelectedElement["element"],
-        volume
-      );
-
-      if (isColourException) {
+      if (globalSelectedElement["type"] === "Molecule") {
         currentColour = getMoleculeColour(
           globalSelectedElement["element"],
-          volume,
-          true
+          volume
         );
+
+        if (isColourException) {
+          currentColour = getMoleculeColour(
+            globalSelectedElement["element"],
+            volume,
+            true
+          );
+        }
+      }
+
+      if (globalSelectedElement["type"] === "Atom") {
+        currentColour = getAtomColour(globalSelectedElement["element"]);
+
+        if (isColourException) {
+          currentColour = "#FFFF00";
+        }
       }
 
       anonymousObject.position.set(x, y, z);

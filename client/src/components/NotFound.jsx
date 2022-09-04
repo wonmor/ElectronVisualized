@@ -34,13 +34,6 @@ export default function NotFound() {
           <p className="pt-5 text-gray-400">
             Kindly consider <b>redirecting</b> to the main website.
           </p>
-
-          <img
-            className="scale-75 m-auto"
-            src="https://pngimg.com/uploads/dog/dog_PNG50371.png"
-            alt="dog_image"
-          ></img>
-
         </div>
       </div>
     </>

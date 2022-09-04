@@ -149,7 +149,15 @@ export default function Table() {
               H
             </li>
             <li title="Helium">He</li>
-            <li title="Lithium">Li</li>
+            <li onMouseDown={() => {
+                // This code runs first...
+                appendNewRender(...atomDict["Li"]);
+              }}
+              onClick={() => {
+                // This code runs after a global state change...
+                movePage(`/renderer/${globalSelectedElement["element"]}`);
+              }}
+              title="Lithium">Li</li>
             <li title="Beryllium">Be</li>
             <li title="Boron">B</li>
             <li title="Carbon">C</li>
@@ -169,7 +177,15 @@ export default function Table() {
             </li>
             <li title="Fluorine">F</li>
             <li title="Neon">Ne</li>
-            <li title="Sodium">Na</li>
+            <li onMouseDown={() => {
+                // This code runs first...
+                appendNewRender(...atomDict["Na"]);
+              }}
+              onClick={() => {
+                // This code runs after a global state change...
+                movePage(`/renderer/${globalSelectedElement["element"]}`);
+              }}
+              title="Sodium">Na</li>
             <li title="Magnesium">Mg</li>
             <li title="Aluminium">Al</li>
             <li title="Silicon">Si</li>
@@ -177,7 +193,14 @@ export default function Table() {
             <li title="Sulfur">S</li>
             <li title="Chlorine">Cl</li>
             <li title="Argon">Ar</li>
-            <li title="Potassium">K</li>
+            <li onMouseDown={() => {
+                // This code runs first...
+                appendNewRender(...atomDict["K"]);
+              }}
+              onClick={() => {
+                // This code runs after a global state change...
+                movePage(`/renderer/${globalSelectedElement["element"]}`);
+              }} title="Potassium">K</li>
             <li title="Calcium">Ca</li>
             <li title="Scandium">Sc</li>
             <li title="Titanium">Ti</li>
@@ -412,8 +435,7 @@ export default function Table() {
 
           <p className="p-5 text-gray-400 border-b border-gray-500">
             Using spherical harmonics, view the <b>atomic orbital</b> structure
-            of your choice. <b>Hydrogen</b>, <b>Copper</b>, and <b>Oxygen</b>{" "}
-            Atoms are available at the moment.
+            of your choice. Straight from your high school chemistry!
           </p>
 
           {displayPeriodicTable()}

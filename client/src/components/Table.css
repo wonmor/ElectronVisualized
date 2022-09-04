@@ -29,7 +29,13 @@
 
 #periodic-table li:nth-of-type(1),
 
+#periodic-table li:nth-of-type(3),
+
 #periodic-table li:nth-of-type(8),
+
+#periodic-table li:nth-of-type(11),
+
+#periodic-table li:nth-of-type(19),
 
 #periodic-table li:nth-of-type(29) {
     cursor: pointer;
@@ -38,7 +44,13 @@
 
 #periodic-table li:nth-of-type(1):hover,
 
+#periodic-table li:nth-of-type(3):hover,
+
 #periodic-table li:nth-of-type(8):hover,
+
+#periodic-table li:nth-of-type(11):hover,
+
+#periodic-table li:nth-of-type(19):hover,
 
 #periodic-table li:nth-of-type(29):hover {
   color: #D3D3D3;

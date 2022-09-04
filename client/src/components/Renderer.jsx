@@ -7,8 +7,6 @@ import { Slider, Button } from "@mui/material";
 
 import { Switch } from "@headlessui/react";
 
-import quantumNumberData from './quantum_num.json';
-
 import store from "../store";
 
 // A MUST — MAKE SURE THAT YOU WRITE CURLY BRACKETS NEXT TO IMPORT!
@@ -82,10 +80,6 @@ const useLazyInterval = (callback, delay) => {
     // Clear the interval to conserve memory
     return () => clearInterval(id);
   }, [delay]);
-};
-
-const getKeyByValue = (object, value) => {
-  return Object.keys(object).find(key => object[key] === value);
 };
 
 export default function Renderer() {
@@ -289,43 +283,6 @@ export default function Renderer() {
       });
   };
 
-  async function fetchNthAtomRenderElement(renderElement, index) {
-    // Get the element that has one less n quantum number...
-    const newRenderElement = getKeyByValue(quantumNumberData, {"n": index, "l": quantumNumberData[renderElement]["l"], "m": quantumNumberData[renderElement]["m"]});
-
-    await axios({
-      method: "GET",
-      url: `/api/loadSPH/${newRenderElement}`,
-    })
-      .then((response) => {
-        const res = response.data;
-
-        let returnDict = {};
-
-        returnDict[`x_coords_${index}`] = res.x_coords;
-        returnDict[`y_coords_${index}`] = res.y_coords;
-        returnDict[`z_coords_${index}`] = res.z_coords;
-
-        dispatch(
-          appendGlobalAtomInfo(returnDict) || null
-        );
-
-        setPreRender(false);
-      })
-      .catch((error) => {
-        if (error.response) {
-          setStatusText("Server communication error has occured!");
-          setServerError(true);
-
-          console.log(error.response);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-
-          return;
-        }
-      });
-  }
-
   const fetchAtomRenderElement = async (renderElement) => {
     /*
     This is an asyncronous function that sends HTML requests to the server, ran by Flask (Python)
@@ -351,14 +308,11 @@ export default function Renderer() {
             x_coords: res.x_coords,
             y_coords: res.y_coords,
             z_coords: res.z_coords,
+            n_value: res.n_value,
+            l_value: res.l_value,
+            m_value: res.m_value
           }) || null
         );
-
-        if (res.n_value > 1) {
-          for (let i = 1; i < res.n_value; i++) {
-            fetchNthAtomRenderElement(renderElement, i);
-          }
-        }
 
         setPreRender(false);
       })
@@ -409,7 +363,7 @@ export default function Renderer() {
             {globalSelectedElement["name"]}
             <span className="font-thin text-gray-400">. Visualized.</span>
           </h1>
-          
+
           <h2 className="sm:mt-5 pb-3 pl-5 pr-5 text-gray-400">
             Electron Density with the help of{" "}
             {globalSelectedElement["type"] === "Molecule" ? (
@@ -547,9 +501,12 @@ export default function Renderer() {
         </div>} show={true} />
 
         <div
-          className="bg-gray-800 ml-10 mr-10 md:ml-40 md:mr-40 rounded"
+          className="bg-gray-800 text-center text-gray-400 ml-10 mr-10 md:ml-40 md:mr-40 rounded"
           style={{ width: CANVAS.WIDTH, height: CANVAS.HEIGHT }}
         >
+          {!preRender && globalAtomInfo["n_value"] && (
+            <Mount content={
+            <div className="absolute" style={{zIndex: 10, backgroundColor: "black", left: "50%", transform: "translate(-50%, 0%)"}}><p className="pt-2 pl-2 pr-2 text-sm md:text-xl">Quantum Numbers</p><p className="pl-2 pr-2 pb-2 text-sm md:text-xl">N = {globalAtomInfo["n_value"]}&nbsp;&nbsp;&nbsp;&nbsp;L = {globalAtomInfo["l_value"]}&nbsp;&nbsp;&nbsp;&nbsp;M = {globalAtomInfo["m_value"]}</p></div>} show={true} />)}
           <Canvas camera={getCameraPosition(globalSelectedElement["element"])}>
             {!preRender ? (
               <Provider store={store}>
