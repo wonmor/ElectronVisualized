@@ -435,7 +435,7 @@ export default function Table() {
 
           <p className="p-5 text-gray-400 border-b border-gray-500">
             Using spherical harmonics, view the <b>atomic orbital</b> structure
-            of your choice. Straight from your high school chemistry!
+            of your choice.
           </p>
 
           {displayPeriodicTable()}
