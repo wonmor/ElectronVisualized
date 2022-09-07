@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 import { Transition } from "@headlessui/react";
 
-import { useWindowSize } from "./Globals";
+import { useWindowSize, isElectron } from "./Globals";
 
 import "./Header.css";
 
@@ -87,7 +87,7 @@ export default function Header() {
           <img className="w-20 mr-5" src={Logo} alt="logo"></img>
 
           <span className="font-semibold text-xl tracking-tight">
-            ElectronVisualized
+            ElectronVisualized {isElectron() && (<span className="font-extrabold text-transparent text-4xl bg-clip-text bg-gradient-to-r from-purple-300 to-pink-400">Studio</span>)}
           </span>
         </div>
       </button>
