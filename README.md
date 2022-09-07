@@ -2,7 +2,7 @@
 
 # ElectronVisualized
 
-**Web**-based **electron density** viewer single-handedly developed by a **high school student**.
+**Web**-based **electron density** viewer single-handedly developed by a high school student, using spherical harmonics and Density Functional Theory formulas.
 
 ---
 
