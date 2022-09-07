@@ -1,8 +1,8 @@
 ![ElectronVisualPromo](https://user-images.githubusercontent.com/35755386/173193444-2ce2a70c-fd07-421b-98bd-c787badbcd8b.png)
 
-# View Electron Density: Molecular and Atomic Orbitals
+# ElectronVisualized
 
-**Web**-based **electron density simulation** single-handedly developed by a **high school student**. Displayed based upon the internal calculations performed that involve the state-of-the-art **Projector Augmented-wave** (PAW) method and **Density Functional Theory** (DFT): describing the **probable locations of electrons** by simplifying the N-body Schrödinger's Equation into a relatively easier-to-compute N single-body problem.
+Web-based **atomic** and **molecular** orbitals viewer developed by a high school student, using spherical harmonics and Density Functional Theory formulas.
 
 ---
 
@@ -10,15 +10,9 @@
 
 Developed and Designed by **John Seong**. Served under the **MIT** License.
 
-### [Launch Website](https://electronvisual.org)
-
----
-
-## Useful Links
+### [Launch Web App](https://electronvisual.org)
 
 [Download on the **Mac App Store**](https://apps.apple.com/us/app/electronvisualized/id1631246652?mt=12)
-
-[Check out my **LinkedIn**](https://www.linkedin.com/in/john-seong-9194321a9)
 
 ---
 
