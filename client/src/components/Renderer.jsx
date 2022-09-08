@@ -510,7 +510,7 @@ export default function Renderer() {
                 <div className="flex flex-col sm:flex-row">
                   <div className="flex flex-col border-b border-r-0 sm:border-b-0 sm:border-r border-gray-400">
                     <p className="pt-2 pl-2 pr-2 text-sm md:text-xl">
-                      Quantum Numbers
+                      Quantum Num.
                     </p>
                     <p className="pl-2 pr-2 pb-2 text-sm md:text-xl">
                       N = {globalAtomInfo["n_value"]}&nbsp;&nbsp;&nbsp;&nbsp;L = {globalAtomInfo["l_value"]}&nbsp;&nbsp;&nbsp;&nbsp;M = {globalAtomInfo["m_value"]}
@@ -519,7 +519,7 @@ export default function Renderer() {
 
                   <div className="flex flex-col">
                     <p className="pt-2 pl-2 pr-2 text-sm md:text-xl">
-                      Electron Configuration
+                      Electron Config.
                     </p>
                     <p className="pl-2 pr-2 pb-2 text-sm md:text-xl">
                       {globalSelectedElement["electronConfig"]}
