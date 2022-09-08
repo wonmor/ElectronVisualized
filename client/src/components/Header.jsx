@@ -4,6 +4,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 import { Transition } from "@headlessui/react";
 
+import { FaHome } from 'react-icons/fa';
+
 import { useWindowSize, isElectron } from "./Globals";
 
 import "./Header.css";
@@ -74,7 +76,7 @@ export default function Header() {
     if (size.width > 1024) {
       setMenu(true);
       setMenuAlreadyTriggered(true);
-      
+
     } else if (showMenuAlreadyTriggered) {
       setMenu(false);
       setMenuAlreadyTriggered(false);
@@ -97,14 +99,25 @@ export default function Header() {
         </div>
       </button>
 
-      <div className="block lg:hidden">
+      <div className="flex flex-row lg:hidden">
+        <button
+          onClick={() => {
+            movePage("/");
+          }}
+          className={`flex items-center px-3 py-2 border rounded text-rose-200 border-rose-200 hover:text-white hover:border-white ${size.width < 380 ? "mt-5 mr-2" : "mr-2"
+            }`}
+        >
+          {size.width < 380 && <span className="mr-3">Menu</span>}
+
+          <FaHome />
+        </button>
+
         <button
           onClick={() => {
             setMenu(!showMenu);
           }}
-          className={`flex items-center px-3 py-2 border rounded text-rose-200 border-rose-200 hover:text-white hover:border-white ${
-            size.width < 380 ? "mt-5 mr-5" : "mr-5"
-          }`}
+          className={`flex items-center px-3 py-2 border rounded text-rose-200 border-rose-200 hover:text-white hover:border-white ${size.width < 380 ? "mt-5 mr-5" : "mr-5"
+            }`}
         >
           {size.width < 380 && <span className="mr-3">Menu</span>}
 
@@ -130,15 +143,26 @@ export default function Header() {
           leaveTo="transform opacity-0 scale-95"
         >
           <div className="text-sm lg:flex-grow">
+          <button
+          onClick={() => {
+            movePage('/');
+          }}
+          className={`items-center px-3 py-2 border rounded text-rose-200 border-rose-200 hover:text-white hover:border-white hidden lg:inline-block ${size.width < 380 ? "mt-5 mr-5" : "mr-5"
+            }`}
+        >
+          {size.width < 380 && <span className="mr-3">Menu</span>}
+
+          <FaHome />
+        </button>
+        
             <button
               onClick={() => {
                 movePage("/renderer");
               }}
-              className={`block mt-4 lg:inline-block lg:mt-0 mr-4 ${
-                location.pathname === "/renderer"
+              className={`block mt-4 lg:inline-block lg:mt-0 mr-4 ${location.pathname === "/renderer"
                   ? "text-gray-400"
                   : "text-rose-200"
-              } hover:text-white`}
+                } hover:text-white`}
             >
               <span>Renderer</span>
             </button>
@@ -147,9 +171,8 @@ export default function Header() {
               onClick={() => {
                 movePage("/dev");
               }}
-              className={`block mt-4 lg:inline-block lg:mt-0 ${
-                location.pathname === "/dev" ? "text-gray-400" : "text-rose-200"
-              } hover:text-white mr-4`}
+              className={`block mt-4 lg:inline-block lg:mt-0 ${location.pathname === "/dev" ? "text-gray-400" : "text-rose-200"
+                } hover:text-white mr-4`}
             >
               <span>API</span>
             </button>
@@ -158,11 +181,10 @@ export default function Header() {
               onClick={() => {
                 movePage("/docs");
               }}
-              className={`block mt-4 lg:inline-block lg:mt-0 ${
-                location.pathname === "/docs"
+              className={`block mt-4 lg:inline-block lg:mt-0 ${location.pathname === "/docs"
                   ? "text-gray-400"
                   : "text-rose-200"
-              } hover:text-white mr-4`}
+                } hover:text-white mr-4`}
             >
               <span>Docs</span>
             </button>
@@ -171,11 +193,10 @@ export default function Header() {
               onClick={() => {
                 movePage("/extensions");
               }}
-              className={`block mt-4 lg:inline-block lg:mt-0 ${
-                location.pathname === "/extensions"
+              className={`block mt-4 lg:inline-block lg:mt-0 ${location.pathname === "/extensions"
                   ? "text-gray-400"
                   : "text-rose-200"
-              } hover:text-white`}
+                } hover:text-white`}
             >
               <span>Extensions</span>
             </button>
