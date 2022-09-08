@@ -504,6 +504,31 @@ export default function Renderer() {
           className="bg-gray-800 text-center text-gray-400 ml-10 mr-10 md:ml-40 md:mr-40 rounded"
           style={{ width: CANVAS.WIDTH, height: CANVAS.HEIGHT }}
         >
+          {!preRender && globalSelectedElement["type"] === "Molecule" && (
+            <Mount content={
+              <div className="absolute" style={{ zIndex: 10, backgroundColor: "black", left: "50%", transform: "translate(-50%, 0%)" }}>
+                <div className="flex flex-col sm:flex-row">
+                  <div className="flex flex-col border-b border-r-0 sm:border-b-0 sm:border-r border-gray-400">
+                    <p className="pt-2 pl-2 pr-2 text-sm md:text-xl">
+                      Chemical Formula
+                    </p>
+                    <p className="pl-2 pr-2 pb-2 text-sm md:text-xl">
+                      {globalSelectedElement["element"]}
+                    </p>
+                  </div>
+
+                  <div className="flex flex-col">
+                    <p className="pt-2 pl-2 pr-2 text-sm md:text-xl">
+                      Elements
+                    </p>
+                    <p className="pl-2 pr-2 pb-2 text-sm md:text-xl">
+                        {globalAtomInfo["elements"].toString().replaceAll(',', ', ')}
+                    </p>
+                  </div>
+                </div>
+              </div>} show={true} />
+          )}
+
           {!preRender && globalAtomInfo["n_value"] && (
             <Mount content={
               <div className="absolute" style={{ zIndex: 10, backgroundColor: "black", left: "50%", transform: "translate(-50%, 0%)" }}>
