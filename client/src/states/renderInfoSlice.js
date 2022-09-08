@@ -29,10 +29,16 @@ export const renderInfoSlice = createSlice({
                 state.globalRenderInfo = action.payload
             }
         },
+        // By specifying the return value, the redux state updates instantaneously after the update (resetting)...
+        appendGlobalRenderInfo: (state, action) => {
+            if (state.globalAtomInfo !== action.payload) {
+                return {...state, globalRenderInfo: {...state.globalAtomInfo, ...action.payload } };
+            }
+        }
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { setGlobalRenderInfo } = renderInfoSlice.actions
+export const { setGlobalRenderInfo, appendGlobalRenderInfo } = renderInfoSlice.actions
 
 export default renderInfoSlice.reducer

@@ -15,7 +15,7 @@ import {
   appendGlobalAtomInfo,
 } from "../states/atomInfoSlice";
 
-import { setGlobalRenderInfo } from "../states/renderInfoSlice";
+import { setGlobalRenderInfo, appendGlobalRenderInfo } from "../states/renderInfoSlice";
 
 import axios from "axios";
 
@@ -186,6 +186,7 @@ export default function Renderer() {
         preRender: preRender,
         serverError: serverError,
         statusText: statusText,
+        isMoleculeDataFetched: false
       })
     );
   }, [animation, disableButton, dispatch, preRender, serverError, statusText]);
@@ -352,7 +353,7 @@ export default function Renderer() {
 
   // Fetch from the periodic table API...
   useEffect(() => {
-    if (!preRender && globalSelectedElement.type === "Molecule") {
+    if (!preRender && globalSelectedElement.type === "Molecule" && !globalRenderInfo.isMoleculeDataFetched) {
       globalAtomInfo.elements.forEach((element) => {
         axios({
           method: "GET",
@@ -368,8 +369,10 @@ export default function Renderer() {
             return;
           });
       })
+      dispatch(appendGlobalRenderInfo({isMoleculeDataFetched: true}));
+      console.log(globalRenderInfo.isMoleculeDataFetched)
     }
-  }, [globalAtomInfo, globalSelectedElement, preRender])
+  }, [dispatch, globalAtomInfo, globalRenderInfo.isMoleculeDataFetched, globalSelectedElement, preRender])
 
   return (
     <>
