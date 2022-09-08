@@ -433,7 +433,7 @@ export default function Renderer() {
                   className="bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
                   type="button"
                 >
-                  <span>Start Rendering</span>
+                  <span>View the 3D Model</span>
                 </button>
                 {globalSelectedElement["element"] === "H2O" && (
                   <>
