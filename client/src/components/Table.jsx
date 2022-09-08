@@ -88,7 +88,7 @@ export default function Table() {
     );
   };
 
-  const appendNewRender = (element, name, type, description) => {
+  const appendNewRender = (element, name, type, description, electronConfig) => {
     /*
     This function clears the previous render
     and append a new information to Redux global state
@@ -107,6 +107,7 @@ export default function Table() {
         name: name,
         type: type,
         description: description,
+        electronConfig: electronConfig
       })
     );
     resetAllPreviousRenders();
@@ -158,8 +159,24 @@ export default function Table() {
                 movePage(`/renderer/${globalSelectedElement["element"]}`);
               }}
               title="Lithium">Li</li>
-            <li title="Beryllium">Be</li>
-            <li title="Boron">B</li>
+            <li onMouseDown={() => {
+                // This code runs first...
+                appendNewRender(...atomDict["Be"]);
+              }}
+              onClick={() => {
+                // This code runs after a global state change...
+                movePage(`/renderer/${globalSelectedElement["element"]}`);
+              }}
+              title="Beryllium">Be</li>
+            <li onMouseDown={() => {
+                // This code runs first...
+                appendNewRender(...atomDict["B"]);
+              }}
+              onClick={() => {
+                // This code runs after a global state change...
+                movePage(`/renderer/${globalSelectedElement["element"]}`);
+              }}
+              title="Boron">B</li>
             <li title="Carbon">C</li>
             <li title="Nitrogen">N</li>
             <li
@@ -334,7 +351,7 @@ export default function Table() {
           >
             Visualizing{" "}
             <span className="text-rose-200">
-              <b>Orbitals</b>
+              <b>Quantum Mechanics</b>
             </span>
             . Reimagined.
           </h1>
@@ -435,7 +452,7 @@ export default function Table() {
 
           <p className="p-5 text-gray-400 border-b border-gray-500">
             Using spherical harmonics, view the <b>atomic orbital</b> structure
-            of your choice.
+            of your choice.<br />Colours are displayed based upon elements' actual properties in the flame test.
           </p>
 
           {displayPeriodicTable()}

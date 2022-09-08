@@ -298,7 +298,7 @@ export default function Renderer() {
 
     await axios({
       method: "GET",
-      url: `/api/loadSPH/${renderElement}`,
+      url: `/api/atom/${renderElement}`,
     })
       .then((response) => {
         const res = response.data;
@@ -506,7 +506,27 @@ export default function Renderer() {
         >
           {!preRender && globalAtomInfo["n_value"] && (
             <Mount content={
-            <div className="absolute" style={{zIndex: 10, backgroundColor: "black", left: "50%", transform: "translate(-50%, 0%)"}}><p className="pt-2 pl-2 pr-2 text-sm md:text-xl">Quantum Numbers</p><p className="pl-2 pr-2 pb-2 text-sm md:text-xl">N = {globalAtomInfo["n_value"]}&nbsp;&nbsp;&nbsp;&nbsp;L = {globalAtomInfo["l_value"]}&nbsp;&nbsp;&nbsp;&nbsp;M = {globalAtomInfo["m_value"]}</p></div>} show={true} />)}
+              <div className="absolute" style={{ zIndex: 10, backgroundColor: "black", left: "50%", transform: "translate(-50%, 0%)" }}>
+                <div className="flex flex-col sm:flex-row">
+                  <div className="flex flex-col border-b border-r-0 sm:border-b-0 sm:border-r border-gray-400">
+                    <p className="pt-2 pl-2 pr-2 text-sm md:text-xl">
+                      Quantum Numbers
+                    </p>
+                    <p className="pl-2 pr-2 pb-2 text-sm md:text-xl">
+                      N = {globalAtomInfo["n_value"]}&nbsp;&nbsp;&nbsp;&nbsp;L = {globalAtomInfo["l_value"]}&nbsp;&nbsp;&nbsp;&nbsp;M = {globalAtomInfo["m_value"]}
+                    </p>
+                  </div>
+
+                  <div className="flex flex-col">
+                    <p className="pt-2 pl-2 pr-2 text-sm md:text-xl">
+                      Electron Configuration
+                    </p>
+                    <p className="pl-2 pr-2 pb-2 text-sm md:text-xl">
+                      {globalSelectedElement["electronConfig"]}
+                    </p>
+                  </div>
+                </div>
+              </div>} show={true} />)}
           <Canvas camera={getCameraPosition(globalSelectedElement["element"])}>
             {!preRender ? (
               <Provider store={store}>
