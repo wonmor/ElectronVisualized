@@ -31,7 +31,7 @@ export default function Docs() {
             <span className="text-white">Manufactured</span>
             <br></br>
             by a fellow{" "}
-            <span className="font-bold text-blue-200">Earthling</span>.
+            <span className="text-blue-200">Earthling</span>.
           </h1>} show />
 
           <h2 className="mt-5 pl-5 pr-5 pt-5 leading-normal bg-gray-600 text-gray-400 rounded">
@@ -40,7 +40,7 @@ export default function Docs() {
               With a{" "}
               <span className="text-white">
                 Great{" "}
-                <span className="font-bold text-rose-200">Documentation</span>
+                <span className="text-rose-200">Documentation</span>
               </span>
               .
             </span>
@@ -50,7 +50,7 @@ export default function Docs() {
             A Beautiful, Elegant Interaction Between the{" "}
             <span className="text-white">User</span> and the{" "}
             <span className="text-white">Developer</span>.
-            <p className="font-bold pt-10 pb-3 pr-5 pl-5 text-rose-100 text-3xl">
+            <p className="pt-10 pb-3 pr-5 pl-5 text-rose-100 text-3xl">
               Table of Contents
             </p>
             <a
@@ -79,7 +79,7 @@ export default function Docs() {
             </a>
             <p
               id="introduction"
-              className="font-bold mt-10 pt-5 pr-5 pl-5 text-left text-3xl border-t border-gray-400"
+              className="mt-10 pt-5 pr-5 pl-5 text-left text-3xl border-t border-gray-400"
             >
               By the Lead Developer of ElectronVisualized.
             </p>

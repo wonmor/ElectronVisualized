@@ -102,7 +102,7 @@ export default function Extensions() {
       <div className="bg-gray-700 pb-5">
         <div className="ml-5 mr-5 text-white text-center sm:pt-10 text-gray-400">
           <Mount content={<h1 className="sm:mb-5 scale-75 sm:scale-90">
-            <span className="font-bold text-rose-200">Extensions</span> make it
+            <span className="text-rose-200">Extensions</span> make it
             more <span className="text-white">accessible</span>.
           </h1>} show />
 

@@ -351,14 +351,14 @@ export default function Table() {
           >
             Visualizing{" "}
             <span className="text-rose-200">
-              <b>Quantum Mechanics</b>
+              Quantum Mechanics
             </span>
             . Reimagined.
           </h1>
 
             <h2 className="sm:mt-5 mb-2 pb-3 pl-5 pr-5 text-gray-400">
               Electron Density with the help of{" "}
-              {globalSelectedElement["type"] === "Molecule" ? (
+              {globalSelectedElement.type === "Molecule" ? (
                 <span className="text-white">Density Functional Theory</span>
               ) : (
                 <span className="text-white">Spherical Harmonics</span>
@@ -411,7 +411,7 @@ export default function Table() {
 
           <div className="bg-gray-600 rounded pb-2">
             <h1
-              className={`scale-90 sm:scale-100 mt-5 pt-5 pl-5 pr-5 font-bold text-blue-200 ${size.width < 350 ? "truncate ..." : null
+              className={`scale-90 sm:scale-100 mt-5 pt-5 pl-5 pr-5 text-blue-200 ${size.width < 350 ? "truncate ..." : null
                 }`}
             >
               Molecules
@@ -447,7 +447,7 @@ export default function Table() {
           </div>
 
           <h1 className="scale-90 sm:scale-100 mt-5 pl-5 pr-5 text-gray-400">
-            <b>Atoms</b>
+            Atoms
           </h1>
 
           <p className="p-5 text-gray-400 border-b border-gray-500">

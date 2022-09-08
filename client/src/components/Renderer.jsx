@@ -381,7 +381,7 @@ export default function Renderer() {
       <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
         <Mount content={<div className="text-rose-200 text-center pt-10 pb-10 ml-5 mr-5">
           <h1
-            className={`font-bold mb-5 ${size.width < 350 ? "scale-75" : null}`}
+            className={`mb-5 ${size.width < 350 ? "scale-75" : null}`}
           >
             {globalSelectedElement["name"]}
             <span className="font-thin text-gray-400">. Visualized.</span>
@@ -404,11 +404,11 @@ export default function Renderer() {
                 <button
                   disabled={disableButton}
                   onClick={() => {
-                    if (globalSelectedElement["type"] === "Molecule") {
+                    if (globalSelectedElement.type === "Molecule") {
                       gaEventTracker("Molecule Renderer", "Render");
 
                       if (
-                        globalSelectedElement["element"] === "H2O" &&
+                        globalSelectedElement.element === "H2O" &&
                         lonePairEnabled
                       ) {
                         fetchMoleculeCombinedRenderElement("H2O", "O");
@@ -416,17 +416,17 @@ export default function Renderer() {
                         Save oxygen atom's coordinates to subtract it
                         from the water's coordinates to visualize the lone pairs...
                         */
-                      } else if (globalSelectedElement["type"] === "Atom") {
+                      } else if (globalSelectedElement.type === "Atom") {
                         fetchAtomRenderElement(
-                          globalSelectedElement["element"]
+                          globalSelectedElement.element
                         );
                       } else {
                         fetchMoleculeCombinedRenderElement(
-                          globalSelectedElement["element"]
+                          globalSelectedElement.element
                         );
                       }
                     } else {
-                      fetchAtomRenderElement(globalSelectedElement["element"]);
+                      fetchAtomRenderElement(globalSelectedElement.element);
                     }
                     setDisableButton(true);
                   }}

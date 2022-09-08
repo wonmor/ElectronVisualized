@@ -87,7 +87,7 @@ export default function Header() {
         <div className="flex items-center flex-shrink-0 text-white mr-6">
           <img className="w-20 mr-5" src={Logo} alt="logo"></img>
 
-          <span className="font-semibold text-xl tracking-tight">
+          <span className="text-xl tracking-tight">
             ElectronVisualized {isElectron() && (<span className="font-extrabold text-transparent text-4xl bg-clip-text bg-gradient-to-r from-purple-300 to-pink-400">Studio</span>)}
           </span>
         </div>

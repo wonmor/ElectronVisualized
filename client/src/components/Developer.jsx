@@ -96,14 +96,14 @@ export default function Developer() {
         <div className="text-white text-center pt-10 pl-5 pr-5 text-gray-400">
           <Mount content={<h1 className="pb-5 text-ellipsis overflow-hidden">
             <span className="text-white">Density Functional Theory</span> Meets
-            the <span className="font-bold text-blue-200">Web</span>.
+            the <span className="text-blue-200">Web</span>.
           </h1>} show />
 
           <div className="bg-gray-600 rounded ml-0 mr-0 lg:ml-60 lg:mr-60">
             <h2 className="mt-5 pl-5 pr-5 pt-5 leading-normal text-gray-400">
               <span className="text-5xl sm:text-6xl">
                 Introducing the{" "}
-                <span className="font-bold text-rose-200">World Engine</span>.
+                <span className="text-rose-200">World Engine</span>.
               </span>
             </h2>
 
@@ -194,7 +194,7 @@ export default function Developer() {
             ) : (
               <div className="block sm:flex align-center justify-center">
                 <div className="text-xl max-h-min text-left bg-gray-900 p-5 text-white">
-                  <span className="font-bold text-5xl text-gray-400">
+                  <span className="text-5xl text-gray-400">
                     HYDROGEN GAS
                   </span>
                   <br></br>
