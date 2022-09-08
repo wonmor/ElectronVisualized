@@ -6,7 +6,7 @@ Web-based **atomic** and **molecular** orbitals viewer developed by a high schoo
 
 ---
 
-## Official Build 5.0
+## Official Build 6.0
 
 Developed and Designed by **John Seong**. Served under the **MIT** License.
 
