@@ -17,6 +17,10 @@ import Logo from "../assets/e_logo.svg";
 ▀▄▀▄▀▄▄▄▄▄▀▄▄▀▄▄▀▄▄▄▄▀▀▄▄▄▄▄▀▄▄▀▄▄▀
 */
 
+const isEmpty = (str) => {
+  return !str.trim().length;
+}
+
 export default function Header() {
   /*
     This is a component function in JSX that contains the HTML markup that represent each graphical element on the webpage
@@ -39,7 +43,6 @@ export default function Header() {
   const [showMenu, setMenu] = useState(false);
   const [showMenuAlreadyTriggered, setMenuAlreadyTriggered] = useState(false);
   const [showDropDown, setDropDown] = useState(false);
-  const [showSearchResults, setSearchResults] = useState(false);
 
   const navigate = useNavigate();
 
@@ -60,6 +63,12 @@ export default function Header() {
     navigate(page);
   };
 
+  const moveToSearchResults = (keyword) => {
+    if (!isEmpty(keyword)) {
+      movePage('/search');
+    }
+  };
+
   // Responsive Menu Design
   useEffect(() => {
     if (size.width > 1024) {
@@ -71,11 +80,6 @@ export default function Header() {
       setMenuAlreadyTriggered(false);
     }
   }, [showMenu, showMenuAlreadyTriggered, size.width]);
-
-  useEffect(() => {
-    if (localSearchKeyword !== "" && showSearchResults) {
-    }
-  }, [localSearchKeyword, showSearchResults]);
 
   return (
     <nav className="flex items-center justify-between flex-wrap bg-gray-800 p-3">
@@ -186,7 +190,7 @@ export default function Header() {
               onMouseLeave={() => setDropDown(false)}
               onSubmit={(e) => {
                 e.preventDefault(); // Else the page will be reloaded which is the default DOM behaviour in forms and its submit button...
-                setSearchResults(true);
+                moveToSearchResults(localSearchKeyword);
               }}
               className="flex flex-cols justify-self-end m-5 overflow-auto scale-90 sm:scale-100 mb-5 p-3 max-w-fit text-white border border-gray-400 rounded"
             >

@@ -9,6 +9,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 
 import Table from './components/Table'
+import Search from './components/Search';
 import Renderer from './components/Renderer';
 import NotFound from './components/NotFound';
 
@@ -66,6 +67,7 @@ export default function App() {
           <Route path={`/renderer/${globalSelectedElement["element"]}`} element={<Renderer />} />
           <Route path="/dev" element={<Developer />} />
           <Route path="/docs" element={<Docs />} />
+          <Route path="/search" element={<Search />} />
           <Route path="/extensions" element={<Extensions />} />
         </Routes>
       </div>
