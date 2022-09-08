@@ -129,20 +129,20 @@ export default function Renderer() {
     (state) => state.cameraInfo.globalCameraInfo
   );
 
-  const [animation, setAnimation] = useState(globalRenderInfo["animation"]);
+  const [animation, setAnimation] = useState(globalRenderInfo.animation);
 
-  const [statusText, setStatusText] = useState(globalRenderInfo["statusText"]);
+  const [statusText, setStatusText] = useState(globalRenderInfo.statusText);
 
   const [disableButton, setDisableButton] = useState(
-    globalRenderInfo["disableButton"]
+    globalRenderInfo.disableButton
   );
 
-  const [preRender, setPreRender] = useState(globalRenderInfo["preRender"]);
+  const [preRender, setPreRender] = useState(globalRenderInfo.preRender);
 
   // const [currentElementArray, setCurrentElementArray] = useState(null);
 
   const [serverError, setServerError] = useState(
-    globalRenderInfo["serverError"]
+    globalRenderInfo.serverError
   );
 
   const [elementNamesInMolecule, setElementNamesInMolecule] = useState();
@@ -351,7 +351,7 @@ export default function Renderer() {
   const gaEventTracker = useAnalyticsEventTracker("Molecule Renderer");
 
   useEffect(() => {
-    if (!preRender && globalSelectedElement["type"] === "Molecule") {
+    if (!preRender && globalSelectedElement.type === "Molecule") {
       globalAtomInfo.elements.forEach((element) => {
         axios({
           method: "GET",
@@ -360,11 +360,7 @@ export default function Renderer() {
           .then((response) => {
             const res = response.data;
             
-            if (elementNamesInMolecule) {
-              setElementNamesInMolecule(elementNamesInMolecule + " " + res.name);
-            } else {
-              setElementNamesInMolecule(res.name);
-            }
+            setElementNamesInMolecule((prevState) => prevState ? [...prevState, res.name] : [res.name]);
           })
           .catch((error) => {
             console.log(error.response);
@@ -372,7 +368,7 @@ export default function Renderer() {
           });
       })
     }
-  }, [globalAtomInfo, globalSelectedElement,preRender])
+  }, [globalAtomInfo, globalSelectedElement, preRender])
 
   return (
     <>
@@ -550,7 +546,7 @@ export default function Renderer() {
                     </p>
                     <p className="pl-2 pr-2 pb-2 text-sm md:text-xl">
                       {elementNamesInMolecule &&
-                      (elementNamesInMolecule.replace(' ', ', '))}
+                      (elementNamesInMolecule.toString().replace(',', ', '))}
                     </p>
                   </div>
                 </div>
