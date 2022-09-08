@@ -546,7 +546,7 @@ export default function Renderer() {
                     </p>
                     <p className="pl-2 pr-2 pb-2 text-sm md:text-xl">
                       {elementNamesInMolecule &&
-                      (elementNamesInMolecule.toString().replace(',', ', '))}
+                      (elementNamesInMolecule.toString().replaceAll(',', ', '))}
                     </p>
                   </div>
                 </div>
