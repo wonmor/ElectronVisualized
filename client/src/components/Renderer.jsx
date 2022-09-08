@@ -15,7 +15,7 @@ import {
   appendGlobalAtomInfo,
 } from "../states/atomInfoSlice";
 
-import { setGlobalRenderInfo, appendGlobalRenderInfo } from "../states/renderInfoSlice";
+import { setGlobalRenderInfo } from "../states/renderInfoSlice";
 
 import axios from "axios";
 
@@ -186,7 +186,6 @@ export default function Renderer() {
         preRender: preRender,
         serverError: serverError,
         statusText: statusText,
-        isMoleculeDataFetched: false
       })
     );
   }, [animation, disableButton, dispatch, preRender, serverError, statusText]);
@@ -352,7 +351,7 @@ export default function Renderer() {
   const gaEventTracker = useAnalyticsEventTracker("Molecule Renderer");
 
   useEffect(() => {
-    if (!preRender && globalSelectedElement.type === "Molecule" && !globalRenderInfo.isMoleculeDataFetched) {
+    if (!preRender && globalSelectedElement.type === "Molecule") {
       globalAtomInfo.elements.forEach((element) => {
         axios({
           method: "GET",
@@ -368,10 +367,8 @@ export default function Renderer() {
             return;
           });
       })
-      dispatch(appendGlobalRenderInfo({isMoleculeDataFetched: true}));
-      console.log(globalRenderInfo.isMoleculeDataFetched)
     }
-  }, [dispatch, globalAtomInfo, globalRenderInfo.isMoleculeDataFetched, globalSelectedElement, preRender])
+  }, [globalAtomInfo, globalSelectedElement, preRender])
 
   return (
     <>
