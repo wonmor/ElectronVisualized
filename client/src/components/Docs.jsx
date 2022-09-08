@@ -32,7 +32,7 @@ export default function Docs() {
             <br></br>
             by a fellow{" "}
             <span className="font-bold text-blue-200">Earthling</span>.
-          </h1>} show={true} />
+          </h1>} show />
 
           <h2 className="mt-5 pl-5 pr-5 pt-5 leading-normal bg-gray-600 text-gray-400 rounded">
             <span className="text-5xl">

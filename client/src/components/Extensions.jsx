@@ -104,7 +104,7 @@ export default function Extensions() {
           <Mount content={<h1 className="sm:mb-5 scale-75 sm:scale-90">
             <span className="font-bold text-rose-200">Extensions</span> make it
             more <span className="text-white">accessible</span>.
-          </h1>} show={true} />
+          </h1>} show />
 
           <div className="pt-5 leading-normal text-gray-400 border-t border-gray-500">
             <img

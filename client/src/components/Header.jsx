@@ -65,6 +65,7 @@ export default function Header() {
     if (size.width > 1024) {
       setMenu(true);
       setMenuAlreadyTriggered(true);
+      
     } else if (showMenuAlreadyTriggered) {
       setMenu(false);
       setMenuAlreadyTriggered(false);

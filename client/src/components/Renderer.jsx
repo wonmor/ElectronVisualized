@@ -47,6 +47,7 @@ DEVELOPED AND DESIGNED BY JOHN SEONG.
 USES GPAW (DENSITY FUNCTIONAL THEORY) FOR COMPUTATION PURPOSES.
 
 HOW TO OPTIMIZE REACT + THREE-FIBER: https://docs.pmnd.rs/react-three-fiber/advanced/scaling-performance
+PERIODIC TABLE REST API WRITTEN IN GOLANG: https://github.com/neelpatel05/periodic-table-api-go
 */
 
 const useLazyInterval = (callback, delay) => {
@@ -143,6 +144,8 @@ export default function Renderer() {
   const [serverError, setServerError] = useState(
     globalRenderInfo["serverError"]
   );
+
+  const [elementNamesInMolecule, setElementNamesInMolecule] = useState();
 
   const dispatch = useDispatch();
 
@@ -347,6 +350,30 @@ export default function Renderer() {
 
   const gaEventTracker = useAnalyticsEventTracker("Molecule Renderer");
 
+  useEffect(() => {
+    if (!preRender && globalSelectedElement["type"] === "Molecule") {
+      globalAtomInfo.elements.forEach((element) => {
+        axios({
+          method: "GET",
+          url: `https://periodic-table-api.herokuapp.com/atomicNumber/${element}`
+        })
+          .then((response) => {
+            const res = response.data;
+            
+            if (elementNamesInMolecule) {
+              setElementNamesInMolecule(elementNamesInMolecule + " " + res.name);
+            } else {
+              setElementNamesInMolecule(res.name);
+            }
+          })
+          .catch((error) => {
+            console.log(error.response);
+            return;
+          });
+      })
+    }
+  }, [globalAtomInfo, globalSelectedElement,preRender])
+
   return (
     <>
       <MetaTag title={"ElectronVisualized"}
@@ -498,7 +525,7 @@ export default function Renderer() {
               </div>
             )}
           </div>
-        </div>} show={true} />
+        </div>} show />
 
         <div
           className="bg-gray-800 text-center text-gray-400 ml-10 mr-10 md:ml-40 md:mr-40 rounded"
@@ -509,7 +536,7 @@ export default function Renderer() {
               <div className="absolute" style={{ zIndex: 10, backgroundColor: "black", left: "50%", transform: "translate(-50%, 0%)" }}>
                 <div className="flex flex-col sm:flex-row">
                   <div className="flex flex-col border-b border-r-0 sm:border-b-0 sm:border-r border-gray-400">
-                    <p className="pt-2 pl-2 pr-2 text-sm md:text-xl">
+                    <p className="pt-2 pl-2 pr-2 font-bold text-sm md:text-xl">
                       Chemical Formula
                     </p>
                     <p className="pl-2 pr-2 pb-2 text-sm md:text-xl">
@@ -518,32 +545,33 @@ export default function Renderer() {
                   </div>
 
                   <div className="flex flex-col">
-                    <p className="pt-2 pl-2 pr-2 text-sm md:text-xl">
+                    <p className="pt-2 pl-2 pr-2 font-bold text-sm md:text-xl">
                       Elements
                     </p>
                     <p className="pl-2 pr-2 pb-2 text-sm md:text-xl">
-                        {globalAtomInfo["elements"].toString().replaceAll(',', ', ')}
+                      {elementNamesInMolecule &&
+                      (elementNamesInMolecule.replace(' ', ', '))}
                     </p>
                   </div>
                 </div>
-              </div>} show={true} />
+              </div>} show />
           )}
 
-          {!preRender && globalAtomInfo["n_value"] && (
+          {!preRender && globalAtomInfo.n_value && (
             <Mount content={
               <div className="absolute" style={{ zIndex: 10, backgroundColor: "black", left: "50%", transform: "translate(-50%, 0%)" }}>
                 <div className="flex flex-col sm:flex-row">
                   <div className="flex flex-col border-b border-r-0 sm:border-b-0 sm:border-r border-gray-400">
-                    <p className="pt-2 pl-2 pr-2 text-sm md:text-xl">
+                    <p className="pt-2 pl-2 pr-2 font-bold text-sm md:text-xl">
                       Quantum Num.
                     </p>
                     <p className="pl-2 pr-2 pb-2 text-sm md:text-xl">
-                      N = {globalAtomInfo["n_value"]}&nbsp;&nbsp;&nbsp;&nbsp;L = {globalAtomInfo["l_value"]}&nbsp;&nbsp;&nbsp;&nbsp;M = {globalAtomInfo["m_value"]}
+                      N = {globalAtomInfo.n_value}&nbsp;&nbsp;&nbsp;&nbsp;L = {globalAtomInfo.l_value}&nbsp;&nbsp;&nbsp;&nbsp;M = {globalAtomInfo.m_value}
                     </p>
                   </div>
 
                   <div className="flex flex-col">
-                    <p className="pt-2 pl-2 pr-2 text-sm md:text-xl">
+                    <p className="pt-2 pl-2 pr-2 font-bold text-sm md:text-xl">
                       Electron Config.
                     </p>
                     <p className="pl-2 pr-2 pb-2 text-sm md:text-xl">
@@ -551,7 +579,8 @@ export default function Renderer() {
                     </p>
                   </div>
                 </div>
-              </div>} show={true} />)}
+              </div>} show />)}
+
           <Canvas camera={getCameraPosition(globalSelectedElement["element"])}>
             {!preRender ? (
               <Provider store={store}>
@@ -569,20 +598,20 @@ export default function Renderer() {
 
             {globalAtomInfo && !preRender && (
               <Provider store={store}>
-                {globalSelectedElement["type"] === "Molecule" && globalAtomInfo["atoms_x"].map((value, index) => {
+                {globalSelectedElement.type === "Molecule" && globalAtomInfo.atoms_x.map((value, index) => {
                   return (
                     <mesh>
                       <Atoms
                         position={[
-                          globalAtomInfo["atoms_x"][index],
-                          globalAtomInfo["atoms_y"][index],
-                          globalAtomInfo["atoms_z"][index],
+                          globalAtomInfo.atoms_x[index],
+                          globalAtomInfo.atoms_y[index],
+                          globalAtomInfo.atoms_z[index],
                         ]}
 
                       // colour={globalAtomInfo["atomic_color"][currentElementArray[index]]}
                       />
 
-                      {Object.values(bondShapeDict[globalSelectedElement["element"]]).map((value) => {
+                      {Object.values(bondShapeDict[globalSelectedElement.element]).map((value) => {
                         return (
                           <>
                             <BondLine

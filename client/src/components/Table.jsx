@@ -139,11 +139,11 @@ export default function Table() {
             <li
               onMouseDown={() => {
                 // This code runs first...
-                appendNewRender(...atomDict["H"]);
+                appendNewRender(...atomDict.H);
               }}
               onClick={() => {
                 // This code runs after a global state change...
-                movePage(`/renderer/${globalSelectedElement["element"]}`);
+                movePage(`/renderer/${globalSelectedElement.element}`);
               }}
               title="Hydrogen"
             >
@@ -152,29 +152,29 @@ export default function Table() {
             <li title="Helium">He</li>
             <li onMouseDown={() => {
                 // This code runs first...
-                appendNewRender(...atomDict["Li"]);
+                appendNewRender(...atomDict.Li);
               }}
               onClick={() => {
                 // This code runs after a global state change...
-                movePage(`/renderer/${globalSelectedElement["element"]}`);
+                movePage(`/renderer/${globalSelectedElement.element}`);
               }}
               title="Lithium">Li</li>
             <li onMouseDown={() => {
                 // This code runs first...
-                appendNewRender(...atomDict["Be"]);
+                appendNewRender(...atomDict.Be);
               }}
               onClick={() => {
                 // This code runs after a global state change...
-                movePage(`/renderer/${globalSelectedElement["element"]}`);
+                movePage(`/renderer/${globalSelectedElement.element}`);
               }}
               title="Beryllium">Be</li>
             <li onMouseDown={() => {
                 // This code runs first...
-                appendNewRender(...atomDict["B"]);
+                appendNewRender(...atomDict.B);
               }}
               onClick={() => {
                 // This code runs after a global state change...
-                movePage(`/renderer/${globalSelectedElement["element"]}`);
+                movePage(`/renderer/${globalSelectedElement.element}`);
               }}
               title="Boron">B</li>
             <li title="Carbon">C</li>
@@ -182,11 +182,11 @@ export default function Table() {
             <li
               onMouseDown={() => {
                 // This code runs first...
-                appendNewRender(...atomDict["O"]);
+                appendNewRender(...atomDict.O);
               }}
               onClick={() => {
                 // This code runs after a global state change...
-                movePage(`/renderer/${globalSelectedElement["element"]}`);
+                movePage(`/renderer/${globalSelectedElement.element}`);
               }}
               title="Oxygen"
             >
@@ -196,11 +196,11 @@ export default function Table() {
             <li title="Neon">Ne</li>
             <li onMouseDown={() => {
                 // This code runs first...
-                appendNewRender(...atomDict["Na"]);
+                appendNewRender(...atomDict.Na);
               }}
               onClick={() => {
                 // This code runs after a global state change...
-                movePage(`/renderer/${globalSelectedElement["element"]}`);
+                movePage(`/renderer/${globalSelectedElement.element}`);
               }}
               title="Sodium">Na</li>
             <li title="Magnesium">Mg</li>
@@ -212,11 +212,11 @@ export default function Table() {
             <li title="Argon">Ar</li>
             <li onMouseDown={() => {
                 // This code runs first...
-                appendNewRender(...atomDict["K"]);
+                appendNewRender(...atomDict.K);
               }}
               onClick={() => {
                 // This code runs after a global state change...
-                movePage(`/renderer/${globalSelectedElement["element"]}`);
+                movePage(`/renderer/${globalSelectedElement.element}`);
               }} title="Potassium">K</li>
             <li title="Calcium">Ca</li>
             <li title="Scandium">Sc</li>
@@ -230,11 +230,11 @@ export default function Table() {
             <li
               onMouseDown={() => {
                 // This code runs first...
-                appendNewRender(...atomDict["Cu"]);
+                appendNewRender(...atomDict.Cu);
               }}
               onClick={() => {
                 // This code runs after a global state change...
-                movePage(`/renderer/${globalSelectedElement["element"]}`);
+                movePage(`/renderer/${globalSelectedElement.element}`);
               }}
               title="Copper"
             >
@@ -407,7 +407,7 @@ export default function Table() {
                 </a>
               </div>
             )}
-          </>} show={true} />
+          </>} show />
 
           <div className="bg-gray-600 rounded pb-2">
             <h1

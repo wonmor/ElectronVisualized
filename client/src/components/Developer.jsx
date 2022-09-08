@@ -97,7 +97,7 @@ export default function Developer() {
           <Mount content={<h1 className="pb-5 text-ellipsis overflow-hidden">
             <span className="text-white">Density Functional Theory</span> Meets
             the <span className="font-bold text-blue-200">Web</span>.
-          </h1>} show={true} />
+          </h1>} show />
 
           <div className="bg-gray-600 rounded ml-0 mr-0 lg:ml-60 lg:mr-60">
             <h2 className="mt-5 pl-5 pr-5 pt-5 leading-normal text-gray-400">
