@@ -452,7 +452,7 @@ export default function Table() {
 
           <p className="p-5 text-gray-400 border-b border-gray-500">
             Using spherical harmonics, view the <b>atomic orbital</b> structure
-            of your choice.<br />Colours are displayed based upon elements' actual properties in the flame test.
+            of your choice. Colours are displayed based upon elements' actual properties in the flame test.
           </p>
 
           {displayPeriodicTable()}
