@@ -99,7 +99,7 @@ export default function Header() {
         </div>
       </button>
 
-      <div className="flex flex-row lg:hidden">
+      <div className="flex flex-row mt-4 sm:mt-0 lg:hidden">
         <button
           onClick={() => {
             movePage("/");
