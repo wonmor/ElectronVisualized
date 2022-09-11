@@ -107,8 +107,8 @@ export default function Header() {
           className={`flex items-center px-3 py-2 border rounded text-rose-200 border-rose-200 hover:text-white hover:border-white ${size.width < 380 ? "mt-5 mr-2" : "mr-2"
             }`}
         >
-          {size.width < 380 && <span className="mr-3">Menu</span>}
-
+          {size.width < 380 && <span className="mr-3">Home</span>}
+          
           <FaHome />
         </button>
 
