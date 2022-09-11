@@ -20,9 +20,9 @@ Developed and Designed by **John Seong**. Served under the **MIT** License.
 
 **ElectronVisualized** uses the **spherical harmonics** formula to accurately depict the shape of each atomic orbital based upon its four quantum numbers. Each dot represent a probable location of where an electron might be.
 
-<img width="1200" alt="Screenshot 2022-06-28 at 2 59 12 AM" src="https://user-images.githubusercontent.com/35755386/176114204-8c2b936a-45c5-4f0b-a507-0aaddb252943.png">
+<img width="1200" alt="Screenshot 2022-09-11 at 11 42 22 AM" src="https://user-images.githubusercontent.com/35755386/189536680-670cd641-9dcf-4f37-8561-614daeeb55a5.png">
 
-<img width="1200" alt="Screenshot 2022-06-28 at 3 00 24 AM" src="https://user-images.githubusercontent.com/35755386/176114382-c8355473-f33c-48de-8b92-f1c0b7d1d716.png">
+<img width="1200" alt="Screenshot 2022-09-11 at 11 42 22 AM" src="https://user-images.githubusercontent.com/35755386/189536662-7e8d487a-40f8-4902-9fdd-dac55c273893.png">
 
 ---
 
@@ -30,11 +30,9 @@ Developed and Designed by **John Seong**. Served under the **MIT** License.
 
 Thanks to **Density Functional Theory** and **GPAW** library, we were able to derive the electron density of a molecule without going through complex steps of solving a N-dimensional Schrödinger's Equation.
 
-<img width="1200" alt="Screen Shot 2022-06-18 at 3 00 56 AM" src="https://user-images.githubusercontent.com/35755386/174426800-9100bc8e-6158-4668-b1b2-d741b9ded6c5.png">
+<img width="1200" alt="Screenshot 2022-09-11 at 11 40 50 AM" src="https://user-images.githubusercontent.com/35755386/189536707-bd26705b-e6ba-4081-9bd1-6f65f5045466.png">
 
-<img width="1200" alt="Screen Shot 2022-06-14 at 1 38 26 PM" src="https://user-images.githubusercontent.com/35755386/173641984-e52deac1-2930-4a66-8693-2564242a766b.png">
-
-<img width="1200" alt="Screen Shot 2022-06-14 at 1 37 51 PM" src="https://user-images.githubusercontent.com/35755386/173641815-9876aaf1-465f-4f58-98a7-36bd390b1948.png">
+<img width="1200" alt="Screenshot 2022-09-11 at 11 41 16 AM" src="https://user-images.githubusercontent.com/35755386/189536719-d6728d78-6845-4d7a-9113-a1287e9a8329.png">
 
 ---
 
