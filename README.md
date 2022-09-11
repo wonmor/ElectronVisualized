@@ -22,7 +22,7 @@ Developed and Designed by **John Seong**. Served under the **MIT** License.
 
 <img width="1200" alt="Screenshot 2022-09-11 at 11 42 22 AM" src="https://user-images.githubusercontent.com/35755386/189536680-670cd641-9dcf-4f37-8561-614daeeb55a5.png">
 
-<img width="1200" alt="Screenshot 2022-09-11 at 11 42 22 AM" src="https://user-images.githubusercontent.com/35755386/189536662-7e8d487a-40f8-4902-9fdd-dac55c273893.png">
+<img width="1200" alt="Screenshot 2022-09-11 at 11 41 49 AM" src="https://user-images.githubusercontent.com/35755386/189536771-6bc97dde-04ba-4f90-a04c-bd9364ecd515.png">
 
 ---
 
