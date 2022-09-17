@@ -562,7 +562,7 @@ export default function Renderer() {
                       Quantum Num.
                     </p>
                     <p className="pl-2 pr-2 pb-2 text-sm md:text-xl">
-                      N = {globalAtomInfo.n_value}&nbsp;&nbsp;&nbsp;&nbsp;L = {globalAtomInfo.l_value}&nbsp;&nbsp;&nbsp;&nbsp;M = {globalAtomInfo.m_value}
+                      N = {globalAtomInfo.n_value}&nbsp;&nbsp;&nbsp;&nbsp;L = {globalAtomInfo.l_value}&nbsp;&nbsp;&nbsp;&nbsp;M<sub>l</sub> = {globalAtomInfo.m_value}
                     </p>
                   </div>
 
