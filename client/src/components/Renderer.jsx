@@ -359,7 +359,7 @@ export default function Renderer() {
         })
           .then((response) => {
             const res = response.data;
-            
+
             setElementNamesInMolecule((prevState) => prevState ? [...prevState, res.name] : [res.name]);
           })
           .catch((error) => {
@@ -546,7 +546,7 @@ export default function Renderer() {
                     </p>
                     <p className="pl-2 pr-2 pb-2 text-sm md:text-xl">
                       {elementNamesInMolecule &&
-                      (elementNamesInMolecule.toString().replaceAll(',', ', '))}
+                        (elementNamesInMolecule.toString().replaceAll(',', ', '))}
                     </p>
                   </div>
                 </div>
@@ -577,12 +577,24 @@ export default function Renderer() {
                 </div>
               </div>} show />)}
 
+              {preRender && (
+            <Mount content={
+              <div className="absolute" style={{ zIndex: 10, backgroundColor: "black", left: "50%", transform: "translate(-50%, 0%)" }}>
+                <div className="flex flex-col sm:flex-row">
+                  <div className="flex flex-col">
+                    <p className="p-2 text-sm md:text-xl">
+                      Drag or zoom using your finger or a mouse cursor...
+                    </p>
+                  </div>
+                </div>
+              </div>} show />)}
+
           <Canvas camera={getCameraPosition(globalSelectedElement["element"])}>
-            {!preRender ? (
-              <Provider store={store}>
+          <Provider store={store}>
                 <Controls />
               </Provider>
-            ) : (
+              
+            {preRender && (
               <Suspense fallback={null}>
                 <DefaultModel />
               </Suspense>
