@@ -128,6 +128,31 @@ def serve():
     '''
     return bp.send_static_file('index.html')
 
+@bp.route('/api/atom/<quantum_no>', methods=['GET'])
+@limiter.limit("5 per minute")
+def compute_atom_by_quantum_no(quantum_no):
+    '''
+    This function is used to compute the atom's data by the quantum numbers
+    
+    Parameters
+    ----------
+    quantum_no: str
+        The quantum numbers of the atom
+
+    Returns
+    -------
+    JSON
+        Returns a JSON file containing the atom's data
+    '''
+    dataList = quantum_no.split(',')
+
+    n = int(dataList[0])
+    l = int(dataList[1])
+    m = int(dataList[2])
+
+    data = atom.plot_atomic_orbital(name, n, l, m)
+    return data
+
 @bp.route('/api/atom/<name>', methods=['GET'])
 @limiter.limit("5 per minute")
 @cross_origin()
