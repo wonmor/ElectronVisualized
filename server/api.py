@@ -128,7 +128,7 @@ def serve():
     '''
     return bp.send_static_file('index.html')
 
-@bp.route('/api/atom/<quantum_no>', methods=['GET'])
+@bp.route('/api/atom-quantum/<quantum_no>', methods=['GET'])
 @limiter.limit("5 per minute")
 def compute_atom_by_quantum_no(quantum_no):
     '''
