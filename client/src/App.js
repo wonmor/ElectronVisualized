@@ -57,9 +57,8 @@ export default function App() {
   }, []);
 
   return (
-    <div>
+    <>
       <Header />
-      <div>
         <Routes>
           <Route path="*" element={<NotFound />} />
           <Route exact path="/" element={<Table />} />
@@ -70,8 +69,7 @@ export default function App() {
           <Route path="/search" element={<Search />} />
           <Route path="/extensions" element={<Extensions />} />
         </Routes>
-      </div>
       <Footer />
-    </div>
+    </>
   );
 }
