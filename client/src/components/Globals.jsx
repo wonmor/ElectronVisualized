@@ -17,6 +17,11 @@ export const RENDERER = {
   TUBE_RADIUS: "0.3",
 };
 
+// Key: Molecule Name, Value: Molecule to Subtract
+export const moleculesWithLonePairs = {
+  "H2O": "O",
+}
+
 export const moleculeDict = {
   H2O: [
     "Water",

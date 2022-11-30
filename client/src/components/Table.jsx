@@ -402,7 +402,7 @@ export default function Table() {
                     ></path>
                   </svg>
                   <span>
-                    Now Available on the Mac App Store
+                    Mac App Store
                   </span>
                 </a>
               </div>

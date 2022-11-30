@@ -31,7 +31,7 @@ import { Mount } from "./Transitions";
 
 import { Particles } from "./Instances";
 
-import { bondShapeDict } from "./Globals";
+import { bondShapeDict, moleculesWithLonePairs } from "./Globals";
 
 import {
   CANVAS,
@@ -104,8 +104,6 @@ export default function Renderer() {
 
   const [reachedMaxPeak, setMaxPeak] = useState(false);
   const [reachedMinPeak, setMinPeak] = useState(true);
-
-  const [lonePairEnabled, setLonePairEnabled] = useState(true);
   const [addCoolEffects, setAddCoolEffects] = useState(false);
 
   const [zoomCameraConstant, setZoomCameraConstant] = useState(1.0);
@@ -408,13 +406,12 @@ export default function Renderer() {
                       gaEventTracker("Molecule Renderer", "Render");
 
                       if (
-                        globalSelectedElement.element === "H2O" &&
-                        lonePairEnabled
+                        Object.keys(moleculesWithLonePairs).includes(globalSelectedElement.element)
                       ) {
-                        fetchMoleculeCombinedRenderElement("H2O", "O");
+                        fetchMoleculeCombinedRenderElement(globalSelectedElement.element, moleculesWithLonePairs[globalSelectedElement.element]);
                         /*
-                        Save oxygen atom's coordinates to subtract it
-                        from the water's coordinates to visualize the lone pairs...
+                        e.g. H2O (Water) has a lone pair on the Oxygen atom, so we need to render the Oxygen atom as well...
+                        Save oxygen atom's coordinates to subtract it from the water's coordinates to visualize the lone pairs...
                         */
                       } else if (globalSelectedElement.type === "Atom") {
                         fetchAtomRenderElement(
@@ -435,26 +432,6 @@ export default function Renderer() {
                 >
                   <span>View the 3D Model</span>
                 </button>
-                {globalSelectedElement["element"] === "H2O" && (
-                  <>
-                    <p className="text-gray-400 mt-5 ml-5 mr-5">
-                      Enable <span className="text-white">Lone Pair</span>{" "}
-                      Rendering
-                    </p>
-
-                    <Switch
-                      checked={lonePairEnabled}
-                      onChange={setLonePairEnabled}
-                      className={`${lonePairEnabled ? "bg-blue-600" : "bg-gray-400"
-                        } relative inline-flex h-6 w-11 items-center rounded-full`}
-                    >
-                      <span
-                        className={`${lonePairEnabled ? "translate-x-6" : "translate-x-1"
-                          } inline-block h-4 w-4 transform rounded-full bg-white`}
-                      />
-                    </Switch>
-                  </>
-                )}
               </div>
             ) : preRender ? (
               <div className="text-gray-400 mt-5">
@@ -475,7 +452,7 @@ export default function Renderer() {
               </div>
             ) : (
               <div className="p-5">
-                {!animation && (
+                {(!animation && !globalAtomInfo.n_value) && (
                   <div>
                     <p className="text-gray-400">Particle Radius</p>
 
@@ -497,27 +474,35 @@ export default function Renderer() {
                     />
                   </div>
                 )}
-                <Button
-                  onClick={() => {
-                    setAnimation(!animation);
 
-                    if (!animation) {
-                      setParticleRadius(0.01);
+                {!globalAtomInfo.n_value ? (
+                  <Button
+                    onClick={() => {
+                      setAnimation(!animation);
 
-                      setMaxPeak(false);
-                      setMinPeak(true);
-                    }
-                  }}
-                  variant="outlined"
-                  sx={{
-                    marginLeft: "7.5em",
-                    marginRight: "7.5em",
-                    color: "gray",
-                    borderColor: "gray",
-                  }}
-                >
-                  {!animation ? "Enable Animation" : "Disable Animation"}
-                </Button>
+                      if (!animation) {
+                        setParticleRadius(0.01);
+
+                        setMaxPeak(false);
+                        setMinPeak(true);
+                      }
+                    }}
+                    variant="outlined"
+                    sx={{
+                      marginLeft: "7.5em",
+                      marginRight: "7.5em",
+                      color: "gray",
+                      borderColor: "gray",
+                    }}
+                  >
+                    {!animation ? "Enable Animation" : "Disable Animation"}
+                  </Button>
+                ) : (
+                  <div className="flex flex-col items-center justify-center bg-white p-3">
+                    <h2 className="text-black text-xl md:text-2xl font-bold">Electron Config.</h2>
+                    <h2 className="text-black">{globalSelectedElement["electronConfig"]}</h2>
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -556,24 +541,13 @@ export default function Renderer() {
           {!preRender && globalAtomInfo.n_value && (
             <Mount content={
               <div className="absolute" style={{ zIndex: 10, backgroundColor: "black", left: "50%", transform: "translate(-50%, 0%)" }}>
-                <div className="flex flex-col sm:flex-row">
-                  <div className="flex flex-col border-b border-r-0 sm:border-b-0 sm:border-r border-gray-400">
-                    <p className="pt-2 pl-2 pr-2 font-bold text-sm md:text-xl">
-                      Quantum Num.
-                    </p>
-                    <p className="pl-2 pr-2 pb-2 text-sm md:text-xl">
-                      N = {globalAtomInfo.n_value}&nbsp;&nbsp;&nbsp;&nbsp;L = {globalAtomInfo.l_value}&nbsp;&nbsp;&nbsp;&nbsp;M<sub>l</sub> = {globalAtomInfo.m_value}
-                    </p>
-                  </div>
-
-                  <div className="flex flex-col">
-                    <p className="pt-2 pl-2 pr-2 font-bold text-sm md:text-xl">
-                      Electron Config.
-                    </p>
-                    <p className="pl-2 pr-2 pb-2 text-sm md:text-xl">
-                      {globalSelectedElement["electronConfig"]}
-                    </p>
-                  </div>
+                <div className="flex flex-col">
+                  <p className="pt-2 pl-2 pr-2 font-bold text-sm md:text-xl">
+                    Quantum Num.
+                  </p>
+                  <p className="pl-2 pr-2 pb-2 text-sm md:text-xl">
+                    N = {globalAtomInfo.n_value}&nbsp;&nbsp;&nbsp;&nbsp;L = {globalAtomInfo.l_value}&nbsp;&nbsp;&nbsp;&nbsp;M<sub>l</sub> = {globalAtomInfo.m_value}
+                  </p>
                 </div>
               </div>} show />)}
 
