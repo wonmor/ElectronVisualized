@@ -6,7 +6,7 @@ import { Transition } from "@headlessui/react";
 
 import { FaHome } from 'react-icons/fa';
 
-import { useWindowSize, isElectron } from "./Globals";
+import { useWindowSize } from "./Globals";
 
 import "./Header.css";
 
@@ -94,7 +94,7 @@ export default function Header() {
           <img className="w-20 mr-5" src={Logo} alt="logo"></img>
 
           <span className="text-xl tracking-tight">
-            ElectronVisualized {isElectron() && (<span className="font-extrabold text-transparent text-4xl bg-clip-text bg-gradient-to-r from-purple-300 to-pink-400">Studio</span>)}
+            ElectronVisualized
           </span>
         </div>
       </button>
