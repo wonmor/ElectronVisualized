@@ -499,16 +499,16 @@ export default function Renderer() {
                         {!animation ? "Enable Animation" : "Disable Animation"}
                       </Button>
                     ) : (
-                      <div className="flex flex-col items-center justify-center bg-white p-3 rounded">
-                        <h2 className="text-black text-xl md:text-2xl font-bold">
+                      <div className="flex flex-col items-center justify-center bg-white p-3 rounded scale-90 sm:scale-100">
+                        <h2 className="text-black text-xl md:text-2xl font-bold mb-2">
                           Electron Config.
                         </h2>
-                        <div className="flex flex-row space-x-3">
+                        <div className="flex flex-row space-x-3 justify-center items-center">
                           {electronConfig.map((config, index) => {
                             if (index !== 0) {
                               return (
-                                <button>
-                                  <h2 className="text-black">{config}</h2>
+                                <button className={`border-2 p-2 border-black rounded ${index === electronConfig.length - 1 ? "bg-black" : "bg-white hover:bg-gray-200"}`} type="button">
+                                  <h2 className={`${index === electronConfig.length - 1 ? "text-white" : "text-black"}`}>{config}</h2>
                                 </button>
                               );
                             } else {
