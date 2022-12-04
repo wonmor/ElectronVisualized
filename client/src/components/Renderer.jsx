@@ -139,11 +139,9 @@ export default function Renderer() {
 
   // const [currentElementArray, setCurrentElementArray] = useState(null);
 
-  const [serverError, setServerError] = useState(
-    globalRenderInfo.serverError
-  );
+  const [serverError, setServerError] = useState(globalRenderInfo.serverError);
 
-  const [elementNamesInMolecule, setElementNamesInMolecule] = useState();
+  const [electronConfig, setElectronConfig] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -187,6 +185,15 @@ export default function Renderer() {
       })
     );
   }, [animation, disableButton, dispatch, preRender, serverError, statusText]);
+
+  // Splits the electron config. String into an array...
+  useEffect(() => {
+    try {
+      setElectronConfig(globalSelectedElement["electronConfig"].split(" "));
+    } catch (error) {
+      console.log(error);
+    }
+  }, [globalSelectedElement]);
 
   const fetchMoleculeSecondRenderElement = async (secondRenderElement) => {
     await axios({
@@ -311,7 +318,7 @@ export default function Renderer() {
             z_coords: res.z_coords,
             n_value: res.n_value,
             l_value: res.l_value,
-            m_value: res.m_value
+            m_value: res.m_value,
           }) || null
         );
 
@@ -348,226 +355,267 @@ export default function Renderer() {
 
   const gaEventTracker = useAnalyticsEventTracker("Molecule Renderer");
 
-  useEffect(() => {
-    if (!preRender && globalSelectedElement.type === "Molecule") {
-      globalAtomInfo.elements.forEach((element) => {
-        axios({
-          method: "GET",
-          url: `https://periodic-table-api.herokuapp.com/atomicNumber/${element}`
-        })
-          .then((response) => {
-            const res = response.data;
-
-            setElementNamesInMolecule((prevState) => prevState ? [...prevState, res.name] : [res.name]);
-          })
-          .catch((error) => {
-            console.log(error.response);
-            return;
-          });
-      })
-    }
-  }, [globalAtomInfo, globalSelectedElement, preRender])
-
   return (
     <>
-      <MetaTag title={"ElectronVisualized"}
+      <MetaTag
+        title={"ElectronVisualized"}
         description={"View Electron Density, Molecular and Atomic Orbitals"}
-        keywords={"electron, electron density, chemistry, computational chemistry"}
+        keywords={
+          "electron, electron density, chemistry, computational chemistry"
+        }
         imgsrc={"cover.png"}
-        url={"https://electronvisual.org"} />
+        url={"https://electronvisual.org"}
+      />
 
       <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
-        <Mount content={<div className="text-rose-200 text-center pt-10 pb-10 ml-5 mr-5">
-          <h1
-            className={`mb-5 ${size.width < 350 ? "scale-75" : null}`}
-          >
-            {globalSelectedElement["name"]}
-            <span className="font-thin text-gray-400">. Visualized.</span>
-          </h1>
+        <Mount
+          content={
+            <div className="text-rose-200 text-center pt-10 pb-10 ml-5 mr-5">
+              <h1 className={`mb-5 ${size.width < 350 ? "scale-75" : null}`}>
+                {globalSelectedElement["name"]}
+                <span className="font-thin text-gray-400">. Visualized.</span>
+              </h1>
 
-          <h2 className="sm:mt-5 pb-3 pl-5 pr-5 text-gray-400">
-            Electron Density with the help of{" "}
-            {globalSelectedElement["type"] === "Molecule" ? (
-              <span className="text-white">Density Functional Theory</span>
-            ) : (<span className="text-white">Spherical Harmonics</span>)}.
-          </h2>
+              <h2 className="sm:mt-5 pb-3 pl-5 pr-5 text-gray-400">
+                Electron Density with the help of{" "}
+                {globalSelectedElement["type"] === "Molecule" ? (
+                  <span className="text-white">Density Functional Theory</span>
+                ) : (
+                  <span className="text-white">Spherical Harmonics</span>
+                )}
+                .
+              </h2>
 
-          <p className="pt-5 pr-5 pl-5 md:pl-60 md:pr-60 text-gray-400">
-            {globalSelectedElement["description"]}
-          </p>
+              <p className="pt-5 pr-5 pl-5 md:pl-60 md:pr-60 text-gray-400">
+                {globalSelectedElement["description"]}
+              </p>
 
-          <div class="flex items-center justify-center pt-5">
-            {!disableButton ? (
-              <div class="grid grid-row-2 gap-4 content-center justify-items-center">
-                <button
-                  disabled={disableButton}
-                  onClick={() => {
-                    if (globalSelectedElement.type === "Molecule") {
-                      gaEventTracker("Molecule Renderer", "Render");
+              <div class="flex items-center justify-center pt-5">
+                {!disableButton ? (
+                  <div class="grid grid-row-2 gap-4 content-center justify-items-center">
+                    <button
+                      disabled={disableButton}
+                      onClick={() => {
+                        if (globalSelectedElement.type === "Molecule") {
+                          gaEventTracker("Molecule Renderer", "Render");
 
-                      if (
-                        Object.keys(moleculesWithLonePairs).includes(globalSelectedElement.element)
-                      ) {
-                        fetchMoleculeCombinedRenderElement(globalSelectedElement.element, moleculesWithLonePairs[globalSelectedElement.element]);
-                        /*
+                          if (
+                            Object.keys(moleculesWithLonePairs).includes(
+                              globalSelectedElement.element
+                            )
+                          ) {
+                            fetchMoleculeCombinedRenderElement(
+                              globalSelectedElement.element,
+                              moleculesWithLonePairs[
+                                globalSelectedElement.element
+                              ]
+                            );
+                            /*
                         e.g. H2O (Water) has a lone pair on the Oxygen atom, so we need to render the Oxygen atom as well...
                         Save oxygen atom's coordinates to subtract it from the water's coordinates to visualize the lone pairs...
                         */
-                      } else if (globalSelectedElement.type === "Atom") {
-                        fetchAtomRenderElement(
-                          globalSelectedElement.element
-                        );
-                      } else {
-                        fetchMoleculeCombinedRenderElement(
-                          globalSelectedElement.element
-                        );
-                      }
-                    } else {
-                      fetchAtomRenderElement(globalSelectedElement.element);
-                    }
-                    setDisableButton(true);
-                  }}
-                  className="bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
-                  type="button"
-                >
-                  <span>View the 3D Model</span>
-                </button>
-              </div>
-            ) : preRender ? (
-              <div className="text-gray-400 mt-5">
-                <h3>{statusText}</h3>
-
-                {!serverError && (
-                  <div className="scale-75 lds-roller">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div className="p-5">
-                {(!animation && !globalAtomInfo.n_value) && (
-                  <div>
-                    <p className="text-gray-400">Particle Radius</p>
-
-                    <Slider
-                      className="ml-40 mr-40 scale-90 sm:scale-100 mb-5"
-                      onClick={() => {
-                        setAnimation(false);
+                          } else if (globalSelectedElement.type === "Atom") {
+                            fetchAtomRenderElement(
+                              globalSelectedElement.element
+                            );
+                          } else {
+                            fetchMoleculeCombinedRenderElement(
+                              globalSelectedElement.element
+                            );
+                          }
+                        } else {
+                          fetchAtomRenderElement(globalSelectedElement.element);
+                        }
+                        setDisableButton(true);
                       }}
-                      sx={{
-                        width: 300,
-                        color: "gray",
-                      }}
-                      value={particleRadius}
-                      onChange={changeParticleRadius}
-                      min={0.01}
-                      max={0.07}
-                      step={0.001}
-                      valueLabelDisplay="auto"
-                    />
+                      className="bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
+                      type="button"
+                    >
+                      <span>View the 3D Model</span>
+                    </button>
                   </div>
-                )}
+                ) : preRender ? (
+                  <div className="text-gray-400 mt-5">
+                    <h3>{statusText}</h3>
 
-                {!globalAtomInfo.n_value ? (
-                  <Button
-                    onClick={() => {
-                      setAnimation(!animation);
-
-                      if (!animation) {
-                        setParticleRadius(0.01);
-
-                        setMaxPeak(false);
-                        setMinPeak(true);
-                      }
-                    }}
-                    variant="outlined"
-                    sx={{
-                      marginLeft: "7.5em",
-                      marginRight: "7.5em",
-                      color: "gray",
-                      borderColor: "gray",
-                    }}
-                  >
-                    {!animation ? "Enable Animation" : "Disable Animation"}
-                  </Button>
+                    {!serverError && (
+                      <div className="scale-75 lds-roller">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                      </div>
+                    )}
+                  </div>
                 ) : (
-                  <div className="flex flex-col items-center justify-center bg-white p-3">
-                    <h2 className="text-black text-xl md:text-2xl font-bold">Electron Config.</h2>
-                    <h2 className="text-black">{globalSelectedElement["electronConfig"]}</h2>
+                  <div className="p-5">
+                    {!animation && !globalAtomInfo.n_value && (
+                      <div>
+                        <p className="text-gray-400">Particle Radius</p>
+
+                        <Slider
+                          className="ml-40 mr-40 scale-90 sm:scale-100 mb-5"
+                          onClick={() => {
+                            setAnimation(false);
+                          }}
+                          sx={{
+                            width: 300,
+                            color: "gray",
+                          }}
+                          value={particleRadius}
+                          onChange={changeParticleRadius}
+                          min={0.01}
+                          max={0.07}
+                          step={0.001}
+                          valueLabelDisplay="auto"
+                        />
+                      </div>
+                    )}
+
+                    {!globalAtomInfo.n_value ? (
+                      <Button
+                        onClick={() => {
+                          setAnimation(!animation);
+
+                          if (!animation) {
+                            setParticleRadius(0.01);
+
+                            setMaxPeak(false);
+                            setMinPeak(true);
+                          }
+                        }}
+                        variant="outlined"
+                        sx={{
+                          marginLeft: "7.5em",
+                          marginRight: "7.5em",
+                          color: "gray",
+                          borderColor: "gray",
+                        }}
+                      >
+                        {!animation ? "Enable Animation" : "Disable Animation"}
+                      </Button>
+                    ) : (
+                      <div className="flex flex-col items-center justify-center bg-white p-3 rounded">
+                        <h2 className="text-black text-xl md:text-2xl font-bold">
+                          Electron Config.
+                        </h2>
+                        <div className="flex flex-row space-x-3">
+                          {electronConfig.map((config, index) => {
+                            if (index !== 0) {
+                              return (
+                                <button>
+                                  <h2 className="text-black">{config}</h2>
+                                </button>
+                              );
+                            } else {
+                              return <h2 className="text-black">{config}</h2>;
+                            }
+                          })}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
-            )}
-          </div>
-        </div>} show />
+            </div>
+          }
+          show
+        />
 
         <div
           className="bg-gray-800 text-center text-gray-400 ml-10 mr-10 md:ml-40 md:mr-40 rounded"
           style={{ width: CANVAS.WIDTH, height: CANVAS.HEIGHT }}
         >
           {!preRender && globalSelectedElement["type"] === "Molecule" && (
-            <Mount content={
-              <div className="absolute" style={{ zIndex: 10, backgroundColor: "black", left: "50%", transform: "translate(-50%, 0%)" }}>
-                <div className="flex flex-col sm:flex-row">
-                  <div className="flex flex-col border-b border-r-0 sm:border-b-0 sm:border-r border-gray-400">
-                    <p className="pt-2 pl-2 pr-2 font-bold text-sm md:text-xl">
-                      Chemical Formula
-                    </p>
-                    <p className="pl-2 pr-2 pb-2 text-sm md:text-xl">
-                      {globalSelectedElement["element"]}
-                    </p>
-                  </div>
-
-                  <div className="flex flex-col">
-                    <p className="pt-2 pl-2 pr-2 font-bold text-sm md:text-xl">
-                      Elements
-                    </p>
-                    <p className="pl-2 pr-2 pb-2 text-sm md:text-xl">
-                      {elementNamesInMolecule &&
-                        (elementNamesInMolecule.toString().replaceAll(',', ', '))}
-                    </p>
+            <Mount
+              content={
+                <div
+                  className="absolute"
+                  style={{
+                    zIndex: 10,
+                    backgroundColor: "black",
+                    left: "50%",
+                    transform: "translate(-50%, 0%)",
+                  }}
+                >
+                  <div className="flex flex-col sm:flex-row">
+                    <div className="flex flex-col">
+                      <p className="pt-2 pl-2 pr-2 font-bold text-sm md:text-xl">
+                        Chemical Formula
+                      </p>
+                      <p className="pl-2 pr-2 pb-2 text-sm md:text-xl">
+                        {globalSelectedElement["element"]}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>} show />
+              }
+              show
+            />
           )}
 
           {!preRender && globalAtomInfo.n_value && (
-            <Mount content={
-              <div className="absolute" style={{ zIndex: 10, backgroundColor: "black", left: "50%", transform: "translate(-50%, 0%)" }}>
-                <div className="flex flex-col">
-                  <p className="pt-2 pl-2 pr-2 font-bold text-sm md:text-xl">
-                    Quantum Num.
-                  </p>
-                  <p className="pl-2 pr-2 pb-2 text-sm md:text-xl">
-                    N = {globalAtomInfo.n_value}&nbsp;&nbsp;&nbsp;&nbsp;L = {globalAtomInfo.l_value}&nbsp;&nbsp;&nbsp;&nbsp;M<sub>l</sub> = {globalAtomInfo.m_value}
-                  </p>
-                </div>
-              </div>} show />)}
-
-              {preRender && (
-            <Mount content={
-              <div className="absolute" style={{ zIndex: 10, backgroundColor: "black", left: "50%", transform: "translate(-50%, 0%)" }}>
-                <div className="flex flex-col sm:flex-row">
+            <Mount
+              content={
+                <div
+                  className="absolute"
+                  style={{
+                    zIndex: 10,
+                    backgroundColor: "black",
+                    left: "50%",
+                    transform: "translate(-50%, 0%)",
+                  }}
+                >
                   <div className="flex flex-col">
-                    <p className="p-2 text-sm md:text-xl">
-                      Drag or zoom using your finger or a mouse cursor...
+                    <p className="pt-2 pl-2 pr-2 font-bold text-sm md:text-xl">
+                      Quantum Num.
+                    </p>
+                    <p className="pl-2 pr-2 pb-2 text-sm md:text-xl">
+                      N = {globalAtomInfo.n_value}&nbsp;&nbsp;&nbsp;&nbsp;L ={" "}
+                      {globalAtomInfo.l_value}&nbsp;&nbsp;&nbsp;&nbsp;M
+                      <sub>l</sub> = {globalAtomInfo.m_value}
                     </p>
                   </div>
                 </div>
-              </div>} show />)}
+              }
+              show
+            />
+          )}
+
+          {preRender && (
+            <Mount
+              content={
+                <div
+                  className="absolute"
+                  style={{
+                    zIndex: 10,
+                    backgroundColor: "black",
+                    left: "50%",
+                    transform: "translate(-50%, 0%)",
+                  }}
+                >
+                  <div className="flex flex-col sm:flex-row">
+                    <div className="flex flex-col">
+                      <p className="p-2 text-sm md:text-xl">
+                        Drag or zoom using your finger or a mouse cursor...
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              }
+              show
+            />
+          )}
 
           <Canvas camera={getCameraPosition(globalSelectedElement["element"])}>
-          <Provider store={store}>
-                <Controls />
-              </Provider>
-              
+            <Provider store={store}>
+              <Controls />
+            </Provider>
+
             {preRender && (
               <Suspense fallback={null}>
                 <DefaultModel />
@@ -580,38 +628,41 @@ export default function Renderer() {
 
             {globalAtomInfo && !preRender && (
               <Provider store={store}>
-                {globalSelectedElement.type === "Molecule" && globalAtomInfo.atoms_x.map((value, index) => {
-                  return (
-                    <mesh>
-                      <Atoms
-                        position={[
-                          globalAtomInfo.atoms_x[index],
-                          globalAtomInfo.atoms_y[index],
-                          globalAtomInfo.atoms_z[index],
-                        ]}
+                {globalSelectedElement.type === "Molecule" &&
+                  globalAtomInfo.atoms_x.map((value, index) => {
+                    return (
+                      <mesh>
+                        <Atoms
+                          position={[
+                            globalAtomInfo.atoms_x[index],
+                            globalAtomInfo.atoms_y[index],
+                            globalAtomInfo.atoms_z[index],
+                          ]}
 
-                      // colour={globalAtomInfo["atomic_color"][currentElementArray[index]]}
-                      />
+                          // colour={globalAtomInfo["atomic_color"][currentElementArray[index]]}
+                        />
 
-                      {Object.values(bondShapeDict[globalSelectedElement.element]).map((value) => {
-                        return (
-                          <>
-                            <BondLine
-                              coords={[
-                                globalAtomInfo["atoms_x"][value[0]],
-                                globalAtomInfo["atoms_y"][value[0]],
-                                globalAtomInfo["atoms_z"][value[0]],
-                                globalAtomInfo["atoms_x"][value[1]],
-                                globalAtomInfo["atoms_y"][value[1]],
-                                globalAtomInfo["atoms_z"][value[1]],
-                              ]}
-                            />
-                          </>
-                        );
-                      })}
-                    </mesh>
-                  );
-                })}
+                        {Object.values(
+                          bondShapeDict[globalSelectedElement.element]
+                        ).map((value) => {
+                          return (
+                            <>
+                              <BondLine
+                                coords={[
+                                  globalAtomInfo["atoms_x"][value[0]],
+                                  globalAtomInfo["atoms_y"][value[0]],
+                                  globalAtomInfo["atoms_z"][value[0]],
+                                  globalAtomInfo["atoms_x"][value[1]],
+                                  globalAtomInfo["atoms_y"][value[1]],
+                                  globalAtomInfo["atoms_z"][value[1]],
+                                ]}
+                              />
+                            </>
+                          );
+                        })}
+                      </mesh>
+                    );
+                  })}
                 <Particles
                   particleRef={particleRef}
                   lightRef={lightRef}
@@ -672,12 +723,14 @@ export default function Renderer() {
               <Switch
                 checked={addCoolEffects}
                 onChange={setAddCoolEffects}
-                className={`${addCoolEffects ? "bg-blue-600" : "bg-gray-400"
-                  } relative inline-flex h-6 w-11 items-center rounded-full`}
+                className={`${
+                  addCoolEffects ? "bg-blue-600" : "bg-gray-400"
+                } relative inline-flex h-6 w-11 items-center rounded-full`}
               >
                 <span
-                  className={`${addCoolEffects ? "translate-x-6" : "translate-x-1"
-                    } inline-block h-4 w-4 transform rounded-full bg-white`}
+                  className={`${
+                    addCoolEffects ? "translate-x-6" : "translate-x-1"
+                  } inline-block h-4 w-4 transform rounded-full bg-white`}
                 />
               </Switch>
             </div>
