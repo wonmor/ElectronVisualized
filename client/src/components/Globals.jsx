@@ -82,7 +82,7 @@ export const atomDict = {
     "Copper Atom",
     "Atom",
     "Copper is a chemical element with the symbol Cu (from Latin: cuprum) and atomic number 29. It is a soft, malleable, and ductile metal with very high thermal and electrical conductivity.",
-    "[Ar] 3d^10 4s^1"
+    "[Ar] 4s^1 3d^10"
   ],
   Li: [
     "Li",
