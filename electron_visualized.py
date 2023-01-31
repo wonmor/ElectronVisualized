@@ -57,4 +57,10 @@ VVIP: ENVIRONMENTAL VARIABLES REQUIRED
 5. SECRET_KEY — FOR FLASK
 6. AWS_SECRET_ACCESS_KEY, AWS_DEFAULT_REGION="us-east-2", AWS_ACCESS_KEY_ID
 
+How to connect to DigitalOcean VPS console terminal from your local machine:
+1. ssh <username>@<IP_ADDRESS>
+2. Enter password
+
+<username> can be root, or your own username
+
 '''
