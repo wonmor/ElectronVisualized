@@ -51,6 +51,7 @@ traits==6.3.2
 traitsui==7.3.1
 typing_extensions==4.2.0
 urllib3==1.26.9
+waitress==2.1.2
 Werkzeug==2.1.2
 wrapt==1.14.1
 zope.event==4.5.0

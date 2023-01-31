@@ -19,7 +19,7 @@ RUN pip3 install -r ./requirements.txt
 # Pretty much pass everything in the root folder except for the client folder, as we do NOT want to overwrite the pre-generated client folder that is already in the ./app folder
 COPY electron_visualized.py .flaskenv ./
 COPY server ./server
-EXPOSE 5000
+EXPOSE 8080
 ENTRYPOINT ["python"]
 CMD ["electron_visualized.py"]
 
