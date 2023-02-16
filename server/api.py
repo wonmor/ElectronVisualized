@@ -144,7 +144,7 @@ def compute_atom_by_quantum_no(data):
     JSON
         Returns a JSON file containing the atom's data
     '''
-    dataList = data.split(',')
+    dataList = data.split('-')
 
     n = int(dataList[0])
     l = int(dataList[1])
