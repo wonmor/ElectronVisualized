@@ -375,7 +375,7 @@ export default function Table() {
                 >
                   <img className="mr-3" style={{ width: "15px" }} src="web.svg" alt="web" />
                   <span>
-                    Runs Natively on the Web
+                    Get Pro Membership
                   </span>
                 </div>
 
@@ -456,32 +456,6 @@ export default function Table() {
           </p>
 
           {displayPeriodicTable()}
-
-          <h2 className="p-5 text-gray-400 border-t border-gray-500">
-            "Compared to more traditional plane wave or localized basis set
-            approaches,{" "}
-            <span className="text-white">Projector Augmented-wave</span> method
-            offers <span className="text-white">several advantages</span>, most
-            notably good computational scalability and systematic convergence
-            properties."
-          </h2>
-
-          <p className="p-5 text-gray-400">
-            — A public testimonial by{" "}
-            <span className="text-white">J Enkovaara et al. 2010</span> on their
-            topical review{" "}
-            <a
-              href="https://iopscience.iop.org/article/10.1088/0953-8984/22/25/253202"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:underline text-blue-200"
-            >
-              <i>
-                Electronic structure calculations with <b>GPAW</b>
-              </i>
-            </a>
-            .
-          </p>
         </div>
         <Background />
       </div>

@@ -48,7 +48,7 @@ def _HFunc(r,theta,phi,n,l,m):
 
     return _psi_R(r,n,l) * _psi_ang(phi,theta,l,m)
 
-def plot_atomic_orbital(element_name, n, l, m):
+def plot_atomic_orbital(n, l, m):
     maxi = 60
     resolution = 160
 
@@ -103,10 +103,10 @@ def plot_atomic_orbital(element_name, n, l, m):
         "m_value": m
     }
 
-    with open(os.path.join(PROJECT_ROOT, f'client/src/assets/SPH_{element_name}.json'), 'w+') as outfile:
+    with open(os.path.join(PROJECT_ROOT, f'client/src/assets/SPH_{n}_{l}_{m}.json'), 'w+') as outfile:
         json.dump(return_value, outfile, sort_keys=True,
                   indent=4, separators=(',', ': '))
 
-    multipart_upload_boto3("SPH_" + element_name, os.path.join(PROJECT_ROOT, f'client/src/assets/SPH_{element_name}.json'))
+    multipart_upload_boto3(f"SPH_{n}_{l}_{m}", os.path.join(PROJECT_ROOT, f'client/src/assets/SPH_{n}_{l}_{m}.json'))
 
     return jsonify(return_value)

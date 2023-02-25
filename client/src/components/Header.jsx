@@ -4,9 +4,9 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 import { Transition } from "@headlessui/react";
 
-import { FaHome } from 'react-icons/fa';
-
 import { useWindowSize } from "./Globals";
+
+import { useAuth } from "../auth";
 
 import "./Header.css";
 
@@ -45,6 +45,8 @@ export default function Header() {
   const [showMenu, setMenu] = useState(false);
   const [showMenuAlreadyTriggered, setMenuAlreadyTriggered] = useState(false);
   const [showDropDown, setDropDown] = useState(false);
+
+  const [logged] = useAuth();
 
   const navigate = useNavigate();
 
@@ -100,17 +102,31 @@ export default function Header() {
       </button>
 
       <div className="flex flex-row mt-4 sm:mt-0 lg:hidden">
-        <button
-          onClick={() => {
-            movePage("/");
-          }}
-          className={`flex items-center px-3 py-2 border rounded text-rose-200 border-rose-200 hover:text-white hover:border-white ${size.width < 380 ? "mt-5 mr-2" : "mr-2"
-            }`}
-        >
-          {size.width < 380 && <span className="mr-3">Home</span>}
-          
-          <FaHome />
-        </button>
+        {!logged ? (
+          <button
+            onClick={() => {
+              movePage("/login");
+            }}
+            className={`flex items-center px-3 py-2 border rounded text-rose-200 border-rose-200 hover:text-white hover:border-white ${size.width < 380 ? "mt-5 mr-2" : "mr-2"
+              }`}
+          >
+            {size.width < 380 && <span className="mr-3">Home</span>}
+            
+            <span>Login</span>
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              
+            }}
+            className={`flex items-center px-3 py-2 border rounded text-rose-200 border-rose-200 hover:text-white hover:border-white ${size.width < 380 ? "mt-5 mr-2" : "mr-2"
+              }`}
+          >
+            {size.width < 380 && <span className="mr-3">Home</span>}
+            
+            <span>Log out</span>
+          </button>
+        )}
 
         <button
           onClick={() => {
@@ -145,14 +161,14 @@ export default function Header() {
           <div className="text-sm lg:flex-grow">
           <button
           onClick={() => {
-            movePage('/');
+            movePage('/login');
           }}
           className={`items-center px-3 py-2 border rounded text-rose-200 border-rose-200 hover:text-white hover:border-white hidden lg:inline-block ${size.width < 380 ? "mt-5 mr-5" : "mr-5"
             }`}
         >
           {size.width < 380 && <span className="mr-3">Menu</span>}
 
-          <FaHome />
+          <span>Login</span>
         </button>
         
             <button
@@ -202,55 +218,6 @@ export default function Header() {
             </button>
           </div>
         </Transition>
-
-        {/* Reponsive Search Bar... */}
-        {size.width > 1024 && (
-          <div className="flex flex-cols">
-            <form
-              onClick={() => setDropDown(true)}
-              onMouseLeave={() => setDropDown(false)}
-              onSubmit={(e) => {
-                e.preventDefault(); // Else the page will be reloaded which is the default DOM behaviour in forms and its submit button...
-                moveToSearchResults(localSearchKeyword);
-              }}
-              className="flex flex-cols justify-self-end m-5 overflow-auto scale-90 sm:scale-100 mb-5 p-3 max-w-fit text-white border border-gray-400 rounded"
-            >
-              <label>
-                <span>
-                  <input
-                    className="bg-transparent truncate ..."
-                    type="text"
-                    onChange={setLocalSearchKeyword}
-                    placeholder="Type any keyword..."
-                  />
-                </span>
-              </label>
-              <button className="ml-3" type="submit">
-                <span>Search</span>
-              </button>
-            </form>
-            <div className="absolute mt-20 mr-10" style={{ "z-index": "10" }}>
-              <Transition
-                show={showDropDown}
-                enter="transition ease-out duration-100"
-                enterFrom="transform opacity-0 scale-95"
-                enterTo="transform opacity-100 scale-100"
-                leave="transition ease-in duration-200"
-                leaveFrom="transform opacity-100 scale-100"
-                leaveTo="transform opacity-0 scale-95"
-              >
-                <div className="bg-black text-white p-5 rounded">
-                  <h3 className="mb-5">
-                    I can help you with whatever you need.
-                  </h3>
-                  <p>
-                    <i className="font-semibold">Try searching "H2O"...</i>
-                  </p>
-                </div>
-              </Transition>
-            </div>
-          </div>
-        )}
       </div>
     </nav>
   );

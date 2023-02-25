@@ -3,7 +3,7 @@
     "homepage": ".",
     "version": "0.1.0",
     "private": true,
-    "proxy": "http://127.0.0.1:5000",
+    "proxy": "http://localhost:5000",
     "dependencies": {
         "@emotion/react": "^11.9.0",
         "@emotion/styled": "^11.8.1",
@@ -30,6 +30,7 @@
         "react-router-dom": "^6.3.0",
         "react-scripts": "5.0.1",
         "react-spring": "^9.5.2",
+        "react-token-auth": "^2.3.8",
         "socket.io-client": "^4.5.1",
         "three": "^0.140.2",
         "three-fatline": "^0.5.3",

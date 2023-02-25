@@ -1,6 +1,8 @@
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_socketio import SocketIO
+from flask_praetorian import Praetorian
 from flask_cors import CORS
-from flask_socketio import SocketIO, emit, join_room
 
 from dotenv import load_dotenv
 
@@ -21,6 +23,39 @@ SUPPORTED PLATFORMS: WEB(REACT + FLASK STACK), IOS & MACOS (IN DEV)
 '''
 
 socketio = SocketIO()
+db = SQLAlchemy()
+guard = Praetorian()
+cors = CORS()
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.Text, unique=True)
+    password = db.Column(db.Text)
+    roles = db.Column(db.Text)
+    is_active = db.Column(db.Boolean, default=True, server_default='true')
+
+    @property
+    def rolenames(self):
+        try:
+            return self.roles.split(',')
+        except Exception:
+            return []
+
+    @classmethod
+    def lookup(cls, username):
+        return cls.query.filter_by(username=username).one_or_none()
+
+    @classmethod
+    def identify(cls, id):
+        return cls.query.get(id)
+
+    @property
+    def identity(self):
+        return self.id
+
+    def is_valid(self):
+        return self.is_active
+
 
 def create_app():
     '''
@@ -40,7 +75,22 @@ def create_app():
     load_dotenv()
 
     app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
+    app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(os.getcwd(), 'database.db')}"
+    app.config['JWT_ACCESS_LIFESPAN'] = {'hours': 24}
+    app.config['JWT_REFRESH_LIFESPAN'] = {'days': 30}
+
     app.register_blueprint(api.bp)
+
+    # Initialize the flask-praetorian instance for the app
+    guard.init_app(app, User)
+
+    db.init_app(app)
+
+    # Initializes CORS so that the api_tool can talk to the example app
+    cors.init_app(app)
+
+    with app.app_context():
+        db.create_all()
     
     global socketio
     socketio.init_app(app)
