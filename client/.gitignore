@@ -26,3 +26,4 @@ yarn-error.log*
 src/assets/*.json
 
 package-lock.json
+yarn.lock
