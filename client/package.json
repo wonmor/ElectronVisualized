@@ -40,11 +40,11 @@
         "web-vitals": "^2.1.4"
     },
     "scripts": {
-        "start": "react-scripts start",
+        "start": "react-scripts --openssl-legacy-provider start",
         "start-api": "cd ../ && venv/bin/flask run --no-debugger",
-        "build": "react-scripts build",
-        "test": "react-scripts test",
-        "eject": "react-scripts eject"
+        "build": "react-scripts --openssl-legacy-provider build",
+        "test": "react-scripts --openssl-legacy-provider test",
+        "eject": "react-scripts --openssl-legacy-provider eject"
     },
     "eslintConfig": {
         "extends": [
