@@ -1,4 +1,4 @@
-![ElectronVisualPromo](https://user-images.githubusercontent.com/35755386/173193444-2ce2a70c-fd07-421b-98bd-c787badbcd8b.png)
+<img width="100" alt="icon-2" src="https://user-images.githubusercontent.com/35755386/224520472-1e542a07-dfca-4a27-a663-c5831708aeaa.png">
 
 # ElectronVisualized
 
