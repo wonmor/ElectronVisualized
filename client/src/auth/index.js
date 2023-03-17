@@ -1,3 +1,5 @@
+import { createAuthProvider } from 'react-token-auth';
+
 const authProvider = {
     [Symbol.iterator]: function* () {
       yield this.useAuth;
