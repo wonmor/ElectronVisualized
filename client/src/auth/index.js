@@ -1,5 +1,3 @@
-import { createAuthProvider } from 'react-token-auth';
-
 const authProvider = {
     [Symbol.iterator]: function* () {
       yield this.useAuth;
@@ -13,10 +11,10 @@ const authProvider = {
     logout: null,
   };
   
-  createAuthProvider({
+  const provider = createAuthProvider({
     accessTokenKey: 'access_token',
-    onUpdateToken: (token) =>
-      fetch(
+    onUpdateToken: async (token) => {
+      const response = await fetch(
         process.env.NODE_ENV === 'production'
           ? '/api/refresh'
           : 'https://www.electronvisual.org/api/refresh',
@@ -24,25 +22,18 @@ const authProvider = {
           method: 'POST',
           body: token.access_token,
         }
-      ).then((r) => r.json()),
-  }).forEach((fn, i) => {
-    switch (i) {
-      case 0:
-        authProvider.useAuth = fn;
-        break;
-      case 1:
-        authProvider.authFetch = fn;
-        break;
-      case 2:
-        authProvider.login = fn;
-        break;
-      case 3:
-        authProvider.logout = fn;
-        break;
-      default:
-        break;
-    }
+      );
+      const data = await response.json();
+      return data;
+    },
   });
   
-  export const [useAuth, authFetch, login, logout] = authProvider;
+  provider.then(([useAuth, authFetch, login, logout]) => {
+    authProvider.useAuth = useAuth;
+    authProvider.authFetch = authFetch;
+    authProvider.login = login;
+    authProvider.logout = logout;
+  });
+  
+  export const { useAuth, authFetch, login, logout } = authProvider;
   
