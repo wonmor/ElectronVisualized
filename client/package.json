@@ -11,6 +11,9 @@
         "@heroicons/react": "^1.0.6",
         "@mui/icons-material": "^5.8.2",
         "@mui/material": "^5.8.2",
+        "@react-spring/core": "^9.7.0",
+        "@react-spring/types": "^9.7.0",
+        "@react-spring/web": "^9.7.0",
         "@react-three/drei": "^9.13.2",
         "@react-three/fiber": "^8.0.21",
         "@react-three/postprocessing": "^2.3.2",
@@ -37,11 +40,11 @@
         "web-vitals": "^2.1.4"
     },
     "scripts": {
-        "start": "react-scripts --openssl-legacy-provider start",
+        "start": "react-scripts start",
         "start-api": "cd ../ && venv/bin/flask run --no-debugger",
-        "build": "react-scripts --openssl-legacy-provider build",
-        "test": "react-scripts --openssl-legacy-provider test",
-        "eject": "react-scripts --openssl-legacy-provider eject"
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject"
     },
     "eslintConfig": {
         "extends": [
