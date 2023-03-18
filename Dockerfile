@@ -24,3 +24,6 @@ ENTRYPOINT ["python"]
 CMD ["electron_visualized.py"]
 
 # THIS IS CALLED MULTI-STAGE BUILDING IN DOCKER
+# HOW TO PERSIST THE DATABASE.DB WHEN DOCKER BUILDING...
+# https://docs.docker.com/get-started/05_persisting_data/
+# FOR CAPROVER... https://caprover.com/docs/persistent-apps.html

@@ -75,7 +75,12 @@ def create_app():
     load_dotenv()
 
     app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
-    app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(os.getcwd(), 'database.db')}"
+
+    # Create the 'users' directory if it doesn't exist
+    users_dir = os.path.join(os.getcwd(), 'server', 'users')
+    os.makedirs(users_dir, exist_ok=True)
+
+    app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(os.getcwd(), 'server', 'users', 'database.db')}"
     app.config['JWT_ACCESS_LIFESPAN'] = {'hours': 24}
     app.config['JWT_REFRESH_LIFESPAN'] = {'days': 30}
 
