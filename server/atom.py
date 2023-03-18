@@ -108,11 +108,6 @@ def plot_atomic_orbital(name, n, l, m):
                   indent=4, separators=(',', ': '))
 
     multipart_upload_boto3(f"SPH_{n}_{l}_{m}", os.path.join(PROJECT_ROOT, f'client/src/assets/SPH_{n}_{l}_{m}.json'))
-
-    with open(os.path.join(PROJECT_ROOT, f'client/src/assets/SPH_{name}.json'), 'w+') as outfile:
-        json.dump(return_value, outfile, sort_keys=True,
-                  indent=4, separators=(',', ': '))
-
-    multipart_upload_boto3(f"SPH_{n}_{l}_{m}", os.path.join(PROJECT_ROOT, f'client/src/assets/SPH_{name}.json'))
+    multipart_upload_boto3(f"SPH_{name}", os.path.join(PROJECT_ROOT, f'client/src/assets/SPH_{n}_{l}_{m}.json'))
 
     return jsonify(return_value)
