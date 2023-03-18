@@ -1,4 +1,3 @@
-import { Mount } from "./Transitions";
 import { Background } from "./Geometries";
 import MetaTag from "./MetaTag";
 import { login } from "../auth"
@@ -43,9 +42,9 @@ export default function Login() {
     
           <div className="bg-gray-700 pb-5" style={{ "min-height": "100vh" }}>
             <div className="text-center pt-10 pl-5 pr-5 text-gray-400">
-              <Mount content={<h1 className="sm:pb-5 scale-75 sm:scale-100">
+              <h1 className="sm:pb-5 scale-75 sm:scale-100">
                 <span className="text-white">Login.</span>
-              </h1>} show />
+              </h1>
 
               {username === "" ? (
                 <form
@@ -75,7 +74,6 @@ export default function Login() {
                         </button>
                     </form>
               ) : password === "" ? (
-                <Mount content={
                     <form
                         onSubmit={(e) => {
                             e.preventDefault(); // Else the page will be reloaded which is the default DOM behaviour in forms and its submit button...
@@ -102,11 +100,9 @@ export default function Login() {
                         <button className="ml-3" type="submit">
                             <span>Submit</span>
                         </button>
-                    </form>
-                } show />   
+                    </form> 
             ) : (
                 <div className="mt-5">
-                    <Mount content={
                         <>
                             {errorMessage === "" ? (
                                 <h3 className="text-blue-200">
@@ -118,7 +114,6 @@ export default function Login() {
                                 </h3>
                             )}
                         </>
-                    } show />
                 </div>
             )}
             </div>
