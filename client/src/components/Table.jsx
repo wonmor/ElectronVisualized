@@ -502,7 +502,7 @@ function ThreeDigitEntry() {
         <div className="flex items-center justify-center">
           <input
             className={classNames(
-              "w-12 py-2 mr-2 text-center border rounded",
+              "w-12 py-2 mr-2 text-center text-gray-500 border rounded",
               {
                 "border-red-500": digit1.length === 0,
               }
@@ -515,7 +515,7 @@ function ThreeDigitEntry() {
           />
           <input
             className={classNames(
-              "w-12 py-2 mr-2 text-center border rounded",
+              "w-12 py-2 mr-2 text-center text-gray-500 border rounded",
               {
                 "border-red-500": digit2.length === 0,
               }
@@ -528,7 +528,7 @@ function ThreeDigitEntry() {
           />
           <input
             className={classNames(
-              "w-12 py-2 text-center border rounded",
+              "w-12 py-2 text-center text-gray-500 border rounded",
               {
                 "border-red-500": digit3.length === 0,
               }

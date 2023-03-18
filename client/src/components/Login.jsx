@@ -8,6 +8,7 @@ export default function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    const [isRegister, setRegister] = useState(false);
 
     const navigate = useNavigate();
 
@@ -43,12 +44,12 @@ export default function Login() {
           <div className="bg-gray-700 pb-5" style={{ "min-height": "100vh" }}>
             <div className="text-center pt-10 pl-5 pr-5 text-gray-400">
               <h1 className="sm:pb-5 scale-75 sm:scale-100">
-                <span className="text-white">Login.</span>
+                <span className="text-white">{!isRegister ? "Login." : "Register."}</span>
               </h1>
 
               <h3>or <button onClick={() => {
-                navigate("/register");
-              }}><span className="text-blue-200 hover:underline">Register</span></button>.</h3>
+                setRegister(!isRegister);
+              }}><span className="text-blue-200 hover:underline">{!isRegister ? "Register" : "Login"}</span></button>.</h3>
 
               {username === "" ? (
                 <form
