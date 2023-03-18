@@ -1,15 +1,10 @@
-import React from "react";
-
+import React, { useState } from "react";
+import classNames from "classnames";
 import { useNavigate } from "react-router-dom";
-
 import { useSelector, useDispatch } from "react-redux";
-
 import { setGlobalRenderInfo } from "../states/renderInfoSlice";
-
 import { setGlobalSelectedElement } from "../states/selectedElementSlice";
-
 import { Background } from "./Geometries";
-
 import { moleculeDict, atomDict, useWindowSize, isElectron } from "./Globals";
 
 import MetaTag from "./MetaTag";
@@ -381,7 +376,7 @@ export default function Table() {
               <div className="flex flex-col md:flex-row justify-center items-center">
                 <button
                   onClick={() => {movePage("/login")}}
-                  className="w-fit text-white bg-[#050708]/30 hover:bg-black font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 mb-2"
+                  className="w-fit text-white bg-[#050708]/30 hover:bg-[#050708] font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 mb-2"
                 >
                   <span>
                     Get Pro Membership
@@ -414,6 +409,20 @@ export default function Table() {
                     Mac App Store
                   </span>
                 </a>
+
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.johnseong.electronify"
+                  type="button"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-fit text-black bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-300 dark:hover:bg-gray-100 mr-2 mb-2"
+                >
+                  <img src="google_play.svg" alt="google_play_icon" className="w-5 h-5 mr-2 -ml-1" />
+                  <span>
+                    Google Play
+                  </span>
+                </a>
+
               </div>
             )}
 
@@ -458,15 +467,95 @@ export default function Table() {
             Atoms
           </h1>
 
-          <p className="p-5 text-gray-400 border-b border-gray-500">
+          <p className="p-5 text-gray-400">
             Using spherical harmonics, view the <b>atomic orbital</b> structure
             of your choice. Colours are displayed based upon elements' actual properties in the flame test.
           </p>
+
+          <div className="ml-5 mr-5 pb-10 border-b border-gray-500">
+            <ThreeDigitEntry />
+          </div>
 
           {displayPeriodicTable()}
         </div>
         <Background />
       </div>
     </>
+  );
+}
+
+function ThreeDigitEntry() {
+  const [digit1, setDigit1] = useState("");
+  const [digit2, setDigit2] = useState("");
+  const [digit3, setDigit3] = useState("");
+
+  const handleDigitChange = (event, digitSetter) => {
+    const value = event.target.value;
+    if (value.length <= 1) {
+      digitSetter(value);
+    }
+  };
+
+  return (
+      <div className="p-6 w-fit m-auto bg-white rounded-lg shadow-lg">
+        <h2 className="mb-4 text-xl font-medium">Enter Quantum Num.</h2>
+        <div className="flex items-center justify-center">
+          <input
+            className={classNames(
+              "w-12 py-2 mr-2 text-center border rounded",
+              {
+                "border-red-500": digit1.length === 0,
+              }
+            )}
+            type="text"
+            maxLength="1"
+            placeholder="N"
+            value={digit1}
+            onChange={(event) => handleDigitChange(event, setDigit1)}
+          />
+          <input
+            className={classNames(
+              "w-12 py-2 mr-2 text-center border rounded",
+              {
+                "border-red-500": digit2.length === 0,
+              }
+            )}
+            type="text"
+            maxLength="1"
+            placeholder="L"
+            value={digit2}
+            onChange={(event) => handleDigitChange(event, setDigit2)}
+          />
+          <input
+            className={classNames(
+              "w-12 py-2 text-center border rounded",
+              {
+                "border-red-500": digit3.length === 0,
+              }
+            )}
+            type="text"
+            maxLength="1"
+            value={digit3}
+            placeholder="ML"
+            onChange={(event) => handleDigitChange(event, setDigit3)}
+          />
+        </div>
+        <div className="mt-4">
+          {digit1.length === 0 || digit2.length === 0 || digit3.length === 0 ? (
+            <p className="text-red-500">Please enter three digits.</p>
+          ) : (
+            <button
+                    onClick={() => {
+                      // This code runs after a global state change...
+                      
+                    }}
+                    className="mb-2 mr-2 sm:mt-0 bg-transparent hover:bg-green-600 text-green-600 hover:text-white py-2 px-4 border border-green-600 hover:border-transparent rounded"
+                    type="button"
+                  >
+                    <span>View 3D Model</span>
+                  </button>
+          )}
+        </div>
+      </div>
   );
 }
