@@ -48,7 +48,7 @@ def _HFunc(r,theta,phi,n,l,m):
 
     return _psi_R(r,n,l) * _psi_ang(phi,theta,l,m)
 
-def plot_atomic_orbital(n, l, m):
+def plot_atomic_orbital(name, n, l, m):
     maxi = 60
     resolution = 160
 
