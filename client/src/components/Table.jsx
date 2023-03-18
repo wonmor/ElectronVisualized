@@ -498,7 +498,7 @@ function ThreeDigitEntry() {
 
   return (
       <div className="p-6 w-fit m-auto bg-white rounded-lg shadow-lg">
-        <h2 className="mb-4 text-xl font-medium">Enter Quantum Num.</h2>
+        <h2 className="mb-4 text-xl text-gray-500 font-medium">Enter Quantum Num.</h2>
         <div className="flex items-center justify-center">
           <input
             className={classNames(
