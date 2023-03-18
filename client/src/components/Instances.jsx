@@ -83,8 +83,8 @@ export function Particles({ particleRef, lightRef, particleRadius }) {
         const currentYCoords = globalAtomInfo["y_coords"][i];
         const currentZCoords = globalAtomInfo["z_coords"][i];
         
-        const y = currentXCoords / 10;
-        const x = currentYCoords / 10;
+        const x = currentXCoords / 10;
+        const y = currentYCoords / 10;
         const z = currentZCoords / 10;
 
         const volume = 0;
