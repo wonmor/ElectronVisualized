@@ -196,7 +196,7 @@ export default function Renderer() {
   const fetchMoleculeSecondRenderElement = async (secondRenderElement) => {
     await axios({
       method: "GET",
-      url: `${process.env.NODE_ENV === 'development' && "https://electronvisual.org"}/api/load/${secondRenderElement}`,
+      url: `/api/load/${secondRenderElement}`,
     })
       .then((response) => {
         const res = response.data;
@@ -241,7 +241,7 @@ export default function Renderer() {
 
     await axios({
       method: "GET",
-      url: `${process.env.NODE_ENV === 'development' && "https://electronvisual.org"}/api/load/${firstRenderElement}`,
+      url: `/api/load/${firstRenderElement}`,
     })
       .then((response) => {
         const res = response.data;
@@ -304,7 +304,7 @@ export default function Renderer() {
 
     await axios({
       method: "GET",
-      url: `${process.env.NODE_ENV === 'development' && "https://electronvisual.org"}/api/loadSPH/${renderElement}`,
+      url: `/api/loadSPH/${renderElement}`,
     })
       .then((response) => {
         const res = response.data;
