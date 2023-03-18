@@ -77,6 +77,20 @@ export const atomDict = {
     "Oxygen is a colourless, odourless, tasteless gas essential to living organisms, being taken up by animals, which convert it to carbon dioxide; plants, in turn, utilize carbon dioxide as a source of carbon and return the oxygen to the atmosphere.",
     "[He] 2s^2 2p^4"
   ],
+  F: [
+    "F",
+    "Fluorine Atom",
+    "Atom",
+    "Fluorine is a chemical element with the symbol F and atomic number 9. It is the lightest halogen and exists as a highly toxic pale yellow diatomic gas at standard conditions. As the most electronegative element, it is extremely reactive, as it reacts with almost all other elements, except for helium and neon.",
+    "[He] 2s^2 2p^5"
+  ],
+  Ne: [
+    "Ne",
+    "Neon Atom",
+    "Atom",
+    "Neon is a chemical element with the symbol Ne and atomic number 10. It is a noble gas. Neon is a colorless, odorless, inert monatomic gas under standard conditions, with about two-thirds the density of air.",
+    "[He] 2s^2 2p^6"
+  ],
   Cu: [
     "Cu",
     "Copper Atom",
@@ -215,6 +229,12 @@ export const getAtomColour = (
 
     case "O":
       return "#FFA500";
+
+    case "F":
+      return "#0CBAA6";
+
+    case "Ne":
+      return "#39FF14";
 
     case "Cu":
       return '#00CC99';

@@ -192,8 +192,22 @@ export default function Table() {
             >
               O
             </li>
-            <li title="Fluorine">F</li>
-            <li title="Neon">Ne</li>
+            <li onMouseDown={() => {
+                // This code runs first...
+                appendNewRender(...atomDict.F);
+              }}
+              onClick={() => {
+                // This code runs after a global state change...
+                movePage(`/renderer/${globalSelectedElement.element}`);
+              }} title="Fluorine">F</li>
+            <li onMouseDown={() => {
+                // This code runs first...
+                appendNewRender(...atomDict.Ne);
+              }}
+              onClick={() => {
+                // This code runs after a global state change...
+                movePage(`/renderer/${globalSelectedElement.element}`);
+              }} title="Neon">Ne</li>
             <li onMouseDown={() => {
                 // This code runs first...
                 appendNewRender(...atomDict.Na);
@@ -369,11 +383,9 @@ export default function Table() {
               <div className="flex flex-col md:flex-row justify-center items-center">
                 <div
                   type="button"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  onClick={() => {movePage("/login")}}
                   className="w-fit text-white bg-[#050708]/30 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 mb-2"
                 >
-                  <img className="mr-3" style={{ width: "15px" }} src="web.svg" alt="web" />
                   <span>
                     Get Pro Membership
                   </span>

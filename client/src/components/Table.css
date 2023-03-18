@@ -37,6 +37,10 @@
 
 #periodic-table li:nth-of-type(8),
 
+#periodic-table li:nth-of-type(9),
+
+#periodic-table li:nth-of-type(10),
+
 #periodic-table li:nth-of-type(11),
 
 #periodic-table li:nth-of-type(19),
@@ -55,6 +59,10 @@
 #periodic-table li:nth-of-type(5):hover,
 
 #periodic-table li:nth-of-type(8):hover,
+
+#periodic-table li:nth-of-type(9):hover,
+
+#periodic-table li:nth-of-type(10):hover,
 
 #periodic-table li:nth-of-type(11):hover,
 
