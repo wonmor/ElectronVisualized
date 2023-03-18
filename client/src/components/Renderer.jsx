@@ -27,8 +27,6 @@ import Controls from "./Controls";
 
 import MetaTag from "./MetaTag";
 
-import { Mount } from "./Transitions";
-
 import { Particles } from "./Instances";
 
 import { bondShapeDict, moleculesWithLonePairs } from "./Globals";
@@ -368,8 +366,6 @@ export default function Renderer() {
       />
 
       <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
-        <Mount
-          content={
             <div className="text-rose-200 text-center pt-10 pb-10 ml-5 mr-5">
               <h1 className={`mb-5 ${size.width < 350 ? "scale-75" : null}`}>
                 {globalSelectedElement["name"]}
@@ -522,17 +518,12 @@ export default function Renderer() {
                 )}
               </div>
             </div>
-          }
-          show
-        />
 
         <div
           className="bg-gray-800 text-center text-gray-400 ml-10 mr-10 md:ml-40 md:mr-40 rounded"
           style={{ width: CANVAS.WIDTH, height: CANVAS.HEIGHT }}
         >
           {!preRender && globalSelectedElement["type"] === "Molecule" && (
-            <Mount
-              content={
                 <div
                   className="absolute"
                   style={{
@@ -553,14 +544,9 @@ export default function Renderer() {
                     </div>
                   </div>
                 </div>
-              }
-              show
-            />
           )}
 
           {!preRender && globalAtomInfo.n_value && (
-            <Mount
-              content={
                 <div
                   className="absolute"
                   style={{
@@ -581,14 +567,9 @@ export default function Renderer() {
                     </p>
                   </div>
                 </div>
-              }
-              show
-            />
           )}
 
           {preRender && (
-            <Mount
-              content={
                 <div
                   className="absolute"
                   style={{
@@ -606,9 +587,6 @@ export default function Renderer() {
                     </div>
                   </div>
                 </div>
-              }
-              show
-            />
           )}
 
           <Canvas camera={getCameraPosition(globalSelectedElement["element"])}>

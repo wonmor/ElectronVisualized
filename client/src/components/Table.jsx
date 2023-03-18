@@ -14,8 +14,6 @@ import { moleculeDict, atomDict, useWindowSize, isElectron } from "./Globals";
 
 import MetaTag from "./MetaTag";
 
-import { Mount } from "./Transitions";
-
 import "./Table.css";
 
 import "./Background.css";
@@ -359,7 +357,7 @@ export default function Table() {
 
       <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
         <div className="text-white text-center p-5 text-gray-400">
-          <Mount content={<><h1
+          <h1
             className={`scale-75 sm:scale-100 ${size.width < 350 ? "truncate" : null
               }`}
           >
@@ -418,7 +416,6 @@ export default function Table() {
                 </a>
               </div>
             )}
-          </>} show />
 
           <div className="bg-gray-600 rounded pb-2">
             <h1

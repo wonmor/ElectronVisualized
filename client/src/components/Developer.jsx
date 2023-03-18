@@ -2,8 +2,6 @@ import React, { useState } from "react";
 
 import { Background } from "./Geometries";
 
-import { Mount } from "./Transitions";
-
 import Dropdown from "./Dropdown";
 
 import MetaTag from "./MetaTag";
@@ -94,10 +92,10 @@ export default function Developer() {
 
       <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
         <div className="text-white text-center pt-10 pl-5 pr-5 text-gray-400">
-          <Mount content={<h1 className="pb-5 text-ellipsis overflow-hidden">
+          <h1 className="pb-5 text-ellipsis overflow-hidden">
             <span className="text-white">Density Functional Theory</span> Meets
             the <span className="text-blue-200">Web</span>.
-          </h1>} show />
+          </h1>
 
           <div className="bg-gray-600 rounded ml-0 mr-0 lg:ml-60 lg:mr-60">
             <h2 className="mt-5 pl-5 pr-5 pt-5 leading-normal text-gray-400">

@@ -4,7 +4,6 @@ import { Background } from "./Geometries";
 import { uBitConnectDevice } from "../utilities/serial";
 import { getBrowser } from "../utilities/platform";
 import { isElectron } from "./Globals";
-import { Mount } from "./Transitions";
 
 export default function Extensions() {
   /*
@@ -101,10 +100,10 @@ export default function Extensions() {
     <div>
       <div className="bg-gray-700 pb-5">
         <div className="ml-5 mr-5 text-white text-center sm:pt-10 text-gray-400">
-          <Mount content={<h1 className="sm:mb-5 scale-75 sm:scale-90">
+          <h1 className="sm:mb-5 scale-75 sm:scale-90">
             <span className="text-rose-200">Extensions</span> make it
             more <span className="text-white">accessible</span>.
-          </h1>} show />
+          </h1>
 
           <div className="pt-5 leading-normal text-gray-400 border-t border-gray-500">
             <img
