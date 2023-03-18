@@ -32,12 +32,12 @@ def _psi_ang(phi,theta,l=0,m=0):
     
     return sphHarm.real
 
-def _HFunc(r,theta,phi,n,l,m):
+def _HFunc(x, y, z, n, l, m):
     '''
     INPUT
-        r: Radial coordinate
-        theta: Polar coordinate
-        phi: Azimuthal coordinate
+        x: X coordinate
+        y: Y coordinate
+        z: Z coordinate
         n: Principle quantum number
         l: Angular momentum quantum number
         m: Magnetic quantum number
@@ -46,53 +46,57 @@ def _HFunc(r,theta,phi,n,l,m):
         Value of wavefunction
     '''
 
-    return _psi_R(r,n,l) * _psi_ang(phi,theta,l,m)
+    r = np.sqrt(x**2 + y**2 + z**2)
+    theta = np.arccos(z / r)
+    phi = np.arctan2(y, x)
+
+    return _psi_R(r, n, l) * _psi_ang(phi, theta, l, m)
+
 
 def plot_atomic_orbital(name, n, l, m):
     maxi = 60
     resolution = 160
+    num_electrons = 8000
+    burn_in = 1000
+    delta = 0.5
 
-    base = np.linspace(-maxi, maxi, resolution)[:,np.newaxis,np.newaxis]
+    # Initialize electron coordinate
+    x_coords = np.random.uniform(-maxi, maxi, num_electrons)
+    y_coords = np.random.uniform(-maxi, maxi, num_electrons)
+    z_coords = np.random.uniform(-maxi, maxi, num_electrons)
+    coords = np.stack([x_coords, y_coords, z_coords], axis=-1)
 
-    x2 = np.tile(base, (1,resolution,resolution))
-    y2 = np.swapaxes(x2,0,1)
-    z2 = np.swapaxes(x2,0,2)
+    # Burn in the algorithm
+    for i in range(burn_in):
+        # Generate a new electron coordinate
+        new_coords = coords + np.random.normal(0, delta, size=(num_electrons, 3))
 
-    total = np.concatenate((x2[np.newaxis,:],y2[np.newaxis,:],z2[np.newaxis,:]), axis=0)
+        # Calculate the acceptance probability
+        psi_new = _HFunc(new_coords[:, 0], new_coords[:, 1], new_coords[:, 2], n, l, m)
+        psi_old = _HFunc(coords[:, 0], coords[:, 1], coords[:, 2], n, l, m)
+        acceptance_prob = np.abs(psi_new / psi_old) ** 2
 
-    r2 = np.linalg.norm(total, axis=0)
+        # Accept or reject the new electron coordinate
+        accept = acceptance_prob > np.random.uniform(size=num_electrons)
+        coords[accept] = new_coords[accept]
 
-    np.seterr(all='ignore')
+    # Generate electron coordinates using the Metropolis-Hastings algorithm
+    for i in range(num_electrons - burn_in):
+        # Generate a new electron coordinate
+        new_coords = coords + np.random.normal(0, delta, size=(num_electrons, 3))
 
-    phi2 = np.arctan(np.divide(total[2],np.linalg.norm(total[:2], axis=0))) + np.pi / 2
-    theta2 = np.arctan2(total[1],total[0])
+        # Calculate the acceptance probability
+        psi_new = _HFunc(new_coords[:, 0], new_coords[:, 1], new_coords[:, 2], n, l, m)
+        psi_old = _HFunc(coords[:, 0], coords[:, 1], coords[:, 2], n, l, m)
+        acceptance_prob = np.abs(psi_new / psi_old) ** 2
 
-    psi = _HFunc(r2, theta2, phi2, n, l, m)
+        # Accept or reject the new electron coordinate
+        accept = acceptance_prob > np.random.uniform(size=num_electrons)
+        coords[accept] = new_coords[accept]
 
-    density = r2 ** 2 * np.sin(phi2) * psi ** 2
-
-    elements = []
-    probability = []
-
-    for ix in range(resolution):
-        for iy in range(resolution):
-            for iz in range(resolution):
-                # Serialize into 1D object
-                elements.append(str((ix,iy,iz)))
-                probability.append(density[ix][iy][iz])
-
-    # Ensure sum of probability is 1
-    probability = probability / sum(probability)
-
-    # Getting electron coordinates based on probabiliy
-    coord = np.random.choice(elements, size=8000, replace=True, p=probability)
-
-    elem_mat = [i.split(',') for i in coord]
-    elem_mat = np.matrix(elem_mat)
-    
-    x_coords = [float(i.item()[1:]) for i in elem_mat[:,0]] 
-    y_coords = [float(i.item()) for i in elem_mat[:,1]] 
-    z_coords = [float(i.item()[0:-1]) for i in elem_mat[:,2]]
+    x_coords = coords[:, 0].tolist()
+    y_coords = coords[:, 1].tolist()
+    z_coords = coords[:, 2].tolist()
 
     return_value = {
         "x_coords": x_coords,
