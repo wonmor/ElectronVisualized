@@ -381,15 +381,14 @@ export default function Table() {
             </h2>
             {!isElectron() && (
               <div className="flex flex-col md:flex-row justify-center items-center">
-                <div
-                  type="button"
+                <button
                   onClick={() => {movePage("/login")}}
                   className="w-fit text-white bg-[#050708]/30 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 mb-2"
                 >
                   <span>
                     Get Pro Membership
                   </span>
-                </div>
+                </button>
 
                 <a
                   href="https://apps.apple.com/us/app/electronvisualized/id1631246652?mt=12"
