@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import classNames from "classnames";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -8,9 +8,9 @@ import { Background } from "./Geometries";
 import { moleculeDict, atomDict, useWindowSize, isElectron } from "./Globals";
 
 import MetaTag from "./MetaTag";
+import quantumNumbers from '../assets/quantum_num.json';
 
 import "./Table.css";
-
 import "./Background.css";
 
 /*
@@ -37,10 +37,29 @@ export default function Table() {
   );
 
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
-
   const size = useWindowSize();
+
+  const [digit1, setDigit1] = useState("");
+  const [digit2, setDigit2] = useState("");
+  const [digit3, setDigit3] = useState("");
+
+  const [noResultsFound, setNoResultsFound] = useState(false);
+
+  useEffect(() => {
+    if (digit1.length === 0 || digit2.length === 0 || digit3.length === 0) {
+      setNoResultsFound(false);
+    }
+  }, [digit1, digit2, digit3]);
+
+  const handleDigitChange = (event, digitSetter) => {
+    const value = event.target.value;
+    if (!isNaN(value) && value.length <= 1) {
+      digitSetter(value);
+    } else {
+      digitSetter(0); // or any other default value that you want
+    }
+  };
 
   const movePage = (page) => {
     /*
@@ -581,31 +600,7 @@ export default function Table() {
           </p>
 
           <div className="ml-5 mr-5 pb-10 border-b border-gray-500">
-            <ThreeDigitEntry />
-          </div>
-
-          {displayPeriodicTable()}
-        </div>
-        <Background />
-      </div>
-    </>
-  );
-}
-
-function ThreeDigitEntry() {
-  const [digit1, setDigit1] = useState("");
-  const [digit2, setDigit2] = useState("");
-  const [digit3, setDigit3] = useState("");
-
-  const handleDigitChange = (event, digitSetter) => {
-    const value = event.target.value;
-    if (value.length <= 1) {
-      digitSetter(value);
-    }
-  };
-
-  return (
-      <div className="p-6 w-fit m-auto bg-white rounded-lg shadow-lg">
+          <div className="p-6 w-fit m-auto bg-white rounded-lg shadow-lg">
         <h2 className="mb-4 text-xl text-gray-500 font-medium">Enter Quantum Num.</h2>
         <div className="flex items-center justify-center">
           <input
@@ -653,17 +648,40 @@ function ThreeDigitEntry() {
             <p className="text-red-500">Please enter three digits.</p>
           ) : (
             <button
-                    onClick={() => {
-                      // This code runs after a global state change...
-                      
-                    }}
-                    className="mb-2 mr-2 sm:mt-0 bg-transparent hover:bg-green-600 text-green-600 hover:text-white py-2 px-4 border border-green-600 hover:border-transparent rounded"
-                    type="button"
-                  >
-                    <span>View 3D Model</span>
-                  </button>
+              onClick={() => {
+                let matchFound = false;
+
+                for (const [key, value] of Object.entries(quantumNumbers)) {
+                    if (value["n"] === parseInt(digit1) && value["l"] === parseInt(digit2) && value["m"] === parseInt(digit3)) {
+                        appendNewRender(...atomDict[key]);
+                        movePage(`/renderer`);
+                        matchFound = true;
+                        break;
+                    }
+                }
+
+                if (!matchFound) {
+                    setNoResultsFound(true);
+                }
+              }}
+              className="mb-2 mr-2 sm:mt-0 bg-transparent hover:bg-green-600 text-green-600 hover:text-white py-2 px-4 border border-green-600 hover:border-transparent rounded"
+              type="button"
+            >
+              <span>Search</span>
+            </button>
+          )}
+
+          {noResultsFound && (
+            <p className="text-red-500">No results found.</p>
           )}
         </div>
       </div>
+          </div>
+
+          {displayPeriodicTable()}
+        </div>
+        <Background />
+      </div>
+    </>
   );
 }

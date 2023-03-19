@@ -22,8 +22,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Dataset files
-src/assets/*.json
-
 package-lock.json
 yarn.lock
