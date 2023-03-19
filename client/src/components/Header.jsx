@@ -195,18 +195,6 @@ export default function Header() {
 
             <button
               onClick={() => {
-                movePage("/docs");
-              }}
-              className={`block mt-4 lg:inline-block lg:mt-0 ${location.pathname === "/docs"
-                  ? "text-gray-400"
-                  : "text-rose-200"
-                } hover:text-white mr-4`}
-            >
-              <span>Docs</span>
-            </button>
-
-            <button
-              onClick={() => {
                 movePage("/extensions");
               }}
               className={`block mt-4 lg:inline-block lg:mt-0 ${location.pathname === "/extensions"
