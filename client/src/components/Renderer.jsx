@@ -5,8 +5,6 @@ import { EffectComposer, SelectiveBloom } from "@react-three/postprocessing";
 
 import { Slider, Button } from "@mui/material";
 
-import { Switch } from "@headlessui/react";
-
 import store from "../store";
 
 // A MUST — MAKE SURE THAT YOU WRITE CURLY BRACKETS NEXT TO IMPORT!
@@ -35,8 +33,6 @@ import {
   CANVAS,
   getCameraPosition,
   useWindowSize,
-  zoomInCamera,
-  zoomOutCamera,
   useAnalyticsEventTracker,
 } from "./Globals";
 
