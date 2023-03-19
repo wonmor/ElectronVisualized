@@ -4,8 +4,8 @@ WORKDIR /app
 ENV PATH /app/client/node_modules/.bin:$PATH
 COPY client ./client
 WORKDIR /app/client
-RUN yarn install
-RUN yarn build
+RUN npm install
+RUN npm run build
 
 # FOR BACK-END DEPLOYMENT... (FLASK)
 FROM python:3.10.4-slim
