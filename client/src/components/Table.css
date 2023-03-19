@@ -45,7 +45,31 @@
 
 #periodic-table li:nth-of-type(19),
 
-#periodic-table li:nth-of-type(29) {
+#periodic-table li:nth-of-type(26),
+
+#periodic-table li:nth-of-type(27),
+
+#periodic-table li:nth-of-type(28),
+
+#periodic-table li:nth-of-type(29),
+
+#periodic-table li:nth-of-type(30),
+
+#periodic-table li:nth-of-type(46),
+
+#periodic-table li:nth-of-type(58),
+
+#periodic-table li:nth-of-type(59),
+
+#periodic-table li:nth-of-type(60),
+
+#periodic-table li:nth-of-type(61),
+
+#periodic-table li:nth-of-type(62),
+
+#periodic-table li:nth-of-type(63),
+
+#periodic-table li:nth-of-type(64) {
     cursor: pointer;
     color: white;
 }
@@ -68,7 +92,31 @@
 
 #periodic-table li:nth-of-type(19):hover,
 
-#periodic-table li:nth-of-type(29):hover {
+#periodic-table li:nth-of-type(26):hover,
+
+#periodic-table li:nth-of-type(27):hover,
+
+#periodic-table li:nth-of-type(28):hover,
+
+#periodic-table li:nth-of-type(29):hover,
+
+#periodic-table li:nth-of-type(30):hover,
+
+#periodic-table li:nth-of-type(46):hover,
+
+#periodic-table li:nth-of-type(58):hover,
+
+#periodic-table li:nth-of-type(59):hover,
+
+#periodic-table li:nth-of-type(60):hover,
+
+#periodic-table li:nth-of-type(61):hover,
+
+#periodic-table li:nth-of-type(62):hover,
+
+#periodic-table li:nth-of-type(63):hover,
+
+#periodic-table li:nth-of-type(64):hover {
   color: #D3D3D3;
 }
 

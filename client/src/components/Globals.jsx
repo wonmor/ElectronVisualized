@@ -91,12 +91,96 @@ export const atomDict = {
     "Neon is a chemical element with the symbol Ne and atomic number 10. It is a noble gas. Neon is a colorless, odorless, inert monatomic gas under standard conditions, with about two-thirds the density of air.",
     "[He] 2s^2 2p^6"
   ],
+  Fe: [
+    "Fe",
+    "Iron Atom",
+    "Atom",
+    "Iron is a chemical element with the symbol Fe and atomic number 26. It is a metal that belongs to the first transition series and group 8 of the periodic table. It is by mass the most common element on Earth, forming much of Earth's outer and inner core.",
+    "[Ar] 4s^2 3d^6"
+  ],
+  Co: [
+    "Co",
+    "Cobalt Atom",
+    "Atom",
+    "Cobalt is a chemical element with the symbol Co and atomic number 27. Like nickel, cobalt is found in the Earth's crust only in chemically combined form, save for small deposits found in alloys of natural meteoric iron. The free element, produced by reductive smelting, is a hard, lustrous, silver-gray metal.",
+    "[Ar] 4s^2 3d^7"
+  ],
+  Ni: [
+    "Ni",
+    "Nickel Atom",
+    "Atom",
+    "Nickel is a chemical element with the symbol Ni and atomic number 28. It is a silvery-white lustrous metal with a slight golden tinge. Nickel belongs to the transition metals and is hard and ductile.",
+    "[Ar] 4s^2 3d^8"
+  ],
   Cu: [
     "Cu",
     "Copper Atom",
     "Atom",
     "Copper is a chemical element with the symbol Cu (from Latin: cuprum) and atomic number 29. It is a soft, malleable, and ductile metal with very high thermal and electrical conductivity.",
     "[Ar] 4s^1 3d^10"
+  ],
+  Zn: [
+    "Zn",
+    "Zinc Atom",
+    "Atom",
+    "Zinc is a chemical element with the symbol Zn and atomic number 30. It is the first element in group 12 of the periodic table. In some respects zinc is chemically similar to magnesium: both elements exhibit only one normal oxidation state (+2), and the Zn2+ and Mg2+ ions are of similar size.",
+    "[Ar] 4s^2 3d^10"
+  ],
+  Pd: [
+    "Pd",
+    "Palladium Atom",
+    "Atom",
+    "Palladium is a chemical element with the symbol Pd and atomic number 46. It is a rare and lustrous silvery-white metal discovered in 1803 by William Hyde Wollaston. It has the greatest density of any element and the lowest melting point of any metal.",
+    "[Kr] 4d^10"
+  ],
+  Ce: [
+    "Ce",
+    "Cerium Atom",
+    "Atom",
+    "Cerium is a chemical element with the symbol Ce and atomic number 58. Cerium is a soft, ductile and silvery-white metal that tarnishes when exposed to air, and it is soft enough to be cut with a knife.",
+    "[Xe] 6s^2 4f^1"
+  ],
+  Pr: [
+    "Pr",
+    "Praseodymium Atom",
+    "Atom",
+    "Praseodymium is a chemical element with the symbol Pr and atomic number 59. It is the third member of the lanthanide series, and is traditionally considered to be one of the rare-earth elements.",
+    "[Xe] 6s^2 4f^3"
+  ],
+  Nd: [
+    "Nd",
+    "Neodymium Atom",
+    "Atom",
+    "Neodymium is a chemical element with the symbol Nd and atomic number 60. It is the fourth member of the lanthanide series and is traditionally considered to be one of the rare-earth elements.",
+    "[Xe] 6s^2 4f^4"
+  ],
+  Pm: [
+    "Pm",
+    "Promethium Atom",
+    "Atom",
+    "Promethium is a chemical element with the symbol Pm and atomic number 61. It is the fifth member of the lanthanide series and is traditionally considered to be one of the rare-earth elements.",
+    "[Xe] 6s^2 4f^5"
+  ],
+  Sm: [
+    "Sm",
+    "Samarium Atom",
+    "Atom",
+    "Samarium is a chemical element with the symbol Sm and atomic number 62. It is the sixth member of the lanthanide series and is traditionally considered to be one of the rare-earth elements.",
+    "[Xe] 6s^2 4f^6"
+  ],
+  Eu: [
+    "Eu",
+    "Europium Atom",
+    "Atom",
+    "Europium is a chemical element with the symbol Eu and atomic number 63. It is a soft, silvery-white metal that tarnishes when exposed to air, and it is soft enough to be cut with a knife.",
+    "[Xe] 6s^2 4f^7"
+  ],
+  Gd: [
+    "Gd",
+    "Gadolinium Atom",
+    "Atom",
+    "Gadolinium is a chemical element with the symbol Gd and atomic number 64. Gadolinium is a silvery-white, malleable, and ductile rare earth metal. Gadolinium is the third most abundant rare earth element, after cerium and lanthanum.",
+    "[Xe] 6s^2 5d^1 4f^7"
   ],
   Li: [
     "Li",
@@ -236,8 +320,44 @@ export const getAtomColour = (
     case "Ne":
       return "#39FF14";
 
+    case "Fe":
+      return "#ffff00";
+
+    case "Co":
+      return "#0000FF";
+
+    case "Ni":
+      return "#727472"
+
     case "Cu":
       return '#00CC99';
+
+    case "Zn":
+      return "#0D98BA";
+
+    case "Pd":
+      return "#87CEEB";
+
+    case "Ce":
+      return "#FFFF00";
+    
+    case "Pr":
+      return "#C0C0C0";
+
+    case "Nd":
+      return "#953553";
+
+    case "Pm":
+      return "#00FF00";
+
+    case "Sm":
+      return "#e03fd8";
+
+    case "Eu":
+      return "#FF0000";
+
+    case "Gd":
+      return "#c0c0c0";
 
     default:
       return "#FFFF00";

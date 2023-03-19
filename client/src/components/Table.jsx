@@ -231,9 +231,36 @@ export default function Table() {
             <li title="Vanadium">V</li>
             <li title="Chromium">Cr</li>
             <li title="Manganese">Mn</li>
-            <li title="Iron">Fe</li>
-            <li title="Cobalt">Co</li>
-            <li title="Nickel">Ni</li>
+            <li 
+              onMouseDown={() => {
+                // This code runs first...
+                appendNewRender(...atomDict.Fe);
+              }}
+              onClick={() => {
+                // This code runs after a global state change...
+                movePage(`/renderer/${globalSelectedElement.element}`);
+              }}
+              title="Iron">Fe</li>
+            <li 
+              onMouseDown={() => {
+                // This code runs first...
+                appendNewRender(...atomDict.Co);
+              }}
+              onClick={() => {
+                // This code runs after a global state change...
+                movePage(`/renderer/${globalSelectedElement.element}`);
+              }}
+              title="Cobalt">Co</li>
+            <li 
+              onMouseDown={() => {
+                // This code runs first...
+                appendNewRender(...atomDict.Ni);
+              }}
+              onClick={() => {
+                // This code runs after a global state change...
+                movePage(`/renderer/${globalSelectedElement.element}`);
+              }}
+              title="Nickel">Ni</li>
             <li
               onMouseDown={() => {
                 // This code runs first...
@@ -247,7 +274,16 @@ export default function Table() {
             >
               Cu
             </li>
-            <li title="Zinc">Zn</li>
+            <li
+              onMouseDown={() => {
+                // This code runs first...
+                appendNewRender(...atomDict.Zn);
+              }}
+              onClick={() => {
+                // This code runs after a global state change...
+                movePage(`/renderer/${globalSelectedElement.element}`);
+              }}
+              title="Zinc">Zn</li>
             <li title="Gallium">Ga</li>
             <li title="Germanium">Ge</li>
             <li title="Arsenic">As</li>
@@ -263,7 +299,16 @@ export default function Table() {
             <li title="Technetium">Tc</li>
             <li title="Ruthenium">Ru</li>
             <li title="Rhodium">Rh</li>
-            <li title="Palladium">Pd</li>
+            <li
+              onMouseDown={() => {
+                // This code runs first...
+                appendNewRender(...atomDict.Pd);
+              }}
+              onClick={() => {
+                // This code runs after a global state change...
+                movePage(`/renderer/${globalSelectedElement.element}`);
+              }}
+              title="Palladium">Pd</li>
             <li title="Silver">Ag</li>
             <li title="Cadmium">Cd</li>
             <li title="Indium">In</li>
@@ -275,13 +320,76 @@ export default function Table() {
             <li title="Caesium">Cs</li>
             <li title="Barium">Ba</li>
             <li title="Lanthanum">La</li>
-            <li title="Cerium">Ce</li>
-            <li title="Praseodymium">Pr</li>
-            <li title="Neodymium">Nd</li>
-            <li title="Promethium">Pm</li>
-            <li title="Samarium">Sm</li>
-            <li title="Europium">Eu</li>
-            <li title="Gadolinium">Gd</li>
+            <li
+              onMouseDown={() => {
+                // This code runs first...
+                appendNewRender(...atomDict.Ce);
+              }}
+              onClick={() => {
+                // This code runs after a global state change...
+                movePage(`/renderer/${globalSelectedElement.element}`);
+              }}
+              title="Cerium">Ce</li>
+            <li 
+              onMouseDown={() => {
+                // This code runs first...
+                appendNewRender(...atomDict.Pr);
+              }}
+              onClick={() => {
+                // This code runs after a global state change...
+                movePage(`/renderer/${globalSelectedElement.element}`);
+              }}
+              title="Praseodymium">Pr</li>
+            <li
+              onMouseDown={() => {
+                // This code runs first...
+                appendNewRender(...atomDict.Nd);
+              }}
+              onClick={() => {
+                // This code runs after a global state change...
+                movePage(`/renderer/${globalSelectedElement.element}`);
+              }}
+              title="Neodymium">Nd</li>
+            <li
+              onMouseDown={() => {
+                // This code runs first...
+                appendNewRender(...atomDict.Pm);
+              }}
+              onClick={() => {
+                // This code runs after a global state change...
+                movePage(`/renderer/${globalSelectedElement.element}`);
+              }}
+              title="Promethium">Pm</li>
+            <li
+              onMouseDown={() => {
+                // This code runs first...
+                appendNewRender(...atomDict.Sm);
+              }}
+              onClick={() => {
+                // This code runs after a global state change...
+                movePage(`/renderer/${globalSelectedElement.element}`);
+              }}
+              title="Samarium">Sm</li>
+            <li
+              onMouseDown={() => {
+                // This code runs first...
+                appendNewRender(...atomDict.Eu);
+              }}
+              onClick={() => {
+                // This code runs after a global state change...
+                movePage(`/renderer/${globalSelectedElement.element}`);
+              }}
+              title="Europium">Eu</li>
+            <li
+              onMouseDown={() => {
+                // This code runs first...
+                appendNewRender(...atomDict.Gd);
+              }}
+              onClick={() => {
+                // This code runs after a global state change...
+                movePage(`/renderer/${globalSelectedElement.element}`);
+              }}
+              title="Gadolinium">Gd</li>
             <li title="Terbium">Tb</li>
             <li title="Dysprosium">Dy</li>
             <li title="Holmium">Ho</li>
