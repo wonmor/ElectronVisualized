@@ -676,57 +676,8 @@ export default function Renderer() {
             <gridHelper args={[undefined, undefined, "gray"]} />
           </Canvas>
         </div>
-        {!preRender ? (
-          <>
-            <div className="flex flex-row justify-center items-center w-full p-5">
-              <button
-                onMouseDown={() => {
-                  setZoomCameraConstant(zoomCameraConstant + 0.1);
-                }}
-                onClick={() => {
-                  zoomInCamera(globalCameraInfo, zoomCameraConstant);
-                }}
-                className="mr-2 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
-                type="button"
-              >
-                <span>Zoom In</span>
-              </button>
-
-              <button
-                onMouseDown={() => {
-                  setZoomCameraConstant(zoomCameraConstant - 0.1);
-                }}
-                onClick={() => {
-                  zoomOutCamera(globalCameraInfo, zoomCameraConstant);
-                }}
-                className="mr-2 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
-                type="button"
-              >
-                <span>Zoom Out</span>
-              </button>
-            </div>
-
-            <div className="flex justify-center items-center w-full pl-5 pr-5 pb-5">
-              <p className="text-gray-400 mr-5">Add Cool Effects for Gamers</p>
-
-              <Switch
-                checked={addCoolEffects}
-                onChange={setAddCoolEffects}
-                className={`${
-                  addCoolEffects ? "bg-blue-600" : "bg-gray-400"
-                } relative inline-flex h-6 w-11 items-center rounded-full`}
-              >
-                <span
-                  className={`${
-                    addCoolEffects ? "translate-x-6" : "translate-x-1"
-                  } inline-block h-4 w-4 transform rounded-full bg-white`}
-                />
-              </Switch>
-            </div>
-          </>
-        ) : (
-          <div class="p-5" />
-        )}
+        
+        <div class="p-5" />
       </div>
     </>
   );
