@@ -179,7 +179,7 @@ export default function Table() {
               }}
               onClick={() => {
                 // This code runs after a global state change...
-                movePage(`/renderer/${globalSelectedElement.element}`);
+                movePage(`/renderer`);
               }}
               title="Oxygen"
             >
@@ -191,7 +191,7 @@ export default function Table() {
               }}
               onClick={() => {
                 // This code runs after a global state change...
-                movePage(`/renderer/${globalSelectedElement.element}`);
+                movePage(`/renderer`);
               }} title="Fluorine">F</li>
             <li onMouseDown={() => {
                 // This code runs first...
