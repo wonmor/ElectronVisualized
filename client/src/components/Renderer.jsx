@@ -366,227 +366,238 @@ export default function Renderer() {
       />
 
       <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
-            <div className="text-rose-200 text-center pt-10 pb-10 ml-5 mr-5">
-              <h1 className={`mb-5 ${size.width < 350 ? "scale-75" : null}`}>
-                {globalSelectedElement["name"]}
-                <span className="font-thin text-gray-400">. Visualized.</span>
-              </h1>
+        <div className="text-rose-200 text-center pt-10 pb-10 ml-5 mr-5">
+          <h1 className={`mb-5 ${size.width < 350 ? "scale-75" : null}`}>
+            {globalSelectedElement["name"]}
+            <span className="font-thin text-gray-400">. Visualized.</span>
+          </h1>
 
-              <h2 className="sm:mt-5 pb-3 pl-5 pr-5 text-gray-400">
-                Electron Density with the help of{" "}
-                {globalSelectedElement["type"] === "Molecule" ? (
-                  <span className="text-white">Density Functional Theory</span>
-                ) : (
-                  <span className="text-white">Spherical Harmonics</span>
-                )}
-                .
-              </h2>
+          <h2 className="sm:mt-5 pb-3 pl-5 pr-5 text-gray-400">
+            Electron Density with the help of{" "}
+            {globalSelectedElement["type"] === "Molecule" ? (
+              <span className="text-white">Density Functional Theory</span>
+            ) : (
+              <span className="text-white">Spherical Harmonics</span>
+            )}
+            .
+          </h2>
 
-              <p className="pt-5 pr-5 pl-5 md:pl-60 md:pr-60 text-gray-400">
-                {globalSelectedElement["description"]}
-              </p>
+          <p className="pt-5 pr-5 pl-5 md:pl-60 md:pr-60 text-gray-400">
+            {globalSelectedElement["description"]}
+          </p>
 
-              <div class="flex items-center justify-center pt-5">
-                {!disableButton ? (
-                  <div class="grid grid-row-2 gap-4 content-center justify-items-center">
-                    <button
-                      disabled={disableButton}
-                      onClick={() => {
-                        if (globalSelectedElement.type === "Molecule") {
-                          gaEventTracker("Molecule Renderer", "Render");
+          <div class="flex items-center justify-center pt-5">
+            {!disableButton ? (
+              <div class="grid grid-row-2 gap-4 content-center justify-items-center">
+                <button
+                  disabled={disableButton}
+                  onClick={() => {
+                    if (globalSelectedElement.type === "Molecule") {
+                      gaEventTracker("Molecule Renderer", "Render");
 
-                          if (
-                            Object.keys(moleculesWithLonePairs).includes(
-                              globalSelectedElement.element
-                            )
-                          ) {
-                            fetchMoleculeCombinedRenderElement(
-                              globalSelectedElement.element,
-                              moleculesWithLonePairs[
-                                globalSelectedElement.element
-                              ]
-                            );
-                            /*
+                      if (
+                        Object.keys(moleculesWithLonePairs).includes(
+                          globalSelectedElement.element
+                        )
+                      ) {
+                        fetchMoleculeCombinedRenderElement(
+                          globalSelectedElement.element,
+                          moleculesWithLonePairs[globalSelectedElement.element]
+                        );
+                        /*
                         e.g. H2O (Water) has a lone pair on the Oxygen atom, so we need to render the Oxygen atom as well...
                         Save oxygen atom's coordinates to subtract it from the water's coordinates to visualize the lone pairs...
                         */
-                          } else if (globalSelectedElement.type === "Atom") {
-                            fetchAtomRenderElement(
-                              globalSelectedElement.element
-                            );
-                          } else {
-                            fetchMoleculeCombinedRenderElement(
-                              globalSelectedElement.element
-                            );
-                          }
-                        } else {
-                          fetchAtomRenderElement(globalSelectedElement.element);
-                        }
-                        setDisableButton(true);
-                      }}
-                      className="bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
-                      type="button"
-                    >
-                      <span>View the 3D Model</span>
-                    </button>
-                  </div>
-                ) : preRender ? (
-                  <div className="text-gray-400 mt-5">
-                    <h3>{statusText}</h3>
+                      } else if (globalSelectedElement.type === "Atom") {
+                        fetchAtomRenderElement(globalSelectedElement.element);
+                      } else {
+                        fetchMoleculeCombinedRenderElement(
+                          globalSelectedElement.element
+                        );
+                      }
+                    } else {
+                      fetchAtomRenderElement(globalSelectedElement.element);
+                    }
+                    setDisableButton(true);
+                  }}
+                  className="bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
+                  type="button"
+                >
+                  <span>View the 3D Model</span>
+                </button>
+              </div>
+            ) : preRender ? (
+              <div className="text-gray-400 mt-5">
+                <h3>{statusText}</h3>
 
-                    {!serverError && (
-                      <div className="scale-75 lds-roller">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  <div className="p-5">
-                    {!animation && !globalAtomInfo.n_value && (
-                      <div>
-                        <p className="text-gray-400">Particle Radius</p>
-
-                        <Slider
-                          className="ml-40 mr-40 scale-90 sm:scale-100 mb-5"
-                          onClick={() => {
-                            setAnimation(false);
-                          }}
-                          sx={{
-                            width: 300,
-                            color: "gray",
-                          }}
-                          value={particleRadius}
-                          onChange={changeParticleRadius}
-                          min={0.01}
-                          max={0.07}
-                          step={0.001}
-                          valueLabelDisplay="auto"
-                        />
-                      </div>
-                    )}
-
-                    {!globalAtomInfo.n_value ? (
-                      <Button
-                        onClick={() => {
-                          setAnimation(!animation);
-
-                          if (!animation) {
-                            setParticleRadius(0.01);
-
-                            setMaxPeak(false);
-                            setMinPeak(true);
-                          }
-                        }}
-                        variant="outlined"
-                        sx={{
-                          marginLeft: "7.5em",
-                          marginRight: "7.5em",
-                          color: "gray",
-                          borderColor: "gray",
-                        }}
-                      >
-                        {!animation ? "Enable Animation" : "Disable Animation"}
-                      </Button>
-                    ) : (
-                      <div className="flex flex-col items-center justify-center bg-white p-3 rounded scale-90 sm:scale-100">
-                        <h2 className="text-black text-xl md:text-2xl font-bold mb-2">
-                          Electron Config.
-                        </h2>
-                        <div className="flex flex-row space-x-3 justify-center items-center">
-                          {electronConfig.map((config, index) => {
-                            if (index !== 0) {
-                              return (
-                                <button className={`border-2 p-2 border-black rounded ${index === electronConfig.length - 1 ? "bg-black" : "bg-white hover:bg-gray-200"}`} type="button">
-                                  <h2 className={`${index === electronConfig.length - 1 ? "text-white" : "text-black"}`}>{config}</h2>
-                                </button>
-                              );
-                            } else {
-                              return <h2 className="text-black">{config}</h2>;
-                            }
-                          })}
-                        </div>
-                      </div>
-                    )}
+                {!serverError && (
+                  <div className="scale-75 lds-roller">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
                   </div>
                 )}
               </div>
-            </div>
+            ) : (
+              <div className="p-5">
+                {!animation && !globalAtomInfo.n_value && (
+                  <div>
+                    <p className="text-gray-400">Particle Radius</p>
+
+                    <Slider
+                      className="ml-40 mr-40 scale-90 sm:scale-100 mb-5"
+                      onClick={() => {
+                        setAnimation(false);
+                      }}
+                      sx={{
+                        width: 300,
+                        color: "gray",
+                      }}
+                      value={particleRadius}
+                      onChange={changeParticleRadius}
+                      min={0.01}
+                      max={0.07}
+                      step={0.001}
+                      valueLabelDisplay="auto"
+                    />
+                  </div>
+                )}
+
+                {!globalAtomInfo.n_value ? (
+                  <Button
+                    onClick={() => {
+                      setAnimation(!animation);
+
+                      if (!animation) {
+                        setParticleRadius(0.01);
+
+                        setMaxPeak(false);
+                        setMinPeak(true);
+                      }
+                    }}
+                    variant="outlined"
+                    sx={{
+                      marginLeft: "7.5em",
+                      marginRight: "7.5em",
+                      color: "gray",
+                      borderColor: "gray",
+                    }}
+                  >
+                    {!animation ? "Enable Animation" : "Disable Animation"}
+                  </Button>
+                ) : (
+                  <div className="flex flex-col items-center justify-center bg-white p-3 rounded scale-90 sm:scale-100">
+                    <h2 className="text-black text-xl md:text-2xl font-bold mb-2">
+                      Electron Config.
+                    </h2>
+                    <div className="flex flex-row space-x-3 justify-center items-center">
+                      {electronConfig.map((config, index) => {
+                        if (index !== 0) {
+                          return (
+                            <button
+                              className={`border-2 p-2 border-black rounded ${
+                                index === electronConfig.length - 1
+                                  ? "bg-black"
+                                  : "bg-white hover:bg-gray-200"
+                              }`}
+                              type="button"
+                            >
+                              <h2
+                                className={`${
+                                  index === electronConfig.length - 1
+                                    ? "text-white"
+                                    : "text-black"
+                                }`}
+                              >
+                                {config}
+                              </h2>
+                            </button>
+                          );
+                        } else {
+                          return <h2 className="text-black">{config}</h2>;
+                        }
+                      })}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
 
         <div
           className="bg-gray-800 text-center text-gray-400 ml-10 mr-10 md:ml-40 md:mr-40 rounded"
           style={{ width: CANVAS.WIDTH, height: CANVAS.HEIGHT }}
         >
           {!preRender && globalSelectedElement["type"] === "Molecule" && (
-                <div
-                  className="absolute"
-                  style={{
-                    zIndex: 10,
-                    backgroundColor: "black",
-                    left: "50%",
-                    transform: "translate(-50%, 0%)",
-                  }}
-                >
-                  <div className="flex flex-col sm:flex-row">
-                    <div className="flex flex-col">
-                      <p className="pt-2 pl-2 pr-2 font-bold text-sm md:text-xl">
-                        Chemical Formula
-                      </p>
-                      <p className="pl-2 pr-2 pb-2 text-sm md:text-xl">
-                        {globalSelectedElement["element"]}
-                      </p>
-                    </div>
-                  </div>
+            <div
+              className="absolute"
+              style={{
+                zIndex: 10,
+                backgroundColor: "black",
+                left: "50%",
+                transform: "translate(-50%, 0%)",
+              }}
+            >
+              <div className="flex flex-col sm:flex-row">
+                <div className="flex flex-col">
+                  <p className="pt-2 pl-2 pr-2 font-bold text-sm md:text-xl">
+                    Chemical Formula
+                  </p>
+                  <p className="pl-2 pr-2 pb-2 text-sm md:text-xl">
+                    {globalSelectedElement["element"]}
+                  </p>
                 </div>
+              </div>
+            </div>
           )}
 
           {!preRender && globalAtomInfo.n_value && (
-                <div
-                  className="absolute"
-                  style={{
-                    zIndex: 10,
-                    backgroundColor: "black",
-                    left: "50%",
-                    transform: "translate(-50%, 0%)",
-                  }}
-                >
-                  <div className="flex flex-col">
-                    <p className="pt-2 pl-2 pr-2 font-bold text-sm md:text-xl">
-                      Quantum Num.
-                    </p>
-                    <p className="pl-2 pr-2 pb-2 text-sm md:text-xl">
-                      N = {globalAtomInfo.n_value}&nbsp;&nbsp;&nbsp;&nbsp;L ={" "}
-                      {globalAtomInfo.l_value}&nbsp;&nbsp;&nbsp;&nbsp;M
-                      <sub>l</sub> = {globalAtomInfo.m_value}
-                    </p>
-                  </div>
-                </div>
+            <div
+              className="absolute"
+              style={{
+                zIndex: 10,
+                backgroundColor: "black",
+                left: "50%",
+                transform: "translate(-50%, 0%)",
+              }}
+            >
+              <div className="flex flex-col">
+                <p className="pt-2 pl-2 pr-2 font-bold text-sm md:text-xl">
+                  Quantum Num.
+                </p>
+                <p className="pl-2 pr-2 pb-2 text-sm md:text-xl">
+                  N = {globalAtomInfo.n_value}&nbsp;&nbsp;&nbsp;&nbsp;L ={" "}
+                  {globalAtomInfo.l_value}&nbsp;&nbsp;&nbsp;&nbsp;M
+                  <sub>l</sub> = {globalAtomInfo.m_value}
+                </p>
+              </div>
+            </div>
           )}
 
           {preRender && (
-                <div
-                  className="absolute"
-                  style={{
-                    zIndex: 10,
-                    backgroundColor: "black",
-                    left: "50%",
-                    transform: "translate(-50%, 0%)",
-                  }}
-                >
-                  <div className="flex flex-col sm:flex-row">
-                    <div className="flex flex-col">
-                      <p className="p-2 text-sm md:text-xl">
-                        Drag or zoom using your finger or a mouse cursor...
-                      </p>
-                    </div>
-                  </div>
+            <div
+              className="absolute"
+              style={{
+                zIndex: 10,
+                backgroundColor: "black",
+                left: "50%",
+                transform: "translate(-50%, 0%)",
+              }}
+            >
+              <div className="flex flex-col sm:flex-row">
+                <div className="flex flex-col">
+                  <p className="p-2 text-sm md:text-xl">
+                    Drag or zoom using your finger or a mouse cursor...
+                  </p>
                 </div>
+              </div>
+            </div>
           )}
 
           <Canvas camera={getCameraPosition(globalSelectedElement["element"])}>

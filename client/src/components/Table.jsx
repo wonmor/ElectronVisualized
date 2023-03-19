@@ -136,7 +136,7 @@ export default function Table() {
               }}
               onClick={() => {
                 // This code runs after a global state change...
-                movePage(`/renderer/${globalSelectedElement.element}`);
+                movePage(`/renderer`);
               }}
               title="Hydrogen"
             >
@@ -149,7 +149,7 @@ export default function Table() {
               }}
               onClick={() => {
                 // This code runs after a global state change...
-                movePage(`/renderer/${globalSelectedElement.element}`);
+                movePage(`/renderer`);
               }}
               title="Lithium">Li</li>
             <li onMouseDown={() => {
@@ -158,7 +158,7 @@ export default function Table() {
               }}
               onClick={() => {
                 // This code runs after a global state change...
-                movePage(`/renderer/${globalSelectedElement.element}`);
+                movePage(`/renderer`);
               }}
               title="Beryllium">Be</li>
             <li onMouseDown={() => {
@@ -167,7 +167,7 @@ export default function Table() {
               }}
               onClick={() => {
                 // This code runs after a global state change...
-                movePage(`/renderer/${globalSelectedElement.element}`);
+                movePage(`/renderer`);
               }}
               title="Boron">B</li>
             <li title="Carbon">C</li>
@@ -199,7 +199,7 @@ export default function Table() {
               }}
               onClick={() => {
                 // This code runs after a global state change...
-                movePage(`/renderer/${globalSelectedElement.element}`);
+                movePage(`/renderer`);
               }} title="Neon">Ne</li>
             <li onMouseDown={() => {
                 // This code runs first...
@@ -207,7 +207,7 @@ export default function Table() {
               }}
               onClick={() => {
                 // This code runs after a global state change...
-                movePage(`/renderer/${globalSelectedElement.element}`);
+                movePage(`/renderer`);
               }}
               title="Sodium">Na</li>
             <li title="Magnesium">Mg</li>
@@ -223,7 +223,7 @@ export default function Table() {
               }}
               onClick={() => {
                 // This code runs after a global state change...
-                movePage(`/renderer/${globalSelectedElement.element}`);
+                movePage(`/renderer`);
               }} title="Potassium">K</li>
             <li title="Calcium">Ca</li>
             <li title="Scandium">Sc</li>
@@ -238,7 +238,7 @@ export default function Table() {
               }}
               onClick={() => {
                 // This code runs after a global state change...
-                movePage(`/renderer/${globalSelectedElement.element}`);
+                movePage(`/renderer`);
               }}
               title="Iron">Fe</li>
             <li 
@@ -248,7 +248,7 @@ export default function Table() {
               }}
               onClick={() => {
                 // This code runs after a global state change...
-                movePage(`/renderer/${globalSelectedElement.element}`);
+                movePage(`/renderer`);
               }}
               title="Cobalt">Co</li>
             <li 
@@ -258,7 +258,7 @@ export default function Table() {
               }}
               onClick={() => {
                 // This code runs after a global state change...
-                movePage(`/renderer/${globalSelectedElement.element}`);
+                movePage(`/renderer`);
               }}
               title="Nickel">Ni</li>
             <li
@@ -268,7 +268,7 @@ export default function Table() {
               }}
               onClick={() => {
                 // This code runs after a global state change...
-                movePage(`/renderer/${globalSelectedElement.element}`);
+                movePage(`/renderer`);
               }}
               title="Copper"
             >
@@ -281,7 +281,7 @@ export default function Table() {
               }}
               onClick={() => {
                 // This code runs after a global state change...
-                movePage(`/renderer/${globalSelectedElement.element}`);
+                movePage(`/renderer`);
               }}
               title="Zinc">Zn</li>
             <li title="Gallium">Ga</li>
@@ -306,7 +306,7 @@ export default function Table() {
               }}
               onClick={() => {
                 // This code runs after a global state change...
-                movePage(`/renderer/${globalSelectedElement.element}`);
+                movePage(`/renderer`);
               }}
               title="Palladium">Pd</li>
             <li title="Silver">Ag</li>
@@ -327,7 +327,7 @@ export default function Table() {
               }}
               onClick={() => {
                 // This code runs after a global state change...
-                movePage(`/renderer/${globalSelectedElement.element}`);
+                movePage(`/renderer`);
               }}
               title="Cerium">Ce</li>
             <li 
@@ -337,7 +337,7 @@ export default function Table() {
               }}
               onClick={() => {
                 // This code runs after a global state change...
-                movePage(`/renderer/${globalSelectedElement.element}`);
+                movePage(`/renderer`);
               }}
               title="Praseodymium">Pr</li>
             <li
@@ -347,7 +347,7 @@ export default function Table() {
               }}
               onClick={() => {
                 // This code runs after a global state change...
-                movePage(`/renderer/${globalSelectedElement.element}`);
+                movePage(`/renderer`);
               }}
               title="Neodymium">Nd</li>
             <li
@@ -357,7 +357,7 @@ export default function Table() {
               }}
               onClick={() => {
                 // This code runs after a global state change...
-                movePage(`/renderer/${globalSelectedElement.element}`);
+                movePage(`/renderer`);
               }}
               title="Promethium">Pm</li>
             <li
@@ -367,7 +367,7 @@ export default function Table() {
               }}
               onClick={() => {
                 // This code runs after a global state change...
-                movePage(`/renderer/${globalSelectedElement.element}`);
+                movePage(`/renderer`);
               }}
               title="Samarium">Sm</li>
             <li
@@ -377,7 +377,7 @@ export default function Table() {
               }}
               onClick={() => {
                 // This code runs after a global state change...
-                movePage(`/renderer/${globalSelectedElement.element}`);
+                movePage(`/renderer`);
               }}
               title="Europium">Eu</li>
             <li
@@ -387,7 +387,7 @@ export default function Table() {
               }}
               onClick={() => {
                 // This code runs after a global state change...
-                movePage(`/renderer/${globalSelectedElement.element}`);
+                movePage(`/renderer`);
               }}
               title="Gadolinium">Gd</li>
             <li title="Terbium">Tb</li>
@@ -559,7 +559,7 @@ export default function Table() {
                     }}
                     onClick={() => {
                       // This code runs after a global state change...
-                      movePage(`/renderer/${globalSelectedElement["element"]}`);
+                      movePage(`/renderer`);
                     }}
                     className="mb-2 mr-2 sm:mt-0 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
                     type="button"

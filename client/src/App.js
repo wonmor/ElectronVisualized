@@ -1,4 +1,4 @@
-import React, { useEffect, lazy, Suspense } from "react";
+import React, { useEffect } from "react";
 import ReactGA from 'react-ga';
 
 import { Routes, Route } from "react-router-dom";
@@ -9,14 +9,14 @@ import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
-const Login = lazy(() => import('./components/Login'));
-const Table = lazy(() => import('./components/Table'));
-const Search = lazy(() => import('./components/Search'));
-const Renderer = lazy(() => import('./components/Renderer'));
-const NotFound = lazy(() => import('./components/NotFound'));
+import Login from './components/Login';
+import Table from './components/Table';
+import Search from './components/Search';
+import Renderer from './components/Renderer';
+import NotFound from './components/NotFound';
 
-const Developer = lazy(() => import('./components/Developer'));
-const Extensions = lazy(() => import('./components/Extensions'));
+import Developer from './components/Developer';
+import Extensions from './components/Extensions';
 
 
 /*
@@ -59,18 +59,15 @@ export default function App() {
   return (
     <>
       <Header />
-        <Suspense fallback={<h3>Loading...</h3>}>
-          <Routes>
-            <Route path="*" element={<NotFound />} />
-            <Route exact path="/" element={<Table />} />
-            <Route path="/renderer" element={<Renderer />} />
-            <Route path={`/renderer/${globalSelectedElement["element"]}`} element={<Renderer />} />
-            <Route path="/dev" element={<Developer />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/extensions" element={<Extensions />} />
-          </Routes>
-        </Suspense>
+        <Routes>
+          <Route path="*" element={<NotFound />} />
+          <Route exact path="/" element={<Table />} />
+          <Route path="/renderer" element={<Renderer />} />
+          <Route path="/dev" element={<Developer />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/extensions" element={<Extensions />} />
+        </Routes>
       <Footer />
     </>
   );
