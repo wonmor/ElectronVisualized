@@ -284,7 +284,7 @@ def connect_to_socket():
     socketio.run(current_app, host="0.0.0.0", port=9000)
 
 @bp.route('/api/login', methods=['POST'])
-@limiter.limit("30 per minute")
+@limiter.limit("100 per minute")
 @cross_origin()
 def login():
     """
@@ -300,6 +300,49 @@ def login():
     user = guard.authenticate(username, password)
     ret = {'access_token': guard.encode_jwt_token(user)}
     return ret, 200
+
+@bp.route('/api/register', methods=['POST'])
+@limiter.limit("30 per minute")
+@cross_origin()
+def register():
+    """
+    Registers a new user by parsing a POST request containing user credentials and
+    adding the user to the database.
+    .. example::
+       $ curl http://localhost:5000/api/register -X POST \
+         -d '{"username":"Yasoob","password":"strongpassword"}'
+    """
+    req = flask.request.get_json(force=True)
+    username = req.get('username', None)
+    password = req.get('password', None)
+    if username is None or password is None:
+        return {'error': 'Missing username or password'}, 400
+    if User.query.filter_by(username=username).first() is not None:
+        return {'error': 'Username already taken'}, 400
+    user = User(username=username)
+    user.hash_password(password)
+    db.session.add(user)
+    db.session.commit()
+    ret = {'message': 'Registration successful'}
+    return ret, 201
+
+@bp.route('/api/check_duplicate_username', methods=['POST'])
+@limiter.limit("30 per minute")
+@cross_origin()
+def check_duplicate_username():
+    """
+    Checks whether a given username is already present in the database.
+    .. example::
+       $ curl http://localhost:5000/api/check_duplicate_username -X POST \
+         -d '{"username":"Yasoob"}'
+    """
+    req = flask.request.get_json(force=True)
+    username = req.get('username', None)
+    if username is None:
+        return {'error': 'Missing username'}, 400
+    if User.query.filter_by(username=username).first() is not None:
+        return {'duplicate': True}, 200
+    return {'duplicate': False}, 200
 
   
 @bp.route('/api/refresh', methods=['POST'])

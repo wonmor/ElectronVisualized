@@ -4,7 +4,7 @@ import { login } from "../auth"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+export default function Register() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
@@ -32,6 +32,18 @@ export default function Login() {
             })
     };
 
+    const checkDuplicateUsername = async (username) => {
+        const response = await fetch('/api/check_duplicate_username', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ username })
+        });
+        const data = await response.json();
+        return data.duplicate;
+      }
+
     return (
         <>
           <MetaTag title={"ElectronVisualized"}
@@ -43,14 +55,14 @@ export default function Login() {
           <div className="bg-gray-700 pb-5" style={{ "min-height": "100vh" }}>
             <div className="text-center pt-10 pl-5 pr-5 text-gray-400">
               <h1 className="sm:pb-5 scale-75 sm:scale-100">
-                <span className="text-white">{"Sign in"}</span>
+                <span className="text-white">{"Sign up"}</span>
               </h1>
 
               <h3>or <button onClick={() => {
-                navigate("/register");
-              }}><span className="text-blue-200 hover:underline">{"Sign up"}</span></button>.</h3>
+                navigate("/login");
+              }}><span className="text-blue-200 hover:underline">{"Sign in"}</span></button>.</h3>
             
-              {username === "" ? (
+              {errorMessage === "" && username === "" ? (
                 <form
                     onSubmit={(e) => {
                         e.preventDefault(); // Else the page will be reloaded which is the default DOM behaviour in forms and its submit button...
@@ -59,8 +71,15 @@ export default function Login() {
                             return;
                         }
 
-                        setUsername(e.target[0].value);
-                        e.target[0].value = "";
+                        checkDuplicateUsername(e.target[0].value).then((duplicate) => {
+                            if (duplicate) {
+                                setErrorMessage("The username is already taken.");
+                            }
+                            else {
+                                setUsername(e.target[0].value);
+                                e.target[0].value = "";
+                            }
+                        });
                     }}
                     className="flex flex-cols justify-self-end m-auto mt-5 overflow-auto scale-90 sm:scale-100 mb-5 p-3 max-w-fit text-white border border-gray-400 rounded"
                     >
@@ -74,7 +93,7 @@ export default function Login() {
                             </span>
                         </label>
                         <button className="ml-3" type="submit">
-                            <span>Submit</span>
+                            <span>Check</span>
                         </button>
                     </form>
               ) : password === "" ? (

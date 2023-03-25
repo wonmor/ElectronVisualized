@@ -9,6 +9,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 
 const Login = React.lazy(() => import('./components/Login'));
+const Register = React.lazy(() => import('./components/Register'));
 const Table = React.lazy(() => import('./components/Table'));
 const Search = React.lazy(() => import('./components/Search'));
 const Renderer = React.lazy(() => import('./components/Renderer'));
@@ -63,6 +64,7 @@ export default function App() {
             <Route path="/renderer" element={<Renderer />} />
             <Route path="/dev" element={<Developer />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/search" element={<Search />} />
             <Route path="/extensions" element={<Extensions />} />
           </Routes>
