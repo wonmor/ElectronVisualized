@@ -326,6 +326,7 @@ def register():
     ret = {'message': 'Registration successful'}
     return ret, 201
 
+
 @bp.route('/api/check_duplicate_username', methods=['POST'])
 @limiter.limit("30 per minute")
 @cross_origin()
