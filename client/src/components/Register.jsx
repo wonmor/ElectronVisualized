@@ -12,7 +12,7 @@ export default function Register() {
   const navigate = useNavigate();
 
   const registerSuccessful = async () => {
-    const response = await fetch("api/register", {
+    const response = await fetch("/api/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -28,7 +28,7 @@ export default function Register() {
     if (response.status === 201) {
       // Registration successful
       console.log(data.message); // You can do something else here, like redirecting to the login page
-        navigate("/");
+      navigate("/");
     } else {
       // Registration failed
       setErrorMessage(data.error);
@@ -133,29 +133,32 @@ export default function Register() {
                 e.target[1].value = "";
                 registerSuccessful();
               }}
-              className="flex flex-cols justify-self-end m-auto mt-5 overflow-auto scale-90 sm:scale-100 mb-5 p-3 max-w-fit text-white border border-gray-400 rounded"
             >
-              <label>
-                <span>
-                  <input
-                    className="bg-transparent truncate ..."
-                    type="password"
-                    placeholder="Enter the password..."
-                  />
-                </span>
-              </label>
-              <label>
-                <span>
-                  <input
-                    className="bg-transparent truncate ..."
-                    type="password"
-                    placeholder="Confirm the password..."
-                  />
-                </span>
-              </label>
-              <button className="ml-3" type="submit">
-                <span>Submit</span>
-              </button>
+              <div className="flex flex-cols justify-self-end m-auto mt-5 overflow-auto scale-90 sm:scale-100 mb-5 p-3 max-w-fit text-white border border-gray-400 rounded">
+                <label>
+                  <span>
+                    <input
+                      className="bg-transparent truncate ..."
+                      type="password"
+                      placeholder="Enter the password..."
+                    />
+                  </span>
+                </label>
+              </div>
+              <div className="flex flex-cols justify-self-end m-auto mt-5 overflow-auto scale-90 sm:scale-100 mb-5 p-3 max-w-fit text-white border border-gray-400 rounded">
+                <label>
+                  <span>
+                    <input
+                      className="bg-transparent truncate ..."
+                      type="password"
+                      placeholder="Confirm the password..."
+                    />
+                  </span>
+                </label>
+                <button className="ml-3" type="submit">
+                  <span>Submit</span>
+                </button>
+              </div>
             </form>
           ) : (
             <div className="mt-5">
