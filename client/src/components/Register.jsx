@@ -11,25 +11,11 @@ export default function Register() {
 
     const navigate = useNavigate();
 
-    const loginSuccessful = async () => {
+    const registerSuccessful = async () => {
         let opts = {
             'username': username,
             'password': password
         }
-
-        fetch('/api/login', {
-            method: 'post',
-            body: JSON.stringify(opts)
-          }).then(r => r.json())
-            .then(token => {
-              if (token.access_token) {
-                login(token);
-                navigate("/");     
-              }
-              else {
-                setErrorMessage("Please type in the correct username and password pair.");
-              }
-            })
     };
 
     const checkDuplicateUsername = async (username) => {
@@ -107,7 +93,7 @@ export default function Register() {
 
                             setPassword(e.target[0].value);
                             e.target[0].value = "";
-                            loginSuccessful();
+                            registerSuccessful();
                         }}
                         className="flex flex-cols justify-self-end m-auto mt-5 overflow-auto scale-90 sm:scale-100 mb-5 p-3 max-w-fit text-white border border-gray-400 rounded"
                     >

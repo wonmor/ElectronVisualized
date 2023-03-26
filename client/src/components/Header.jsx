@@ -112,7 +112,7 @@ export default function Header() {
           >
             {size.width < 380 && <span className="mr-3">Home</span>}
             
-            <span>Login</span>
+            <span>Sign in</span>
           </button>
         ) : (
           <button
@@ -124,7 +124,7 @@ export default function Header() {
           >
             {size.width < 380 && <span className="mr-3">Home</span>}
             
-            <span>Log out</span>
+            <span>Sign out</span>
           </button>
         )}
 
@@ -159,17 +159,30 @@ export default function Header() {
           leaveTo="transform opacity-0 scale-95"
         >
           <div className="text-sm lg:flex-grow">
-          <button
-          onClick={() => {
-            movePage('/login');
-          }}
-          className={`items-center px-3 py-2 border rounded text-rose-200 border-rose-200 hover:text-white hover:border-white hidden lg:inline-block ${size.width < 380 ? "mt-5 mr-5" : "mr-5"
-            }`}
-        >
+          {!logged ? (
+            <button
+              onClick={() => {
+                movePage('/login');
+              }}
+              className={`items-center px-3 py-2 border rounded text-rose-200 border-rose-200 hover:text-white hover:border-white hidden lg:inline-block ${size.width < 380 ? "mt-5 mr-5" : "mr-5"
+                }`}
+            >
+            {size.width < 380 && <span className="mr-3">Menu</span>}
+
+            <span>Sign in</span>
+          </button>) : (
+            <button
+            onClick={() => {
+              
+            }}
+            className={`items-center px-3 py-2 border rounded text-rose-200 border-rose-200 hover:text-white hover:border-white hidden lg:inline-block ${size.width < 380 ? "mt-5 mr-5" : "mr-5"
+              }`}
+          >
           {size.width < 380 && <span className="mr-3">Menu</span>}
 
-          <span>Login</span>
+          <span>Sign out</span>
         </button>
+          )}
         
             <button
               onClick={() => {
