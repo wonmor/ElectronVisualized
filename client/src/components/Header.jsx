@@ -21,7 +21,7 @@ import Logo from "../assets/e_logo.svg";
 
 const isEmpty = (str) => {
   return !str.trim().length;
-}
+};
 
 export default function Header() {
   /*
@@ -69,7 +69,7 @@ export default function Header() {
 
   const moveToSearchResults = (keyword) => {
     if (!isEmpty(keyword)) {
-      movePage('/search');
+      movePage("/search");
     }
   };
 
@@ -78,7 +78,6 @@ export default function Header() {
     if (size.width > 1024) {
       setMenu(true);
       setMenuAlreadyTriggered(true);
-
     } else if (showMenuAlreadyTriggered) {
       setMenu(false);
       setMenuAlreadyTriggered(false);
@@ -95,45 +94,44 @@ export default function Header() {
         <div className="flex items-center flex-shrink-0 text-white mr-6">
           <img className="w-20 mr-5" src={Logo} alt="logo"></img>
 
-          <span className="text-xl tracking-tight">
-            ElectronVisualized
-          </span>
+          <span className="text-xl tracking-tight">ElectronVisualized</span>
         </div>
       </button>
 
       <div className="flex flex-row mt-4 sm:mt-0 lg:hidden">
-        {!logged ? (
+        {/* {!logged ? (
           <button
             onClick={() => {
               movePage("/login");
             }}
-            className={`flex items-center px-3 py-2 border rounded text-rose-200 border-rose-200 hover:text-white hover:border-white ${size.width < 380 ? "mt-5 mr-2" : "mr-2"
-              }`}
+            className={`flex items-center px-3 py-2 border rounded text-rose-200 border-rose-200 hover:text-white hover:border-white ${
+              size.width < 380 ? "mt-5 mr-2" : "mr-2"
+            }`}
           >
             {size.width < 380 && <span className="mr-3">Home</span>}
-            
+
             <span>Sign in</span>
           </button>
         ) : (
           <button
-            onClick={() => {
-              
-            }}
-            className={`flex items-center px-3 py-2 border rounded text-rose-200 border-rose-200 hover:text-white hover:border-white ${size.width < 380 ? "mt-5 mr-2" : "mr-2"
-              }`}
+            onClick={() => {}}
+            className={`flex items-center px-3 py-2 border rounded text-rose-200 border-rose-200 hover:text-white hover:border-white ${
+              size.width < 380 ? "mt-5 mr-2" : "mr-2"
+            }`}
           >
             {size.width < 380 && <span className="mr-3">Home</span>}
-            
+
             <span>Sign out</span>
           </button>
-        )}
+        )} */}
 
         <button
           onClick={() => {
             setMenu(!showMenu);
           }}
-          className={`flex items-center px-3 py-2 border rounded text-rose-200 border-rose-200 hover:text-white hover:border-white ${size.width < 380 ? "mt-5 mr-5" : "mr-5"
-            }`}
+          className={`flex items-center px-3 py-2 border rounded text-rose-200 border-rose-200 hover:text-white hover:border-white ${
+            size.width < 380 ? "mt-5 mr-5" : "mr-5"
+          }`}
         >
           {size.width < 380 && <span className="mr-3">Menu</span>}
 
@@ -159,39 +157,41 @@ export default function Header() {
           leaveTo="transform opacity-0 scale-95"
         >
           <div className="text-sm lg:flex-grow">
-          {!logged ? (
-            <button
-              onClick={() => {
-                movePage('/login');
-              }}
-              className={`items-center px-3 py-2 border rounded text-rose-200 border-rose-200 hover:text-white hover:border-white hidden lg:inline-block ${size.width < 380 ? "mt-5 mr-5" : "mr-5"
+            {/* {!logged ? (
+              <button
+                onClick={() => {
+                  movePage("/login");
+                }}
+                className={`items-center px-3 py-2 border rounded text-rose-200 border-rose-200 hover:text-white hover:border-white hidden lg:inline-block ${
+                  size.width < 380 ? "mt-5 mr-5" : "mr-5"
                 }`}
-            >
-            {size.width < 380 && <span className="mr-3">Menu</span>}
+              >
+                {size.width < 380 && <span className="mr-3">Menu</span>}
 
-            <span>Sign in</span>
-          </button>) : (
-            <button
-            onClick={() => {
-              
-            }}
-            className={`items-center px-3 py-2 border rounded text-rose-200 border-rose-200 hover:text-white hover:border-white hidden lg:inline-block ${size.width < 380 ? "mt-5 mr-5" : "mr-5"
-              }`}
-          >
-          {size.width < 380 && <span className="mr-3">Menu</span>}
+                <span>Sign in</span>
+              </button>
+            ) : (
+              <button
+                onClick={() => {}}
+                className={`items-center px-3 py-2 border rounded text-rose-200 border-rose-200 hover:text-white hover:border-white hidden lg:inline-block ${
+                  size.width < 380 ? "mt-5 mr-5" : "mr-5"
+                }`}
+              >
+                {size.width < 380 && <span className="mr-3">Menu</span>}
 
-          <span>Sign out</span>
-        </button>
-          )}
-        
+                <span>Sign out</span>
+              </button>
+            )} */}
+
             <button
               onClick={() => {
                 movePage("/renderer");
               }}
-              className={`block mt-4 lg:inline-block lg:mt-0 mr-4 ${location.pathname === "/renderer"
+              className={`block mt-4 lg:inline-block lg:mt-0 mr-4 ${
+                location.pathname === "/renderer"
                   ? "text-gray-400"
                   : "text-rose-200"
-                } hover:text-white`}
+              } hover:text-white`}
             >
               <span>Renderer</span>
             </button>
@@ -200,8 +200,9 @@ export default function Header() {
               onClick={() => {
                 movePage("/dev");
               }}
-              className={`block mt-4 lg:inline-block lg:mt-0 ${location.pathname === "/dev" ? "text-gray-400" : "text-rose-200"
-                } hover:text-white mr-4`}
+              className={`block mt-4 lg:inline-block lg:mt-0 ${
+                location.pathname === "/dev" ? "text-gray-400" : "text-rose-200"
+              } hover:text-white mr-4`}
             >
               <span>API</span>
             </button>
@@ -210,10 +211,11 @@ export default function Header() {
               onClick={() => {
                 movePage("/extensions");
               }}
-              className={`block mt-4 lg:inline-block lg:mt-0 ${location.pathname === "/extensions"
+              className={`block mt-4 lg:inline-block lg:mt-0 ${
+                location.pathname === "/extensions"
                   ? "text-gray-400"
                   : "text-rose-200"
-                } hover:text-white`}
+              } hover:text-white`}
             >
               <span>Extensions</span>
             </button>
