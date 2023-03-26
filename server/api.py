@@ -13,7 +13,7 @@ from flask_limiter.util import get_remote_address
 
 from server.extensions import multipart_download_boto3
 
-from . import molecule, atom, socketio, guard
+from . import User, molecule, atom, socketio, guard, db
 
 '''
 █▀█ █▀▀ █▀ ▀█▀   ▄▀█ █▀█ █
