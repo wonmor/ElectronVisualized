@@ -502,7 +502,7 @@ export default function Table() {
             {!isElectron() && (
               <div className="flex flex-col md:flex-row justify-center items-center">
                 <a
-                  href="https://apps.apple.com/us/app/electronvisualized/id1631246652?mt=12"
+                  href="https://apps.apple.com/us/app/electronify/id6446613861"
                   type="button"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -524,7 +524,7 @@ export default function Table() {
                     ></path>
                   </svg>
                   <span>
-                    Mac App Store
+                    App Store
                   </span>
                 </a>
 

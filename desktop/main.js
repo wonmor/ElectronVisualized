@@ -1,87 +1,106 @@
-// Modules to control application life and create native browser window
-const { ipcMain, app, BrowserWindow, TouchBar, nativeImage } = require('electron')
-const { TouchBarButton } = TouchBar
+'use strict'
 
-// electron-builder --universal to deploy the app on macOS...
-
+// Import parts of electron to use
+const { app, BrowserWindow } = require('electron')
 const path = require('path')
+const url = require('url')
 
-let isSuccess = false
+// Keep a global reference of the window object, if you don't, the window will
+// be closed automatically when the JavaScript object is garbage collected.
+let mainWindow
 
-// Reloads the window when renderer.js detects a button click...
-ipcMain.on("reload", (event, args) => {
-    getData(mainWindow, checkOnlineStatus)
-})
+// Keep a reference for dev mode
+let dev = false
 
-const getData = (win, func) => {
-    win.loadURL("https://electronvisual.org")
+// Broken:
+// if (process.defaultApp || /[\\/]electron-prebuilt[\\/]/.test(process.execPath) || /[\\/]electron[\\/]/.test(process.execPath)) {
+//   dev = true
+// }
 
-    func(win)
+if (process.env.NODE_ENV !== undefined && process.env.NODE_ENV === 'development') {
+  dev = true
 }
 
-const checkOnlineStatus = (win) => {
-    isSuccess = true
-    win.webContents.on("did-fail-load", function() {
-        win.loadFile(path.join(__dirname, "error.html"))
-        isSuccess = false
-    })
+// Temporary fix broken high-dpi scale factor on Windows (125% scaling)
+// info: https://github.com/electron/electron/issues/9691
+if (process.platform === 'win32') {
+  app.commandLine.appendSwitch('high-dpi-support', 'true')
+  app.commandLine.appendSwitch('force-device-scale-factor', '1')
 }
-
-let counter = 0;
-
-const image = nativeImage.createFromPath('./assets/icon.png').resize({ height: 20 });
-
-let mainWindow = null
 
 function createWindow() {
-    // Create the browser window.
-    mainWindow = new BrowserWindow({
-        width: 1000,
-        height: 800,
-        backgroundColor: '#212936',
-        webPreferences: {
-            nodeIntegration: true,
-            contextIsolation: false,
-        }
+  // Create the browser window.
+  mainWindow = new BrowserWindow({
+    width: 1024,
+    height: 768,
+    show: false,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false
+    }
+  })
+
+  // and load the index.html of the app.
+  let indexPath
+
+  if (dev && process.argv.indexOf('--noDevServer') === -1) {
+    indexPath = url.format({
+      protocol: 'http:',
+      host: 'localhost:8080',
+      pathname: 'index.html',
+      slashes: true
     })
-
-    const button = new TouchBarButton({
-        icon: image,
-        iconPosition: 'left',
-        label: "Okay, Let's get going then!",
-        accessibilityLabel: 'Button looking like a label',
-        backgroundColor: '#3A3B3C',
-        click: () => {
-            if (isSuccess == false) {
-                getData(mainWindow, checkOnlineStatus)
-            }
-        },
+  } else {
+    indexPath = url.format({
+      protocol: 'file:',
+      pathname: path.join(__dirname, 'dist', 'index.html'),
+      slashes: true
     })
+  }
 
-    const touchBar = new TouchBar({
-        items: [
-            button,
-        ],
-    })
+  mainWindow.loadURL(indexPath)
 
-    // and load the index.html of the app.
-    mainWindow.loadFile(path.join(__dirname, "index.html"))
-    if (process.platform == 'darwin') mainWindow.setTouchBar(touchBar)
+  // Don't show until we are ready and loaded
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.show()
 
-    // Open the DevTools.
-    // mainWindow.webContents.openDevTools()
+    // Open the DevTools automatically if developing
+    if (dev) {
+      const { default: installExtension, REACT_DEVELOPER_TOOLS } = require('electron-devtools-installer')
+
+      installExtension(REACT_DEVELOPER_TOOLS)
+        .catch(err => console.log('Error loading React DevTools: ', err))
+      mainWindow.webContents.openDevTools()
+    }
+  })
+
+  // Emitted when the window is closed.
+  mainWindow.on('closed', function() {
+    // Dereference the window object, usually you would store windows
+    // in an array if your app supports multi windows, this is the time
+    // when you should delete the corresponding element.
+    mainWindow = null
+  })
 }
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.whenReady().then(() => {
-    createWindow()
-})
+app.on('ready', createWindow)
 
-app.on('window-all-closed', function() {
+// Quit when all windows are closed.
+app.on('window-all-closed', () => {
+  // On macOS it is common for applications and their menu bar
+  // to stay active until the user quits explicitly with Cmd + Q
+  if (process.platform !== 'darwin') {
     app.quit()
+  }
 })
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
+app.on('activate', () => {
+  // On macOS it's common to re-create a window in the app when the
+  // dock icon is clicked and there are no other windows open.
+  if (mainWindow === null) {
+    createWindow()
+  }
+})

@@ -157,7 +157,7 @@ export default function Header() {
           leaveTo="transform opacity-0 scale-95"
         >
           <div className="text-sm lg:flex-grow">
-            {/* {!logged ? (
+            {!logged ? (
               <button
                 onClick={() => {
                   movePage("/login");
@@ -181,7 +181,7 @@ export default function Header() {
 
                 <span>Sign out</span>
               </button>
-            )} */}
+            )}
 
             <button
               onClick={() => {
