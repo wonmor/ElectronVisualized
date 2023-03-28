@@ -89,7 +89,20 @@ export default function App() {
   return (
     <>
       <Header />
-      <Fallback />
+        <Suspense fallback={
+         <Fallback />
+        }>
+          <Routes>
+            <Route path="*" element={<NotFound />} />
+            <Route exact path="/" element={<Table />} />
+            <Route path="/renderer" element={<Renderer />} />
+            <Route path="/dev" element={<Developer />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/extensions" element={<Extensions />} />
+          </Routes>
+        </Suspense>
       <Footer />
     </>
   );
