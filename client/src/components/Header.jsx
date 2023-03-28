@@ -99,7 +99,7 @@ export default function Header() {
       </button>
 
       <div className="flex flex-row mt-4 sm:mt-0 lg:hidden">
-        {/* {!logged ? (
+        {!logged ? (
           <button
             onClick={() => {
               movePage("/login");
@@ -123,7 +123,7 @@ export default function Header() {
 
             <span>Sign out</span>
           </button>
-        )} */}
+        )}
 
         <button
           onClick={() => {
