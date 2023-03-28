@@ -419,7 +419,7 @@ export default function Renderer() {
                   className="bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
                   type="button"
                 >
-                  <span>View the 3D Model</span>
+                  <span>View 3D Model</span>
                 </button>
               </div>
             ) : preRender ? (
@@ -441,29 +441,6 @@ export default function Renderer() {
               </div>
             ) : (
               <div className="p-5">
-                {!animation && !globalAtomInfo.n_value && (
-                  <div>
-                    <p className="text-gray-400">Particle Radius</p>
-
-                    <Slider
-                      className="ml-40 mr-40 scale-90 sm:scale-100 mb-5"
-                      onClick={() => {
-                        setAnimation(false);
-                      }}
-                      sx={{
-                        width: 300,
-                        color: "gray",
-                      }}
-                      value={particleRadius}
-                      onChange={changeParticleRadius}
-                      min={0.01}
-                      max={0.07}
-                      step={0.001}
-                      valueLabelDisplay="auto"
-                    />
-                  </div>
-                )}
-
                 {!globalAtomInfo.n_value ? (
                   <Button
                     onClick={() => {
@@ -484,7 +461,9 @@ export default function Renderer() {
                       borderColor: "gray",
                     }}
                   >
+                    <span>
                     {!animation ? "Enable Animation" : "Disable Animation"}
+                    </span>
                   </Button>
                 ) : (
                   <div className="flex flex-col items-center justify-center bg-white p-3 rounded scale-90 sm:scale-100">

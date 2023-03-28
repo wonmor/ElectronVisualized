@@ -553,7 +553,7 @@ export default function Table() {
             </h1>
 
             <p className="p-5 text-gray-400">
-              Visualize the <b>molecular orbital</b> structure, all generated
+              Visualize the <b>molecular VSEPR</b> structure, all generated
               using DFT. Now available on the Web and Desktop.
             </p>
 
