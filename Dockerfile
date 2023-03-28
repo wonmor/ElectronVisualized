@@ -4,7 +4,7 @@ WORKDIR /app
 ENV PATH /app/client/node_modules/.bin:$PATH
 COPY client ./client
 WORKDIR /app/client
-RUN npm install
+RUN npm install --force
 RUN npm run build
 
 # FOR BACK-END DEPLOYMENT... (FLASK)
