@@ -142,7 +142,7 @@ export default function Table() {
     return (
       <>
         <div
-          className={`m-10 scale-75 sm:scale-100 ${size.width < 350 ? "scale-50" : null
+          className={`m-10 pb-20 scale-75 sm:scale-100 ${size.width < 350 ? "scale-50" : null
             }`}
           role="region"
           tabindex="0"

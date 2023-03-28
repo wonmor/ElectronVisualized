@@ -195,7 +195,7 @@ export default function Header() {
             >
               <span>Renderer</span>
             </button>
-
+{/* 
             <button
               onClick={() => {
                 movePage("/dev");
@@ -218,7 +218,7 @@ export default function Header() {
               } hover:text-white`}
             >
               <span>Extensions</span>
-            </button>
+            </button> */}
           </div>
         </Transition>
       </div>

@@ -17,9 +17,9 @@ export default function Footer() {
   const currentYear = new Date().getFullYear(); // Get the current year
 
   return (
-    <div className="p-3 text-gray-400 text-center bg-gray-600">
+    <div className="p-3 opacity-50 text-gray-400 text-center bg-gray-600 fixed bottom-0 rounded-3xl" style={{ left: "50%", transform: "translate(-50%, -50%)" }}>
       <div className="scale-90 sm:scale-100">
-        <span className="text-xl">
+        <span className="text-sm md:text-xl">
           © {currentYear} Developed by{" "}
           <a
             className="hover:underline text-white"
