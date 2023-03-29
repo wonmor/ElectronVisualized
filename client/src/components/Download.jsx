@@ -18,7 +18,7 @@ export default function Download() {
 
   return (
     <div style={{ minWidth: "-webkit-fill-available", overflow: "auto" }}>
-      <div className="bg-gray-700 pb-20 overflow-auto">
+      <div className="bg-gray-700 pb-20 overflow-auto" style={{ height: "100vh" }}>
         <div className="ml-5 mr-5 text-white text-center sm:pt-10 text-gray-400">
           <h1 className="scale-75 sm:scale-90">
             Now on{" "}
