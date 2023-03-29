@@ -1,13 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
-
 import { extend } from '@react-three/fiber'
-
 import { useGLTF, useAnimations } from '@react-three/drei'
 
 import * as THREE from "three";
 
 import { Line2, LineGeometry, LineMaterial } from "three-fatline";
-
 import { RENDERER } from "./Globals";
 
 /*

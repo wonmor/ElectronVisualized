@@ -6,12 +6,12 @@
     "main": "electron/main.ts",
     "proxy": "http://localhost:5000",
     "dependencies": {
-        "@emotion/react": "^11.9.0",
-        "@emotion/styled": "^11.8.1",
+        "@emotion/react": "^11.10.6",
+        "@emotion/styled": "^11.10.6",
         "@headlessui/react": "^1.6.4",
         "@heroicons/react": "^1.0.6",
-        "@mui/icons-material": "^5.8.2",
-        "@mui/material": "^5.8.2",
+        "@mui/icons-material": "^5.11.11",
+        "@mui/material": "^5.11.15",
         "@react-three/drei": "^9.13.2",
         "@react-three/fiber": "^8.0.21",
         "@react-three/postprocessing": "^2.3.2",
@@ -31,6 +31,7 @@
         "react-helmet": "^6.1.0",
         "react-icons": "^4.4.0",
         "react-lottie": "^1.2.3",
+        "react-pro-sidebar": "^1.0.0",
         "react-redux": "^8.0.2",
         "react-router-dom": "^6.3.0",
         "react-scripts": "5.0.1",
@@ -46,7 +47,9 @@
         "build": "react-scripts build && compress-cra",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "electron:start": "concurrently \"yarn start\" \"wait-on http://localhost:3001 && electron .\""
+        "electron:start": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+        "electron:build": "yarn build-electron && electron-builder build --publish never",
+        "electron:build:all": "yarn build-electron && electron-builder build --publish never -mwl"
     },
     "eslintConfig": {
         "extends": [

@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef, Suspense } from "react";
 import { useSelector, useDispatch, Provider } from "react-redux";
-
 import { EffectComposer, SelectiveBloom } from "@react-three/postprocessing";
-
 import { Slider, Button } from "@mui/material";
 
 import store from "../store";
@@ -12,22 +10,18 @@ import {
   setGlobalAtomInfo,
   appendGlobalAtomInfo,
 } from "../states/atomInfoSlice";
-
 import { setGlobalRenderInfo } from "../states/renderInfoSlice";
 
 import axios from "axios";
 
 import { Canvas } from "@react-three/fiber";
-
 import { Atoms, BondLine, DefaultModel } from "./Geometries";
 
 import Controls from "./Controls";
-
 import MetaTag from "./MetaTag";
 
 import { Particles } from "./Instances";
-
-import { bondShapeDict, moleculesWithLonePairs } from "./Globals";
+import { bondShapeDict, moleculesWithLonePairs, isElectron } from "./Globals";
 
 import {
   CANVAS,
@@ -192,7 +186,7 @@ export default function Renderer() {
   const fetchMoleculeSecondRenderElement = async (secondRenderElement) => {
     await axios({
       method: "GET",
-      url: `/api/load/${secondRenderElement}`,
+      url: `${isElectron() ? "https://electronvisual.org" : ""}/api/load/${secondRenderElement}`,
     })
       .then((response) => {
         const res = response.data;
@@ -237,7 +231,7 @@ export default function Renderer() {
 
     await axios({
       method: "GET",
-      url: `/api/load/${firstRenderElement}`,
+      url: `${isElectron() ? "https://electronvisual.org" : ""}/api/load/${firstRenderElement}`,
     })
       .then((response) => {
         const res = response.data;
@@ -300,7 +294,7 @@ export default function Renderer() {
 
     await axios({
       method: "GET",
-      url: `/api/loadSPH/${renderElement}`,
+      url: `${isElectron() ? "https://electronvisual.org" : ""}/api/loadSPH/${renderElement}`,
     })
       .then((response) => {
         const res = response.data;

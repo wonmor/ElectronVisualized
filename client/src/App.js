@@ -2,6 +2,16 @@ import React, { Suspense, useEffect } from "react";
 import ReactGA from "react-ga";
 
 import { Routes, Route } from "react-router-dom";
+import { Sidebar, Menu, MenuItem, useProSidebar } from "react-pro-sidebar";
+import { isElectron } from "./components/Globals";
+
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
+import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
+import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
+import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
+import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
+import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 
 import "./App.css";
 
@@ -17,7 +27,6 @@ const Table = React.lazy(() => import("./components/Table"));
 const Search = React.lazy(() => import("./components/Search"));
 const Renderer = React.lazy(() => import("./components/Renderer"));
 const NotFound = React.lazy(() => import("./components/NotFound"));
-
 const Developer = React.lazy(() => import("./components/Developer"));
 const Extensions = React.lazy(() => import("./components/Extensions"));
 
@@ -88,23 +97,46 @@ export default function App() {
     );
   };
 
+  const { collapseSidebar } = useProSidebar();
+
   return (
     <>
       <Header />
-        <Suspense fallback={
-         <Fallback />
-        }>
-          <Routes>
-            <Route path="*" element={<NotFound />} />
-            <Route exact path="/" element={<Table />} />
-            <Route path="/renderer" element={<Renderer />} />
-            <Route path="/dev" element={<Developer />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/extensions" element={<Extensions />} />
-          </Routes>
-        </Suspense>
+      {isElectron() && (
+        <Sidebar style={{ height: "100vh" }}>
+          <Menu>
+            <MenuItem
+              icon={<MenuOutlinedIcon />}
+              onClick={() => {
+                collapseSidebar();
+              }}
+              style={{ textAlign: "center" }}
+            >
+              {" "}
+              <h2>Admin</h2>
+            </MenuItem>
+
+            <MenuItem icon={<HomeOutlinedIcon />}>Home</MenuItem>
+            <MenuItem icon={<PeopleOutlinedIcon />}>Team</MenuItem>
+            <MenuItem icon={<ContactsOutlinedIcon />}>Contacts</MenuItem>
+            <MenuItem icon={<ReceiptOutlinedIcon />}>Profile</MenuItem>
+            <MenuItem icon={<HelpOutlineOutlinedIcon />}>FAQ</MenuItem>
+            <MenuItem icon={<CalendarTodayOutlinedIcon />}>Calendar</MenuItem>
+          </Menu>
+        </Sidebar>
+      )}
+      <Suspense fallback={<Fallback />}>
+        <Routes>
+          <Route path="*" element={<NotFound />} />
+          <Route exact path="/" element={<Table />} />
+          <Route path="/renderer" element={<Renderer />} />
+          <Route path="/dev" element={<Developer />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/extensions" element={<Extensions />} />
+        </Routes>
+      </Suspense>
       <Footer />
     </>
   );
