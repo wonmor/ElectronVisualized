@@ -102,8 +102,9 @@ export default function App() {
   return (
     <>
       <Header />
+      <div className={`${isElectron() && "flex flex-row"}`}>
       {isElectron() && (
-        <Sidebar style={{ height: "100vh" }}>
+        <Sidebar style={{ height: "inherit" }}>
           <Menu>
             <MenuItem
               icon={<MenuOutlinedIcon />}
@@ -112,8 +113,6 @@ export default function App() {
               }}
               style={{ textAlign: "center" }}
             >
-              {" "}
-              <h2>Admin</h2>
             </MenuItem>
 
             <MenuItem icon={<HomeOutlinedIcon />}>Home</MenuItem>
@@ -137,6 +136,7 @@ export default function App() {
           <Route path="/extensions" element={<Extensions />} />
         </Routes>
       </Suspense>
+      </div>
       <Footer />
     </>
   );
