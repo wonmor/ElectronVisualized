@@ -1,4 +1,5 @@
 import React, { Suspense, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import ReactGA from "react-ga";
 
 import { Routes, Route } from "react-router-dom";
@@ -6,11 +7,7 @@ import { Sidebar, Menu, MenuItem, useProSidebar } from "react-pro-sidebar";
 import { isElectron } from "./components/Globals";
 
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
-import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
-import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
-import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
-import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
+import GestureIcon from '@mui/icons-material/Gesture';
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 
 import "./App.css";
@@ -63,6 +60,8 @@ export default function App() {
     A HTML markup that contains graphical elements
   */
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     ReactGA.pageview(window.location.pathname + window.location.search);
 
@@ -107,7 +106,7 @@ export default function App() {
   return (
     <>
       <Header />
-      <div className={`${isElectron() && "flex flex-row bg-gray-800"}`}>
+      <div className={`${isElectron() && "flex flex-row"}`}>
         {isElectron() && (
           <Sidebar style={{ height: "inherit" }}>
             <Menu>
@@ -119,12 +118,8 @@ export default function App() {
                 style={{ textAlign: "center" }}
               ></MenuItem>
 
-              <MenuItem icon={<HomeOutlinedIcon />}>Home</MenuItem>
-              <MenuItem icon={<PeopleOutlinedIcon />}>Team</MenuItem>
-              <MenuItem icon={<ContactsOutlinedIcon />}>Contacts</MenuItem>
-              <MenuItem icon={<ReceiptOutlinedIcon />}>Profile</MenuItem>
-              <MenuItem icon={<HelpOutlineOutlinedIcon />}>FAQ</MenuItem>
-              <MenuItem icon={<CalendarTodayOutlinedIcon />}>Calendar</MenuItem>
+              <MenuItem icon={<HomeOutlinedIcon />} onClick={() => navigate('/')}>Home</MenuItem>
+              <MenuItem icon={<GestureIcon />} onClick={() => navigate('/renderer')}>Renderer</MenuItem>
             </Menu>
           </Sidebar>
         )}
