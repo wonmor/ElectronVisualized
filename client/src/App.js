@@ -119,11 +119,11 @@ export default function App() {
               ></MenuItem>
 
               <MenuItem icon={<HomeOutlinedIcon />} onClick={() => {
-                collapseSidebar();
+                collapseSidebar(true);
                 navigate('/');
               }}>Home</MenuItem>
               <MenuItem icon={<GestureIcon />} onClick={() => {
-                collapseSidebar();
+                collapseSidebar(true);
                 navigate('/renderer');
                 }}>Renderer</MenuItem>
             </Menu>
