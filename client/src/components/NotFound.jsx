@@ -20,7 +20,7 @@ export default function NotFound() {
   */
   return (
     <>
-      <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
+      <div className="bg-gray-700 overflow-auto" style={{ "min-height": "100vh" }}>
         <div className="text-white text-center pt-10 text-gray-400">
 
           <h1 className="leading-tight">

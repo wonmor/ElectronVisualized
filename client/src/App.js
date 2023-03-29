@@ -65,6 +65,11 @@ export default function App() {
 
   useEffect(() => {
     ReactGA.pageview(window.location.pathname + window.location.search);
+
+    if (isElectron()) {
+      console.log("Electron is running");
+      collapseSidebar();
+    }
   }, []);
 
   const defaultOptions = {
@@ -102,40 +107,39 @@ export default function App() {
   return (
     <>
       <Header />
-      <div className={`${isElectron() && "flex flex-row"}`}>
-      {isElectron() && (
-        <Sidebar style={{ height: "inherit" }}>
-          <Menu>
-            <MenuItem
-              icon={<MenuOutlinedIcon />}
-              onClick={() => {
-                collapseSidebar();
-              }}
-              style={{ textAlign: "center" }}
-            >
-            </MenuItem>
+      <div className={`${isElectron() && "flex flex-row bg-gray-800"}`}>
+        {isElectron() && (
+          <Sidebar style={{ height: "inherit" }}>
+            <Menu>
+              <MenuItem
+                icon={<MenuOutlinedIcon />}
+                onClick={() => {
+                  collapseSidebar();
+                }}
+                style={{ textAlign: "center" }}
+              ></MenuItem>
 
-            <MenuItem icon={<HomeOutlinedIcon />}>Home</MenuItem>
-            <MenuItem icon={<PeopleOutlinedIcon />}>Team</MenuItem>
-            <MenuItem icon={<ContactsOutlinedIcon />}>Contacts</MenuItem>
-            <MenuItem icon={<ReceiptOutlinedIcon />}>Profile</MenuItem>
-            <MenuItem icon={<HelpOutlineOutlinedIcon />}>FAQ</MenuItem>
-            <MenuItem icon={<CalendarTodayOutlinedIcon />}>Calendar</MenuItem>
-          </Menu>
-        </Sidebar>
-      )}
-      <Suspense fallback={<Fallback />}>
-        <Routes>
-          <Route path="*" element={<NotFound />} />
-          <Route exact path="/" element={<Table />} />
-          <Route path="/renderer" element={<Renderer />} />
-          <Route path="/dev" element={<Developer />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/extensions" element={<Extensions />} />
-        </Routes>
-      </Suspense>
+              <MenuItem icon={<HomeOutlinedIcon />}>Home</MenuItem>
+              <MenuItem icon={<PeopleOutlinedIcon />}>Team</MenuItem>
+              <MenuItem icon={<ContactsOutlinedIcon />}>Contacts</MenuItem>
+              <MenuItem icon={<ReceiptOutlinedIcon />}>Profile</MenuItem>
+              <MenuItem icon={<HelpOutlineOutlinedIcon />}>FAQ</MenuItem>
+              <MenuItem icon={<CalendarTodayOutlinedIcon />}>Calendar</MenuItem>
+            </Menu>
+          </Sidebar>
+        )}
+        <Suspense fallback={<Fallback />}>
+          <Routes>
+            <Route path="*" element={<NotFound />} />
+            <Route exact path="/" element={<Table />} />
+            <Route path="/renderer" element={<Renderer />} />
+            <Route path="/dev" element={<Developer />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/extensions" element={<Extensions />} />
+          </Routes>
+        </Suspense>
       </div>
       <Footer />
     </>

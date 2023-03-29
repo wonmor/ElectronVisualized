@@ -355,7 +355,7 @@ export default function Renderer() {
         url={"https://electronvisual.org"}
       />
 
-      <div className="bg-gray-700 pb-20" style={{ "min-height": "100vh" }}>
+      <div className="bg-gray-700 pb-20 overflow-auto" style={{ "min-height": "100vh" }}>
         <div className="text-rose-200 text-center pt-10 pb-10 ml-5 mr-5">
           <h1 className={`mb-5 ${size.width < 350 ? "scale-75" : null}`}>
             {globalSelectedElement["name"]}

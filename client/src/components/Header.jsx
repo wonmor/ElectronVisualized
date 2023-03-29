@@ -125,26 +125,28 @@ export default function Header() {
           </>
         )}
 
-        <button
-          onClick={() => {
-            setMenu(!showMenu);
-          }}
-          className={`flex items-center px-3 py-2 border rounded text-rose-200 border-rose-200 hover:text-white hover:border-white ${
-            size.width < 380 ? "mt-5 mr-5" : "mr-5"
-          }`}
-        >
-          {size.width < 380 && <span className="mr-3">Menu</span>}
-
-          <svg
-            className="fill-current h-3 w-3"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
+        {!isElectron() && (
+          <button
+            onClick={() => {
+              setMenu(!showMenu);
+            }}
+            className={`flex items-center px-3 py-2 border rounded text-rose-200 border-rose-200 hover:text-white hover:border-white ${
+              size.width < 380 ? "mt-5 mr-5" : "mr-5"
+            }`}
           >
-            <title>Menu</title>
+            {size.width < 380 && <span className="mr-3">Menu</span>}
 
-            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-          </svg>
-        </button>
+            <svg
+              className="fill-current h-3 w-3"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <title>Menu</title>
+
+              <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+            </svg>
+          </button>
+        )}
       </div>
       <div className="w-full block flex lg:items-center lg:w-auto">
         <Transition
@@ -187,19 +189,21 @@ export default function Header() {
               </>
             )}
 
-            <button
-              onClick={() => {
-                movePage("/renderer");
-              }}
-              className={`block mt-4 lg:inline-block lg:mt-0 mr-4 ${
-                location.pathname === "/renderer"
-                  ? "text-gray-400"
-                  : "text-rose-200"
-              } hover:text-white`}
-            >
-              <span>Renderer</span>
-            </button>
-            {/* 
+            {!isElectron() && (
+              <>
+                <button
+                  onClick={() => {
+                    movePage("/renderer");
+                  }}
+                  className={`block mt-4 lg:inline-block lg:mt-0 mr-4 ${
+                    location.pathname === "/renderer"
+                      ? "text-gray-400"
+                      : "text-rose-200"
+                  } hover:text-white`}
+                >
+                  <span>Renderer</span>
+                </button>
+                {/* 
             <button
               onClick={() => {
                 movePage("/dev");
@@ -223,6 +227,8 @@ export default function Header() {
             >
               <span>Extensions</span>
             </button> */}
+              </>
+            )}
           </div>
         </Transition>
       </div>

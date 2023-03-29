@@ -477,7 +477,7 @@ export default function Table() {
         imgsrc={"cover.png"}
         url={"https://electronvisual.org"} />
 
-      <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
+      <div className="bg-gray-700 overflow-auto" style={{ "min-height": "100vh" }}>
         <div className="text-white text-center p-5 text-gray-400">
           <h1
             className={`scale-75 sm:scale-100 ${size.width < 350 ? "truncate" : null

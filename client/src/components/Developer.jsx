@@ -90,7 +90,7 @@ export default function Developer() {
         imgsrc={"cover.png"}
         url={"https://electronvisual.org"} />
 
-      <div className="bg-gray-700" style={{ "min-height": "100vh" }}>
+      <div className="bg-gray-700 overflow-auto" style={{ "min-height": "100vh" }}>
         <div className="text-white text-center pt-10 pl-5 pr-5 text-gray-400">
           <h1 className="pb-5 text-ellipsis overflow-hidden">
             <span className="text-white">Density Functional Theory</span> Meets
