@@ -26,6 +26,7 @@ const Renderer = React.lazy(() => import("./components/Renderer"));
 const NotFound = React.lazy(() => import("./components/NotFound"));
 const Developer = React.lazy(() => import("./components/Developer"));
 const Extensions = React.lazy(() => import("./components/Extensions"));
+const Download = React.lazy(() => import("./components/Download"));
 
 /*
 ██████╗░░█████╗░██╗░░░██╗████████╗███████╗██████╗░░██████╗
@@ -139,6 +140,7 @@ export default function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/search" element={<Search />} />
             <Route path="/extensions" element={<Extensions />} />
+            <Route path="/download" element={<Download />} />
           </Routes>
         </Suspense>
       </div>
