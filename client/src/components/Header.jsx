@@ -94,6 +94,18 @@ export default function Header() {
         </div>
       </button>
 
+      {isElectron() && (
+        <button
+          onClick={() => {
+            movePage("/download");
+          }}
+          style={{ marginLeft: "auto", marginTop: "auto", marginBottom: "auto", alignSelf: "center" }}
+          className={`block mt-4 lg:inline-block lg:mt-0 mr-4 text-rose-200 hover:text-white`}
+        >
+          <span>Available on iPhone and iPad</span>
+        </button>
+      )}
+
       <div className="flex flex-row mt-4 sm:mt-0 lg:hidden">
         {!isElectron() && (
           <>
