@@ -30,6 +30,8 @@ const Extensions = React.lazy(() => import("./components/Extensions"));
 ╚═╝░░╚═╝░╚════╝░░╚═════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝╚═════╝░
 
 COULD NOT PROXY REQUEST ERROR FIX: https://stackoverflow.com/questions/45367298/could-not-proxy-request-pusher-auth-from-localhost3000-to-http-localhost500
+
+HOW TO START AS AN ELECTRON APP: yarn electron:start https://plainenglish.io/blog/migrate-existing-web-react-app-to-desktop-app-with-electron-a7007128120e
 */
 
 const TRACKING_ID = "G-15Q6HNH1D8"; // Google Analytics Tracking ID

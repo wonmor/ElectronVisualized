@@ -3,6 +3,7 @@
     "homepage": ".",
     "version": "0.1.0",
     "private": true,
+    "main": "electron/main.ts",
     "proxy": "http://localhost:5000",
     "dependencies": {
         "@emotion/react": "^11.9.0",
@@ -20,6 +21,7 @@
         "@testing-library/user-event": "^13.5.0",
         "axios": "^0.27.2",
         "classnames": "^2.3.2",
+        "electron-is-dev": "^2.0.0",
         "lodash": "^4.17.21",
         "postprocessing": "^6.28.0",
         "prop-types": "^15.8.1",
@@ -43,7 +45,8 @@
         "start-api": "cd ../ && venv/bin/flask run --no-debugger",
         "build": "react-scripts build && compress-cra",
         "test": "react-scripts test",
-        "eject": "react-scripts eject"
+        "eject": "react-scripts eject",
+        "electron:start": "concurrently \"yarn start\" \"wait-on http://localhost:3001 && electron .\""
     },
     "eslintConfig": {
         "extends": [
@@ -64,9 +67,13 @@
         ]
     },
     "devDependencies": {
+        "@types/node": "^18.15.11",
         "autoprefixer": "^10.4.7",
         "compress-create-react-app": "^1.3.1",
+        "concurrently": "^8.0.1",
+        "electron": "^23.2.0",
         "postcss": "^8.4.14",
-        "tailwindcss": "^3.0.24"
+        "tailwindcss": "^3.0.24",
+        "wait-on": "^7.0.1"
     }
 }
