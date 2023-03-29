@@ -113,17 +113,17 @@ export default function App() {
               <MenuItem
                 icon={<MenuOutlinedIcon />}
                 onClick={() => {
-                  collapseSidebar();
+                  collapseSidebar(true);
                 }}
                 style={{ textAlign: "center" }}
               ></MenuItem>
 
               <MenuItem icon={<HomeOutlinedIcon />} onClick={() => {
-                collapseSidebar();
+                collapseSidebar(true);
                 navigate('/');
               }}>Home</MenuItem>
               <MenuItem icon={<GestureIcon />} onClick={() => {
-                collapseSidebar();
+                collapseSidebar(true);
                 navigate('/renderer');
                 }}>Renderer</MenuItem>
             </Menu>
