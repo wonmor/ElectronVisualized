@@ -106,8 +106,6 @@ export default function Header() {
                   size.width < 380 ? "mt-5 mr-2" : "mr-2"
                 }`}
               >
-                {size.width < 380 && <span className="mr-3">Home</span>}
-
                 <span>Sign in</span>
               </button>
             ) : (
@@ -117,8 +115,6 @@ export default function Header() {
                   size.width < 380 ? "mt-5 mr-2" : "mr-2"
                 }`}
               >
-                {size.width < 380 && <span className="mr-3">Home</span>}
-
                 <span>Sign out</span>
               </button>
             )}

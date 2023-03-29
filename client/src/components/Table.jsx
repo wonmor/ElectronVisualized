@@ -557,7 +557,7 @@ export default function Table() {
 
       <div
         className="bg-gray-700 overflow-auto"
-        style={{ "min-height": "100vh" }}
+        style={{ minHeight: "100vh", width: "-webkit-fill-available" }}
       >
         <div className="text-white text-center p-5 text-gray-400">
           <h1
