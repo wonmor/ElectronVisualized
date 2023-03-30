@@ -126,7 +126,7 @@ export default function App() {
               <MenuItem icon={<GestureIcon />} onClick={() => {
                 collapseSidebar(true);
                 navigate('/renderer');
-                }}>Renderer</MenuItem>
+                }}>Spotlight</MenuItem>
             </Menu>
           </Sidebar>
         )}

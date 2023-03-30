@@ -30,7 +30,8 @@ export const moleculeDict = {
     "Polar",
     "104.5°",
     "2 bonding orbitals\n2 antibonding orbitals",
-    "sp3"
+    "sp3",
+    "AX2E2"
   ],
   H2: [
     "Hydrogen Gas",
@@ -39,7 +40,8 @@ export const moleculeDict = {
     "Nonpolar",
     "180°",
     "1 bonding orbital\n1 antibonding orbital",
-    "s"
+    "No",
+    "AX2"
   ],
   Cl2: [
     "Chlorine Gas",
@@ -48,7 +50,8 @@ export const moleculeDict = {
     "Nonpolar",
     "180°",
     "1 bonding orbital\n1 antibonding orbital",
-    "s"
+    "No",
+    "AX2"
   ],
   HCl: [
     "Hydrochloric Acid",
@@ -57,7 +60,8 @@ export const moleculeDict = {
     "Polar",
     "180°",
     "1 bonding orbital\n1 antibonding orbital",
-    "sp"
+    "sp",
+    "AX2E"
   ],
 };
 
@@ -73,156 +77,156 @@ export const atomDict = {
     "H",
     "Hydrogen Atom",
     "Atom",
-    "Hydrogen is the lightest element. At standard conditions hydrogen is a gas of diatomic molecules having the formula H2. It is colorless, odorless, tasteless, non-toxic, and highly combustible. Hydrogen is the most abundant chemical substance in the universe, constituting roughly 75% of all normal matter.",
-    "1s^1"
+    "Lightest element. Gas of diatomic molecules. Highly combustible.",
+    "1s^1",
   ],
   Be: [
     "Be",
     "Beryllium Atom",
     "Atom",
-    "Beryllium is a chemical element with the symbol Be and atomic number 4. It is a steel-gray, strong, lightweight and brittle alkaline earth metal. It is a divalent element that occurs naturally only in combination with other elements to form minerals. Notable gemstones high in beryllium include beryl and chrysoberyl.",
-    "[He] 2s^2"
+    "Steel-gray, strong, lightweight and brittle alkaline earth metal.",
+    "[He] 2s^2",
   ],
   B: [
     "B",
     "Boron Atom",
     "Atom",
-    "Boron is a chemical element with the symbol B and atomic number 5. In its crystalline form it is a brittle, dark, lustrous metalloid; in its amorphous form it is a brown powder.",
-    "[He] 2s^2 2p^1"
+    "Brittle, dark, lustrous metalloid.",
+    "[He] 2s^2 2p^1",
   ],
   O: [
     "O",
     "Oxygen Atom",
     "Atom",
-    "Oxygen is a colourless, odourless, tasteless gas essential to living organisms, being taken up by animals, which convert it to carbon dioxide; plants, in turn, utilize carbon dioxide as a source of carbon and return the oxygen to the atmosphere.",
-    "[He] 2s^2 2p^4"
+    "Colorless, odorless, tasteless gas essential to living organisms.",
+    "[He] 2s^2 2p^4",
   ],
   F: [
     "F",
     "Fluorine Atom",
     "Atom",
-    "Fluorine is a chemical element with the symbol F and atomic number 9. It is the lightest halogen and exists as a highly toxic pale yellow diatomic gas at standard conditions. As the most electronegative element, it is extremely reactive, as it reacts with almost all other elements, except for helium and neon.",
-    "[He] 2s^2 2p^5"
+    "Highly reactive pale yellow diatomic gas. Most electronegative element.",
+    "[He] 2s^2 2p^5",
   ],
   Ne: [
     "Ne",
     "Neon Atom",
     "Atom",
-    "Neon is a chemical element with the symbol Ne and atomic number 10. It is a noble gas. Neon is a colorless, odorless, inert monatomic gas under standard conditions, with about two-thirds the density of air.",
-    "[He] 2s^2 2p^6"
+    "Colorless, odorless, inert monatomic gas.",
+    "[He] 2s^2 2p^6",
   ],
   Fe: [
     "Fe",
     "Iron Atom",
     "Atom",
-    "Iron is a chemical element with the symbol Fe and atomic number 26. It is a metal that belongs to the first transition series and group 8 of the periodic table. It is by mass the most common element on Earth, forming much of Earth's outer and inner core.",
-    "[Ar] 4s^2 3d^6"
+    "Most common element on Earth. Belongs to first transition series and group 8 of periodic table.",
+    "[Ar] 4s^2 3d^6",
   ],
   Co: [
     "Co",
     "Cobalt Atom",
     "Atom",
-    "Cobalt is a chemical element with the symbol Co and atomic number 27. Like nickel, cobalt is found in the Earth's crust only in chemically combined form, save for small deposits found in alloys of natural meteoric iron. The free element, produced by reductive smelting, is a hard, lustrous, silver-gray metal.",
-    "[Ar] 4s^2 3d^7"
+    "Hard, lustrous, silver-gray metal.",
+    "[Ar] 4s^2 3d^7",
   ],
   Ni: [
     "Ni",
     "Nickel Atom",
     "Atom",
-    "Nickel is a chemical element with the symbol Ni and atomic number 28. It is a silvery-white lustrous metal with a slight golden tinge. Nickel belongs to the transition metals and is hard and ductile.",
-    "[Ar] 4s^2 3d^8"
+    "Silvery-white lustrous metal with a slight golden tinge.",
+    "[Ar] 4s^2 3d^8",
   ],
   Cu: [
     "Cu",
     "Copper Atom",
     "Atom",
-    "Copper is a chemical element with the symbol Cu (from Latin: cuprum) and atomic number 29. It is a soft, malleable, and ductile metal with very high thermal and electrical conductivity.",
-    "[Ar] 4s^1 3d^10"
+    "Soft, malleable, and ductile metal with high thermal and electrical conductivity.",
+    "[Ar] 4s^1 3d^10",
   ],
   Zn: [
     "Zn",
     "Zinc Atom",
     "Atom",
-    "Zinc is a chemical element with the symbol Zn and atomic number 30. It is the first element in group 12 of the periodic table. In some respects zinc is chemically similar to magnesium: both elements exhibit only one normal oxidation state (+2), and the Zn2+ and Mg2+ ions are of similar size.",
-    "[Ar] 4s^2 3d^10"
+    "First element in group 12 of the periodic table. Chemically similar to magnesium.",
+    "[Ar] 4s^2 3d^10",
   ],
   Pd: [
     "Pd",
     "Palladium Atom",
     "Atom",
-    "Palladium is a chemical element with the symbol Pd and atomic number 46. It is a rare and lustrous silvery-white metal discovered in 1803 by William Hyde Wollaston. It has the greatest density of any element and the lowest melting point of any metal.",
-    "[Kr] 4d^10"
+    "Rare and lustrous silvery-white metal with greatest density of any element.",
+    "[Kr] 4d^10",
   ],
   Ce: [
     "Ce",
     "Cerium Atom",
     "Atom",
-    "Cerium is a chemical element with the symbol Ce and atomic number 58. Cerium is a soft, ductile and silvery-white metal that tarnishes when exposed to air, and it is soft enough to be cut with a knife.",
-    "[Xe] 6s^2 4f^1"
+    "Soft, ductile, and silvery-white metal that tarnishes when exposed to air.",
+    "[Xe] 6s^2 4f^1",
   ],
   Pr: [
     "Pr",
     "Praseodymium Atom",
     "Atom",
-    "Praseodymium is a chemical element with the symbol Pr and atomic number 59. It is the third member of the lanthanide series, and is traditionally considered to be one of the rare-earth elements.",
-    "[Xe] 6s^2 4f^3"
+    "Soft and traditionally considered to be one of the rare-earth elements.",
+    "[Xe] 6s^2 4f^3",
   ],
   Nd: [
     "Nd",
     "Neodymium Atom",
     "Atom",
-    "Neodymium is a chemical element with the symbol Nd and atomic number 60. It is the fourth member of the lanthanide series and is traditionally considered to be one of the rare-earth elements.",
-    "[Xe] 6s^2 4f^4"
+    "Fourth member of the lanthanide series and traditionally considered to be one of the rare-earth elements.",
+    "[Xe] 6s^2 4f^4",
   ],
   Pm: [
     "Pm",
     "Promethium Atom",
     "Atom",
-    "Promethium is a chemical element with the symbol Pm and atomic number 61. It is the fifth member of the lanthanide series and is traditionally considered to be one of the rare-earth elements.",
-    "[Xe] 6s^2 4f^5"
+    "Fifth member of the lanthanide series and traditionally considered to be one of the rare-earth elements.",
+    "[Xe] 6s^2 4f^5",
   ],
   Sm: [
     "Sm",
     "Samarium Atom",
     "Atom",
-    "Samarium is a chemical element with the symbol Sm and atomic number 62. It is the sixth member of the lanthanide series and is traditionally considered to be one of the rare-earth elements.",
-    "[Xe] 6s^2 4f^6"
+    "Sixth member of the lanthanide series and traditionally considered to be one of the rare-earth elements.",
+    "[Xe] 6s^2 4f^6",
   ],
   Eu: [
     "Eu",
     "Europium Atom",
     "Atom",
-    "Europium is a chemical element with the symbol Eu and atomic number 63. It is a soft, silvery-white metal that tarnishes when exposed to air, and it is soft enough to be cut with a knife.",
-    "[Xe] 6s^2 4f^7"
+    "Soft, silvery-white metal that tarnishes when exposed to air.",
+    "[Xe] 6s^2 4f^7",
   ],
   Gd: [
     "Gd",
     "Gadolinium Atom",
     "Atom",
-    "Gadolinium is a chemical element with the symbol Gd and atomic number 64. Gadolinium is a silvery-white, malleable, and ductile rare earth metal. Gadolinium is the third most abundant rare earth element, after cerium and lanthanum.",
-    "[Xe] 6s^2 5d^1 4f^7"
+    "Silvery-white, malleable, and ductile rare earth metal. Third most abundant rare earth element.",
+    "[Xe] 6s^2 5d^1 4f^7",
   ],
   Li: [
     "Li",
     "Lithium Atom",
     "Atom",
-    "A lithium atom is an atom of the chemical element lithium. Stable lithium is composed of three electrons bound by the electromagnetic force to a nucleus containing three protons along with either three or four neutrons, depending on the isotope, held together by the strong force.",
-    "1s^2 2s^1"
+    "Composed of three electrons bound to a nucleus containing three protons. Common alkali metal.",
+    "1s^2 2s^1",
   ],
   Na: [
     "Na",
     "Sodium Atom",
     "Atom",
-    "Sodium is a very soft silvery-white metal. Sodium is the most common alkali metal and the sixth most abundant element on Earth, comprising 2.8 percent of Earth’s crust. It occurs abundantly in nature in compounds, especially common salt—sodium chloride (NaCl)—which forms the mineral halite and constitutes about 80 percent of the dissolved constituents of seawater.",
-    "[Ne] 3s^1"
+    "Very soft silvery-white metal. Sixth most abundant element on Earth.",
+    "[Ne] 3s^1",
   ],
   K: [
     "K",
     "Potassium Atom",
     "Atom",
-    "Potassium is a silvery-white metal that is soft enough to be cut with a knife with little force. Potassium metal reacts rapidly with atmospheric oxygen to form flaky white potassium peroxide in only seconds of exposure.",
-    "[Ar] 4s^1"
-  ]
+    "Silvery-white metal that is soft enough to be cut with a knife with little force. Reacts rapidly with atmospheric oxygen.",
+    "[Ar] 4s^1",
+  ],
 };
 
 export const normalizeData = (val, max, min) => {

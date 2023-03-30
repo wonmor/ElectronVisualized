@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, Suspense } from "react";
 import { useSelector, useDispatch, Provider } from "react-redux";
 import { EffectComposer, SelectiveBloom } from "@react-three/postprocessing";
-import { Slider, Button } from "@mui/material";
+import { Button } from "@mui/material";
 
 import store from "../store";
 
@@ -21,7 +21,12 @@ import Controls from "./Controls";
 import MetaTag from "./MetaTag";
 
 import { Particles } from "./Instances";
-import { bondShapeDict, moleculesWithLonePairs, isElectron } from "./Globals";
+import {
+  bondShapeDict,
+  moleculeDict,
+  moleculesWithLonePairs,
+  isElectron,
+} from "./Globals";
 
 import {
   CANVAS,
@@ -186,7 +191,9 @@ export default function Renderer() {
   const fetchMoleculeSecondRenderElement = async (secondRenderElement) => {
     await axios({
       method: "GET",
-      url: `${isElectron() ? "https://electronvisual.org" : ""}/api/load/${secondRenderElement}`,
+      url: `${
+        isElectron() ? "https://electronvisual.org" : ""
+      }/api/load/${secondRenderElement}`,
     })
       .then((response) => {
         const res = response.data;
@@ -231,7 +238,9 @@ export default function Renderer() {
 
     await axios({
       method: "GET",
-      url: `${isElectron() ? "https://electronvisual.org" : ""}/api/load/${firstRenderElement}`,
+      url: `${
+        isElectron() ? "https://electronvisual.org" : ""
+      }/api/load/${firstRenderElement}`,
     })
       .then((response) => {
         const res = response.data;
@@ -294,7 +303,9 @@ export default function Renderer() {
 
     await axios({
       method: "GET",
-      url: `${isElectron() ? "https://electronvisual.org" : ""}/api/loadSPH/${renderElement}`,
+      url: `${
+        isElectron() ? "https://electronvisual.org" : ""
+      }/api/loadSPH/${renderElement}`,
     })
       .then((response) => {
         const res = response.data;
@@ -328,28 +339,35 @@ export default function Renderer() {
 
   const HSLColorBarLegend = () => {
     return (
-      <div style={{ display: 'flex', height: '20px', overflow: 'hidden', color: 'black' }}>
-        <div style={{ flex: 1, backgroundColor: '#7fffd4' }}>
-          <p style={{ fontSize: '12px', textAlign: 'center' }}>0</p>
+      <div
+        style={{
+          display: "flex",
+          height: "20px",
+          overflow: "hidden",
+          color: "black",
+        }}
+      >
+        <div style={{ flex: 1, backgroundColor: "#7fffd4" }}>
+          <p style={{ fontSize: "12px", textAlign: "center" }}>0</p>
         </div>
-        <div style={{ flex: 1, backgroundColor: '#87CEEB' }}>
-          <p style={{ fontSize: '12px', textAlign: 'center' }}>0.2</p>
+        <div style={{ flex: 1, backgroundColor: "#87CEEB" }}>
+          <p style={{ fontSize: "12px", textAlign: "center" }}>0.2</p>
         </div>
-        <div style={{ flex: 1, backgroundColor: '#3895D3' }}>
-          <p style={{ fontSize: '12px', textAlign: 'center' }}>0.4</p>
+        <div style={{ flex: 1, backgroundColor: "#3895D3" }}>
+          <p style={{ fontSize: "12px", textAlign: "center" }}>0.4</p>
         </div>
-        <div style={{ flex: 1, backgroundColor: '#C3B1E1' }}>
-          <p style={{ fontSize: '12px', textAlign: 'center' }}>0.6</p>
+        <div style={{ flex: 1, backgroundColor: "#C3B1E1" }}>
+          <p style={{ fontSize: "12px", textAlign: "center" }}>0.6</p>
         </div>
-        <div style={{ flex: 1, backgroundColor: 'hsl(0, 50%, 75%)' }}>
-          <p style={{ fontSize: '12px', textAlign: 'center' }}>0.8</p>
+        <div style={{ flex: 1, backgroundColor: "hsl(0, 50%, 75%)" }}>
+          <p style={{ fontSize: "12px", textAlign: "center" }}>0.8</p>
         </div>
-        <div style={{ flex: 1, backgroundColor: 'hsl(60, 50%, 75%)' }}>
-          <p style={{ fontSize: '12px', textAlign: 'center' }}>1</p>
+        <div style={{ flex: 1, backgroundColor: "hsl(60, 50%, 75%)" }}>
+          <p style={{ fontSize: "12px", textAlign: "center" }}>1</p>
         </div>
       </div>
     );
-  };  
+  };
 
   const changeParticleRadius = (event, value) => {
     /*
@@ -380,24 +398,17 @@ export default function Renderer() {
         url={"https://electronvisual.org"}
       />
 
-      <div className="bg-gray-700 pb-20 overflow-auto" style={{ "min-height": "100vh" }}>
+      <div
+        className="bg-gray-700 pb-20 overflow-auto"
+        style={{ minHeight: "100vh", width: "-webkit-fill-available" }}
+      >
         <div className="text-rose-200 text-center pt-10 pb-10 ml-5 mr-5">
           <h1 className={`mb-5 ${size.width < 350 ? "scale-75" : null}`}>
             {globalSelectedElement["name"]}
             <span className="font-thin text-gray-400">. Visualized.</span>
           </h1>
 
-          <h2 className="sm:mt-5 pb-3 pl-5 pr-5 text-gray-400">
-            Electron Density with the help of{" "}
-            {globalSelectedElement["type"] === "Molecule" ? (
-              <span className="text-white">Density Functional Theory</span>
-            ) : (
-              <span className="text-white">Spherical Harmonics</span>
-            )}
-            .
-          </h2>
-
-          <p className="pt-5 pr-5 pl-5 md:pl-60 md:pr-60 text-gray-400">
+          <p className="pr-5 pl-5 md:pl-60 md:pr-60 text-gray-400">
             {globalSelectedElement["description"]}
           </p>
 
@@ -461,29 +472,65 @@ export default function Renderer() {
             ) : (
               <div className="p-5">
                 {!globalAtomInfo.n_value ? (
-                  <Button
-                    onClick={() => {
-                      setAnimation(!animation);
+                  <>
+                    <div
+                      style={{ whiteSpace: "pre-wrap" }}
+                      className="flex flex-col items-center justify-center bg-white p-3 rounded scale-90 sm:scale-100"
+                    >
+                      <h2 className="text-black text-xl md:text-2xl">
+                        {moleculeDict[globalSelectedElement.element][2] +
+                          " | " +
+                          moleculeDict[globalSelectedElement.element][4]}
+                      </h2>
 
-                      if (!animation) {
-                        setParticleRadius(0.01);
+                      <div className="flex flex-row space-x-3 justify-center items-center">
+                        <h2 className="text-black font-bold">
+                          {moleculeDict[globalSelectedElement.element][7]}
+                        </h2>
+                        ;
+                      </div>
 
-                        setMaxPeak(false);
-                        setMinPeak(true);
-                      }
-                    }}
-                    variant="outlined"
-                    sx={{
-                      marginLeft: "7.5em",
-                      marginRight: "7.5em",
-                      color: "gray",
-                      borderColor: "gray",
-                    }}
-                  >
-                    <span>
-                    {!animation ? "Enable Animation" : "Disable Animation"}
-                    </span>
-                  </Button>
+                      <h2 className="text-black text-xl md:text-2xl mb-5">
+                        {moleculeDict[globalSelectedElement.element][3] +
+                          " | " +
+                          moleculeDict[globalSelectedElement.element][6] +
+                          " hybrid"}
+                      </h2>
+
+                      <Button
+                        onClick={() => {
+                          setAnimation(!animation);
+
+                          if (!animation) {
+                            setParticleRadius(0.01);
+
+                            setMaxPeak(false);
+                            setMinPeak(true);
+                          }
+                        }}
+                        variant="contained"
+                        sx={{
+                          marginLeft: "7.5em",
+                          marginRight: "7.5em",
+                          backgroundColor: "white",
+                          color: "black",
+                          borderColor: "black",
+                          border: "3px solid",
+                          "&:hover": {
+                            color: "white",
+                            backgroundColor: "black",
+                            borderColor: "black",
+                          },
+                        }}
+                      >
+                        <span className="font-bold">
+                          {!animation
+                            ? "Enable Animation"
+                            : "Disable Animation"}
+                        </span>
+                      </Button>
+                    </div>
+                  </>
                 ) : (
                   <div className="flex flex-col items-center justify-center bg-white p-3 rounded scale-90 sm:scale-100">
                     <h2 className="text-black text-xl md:text-2xl font-bold mb-2">
@@ -668,7 +715,7 @@ export default function Renderer() {
             <gridHelper args={[undefined, undefined, "gray"]} />
           </Canvas>
         </div>
-        
+
         <div class="p-5" />
       </div>
     </>
