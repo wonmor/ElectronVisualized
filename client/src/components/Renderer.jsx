@@ -326,6 +326,31 @@ export default function Renderer() {
       });
   };
 
+  const HSLColorBarLegend = () => {
+    return (
+      <div style={{ display: 'flex', height: '20px', overflow: 'hidden', color: 'black' }}>
+        <div style={{ flex: 1, backgroundColor: '#7fffd4' }}>
+          <p style={{ fontSize: '12px', textAlign: 'center' }}>0</p>
+        </div>
+        <div style={{ flex: 1, backgroundColor: '#87CEEB' }}>
+          <p style={{ fontSize: '12px', textAlign: 'center' }}>0.2</p>
+        </div>
+        <div style={{ flex: 1, backgroundColor: '#3895D3' }}>
+          <p style={{ fontSize: '12px', textAlign: 'center' }}>0.4</p>
+        </div>
+        <div style={{ flex: 1, backgroundColor: '#C3B1E1' }}>
+          <p style={{ fontSize: '12px', textAlign: 'center' }}>0.6</p>
+        </div>
+        <div style={{ flex: 1, backgroundColor: 'hsl(0, 50%, 75%)' }}>
+          <p style={{ fontSize: '12px', textAlign: 'center' }}>0.8</p>
+        </div>
+        <div style={{ flex: 1, backgroundColor: 'hsl(60, 50%, 75%)' }}>
+          <p style={{ fontSize: '12px', textAlign: 'center' }}>1</p>
+        </div>
+      </div>
+    );
+  };  
+
   const changeParticleRadius = (event, value) => {
     /*
     This function changes the state of individual particle radius...
@@ -515,14 +540,12 @@ export default function Renderer() {
             >
               <div className="flex flex-col sm:flex-row">
                 <div className="flex flex-col">
-                  <p className="pt-2 pl-2 pr-2 font-bold text-sm md:text-xl">
-                    Chemical Formula
-                  </p>
-                  <p className="pl-2 pr-2 pb-2 text-sm md:text-xl">
-                    {globalSelectedElement["element"]}
+                  <p className="pt-2 pl-2 pr-2 text-sm md:text-xl">
+                    Electron Density
                   </p>
                 </div>
               </div>
+              <HSLColorBarLegend />
             </div>
           )}
 

@@ -114,7 +114,7 @@ export default function App() {
               <MenuItem
                 icon={<MenuOutlinedIcon />}
                 onClick={() => {
-                  collapseSidebar(true);
+                  collapseSidebar();
                 }}
                 style={{ textAlign: "center" }}
               ></MenuItem>

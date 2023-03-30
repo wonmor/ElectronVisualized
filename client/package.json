@@ -21,6 +21,7 @@
         "@testing-library/user-event": "^13.5.0",
         "axios": "^0.27.2",
         "classnames": "^2.3.2",
+        "electron-is": "^3.0.0",
         "electron-is-dev": "^2.0.0",
         "lodash": "^4.17.21",
         "postprocessing": "^6.28.0",

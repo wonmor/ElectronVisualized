@@ -25,19 +25,39 @@ export const moleculesWithLonePairs = {
 export const moleculeDict = {
   H2O: [
     "Water",
-    "Water is an inorganic, transparent, tasteless, odourless, and nearly colourless chemical substance, which is the main constituent of Earth's hydrosphere and the fluids of all known living organisms.",
+    "Water is an inorganic, transparent, tasteless, odourless, and nearly colourless chemical substance.",
+    "Bent",
+    "Polar",
+    "104.5°",
+    "2 bonding orbitals\n2 antibonding orbitals",
+    "sp3"
   ],
   H2: [
     "Hydrogen Gas",
-    "Hydrogen is the lightest element. At standard conditions hydrogen is a gas of diatomic molecules having the formula H2. It is colorless, odorless, tasteless, non-toxic, and highly combustible. Hydrogen is the most abundant chemical substance in the universe, constituting roughly 75% of all normal matter.",
+    "Hydrogen is the lightest element. At standard conditions hydrogen is a gas of diatomic molecules having the formula H2.",
+    "Linear",
+    "Nonpolar",
+    "180°",
+    "1 bonding orbital\n1 antibonding orbital",
+    "s"
   ],
   Cl2: [
     "Chlorine Gas",
-    "Chlorine is a yellow-green gas at room temperature. Chlorine has a pungent, irritating odor similar to bleach that is detectable at low concentrations. The density of chlorine gas is approximately 2.5 times greater than air, which will cause it to initially remain near the ground in areas with little air movement.",
+    "Chlorine is a yellow-green gas at room temperature. Chlorine has a pungent, irritating odor similar to bleach that is detectable at low concentrations.",
+    "Linear",
+    "Nonpolar",
+    "180°",
+    "1 bonding orbital\n1 antibonding orbital",
+    "s"
   ],
   HCl: [
     "Hydrochloric Acid",
-    "Hydrochloric acid is the water-based, or aqueous, solution of hydrogen chloride gas. It is also the main component of gastric acid, an acid produced naturally in the human stomach to help digest food.",
+    "Hydrochloric acid is the water-based, or aqueous, solution of hydrogen chloride gas.",
+    "Linear",
+    "Polar",
+    "180°",
+    "1 bonding orbital\n1 antibonding orbital",
+    "sp"
   ],
 };
 
@@ -273,94 +293,54 @@ export const getMoleculeColour = (
   }
 };
 
-export const getAtomColour = (
-  element
-) => {
-  /*
-    Getting the atom colour based upon the element name
-    and the colour it emits while combusting
-  
-    Parameters
-    ----------
-    element: String
-        Name of the element
-    volume: Float
-        Volume that correspond with each coordinate of the Canvas
-  
-    Returns
-    -------
-    String
-        Contains the HEX information of the generated colour
-    */
+export const getAtomColour = (element) => {
   switch (element) {
     case "H":
-      return '#3fc6f2';
-
+      return "#C8C8C8"; // light gray for a neutral atom
     case "Be":
-      return "#FFFFFF";
-
+      return "#FFB266"; // peachy orange for its high melting point and density
     case "B":
-      return "#00FF00";
-
+      return "#FFB3D1"; // pink for its low density and high thermal conductivity
     case "Li":
-      return '#FFC0CB';
-
+      return "#BFBFBF"; // gray for its softness and low density
     case "Na":
-      return "#FFFF00";
-
+      return "#E0E0E0"; // light gray for its reactivity and softness
     case "K":
-      return "#C8A2C8";
-
+      return "#E6E6E6"; // gray for its softness and low density
     case "O":
-      return "#FFA500";
-
+      return "#F07070"; // bright red for its high electronegativity and reactivity
     case "F":
-      return "#0CBAA6";
-
+      return "#66CC99"; // green for its high electronegativity and reactivity
     case "Ne":
-      return "#39FF14";
-
+      return "#EBEBEB"; // light gray for its low reactivity and low boiling point
     case "Fe":
-      return "#ffff00";
-
+      return "#D9A871"; // golden brown for its metallic nature and abundance in the earth's crust
     case "Co":
-      return "#0000FF";
-
+      return "#FF5C5C"; // dark red for its ferromagnetism and use in magnetic materials
     case "Ni":
-      return "#727472"
-
+      return "#A9A9A9"; // dark gray for its metallic nature and use in alloys
     case "Cu":
-      return '#00CC99';
-
+      return "#FFD700"; // gold for its high electrical conductivity and use in electrical wiring
     case "Zn":
-      return "#0D98BA";
-
+      return "#AED6F1"; // light blue for its metallic nature and use in galvanization
     case "Pd":
-      return "#87CEEB";
-
+      return "#E8E8E8"; // light gray for its use in catalytic converters and jewelry
     case "Ce":
-      return "#FFFF00";
-    
+      return "#FFDAB9"; // peach for its use in catalytic converters and ability to change color
     case "Pr":
-      return "#C0C0C0";
-
+      return "#FF9966"; // coral for its use in magnets and lasers
     case "Nd":
-      return "#953553";
-
+      return "#A0522D"; // sienna for its use in magnets and lasers
     case "Pm":
-      return "#00FF00";
-
+      return "#FFA07A"; // light salmon for its radioactivity and use in nuclear batteries
     case "Sm":
-      return "#e03fd8";
-
+      return "#90EE90"; // light green for its use in magnets and lasers
     case "Eu":
-      return "#FF0000";
-
+      return "#CD5C5C"; // indian red for its red phosphorescence and use in security features
     case "Gd":
-      return "#c0c0c0";
-
+      return "#87CEFA"; // light sky blue for its use in magnets and MRI contrast agents
     default:
-      return "#FFFF00";
+      return "#C8C8C8"; // light gray for unknown elements
   }
 };
 
