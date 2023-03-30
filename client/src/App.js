@@ -27,6 +27,7 @@ const NotFound = React.lazy(() => import("./components/NotFound"));
 const Developer = React.lazy(() => import("./components/Developer"));
 const Extensions = React.lazy(() => import("./components/Extensions"));
 const Download = React.lazy(() => import("./components/Download"));
+const DownloadWeb = React.lazy(() => import("./components/DownloadWeb"));
 
 /*
 ██████╗░░█████╗░██╗░░░██╗████████╗███████╗██████╗░░██████╗
@@ -141,6 +142,7 @@ export default function App() {
             <Route path="/search" element={<Search />} />
             <Route path="/extensions" element={<Extensions />} />
             <Route path="/download" element={<Download />} />
+            <Route path="/download-web" element={<DownloadWeb />} />
           </Routes>
         </Suspense>
       </div>

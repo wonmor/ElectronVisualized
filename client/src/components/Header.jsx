@@ -211,7 +211,7 @@ export default function Header() {
                 >
                   <span>Renderer</span>
                 </button>
-                {/* 
+                {/* {/* 
             <button
               onClick={() => {
                 movePage("/dev");
@@ -221,20 +221,20 @@ export default function Header() {
               } hover:text-white mr-4`}
             >
               <span>API</span>
-            </button>
+            </button> */}
 
             <button
               onClick={() => {
-                movePage("/extensions");
+                movePage("/download-web");
               }}
               className={`block mt-4 lg:inline-block lg:mt-0 ${
-                location.pathname === "/extensions"
+                location.pathname === "/download-web"
                   ? "text-gray-400"
                   : "text-rose-200"
               } hover:text-white`}
             >
-              <span>Extensions</span>
-            </button> */}
+              <span>Download</span>
+            </button>
               </>
             )}
           </div>
