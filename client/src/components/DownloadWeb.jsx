@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Background } from "./Geometries";
-import { isElectron } from "./Globals";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export default function DownloadWeb() {
   /*
@@ -33,12 +33,12 @@ export default function DownloadWeb() {
             by scanning the QR code below.
           </p>
 
-          <img
+          <LazyLoadImage
             className="flex m-auto mt-5 mb-5 rounded"
-            style={{ width: "250px" }}
+            width={250}
             src="qrcode.png"
             alt="qrcode"
-          ></img>
+          ></LazyLoadImage>
           </div>
       </div>
       <Background />

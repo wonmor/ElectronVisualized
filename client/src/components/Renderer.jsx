@@ -487,7 +487,6 @@ export default function Renderer() {
                         <h2 className="text-black font-bold">
                           {moleculeDict[globalSelectedElement.element][7]}
                         </h2>
-                        ;
                       </div>
 
                       <h2 className="text-black text-xl md:text-2xl mb-5">

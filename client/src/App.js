@@ -7,8 +7,9 @@ import { Sidebar, Menu, MenuItem, useProSidebar } from "react-pro-sidebar";
 import { isElectron } from "./components/Globals";
 
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import GestureIcon from '@mui/icons-material/Gesture';
+import GestureIcon from "@mui/icons-material/Gesture";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import ScaleIcon from "@mui/icons-material/Scale";
 
 import "./App.css";
 
@@ -28,6 +29,7 @@ const Developer = React.lazy(() => import("./components/Developer"));
 const Extensions = React.lazy(() => import("./components/Extensions"));
 const Download = React.lazy(() => import("./components/Download"));
 const DownloadWeb = React.lazy(() => import("./components/DownloadWeb"));
+const MolarMass = React.lazy(() => import("./components/MolarMass"));
 
 /*
 ██████╗░░█████╗░██╗░░░██╗████████╗███████╗██████╗░░██████╗
@@ -84,7 +86,10 @@ export default function App() {
 
   const Fallback = () => {
     return (
-      <div className="p-10">
+      <div
+        className="p-10"
+        style={{ minHeight: "100vh", width: "-webkit-fill-available" }}
+      >
         <div className="loading__container">
           <div className="flex justify-center items-center">
             <Lottie
@@ -120,14 +125,35 @@ export default function App() {
                 style={{ textAlign: "center" }}
               ></MenuItem>
 
-              <MenuItem icon={<HomeOutlinedIcon />} onClick={() => {
-                collapseSidebar(true);
-                navigate('/');
-              }}>Home</MenuItem>
-              <MenuItem icon={<GestureIcon />} onClick={() => {
-                collapseSidebar(true);
-                navigate('/renderer');
-                }}>Spotlight</MenuItem>
+              <MenuItem
+                icon={<HomeOutlinedIcon />}
+                onClick={() => {
+                  collapseSidebar(true);
+                  navigate("/");
+                }}
+              >
+                Home
+              </MenuItem>
+
+              <MenuItem
+                icon={<GestureIcon />}
+                onClick={() => {
+                  collapseSidebar(true);
+                  navigate("/renderer");
+                }}
+              >
+                Spotlight
+              </MenuItem>
+
+              <MenuItem
+                icon={<ScaleIcon />}
+                onClick={() => {
+                  collapseSidebar(true);
+                  navigate("/molar-mass");
+                }}
+              >
+                Molar Mass
+              </MenuItem>
             </Menu>
           </Sidebar>
         )}
@@ -143,6 +169,7 @@ export default function App() {
             <Route path="/extensions" element={<Extensions />} />
             <Route path="/download" element={<Download />} />
             <Route path="/download-web" element={<DownloadWeb />} />
+            <Route path="/molar-mass" element={<MolarMass />} />
           </Routes>
         </Suspense>
       </div>

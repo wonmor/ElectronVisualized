@@ -148,7 +148,7 @@ export default function Table() {
     return (
       <>
         <div
-          className={`m-10 pb-20 scale-75 sm:scale-100 ${
+          className={`m-10 scale-75 sm:scale-100 ${
             size.width < 350 ? "scale-50" : null
           }`}
           role="region"
@@ -652,7 +652,7 @@ export default function Table() {
 
           <div className="ml-5 mr-5 pb-10 border-b border-gray-500">
             <div className="p-6 w-fit m-auto bg-white rounded-lg shadow-lg">
-              <h2 className="mb-4 text-xl text-gray-500 font-medium">
+              <h2 className="mb-4 text-xl text-black font-medium">
                 Enter Quantum Num.
               </h2>
               <div className="flex items-center justify-center">
@@ -700,7 +700,22 @@ export default function Table() {
                 {digit1.length === 0 ||
                 digit2.length === 0 ||
                 digit3.length === 0 ? (
-                  <p className="text-red-500">Please enter three digits.</p>
+                  <>
+                    <p className="text-red-500">Please enter three digits.</p>
+
+                    <div className="ml-5 mr-5 mt-2">
+                      <button
+                        onClick={() => {
+                          // This code runs after a global state change...
+                          movePage(`/molar-mass`);
+                        }}
+                        className="mb-2 mr-2 sm:mt-0 bg-transparent hover:bg-blue-500 text-black hover:text-white py-2 px-4 border border-black hover:border-transparent rounded"
+                        type="button"
+                      >
+                        <span>Molar Mass Calculator</span>
+                      </button>
+                    </div>
+                  </>
                 ) : (
                   <button
                     onClick={() => {
@@ -725,7 +740,7 @@ export default function Table() {
                         setNoResultsFound(true);
                       }
                     }}
-                    className="mb-2 mr-2 sm:mt-0 bg-transparent hover:bg-green-600 text-green-600 hover:text-white py-2 px-4 border border-green-600 hover:border-transparent rounded"
+                    className="mb-2 mr-2 sm:mt-0 bg-transparent hover:bg-green-800 text-green-800 hover:text-white py-2 px-4 border border-green-800 hover:border-transparent rounded"
                     type="button"
                   >
                     <span>Search</span>

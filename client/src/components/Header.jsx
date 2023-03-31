@@ -209,7 +209,7 @@ export default function Header() {
                       : "text-rose-200"
                   } hover:text-white`}
                 >
-                  <span>Renderer</span>
+                  <span>Spotlight</span>
                 </button>
                 {/* {/* 
             <button

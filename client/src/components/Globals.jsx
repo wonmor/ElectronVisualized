@@ -31,7 +31,8 @@ export const moleculeDict = {
     "104.5°",
     "2 bonding orbitals\n2 antibonding orbitals",
     "sp3",
-    "AX2E2"
+    "AX2E2",
+    "2 sigma bonds\n2 lone pairs"
   ],
   H2: [
     "Hydrogen Gas",
@@ -41,7 +42,8 @@ export const moleculeDict = {
     "180°",
     "1 bonding orbital\n1 antibonding orbital",
     "No",
-    "AX2"
+    "AX2",
+    "1 sigma bond"
   ],
   Cl2: [
     "Chlorine Gas",
@@ -51,7 +53,8 @@ export const moleculeDict = {
     "180°",
     "1 bonding orbital\n1 antibonding orbital",
     "No",
-    "AX2"
+    "AX2",
+    "1 sigma bond\n1 pi bond"
   ],
   HCl: [
     "Hydrochloric Acid",
@@ -61,7 +64,8 @@ export const moleculeDict = {
     "180°",
     "1 bonding orbital\n1 antibonding orbital",
     "sp",
-    "AX2E"
+    "AX2E",
+    "1 sigma bond\n1 lone pair"
   ],
 };
 
