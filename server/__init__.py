@@ -92,6 +92,7 @@ def create_app():
     db.init_app(app)
 
     # Initializes CORS so that the api_tool can talk to the example app
+    app.config['CORS_HEADERS'] = 'Content-Type'
     cors.init_app(app)
 
     with app.app_context():
