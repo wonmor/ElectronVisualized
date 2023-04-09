@@ -30,6 +30,7 @@ const Extensions = React.lazy(() => import("./components/Extensions"));
 const Download = React.lazy(() => import("./components/Download"));
 const DownloadWeb = React.lazy(() => import("./components/DownloadWeb"));
 const MolarMass = React.lazy(() => import("./components/MolarMass"));
+const GaussianCube = React.lazy(() => import("./components/GaussianCube"));
 
 /*
 ██████╗░░█████╗░██╗░░░██╗████████╗███████╗██████╗░░██████╗
@@ -162,6 +163,7 @@ export default function App() {
             <Route path="*" element={<NotFound />} />
             <Route exact path="/" element={<Table />} />
             <Route path="/renderer" element={<Renderer />} />
+            <Route path="/gaussian-cube" element={<GaussianCube />} />
             <Route path="/dev" element={<Developer />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />

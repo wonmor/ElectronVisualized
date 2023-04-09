@@ -109,7 +109,7 @@ export default function Header() {
       <div className="flex flex-row mt-4 sm:mt-0 lg:hidden">
         {!isElectron() && (
           <>
-            {!logged ? (
+            {/* {!logged ? (
               <button
                 onClick={() => {
                   movePage("/login");
@@ -129,7 +129,7 @@ export default function Header() {
               >
                 <span>Sign out</span>
               </button>
-            )}
+            )} */}
           </>
         )}
 
@@ -167,7 +167,7 @@ export default function Header() {
           leaveTo="transform opacity-0 scale-95"
         >
           <div className="text-sm lg:flex-grow">
-            {!isElectron() && (
+            {/* {!isElectron() && (
               <>
                 {!logged ? (
                   <button
@@ -195,7 +195,7 @@ export default function Header() {
                   </button>
                 )}
               </>
-            )}
+            )} */}
 
             {!isElectron() && (
               <>

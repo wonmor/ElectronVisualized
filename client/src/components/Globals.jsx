@@ -23,6 +23,17 @@ export const moleculesWithLonePairs = {
 }
 
 export const moleculeDict = {
+  C2H4: [
+    "Ethene",
+    "Ethene is an organic compound having the formula C2H4. It is a colorless, flammable gas with a faint 'sweet and musky' odor.",
+    "Trigonal Planar",
+    "Nonpolar",
+    "120°",
+    "3 bonding orbitals\n1 antibonding orbital",
+    "sp2",
+    "AX2E",
+    "1 sigma bond\n1 pi bond"
+  ],
   H2O: [
     "Water",
     "Water is an inorganic, transparent, tasteless, odourless, and nearly colourless chemical substance.",
@@ -286,7 +297,7 @@ export const getMoleculeColour = (
       return `hsl(${volume * 100.0 + 800.0}, 100%, 60%)`;
 
     case "Cl2":
-      return `hsl(${volume * 2000.0 + 200.0}, 100%, 60%)`;
+      return `hsl(${volume * 204000.0 + 200.0}, 100%, 60%)`;
 
     case "H2O":
       return lonePairHighlight
@@ -294,7 +305,10 @@ export const getMoleculeColour = (
         : `hsl(${volume * 5000.0 + 180.0}, 100%, 60%)`;
 
     case "HCl":
-      return `hsl(${volume * 24000.0 + 200.0}, 100%, 60%)`;
+      return `hsl(${volume * 204000.0 + 200.0}, 100%, 60%)`;
+
+    case "C2H4":
+      return `hsl(${volume * 5000.0 + 180.0}, 100%, 60%)`;
 
     default:
       return `hsl(${volume * 100.0 + 800.0}, 100%, 60%)`;
@@ -418,6 +432,12 @@ export const getCameraPosition = (element) => {
 
     case "HCl":
       return { fov: 55, position: [-5, 8, 8] };
+
+    case "C2H4":
+      return { fov: 75, position: [-5, 8, 8] };
+
+    case "Cl2":
+      return { fov: 75, position: [-5, 8, 8] };
 
     default:
       return { fov: 35, position: [-5, 8, 8] };

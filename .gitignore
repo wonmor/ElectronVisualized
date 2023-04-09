@@ -278,4 +278,5 @@ Temporary Items
 # For ASE and GPAW
 server/grid.npy
 server/GPAW_log.txt
-server/density.cube
+server/*.cube
+server/*.png

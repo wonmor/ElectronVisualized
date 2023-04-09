@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef, Suspense } from "react";
 import { useSelector, useDispatch, Provider } from "react-redux";
-import { EffectComposer, SelectiveBloom } from "@react-three/postprocessing";
+import { Canvas } from "@react-three/fiber";
 import { Button } from "@mui/material";
+
+import * as THREE from "three";
 
 import store from "../store";
 
@@ -10,11 +12,11 @@ import {
   setGlobalAtomInfo,
   appendGlobalAtomInfo,
 } from "../states/atomInfoSlice";
+
 import { setGlobalRenderInfo } from "../states/renderInfoSlice";
 
 import axios from "axios";
 
-import { Canvas } from "@react-three/fiber";
 import { Atoms, BondLine, DefaultModel } from "./Geometries";
 
 import Controls from "./Controls";
@@ -26,9 +28,6 @@ import {
   moleculeDict,
   moleculesWithLonePairs,
   isElectron,
-} from "./Globals";
-
-import {
   CANVAS,
   getCameraPosition,
   useWindowSize,
@@ -638,7 +637,10 @@ export default function Renderer() {
             </div>
           )}
 
-          <Canvas camera={getCameraPosition(globalSelectedElement["element"])}>
+          <Canvas
+            gl={{ version: 2 }}
+            camera={getCameraPosition(globalSelectedElement["element"])}
+          >
             <Provider store={store}>
               <Controls />
             </Provider>
@@ -655,63 +657,56 @@ export default function Renderer() {
 
             {globalAtomInfo && !preRender && (
               <Provider store={store}>
-                {globalSelectedElement.type === "Molecule" &&
+                {/* {globalSelectedElement.type === "Molecule" &&
                   globalAtomInfo.atoms_x.map((value, index) => {
                     return (
-                      <mesh>
-                        <Atoms
-                          position={[
-                            globalAtomInfo.atoms_x[index],
-                            globalAtomInfo.atoms_y[index],
-                            globalAtomInfo.atoms_z[index],
-                          ]}
+                      <>
+                        <mesh>
+                          <Atoms
+                            position={[
+                              globalAtomInfo.atoms_x[index],
+                              globalAtomInfo.atoms_y[index],
+                              globalAtomInfo.atoms_z[index],
+                            ]}
 
-                          // colour={globalAtomInfo["atomic_color"][currentElementArray[index]]}
-                        />
+                            // colour={globalAtomInfo["atomic_color"][currentElementArray[index]]}
+                          />
 
-                        {Object.values(
-                          bondShapeDict[globalSelectedElement.element]
-                        ).map((value) => {
-                          return (
-                            <>
-                              <BondLine
-                                coords={[
-                                  globalAtomInfo["atoms_x"][value[0]],
-                                  globalAtomInfo["atoms_y"][value[0]],
-                                  globalAtomInfo["atoms_z"][value[0]],
-                                  globalAtomInfo["atoms_x"][value[1]],
-                                  globalAtomInfo["atoms_y"][value[1]],
-                                  globalAtomInfo["atoms_z"][value[1]],
-                                ]}
-                              />
-                            </>
-                          );
-                        })}
-                      </mesh>
+                          {Object.values(
+                            bondShapeDict[globalSelectedElement.element]
+                          ).map((value) => {
+                            return (
+                              <>
+                                <BondLine
+                                  coords={[
+                                    globalAtomInfo["atoms_x"][value[0]],
+                                    globalAtomInfo["atoms_y"][value[0]],
+                                    globalAtomInfo["atoms_z"][value[0]],
+                                    globalAtomInfo["atoms_x"][value[1]],
+                                    globalAtomInfo["atoms_y"][value[1]],
+                                    globalAtomInfo["atoms_z"][value[1]],
+                                  ]}
+                                />
+                              </>
+                            );
+                          })}
+                        </mesh>
+                      </>
                     );
-                  })}
+                  })} */}
+                {globalSelectedElement.type === "Atom" && (
+                  <primitive object={new THREE.AxesHelper(5)} />
+                )}
+
                 <Particles
                   particleRef={particleRef}
                   lightRef={lightRef}
                   particleRadius={particleRadius}
                 />
-
-                {addCoolEffects && (
-                  <EffectComposer>
-                    <SelectiveBloom
-                      selection={[particleRef]}
-                      intensity={2.0}
-                      luminanceThreshold={0}
-                      luminanceSmoothing={0.9}
-                      height={300}
-                      lights={[lightRef]}
-                    />
-                  </EffectComposer>
-                )}
               </Provider>
             )}
 
-            <gridHelper args={[undefined, undefined, "gray"]} />
+            <gridHelper args={[10, 9, "gray"]} />
           </Canvas>
         </div>
 

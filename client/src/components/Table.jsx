@@ -7,6 +7,7 @@ import { setGlobalSelectedElement } from "../states/selectedElementSlice";
 import { Background } from "./Geometries";
 import { moleculeDict, atomDict, useWindowSize, isElectron } from "./Globals";
 
+import ViewInArIcon from '@mui/icons-material/ViewInAr';
 import MetaTag from "./MetaTag";
 import quantumNumbers from "../assets/quantum_num.json";
 
@@ -148,7 +149,7 @@ export default function Table() {
     return (
       <>
         <div
-          className={`m-10 scale-75 sm:scale-100 ${
+          className={`m-10 pb-20 scale-75 sm:scale-100 ${
             size.width < 350 ? "scale-50" : null
           }`}
           role="region"
@@ -643,6 +644,20 @@ export default function Table() {
                   </button>
                 );
               })}
+
+              {/* <br />
+
+              <button
+                onClick={() => {
+                  // This code runs after a global state change...
+                  movePage(`/gaussian-cube`);
+                }}
+                className="mb-2 mr-2 mt-5 bg-transparent hover:bg-blue-500 text-white hover:text-white py-5 px-10 border border-white hover:border-transparent rounded"
+                type="button"
+              >
+                <ViewInArIcon className="w-5 h-5 mr-2 -ml-1" />
+                <span>Gaussian Cube<br />3D Visualizer</span>
+              </button> */}
             </div>
           </div>
 
