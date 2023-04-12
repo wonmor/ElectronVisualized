@@ -17,14 +17,13 @@ import { setGlobalRenderInfo } from "../states/renderInfoSlice";
 
 import axios from "axios";
 
-import { Atoms, BondLine, DefaultModel } from "./Geometries";
+import { GLBViewer, DefaultModel } from "./Geometries";
 
 import Controls from "./Controls";
 import MetaTag from "./MetaTag";
 
 import { Particles } from "./Instances";
 import {
-  bondShapeDict,
   moleculeDict,
   moleculesWithLonePairs,
   isElectron,
@@ -93,12 +92,11 @@ export default function Renderer() {
   const particleRef = useRef();
 
   const [particleRadius, setParticleRadius] = useState(0.015);
-
   const [reachedMaxPeak, setMaxPeak] = useState(false);
   const [reachedMinPeak, setMinPeak] = useState(true);
   const [addCoolEffects, setAddCoolEffects] = useState(false);
-
   const [zoomCameraConstant, setZoomCameraConstant] = useState(1.0);
+  const [molecularOrbital, setMolecularOrbital] = useState(null);
 
   /*
   Define that React and Redux states: former being used locally, and the latter being used globally.
@@ -120,20 +118,15 @@ export default function Renderer() {
   );
 
   const [animation, setAnimation] = useState(globalRenderInfo.animation);
-
   const [statusText, setStatusText] = useState(globalRenderInfo.statusText);
-
   const [disableButton, setDisableButton] = useState(
     globalRenderInfo.disableButton
   );
-
   const [preRender, setPreRender] = useState(globalRenderInfo.preRender);
-
   // const [currentElementArray, setCurrentElementArray] = useState(null);
-
   const [serverError, setServerError] = useState(globalRenderInfo.serverError);
-
   const [electronConfig, setElectronConfig] = useState([]);
+  const [isHomo, setIsHomo] = useState(true);
 
   const dispatch = useDispatch();
 
@@ -368,22 +361,14 @@ export default function Renderer() {
     );
   };
 
-  const changeParticleRadius = (event, value) => {
-    /*
-    This function changes the state of individual particle radius...
-
-    Parameters
-    ----------
-    None
-
-    Returns
-    -------
-    None
-    */
-    setParticleRadius(value);
-  };
-
   const gaEventTracker = useAnalyticsEventTracker("Molecule Renderer");
+
+  useEffect(() => {
+    if (globalSelectedElement.element) {
+      console.log(globalSelectedElement.element);
+      setMolecularOrbital(`${globalSelectedElement.element}${isHomo ? "_HOMO" : "_LUMO"}`);
+    }  
+  }, [globalSelectedElement.element, isHomo])
 
   return (
     <>
@@ -495,7 +480,36 @@ export default function Renderer() {
                           " hybrid"}
                       </h2>
 
-                      <Button
+                      {globalSelectedElement.element === "C2H4" ? (
+                        <Button
+                          onClick={() => {
+                            setIsHomo(!isHomo);
+                          }}
+                          variant="contained"
+                          sx={{
+                            marginLeft: "7.5em",
+                            marginRight: "7.5em",
+                            backgroundColor: "white",
+                            color: "black",
+                            borderColor: "black",
+                            border: "3px solid",
+                            "&:hover": {
+                              backgroundColor: "lightgrey",
+                            },
+                          }}
+                        >
+                          {isHomo ? (
+                            <span className="font-bold">
+                              TOGGLE <span className="bg-black font-bold text-white p-1 rounded">HOMO</span> LUMO
+                            </span>
+                          ) : (
+                            <span className="font-bold">
+                              TOGGLE HOMO <span className="bg-black font-bold text-white p-1 rounded">LUMO</span>
+                            </span>
+                          )}
+                        </Button>
+                      ) : (
+                        <Button
                         onClick={() => {
                           setAnimation(!animation);
 
@@ -527,6 +541,7 @@ export default function Renderer() {
                             : "Disable Animation"}
                         </span>
                       </Button>
+                      )}
                     </div>
                   </>
                 ) : (
@@ -694,8 +709,14 @@ export default function Renderer() {
                       </>
                     );
                   })} */}
-                {globalSelectedElement.type === "Atom" && (
+                {globalSelectedElement.type === "Atom" ? (
                   <primitive object={new THREE.AxesHelper(5)} />
+                ) : (
+                  <>
+                    {globalSelectedElement.element && globalSelectedElement.element === "C2H4" && molecularOrbital !== null && (
+                      <GLBViewer name={molecularOrbital} />
+                    )}
+                  </>
                 )}
 
                 <Particles

@@ -16,7 +16,7 @@
         "@kitware/vtk.js": "^26.9.12",
         "@mui/icons-material": "^5.11.11",
         "@mui/material": "^5.11.15",
-        "@react-three/drei": "^9.13.2",
+        "@react-three/drei": "^9.65.3",
         "@react-three/fiber": "^8.0.21",
         "@react-three/postprocessing": "^2.3.2",
         "@reduxjs/toolkit": "^1.8.3",

@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { extend } from '@react-three/fiber'
 import { useGLTF, useAnimations } from '@react-three/drei'
+import { GLTFLoader } from "three-stdlib";
 
 import * as THREE from "three";
 
 import { Line2, LineGeometry, LineMaterial } from "three-fatline";
-import { RENDERER } from "./Globals";
+import { RENDERER, isElectron } from "./Globals";
 
 /*
 █▀▀▀ █▀▀ █▀▀█ █▀▄▀█ █▀▀ ▀▀█▀▀ █▀▀█ ─▀─ █▀▀ █▀▀ 
@@ -147,5 +148,30 @@ export function Background() {
       <div className="light x8"></div>
       <div className="light x9"></div>
     </div>
+  );
+}
+
+export function GLBViewer(props) {
+  const url = `${
+    isElectron() ? "https://electronvisual.org" : ""
+  }/api/download/${props.name}`;
+
+  const [gltf, setGltf] = useState(null);
+  const ref = useRef();
+
+  useEffect(() => {
+    const loader = new GLTFLoader();
+    loader.load(
+      url,
+      data => setGltf(data),
+      null,
+      error => console.error(error)
+    );
+  }, [url]);
+
+  return (
+    <mesh ref={ref}>
+      {gltf && <primitive castShadow receiveShadow object={gltf.scene} />}
+    </mesh>
   );
 }

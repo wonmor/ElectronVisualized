@@ -296,13 +296,19 @@ def download_file(key):
         file_path = f'server/{key}'
         multipart_download_boto3(key, file_path)
 
-        response = make_response(send_file(file_path, as_attachment=True, attachment_filename=key))
+        # Change the file extension to .glb
+        name, extension = os.path.splitext(file_path)
+        new_file_path = f'{name}.glb'
+        os.rename(file_path, new_file_path)
+
+        response = make_response(send_file(new_file_path.replace("server/", ""), as_attachment=True))
         response.headers['Content-Disposition'] = f'attachment; filename="{key}"'
         return response
+
     except ClientError as e:
         print(e)
         return 'Error downloading file from S3!', 500
-
+    
 @bp.route('/api/connect', methods=['POST'])
 @limiter.exempt
 @cross_origin()

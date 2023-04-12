@@ -280,3 +280,4 @@ server/grid.npy
 server/GPAW_log.txt
 server/*.cube
 server/*.png
+server/*.glb
