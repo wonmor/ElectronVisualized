@@ -96,6 +96,7 @@ def plot_mo(molecule_name="ethene", smiles="C=C"):
 
     # Save the figure as a picture
     fig.savefig("server/mo_energy_diagram.png", dpi=300)
+    multipart_upload_boto3(molecule_name, "server/mo_energy_diagram.png")
 
     def get_mo(mf, mol):
         """Get molecular orbitals"""
@@ -165,6 +166,7 @@ def plot_mo(molecule_name="ethene", smiles="C=C"):
         mol, "server/livvo_lumo.cube", orbitals["livvo"][:, 0], margin=5
     );
 
+    # Use UCSF's ChimeraX to visualize them
     multipart_upload_boto3(molecule_name, "server/cmo_homo.cube")
     multipart_upload_boto3(molecule_name, "server/cmo_lumo.cube")
     multipart_upload_boto3(molecule_name, "server/ibo_homo.cube")

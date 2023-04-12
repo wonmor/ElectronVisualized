@@ -1,7 +1,7 @@
 import json
 import os
 
-from flask import Blueprint, request, current_app
+from flask import Blueprint, request, current_app, send_file, make_response
 import flask
 
 from flask_cors import CORS, cross_origin
@@ -11,7 +11,8 @@ from flask_socketio import SocketIO, emit, join_room
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 
-from server.extensions import multipart_download_boto3
+from botocore.exceptions import ClientError
+from server.extensions import multipart_download_boto3, multipart_upload_boto3
 
 from . import User, molecule, atom, socketio, guard, db
 
@@ -265,6 +266,41 @@ def loadSPH_from_s3(name):
     with open(output, 'r') as f:
         data = json.load(f)
         return data
+    
+@bp.route('/api/upload', methods=['POST'])
+@limiter.limit("5 per minute")
+@cross_origin()
+def upload_file():
+    if 'file' not in request.files:
+        return 'No file uploaded!', 400
+
+    file = request.files['file']
+    name = request.form.get('name')
+
+    if file.filename == '':
+        return 'No file uploaded!', 400
+    
+    # Save the file to the server's file system
+    file_path = os.path.join('server', file.filename)
+    file.save(file_path)
+
+    # Upload the file to S3
+    multipart_upload_boto3(name, file_path)
+
+@bp.route('/api/download/<key>', methods=['GET'])
+@limiter.limit("5 per minute")
+@cross_origin()
+def download_file(key):
+    try:
+        file_path = f'server/{key}'
+        multipart_download_boto3(key, file_path)
+
+        response = make_response(send_file(file_path, as_attachment=True, attachment_filename=key))
+        response.headers['Content-Disposition'] = f'attachment; filename="{key}"'
+        return response
+    except ClientError as e:
+        print(e)
+        return 'Error downloading file from S3!', 500
 
 @bp.route('/api/connect', methods=['POST'])
 @limiter.exempt

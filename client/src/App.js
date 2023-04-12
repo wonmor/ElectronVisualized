@@ -30,7 +30,7 @@ const Extensions = React.lazy(() => import("./components/Extensions"));
 const Download = React.lazy(() => import("./components/Download"));
 const DownloadWeb = React.lazy(() => import("./components/DownloadWeb"));
 const MolarMass = React.lazy(() => import("./components/MolarMass"));
-const GaussianCube = React.lazy(() => import("./components/GaussianCube"));
+const FileUploadForm = React.lazy(() => import("./components/FileUploadForm"));
 
 /*
 ██████╗░░█████╗░██╗░░░██╗████████╗███████╗██████╗░░██████╗
@@ -163,7 +163,6 @@ export default function App() {
             <Route path="*" element={<NotFound />} />
             <Route exact path="/" element={<Table />} />
             <Route path="/renderer" element={<Renderer />} />
-            <Route path="/gaussian-cube" element={<GaussianCube />} />
             <Route path="/dev" element={<Developer />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
@@ -172,6 +171,7 @@ export default function App() {
             <Route path="/download" element={<Download />} />
             <Route path="/download-web" element={<DownloadWeb />} />
             <Route path="/molar-mass" element={<MolarMass />} />
+            <Route path="/file-upload" element={<FileUploadForm />} />
           </Routes>
         </Suspense>
       </div>
