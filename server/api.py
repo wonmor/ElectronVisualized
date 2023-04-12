@@ -271,24 +271,25 @@ def loadSPH_from_s3(name):
 @limiter.limit("5 per minute")
 @cross_origin()
 def upload_file():
-    if 'file' not in request.files:
-        return 'No file uploaded!', 400
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            return 'No file uploaded!', 400
 
-    file = request.files['file']
-    name = request.form.get('name')
+        file = request.files['file']
+        name = request.form.get('name')
 
-    if file.filename == '':
-        return 'No file uploaded!', 400
-    
-    # Save the file to the server's file system
-    file_path = os.path.join('server', file.filename)
-    file.save(file_path)
+        if file.filename == '':
+            return 'No file uploaded!', 400
+        
+        # Save the file to the server's file system
+        file_path = os.path.join('server', file.filename)
+        file.save(file_path)
 
-    # Upload the file to S3
-    multipart_upload_boto3(name, file_path)
+        # Upload the file to S3
+        multipart_upload_boto3(name, file_path)
 
 @bp.route('/api/download/<key>', methods=['GET'])
-@limiter.limit("5 per minute")
+@limiter.exempt()
 @cross_origin()
 def download_file(key):
     try:

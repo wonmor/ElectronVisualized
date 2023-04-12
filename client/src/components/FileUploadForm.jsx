@@ -41,9 +41,9 @@ function FileUploadForm() {
         Upload File to AWS S3
       </h2>
       {success && (
-        <div className="bg-green-500 text-white px-2 py-1 mb-4 rounded-sm shadow-sm">
+        <span className="bg-green-800 text-white px-2 py-1 mb-4 rounded-sm shadow-sm">
           File uploaded successfully!
-        </div>
+        </span>
       )}
       <label className="block text-white mb-4">
         <input type="text" placeholder="Define file key" value={name} onChange={handleNameChange} className="bg-white text-black px-2 py-1 rounded-sm shadow-sm w-full" />
