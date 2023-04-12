@@ -21,7 +21,7 @@ function FileUploadForm() {
     formData.append('name', name);
     formData.append('file', file);
 
-    fetch(`${isElectron ? "https://electronvisual.org" : ""}/api/upload`, {
+    fetch(`${isElectron() ? "https://electronvisual.org" : ""}/api/upload`, {
       method: 'POST',
       body: formData,
     })
