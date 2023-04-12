@@ -96,7 +96,7 @@ def plot_mo(molecule_name="ethene", smiles="C=C"):
 
     # Save the figure as a picture
     fig.savefig("server/mo_energy_diagram.png", dpi=300)
-    multipart_upload_boto3(molecule_name, "server/mo_energy_diagram.png")
+    multipart_upload_boto3(f"{molecule_name}_energy_diagram", "server/mo_energy_diagram.png")
 
     def get_mo(mf, mol):
         """Get molecular orbitals"""
