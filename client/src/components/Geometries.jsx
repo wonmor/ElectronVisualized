@@ -112,6 +112,13 @@ export function DefaultModel(props) {
   const { scene, animations } = useGLTF('/default/scene.gltf')
   const { actions } = useAnimations(animations, scene)
 
+  scene.traverse((child) => {
+    if (child.isMesh) {
+      child.castShadow = true;
+      child.receiveShadow = true;
+    }
+  });
+
   useEffect(() => {
     actions["TOY FREDDY MAGIC"]?.play();
   });
@@ -152,9 +159,7 @@ export function Background() {
 }
 
 export function GLBViewer(props) {
-  const url = `${
-    isElectron() ? "https://electronvisual.org" : ""
-  }/api/download/${props.name}`;
+  const url = `${isElectron() ? 'https://electronvisual.org' : ''}/api/download/${props.name}`;
 
   const [gltf, setGltf] = useState(null);
   const ref = useRef();
@@ -163,14 +168,33 @@ export function GLBViewer(props) {
     const loader = new GLTFLoader();
     loader.load(
       url,
-      data => setGltf(data),
+      (data) => setGltf(data),
       null,
-      error => console.error(error)
+      (error) => console.error(error)
     );
   }, [url]);
 
+  useEffect(() => {
+    if (gltf) {
+      gltf.scene.traverse((child) => {
+        if (child.isMesh) {
+          child.castShadow = true;
+          child.receiveShadow = true;
+          child.material.color.set(0xbe123c);   
+          child.material = new THREE.MeshToonMaterial({ 
+            color: child.material.color,
+            opacity: 0.1,
+            transparent: true,
+            roughness: 0.5,
+            metalness: 0.5
+          });
+        }
+      });
+    }
+  }, [gltf]);
+
   return (
-    <mesh ref={ref}>
+    <mesh rotation-y={1.25} rotation-z={0.15} scale={6} ref={ref}>
       {gltf && <primitive castShadow receiveShadow object={gltf.scene} />}
     </mesh>
   );
