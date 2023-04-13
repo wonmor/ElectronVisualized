@@ -27,9 +27,30 @@ from extensions import multipart_upload_boto3
 
 pd.options.display.float_format = "{:,.3f}".format
 
-def plot_mo(molecule_name="ethene", smiles="C=C"):
+smiles = {
+    "ethene": "C=C",
+    "hydrogen_gas": "[H][H]",
+    "hydrochloric_acid": "ClC(=O)O",
+    "methane": "C",
+    "ethane": "CC",
+    "propane": "CCC",
+    "butane": "CCCC",
+    "pentane": "CCCCC",
+    "hexane": "CCCCCC",
+    "benzene": "c1ccccc1",
+    "toluene": "Cc1ccccc1",
+    "phenol": "c1ccc(cc1)O",
+    "ethyl_acetate": "CCOC(C)=O",
+    "acetone": "CC(=O)C",
+    "acetic_acid": "CC(=O)O",
+    "formic_acid": "C(=O)O",
+    "glycerol": "C(C(CO)O)O",
+}
+
+
+def plot_mo(molecule_name="ethene"):
     molecule_name = molecule_name
-    molecule = Chem.MolFromSmiles(smiles)  # Generate the molecule from smiles
+    molecule = Chem.MolFromSmiles(smiles[molecule_name])  # Generate the molecule from smiles
 
     def get_xyz(molecule, optimize=False):
         """Get xyz-coordinates for the molecule"""
@@ -175,3 +196,5 @@ def plot_mo(molecule_name="ethene", smiles="C=C"):
     # Replace these lines with the paths to your cube files
     cmo_homo_cube_path = pathlib.Path("server/cmo_homo.cube")
     cmo_lumo_cube_path = pathlib.Path("server/cmo_lumo.cube")
+
+plot_mo("water")

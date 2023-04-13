@@ -159,7 +159,7 @@ export function Background() {
 }
 
 export function GLBViewer(props) {
-  const url = `${isElectron() ? 'https://electronvisual.org' : ''}/api/download/${props.name}`;
+  const url = `${isElectron() ? 'https://electronvisual.org' : ''}/api/downloadGLB/${props.name}`;
 
   const [gltf, setGltf] = useState(null);
   const ref = useRef();

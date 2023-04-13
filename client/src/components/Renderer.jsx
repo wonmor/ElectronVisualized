@@ -21,6 +21,7 @@ import { GLBViewer, DefaultModel } from "./Geometries";
 
 import Controls from "./Controls";
 import MetaTag from "./MetaTag";
+import Diagram from "./Diagram";
 
 import { Particles } from "./Instances";
 import {
@@ -366,9 +367,11 @@ export default function Renderer() {
   useEffect(() => {
     if (globalSelectedElement.element) {
       console.log(globalSelectedElement.element);
-      setMolecularOrbital(`${globalSelectedElement.element}${isHomo ? "_HOMO" : "_LUMO"}`);
-    }  
-  }, [globalSelectedElement.element, isHomo])
+      setMolecularOrbital(
+        `${globalSelectedElement.element}${isHomo ? "_HOMO" : "_LUMO"}`
+      );
+    }
+  }, [globalSelectedElement.element, isHomo]);
 
   return (
     <>
@@ -383,7 +386,7 @@ export default function Renderer() {
       />
 
       <div
-        className="bg-gray-700 pb-20 overflow-auto"
+        className="bg-gray-700 pb-20 text-center overflow-auto"
         style={{ minHeight: "100vh", width: "-webkit-fill-available" }}
       >
         <div className="text-rose-200 text-center pt-10 pb-10 ml-5 mr-5">
@@ -500,47 +503,54 @@ export default function Renderer() {
                         >
                           {isHomo ? (
                             <span className="font-bold">
-                              TOGGLE <span className="bg-black font-bold text-white p-1 rounded">HOMO</span> LUMO
+                              TOGGLE{" "}
+                              <span className="bg-black font-bold text-white p-1 rounded">
+                                HOMO
+                              </span>{" "}
+                              LUMO
                             </span>
                           ) : (
                             <span className="font-bold">
-                              TOGGLE HOMO <span className="bg-black font-bold text-white p-1 rounded">LUMO</span>
+                              TOGGLE HOMO{" "}
+                              <span className="bg-black font-bold text-white p-1 rounded">
+                                LUMO
+                              </span>
                             </span>
                           )}
                         </Button>
                       ) : (
                         <Button
-                        onClick={() => {
-                          setAnimation(!animation);
+                          onClick={() => {
+                            setAnimation(!animation);
 
-                          if (!animation) {
-                            setParticleRadius(0.01);
+                            if (!animation) {
+                              setParticleRadius(0.01);
 
-                            setMaxPeak(false);
-                            setMinPeak(true);
-                          }
-                        }}
-                        variant="contained"
-                        sx={{
-                          marginLeft: "7.5em",
-                          marginRight: "7.5em",
-                          backgroundColor: "white",
-                          color: "black",
-                          borderColor: "black",
-                          border: "3px solid",
-                          "&:hover": {
-                            color: "white",
-                            backgroundColor: "black",
+                              setMaxPeak(false);
+                              setMinPeak(true);
+                            }
+                          }}
+                          variant="contained"
+                          sx={{
+                            marginLeft: "7.5em",
+                            marginRight: "7.5em",
+                            backgroundColor: "white",
+                            color: "black",
                             borderColor: "black",
-                          },
-                        }}
-                      >
-                        <span className="font-bold">
-                          {!animation
-                            ? "Enable Animation"
-                            : "Disable Animation"}
-                        </span>
-                      </Button>
+                            border: "3px solid",
+                            "&:hover": {
+                              color: "white",
+                              backgroundColor: "black",
+                              borderColor: "black",
+                            },
+                          }}
+                        >
+                          <span className="font-bold">
+                            {!animation
+                              ? "Enable Animation"
+                              : "Disable Animation"}
+                          </span>
+                        </Button>
                       )}
                     </div>
                   </>
@@ -713,9 +723,11 @@ export default function Renderer() {
                   <primitive object={new THREE.AxesHelper(5)} />
                 ) : (
                   <>
-                    {globalSelectedElement.element && globalSelectedElement.element === "C2H4" && molecularOrbital !== null && (
-                      <GLBViewer name={molecularOrbital} />
-                    )}
+                    {globalSelectedElement.element &&
+                      globalSelectedElement.element === "C2H4" &&
+                      molecularOrbital !== null && (
+                        <GLBViewer name={molecularOrbital} />
+                      )}
                   </>
                 )}
 
@@ -730,6 +742,10 @@ export default function Renderer() {
             <gridHelper args={[10, 9, "gray"]} />
           </Canvas>
         </div>
+
+        {globalSelectedElement.element === "C2H4" && (
+          <Diagram name={globalSelectedElement.name.toLowerCase() + "_energy_diagram"} />
+        )}
 
         <div class="p-5" />
       </div>

@@ -1,0 +1,9 @@
+.image-container {
+  display: flex;
+  justify-content: center;
+}
+
+.scaled-image {
+  max-width: 100%;
+  height: auto;
+}
