@@ -42,6 +42,11 @@ HOW TO OPTIMIZE REACT + THREE-FIBER: https://docs.pmnd.rs/react-three-fiber/adva
 PERIODIC TABLE REST API WRITTEN IN GOLANG: https://github.com/neelpatel05/periodic-table-api-go
 */
 
+const moleculesWithMolecularOrbitals = [
+  "C2H4",
+  "H2O"
+];
+
 const useLazyInterval = (callback, delay) => {
   /*
   This function calls the saved interval and resets it into a new value;
@@ -483,7 +488,7 @@ export default function Renderer() {
                           " hybrid"}
                       </h2>
 
-                      {globalSelectedElement.element === "C2H4" ? (
+                      {moleculesWithMolecularOrbitals.includes(globalSelectedElement.element) ? (
                         <Button
                           onClick={() => {
                             setIsHomo(!isHomo);
@@ -667,12 +672,14 @@ export default function Renderer() {
             camera={getCameraPosition(globalSelectedElement["element"])}
           >
             <Provider store={store}>
-              <Controls />
+              {!preRender && (
+                <Controls />
+              )}
             </Provider>
 
             {preRender && (
               <Suspense fallback={null}>
-                <DefaultModel />
+
               </Suspense>
             )}
 
@@ -724,7 +731,7 @@ export default function Renderer() {
                 ) : (
                   <>
                     {globalSelectedElement.element &&
-                      globalSelectedElement.element === "C2H4" &&
+                      moleculesWithMolecularOrbitals.includes(globalSelectedElement.element) &&
                       molecularOrbital !== null && (
                         <GLBViewer name={molecularOrbital} />
                       )}
@@ -743,8 +750,8 @@ export default function Renderer() {
           </Canvas>
         </div>
 
-        {globalSelectedElement.element === "C2H4" && (
-          <Diagram name={globalSelectedElement.name.toLowerCase() + "_energy_diagram"} />
+        {!preRender && moleculesWithMolecularOrbitals.includes(globalSelectedElement.element) && (
+          <Diagram name={globalSelectedElement.name.toLowerCase().replace(/ /g, "_") + "_energy_diagram"} />
         )}
 
         <div class="p-5" />

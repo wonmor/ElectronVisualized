@@ -93,43 +93,6 @@ export function BondLine({coords}) {
   return <primitive object={lineSegment} position={[0, 0, 0]} />;
 }
 
-export function DefaultModel(props) {
-  /*
-  This is a component function in JSX that contains the HTML markup that represent each graphical element on the webpage
-
-  Parameters
-  ----------
-  props: React element
-    Represents all the other properties that have to be rendered prior to this operation
-
-  Returns
-  -------
-  DOM File
-      A HTML markup that contains graphical elements
-  */
-  const group = useRef();
-
-  const { scene, animations } = useGLTF('/default/scene.gltf')
-  const { actions } = useAnimations(animations, scene)
-
-  scene.traverse((child) => {
-    if (child.isMesh) {
-      child.castShadow = true;
-      child.receiveShadow = true;
-    }
-  });
-
-  useEffect(() => {
-    actions["TOY FREDDY MAGIC"]?.play();
-  });
-
-  return (
-    <group ref={group} {...props} dispose={null}>
-      <primitive castShadow receiveShadow object={scene} />
-    </group>
-  )
-}
-
 export function Background() {
   /*
   This is a component function in JSX that contains the HTML markup that represent each graphical element on the webpage
@@ -180,13 +143,11 @@ export function GLBViewer(props) {
         if (child.isMesh) {
           child.castShadow = true;
           child.receiveShadow = true;
-          child.material.color.set(0xbe123c);   
-          child.material = new THREE.MeshToonMaterial({ 
-            color: child.material.color,
-            opacity: 0.1,
+          child.material = new THREE.MeshBasicMaterial({
+            wireframe: true,
+            color: 0xffffff,
             transparent: true,
-            roughness: 0.5,
-            metalness: 0.5
+            opacity: 0.5,
           });
         }
       });

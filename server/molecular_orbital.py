@@ -45,8 +45,9 @@ smiles = {
     "acetic_acid": "CC(=O)O",
     "formic_acid": "C(=O)O",
     "glycerol": "C(C(CO)O)O",
+    "water": "[H]O[H]",
+    "chlorine_gas": "ClCl",
 }
-
 
 def plot_mo(molecule_name="ethene"):
     molecule_name = molecule_name
@@ -197,4 +198,4 @@ def plot_mo(molecule_name="ethene"):
     cmo_homo_cube_path = pathlib.Path("server/cmo_homo.cube")
     cmo_lumo_cube_path = pathlib.Path("server/cmo_lumo.cube")
 
-plot_mo("water")
+# plot_mo("hydrogen_gas")
