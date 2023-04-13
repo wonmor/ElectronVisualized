@@ -744,9 +744,7 @@ export default function Renderer() {
                       </>
                     );
                   })} */}
-                  {globalSelectedElement.type === "Atom" ? (
-                    <primitive object={new THREE.AxesHelper(5)} />
-                  ) : (
+                  {globalSelectedElement.type === "Molecule" && (
                     <>
                       {globalSelectedElement.element &&
                         moleculesWithMolecularOrbitals.includes(
