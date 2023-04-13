@@ -4,9 +4,9 @@
 
 A web-based viewer for atomic and molecular orbitals. This viewer uses mathematical functions called spherical harmonics and formulas from Density Functional Theory to visualize these orbitals.
 
-For atomic orbitals, the viewer shows the different shapes of orbitals (e.g. s, p, d) for different energy levels (e.g. 1s, 2s, 2p).
+- For atomic orbitals, the viewer shows the different shapes of orbitals (e.g. s, p, d) for different energy levels (e.g. 1s, 2s, 2p).
 
-For molecular orbitals, the viewer uses a computational chemistry method called the Hartree-Fock approach to calculate and visualize the orbitals. This approach calculates the energies and shapes of the orbitals based on the interactions between electrons and nuclei in the molecule.
+- For molecular orbitals, the viewer uses a computational chemistry method called the Hartree-Fock approach to calculate and visualize the orbitals. This approach calculates the energies and shapes of the orbitals based on the interactions between electrons and nuclei in the molecule.
 
 [**https://electronvisual.org**](https://electronvisual.org)
 
