@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef, Suspense } from "react";
 import { useSelector, useDispatch, Provider } from "react-redux";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useThree } from "@react-three/fiber";
 import { Button } from "@mui/material";
 
 import * as THREE from "three";
+import * as FileSaver from "file-saver";
 
 import store from "../store";
 
@@ -14,10 +15,11 @@ import {
 } from "../states/atomInfoSlice";
 
 import { setGlobalRenderInfo } from "../states/renderInfoSlice";
+import { GLTFExporter } from "./GLTFExporter";
 
 import axios from "axios";
 
-import { GLBViewer, DefaultModel } from "./Geometries";
+import { GLBViewer } from "./Geometries";
 
 import Controls from "./Controls";
 import MetaTag from "./MetaTag";
@@ -42,10 +44,7 @@ HOW TO OPTIMIZE REACT + THREE-FIBER: https://docs.pmnd.rs/react-three-fiber/adva
 PERIODIC TABLE REST API WRITTEN IN GOLANG: https://github.com/neelpatel05/periodic-table-api-go
 */
 
-const moleculesWithMolecularOrbitals = [
-  "C2H4",
-  "H2O"
-];
+const moleculesWithMolecularOrbitals = ["C2H4", "H2O"];
 
 const useLazyInterval = (callback, delay) => {
   /*
@@ -94,15 +93,43 @@ export default function Renderer() {
     A HTML markup that contains graphical elements
   */
 
+  const sceneRef = useRef();
   const lightRef = useRef();
   const particleRef = useRef();
 
   const [particleRadius, setParticleRadius] = useState(0.015);
   const [reachedMaxPeak, setMaxPeak] = useState(false);
   const [reachedMinPeak, setMinPeak] = useState(true);
-  const [addCoolEffects, setAddCoolEffects] = useState(false);
-  const [zoomCameraConstant, setZoomCameraConstant] = useState(1.0);
   const [molecularOrbital, setMolecularOrbital] = useState(null);
+
+  const handleExportClick = () => {
+    const gltfExporter = new GLTFExporter();
+    const scene = sceneRef.current;
+
+    // Remove any non-exportable objects from the scene
+    scene.traverse((node) => {
+      if (node.userData && node.userData.skipExport) {
+        node.parent.remove(node);
+      }
+    });
+    gltfExporter.parse(scene, (glb) => {
+      downloadJSON(glb);
+    }, { binary: true });
+  };
+
+  function downloadJSON( data ) {
+    const jsonData = JSON.stringify( data );
+    const blob = new Blob( [ jsonData ], { type: 'application/json' } );
+    const url = URL.createObjectURL( blob );
+    const link = document.createElement( 'a' );
+    link.href = url;
+    link.download = 'model.gltf';
+    document.body.appendChild( link );
+    link.click();
+    document.body.removeChild( link );
+    URL.revokeObjectURL( url );
+  }
+
 
   /*
   Define that React and Redux states: former being used locally, and the latter being used globally.
@@ -117,10 +144,6 @@ export default function Renderer() {
 
   const globalRenderInfo = useSelector(
     (state) => state.renderInfo.globalRenderInfo
-  );
-
-  const globalCameraInfo = useSelector(
-    (state) => state.cameraInfo.globalCameraInfo
   );
 
   const [animation, setAnimation] = useState(globalRenderInfo.animation);
@@ -488,7 +511,9 @@ export default function Renderer() {
                           " hybrid"}
                       </h2>
 
-                      {moleculesWithMolecularOrbitals.includes(globalSelectedElement.element) ? (
+                      {moleculesWithMolecularOrbitals.includes(
+                        globalSelectedElement.element
+                      ) ? (
                         <Button
                           onClick={() => {
                             setIsHomo(!isHomo);
@@ -512,16 +537,11 @@ export default function Renderer() {
                               <span className="bg-black font-bold text-white p-1 rounded">
                                 HOMO
                               </span>{" "}
-                              <span className="font-bold">
-                                LUMO
-                              </span>
+                              <span className="font-bold">LUMO</span>
                             </span>
                           ) : (
                             <span>
-                              ORBITAL{" "}
-                              <span className="font-bold">
-                                HOMO{" "}
-                              </span>
+                              ORBITAL <span className="font-bold">HOMO </span>
                               <span className="bg-black font-bold text-white p-1 rounded">
                                 LUMO
                               </span>
@@ -676,25 +696,18 @@ export default function Renderer() {
             gl={{ version: 2 }}
             camera={getCameraPosition(globalSelectedElement["element"])}
           >
-            <Provider store={store}>
-              {!preRender && (
-                <Controls />
-              )}
-            </Provider>
+            <Provider store={store}>{!preRender && <Controls />}</Provider>
 
-            {preRender && (
-              <Suspense fallback={null}>
-
-              </Suspense>
-            )}
+            {preRender && <Suspense fallback={null}></Suspense>}
 
             <ambientLight intensity={0.5} />
             <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
             <pointLight position={[-10, -10, -10]} />
 
-            {globalAtomInfo && !preRender && (
-              <Provider store={store}>
-                {/* {globalSelectedElement.type === "Molecule" &&
+            <mesh ref={sceneRef}>
+              {globalAtomInfo && !preRender && (
+                <Provider store={store}>
+                  {/* {globalSelectedElement.type === "Molecule" &&
                   globalAtomInfo.atoms_x.map((value, index) => {
                     return (
                       <>
@@ -731,32 +744,52 @@ export default function Renderer() {
                       </>
                     );
                   })} */}
-                {globalSelectedElement.type === "Atom" ? (
-                  <primitive object={new THREE.AxesHelper(5)} />
-                ) : (
-                  <>
-                    {globalSelectedElement.element &&
-                      moleculesWithMolecularOrbitals.includes(globalSelectedElement.element) &&
-                      molecularOrbital !== null && (
-                        <GLBViewer name={molecularOrbital} />
-                      )}
-                  </>
-                )}
+                  {globalSelectedElement.type === "Atom" ? (
+                    <primitive object={new THREE.AxesHelper(5)} />
+                  ) : (
+                    <>
+                      {globalSelectedElement.element &&
+                        moleculesWithMolecularOrbitals.includes(
+                          globalSelectedElement.element
+                        ) &&
+                        molecularOrbital !== null && (
+                          <GLBViewer name={molecularOrbital} />
+                        )}
+                    </>
+                  )}
 
-                <Particles
-                  particleRef={particleRef}
-                  lightRef={lightRef}
-                  particleRadius={particleRadius}
-                />
-              </Provider>
-            )}
-
+                  <Particles
+                    particleRef={particleRef}
+                    lightRef={lightRef}
+                    particleRadius={particleRadius}
+                  />
+                </Provider>
+              )}
+            </mesh>
             <gridHelper args={[10, 9, "gray"]} />
           </Canvas>
         </div>
 
-        {!preRender && moleculesWithMolecularOrbitals.includes(globalSelectedElement.element) && (
-          <Diagram name={globalSelectedElement.name.toLowerCase().replace(/ /g, "_") + "_energy_diagram"} />
+        {!preRender &&
+          moleculesWithMolecularOrbitals.includes(
+            globalSelectedElement.element
+          ) && (
+            <Diagram
+              name={
+                globalSelectedElement.name.toLowerCase().replace(/ /g, "_") +
+                "_energy_diagram"
+              }
+            />
+          )}
+
+        {!preRender && (
+          <button
+            onClick={handleExportClick}
+            className="bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 m-5 border border-white hover:border-transparent rounded"
+            type="button"
+          >
+            <span>Export as .GLB (GLTF) file</span>
+          </button>
         )}
 
         <div class="p-5" />
