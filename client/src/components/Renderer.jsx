@@ -1,10 +1,7 @@
 import React, { useState, useEffect, useRef, Suspense } from "react";
 import { useSelector, useDispatch, Provider } from "react-redux";
-import { Canvas, useThree } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import { Button } from "@mui/material";
-
-import * as THREE from "three";
-import * as FileSaver from "file-saver";
 
 import store from "../store";
 
