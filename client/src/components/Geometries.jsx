@@ -125,6 +125,10 @@ export function GLBViewer(props) {
   const url = `${isElectron() ? 'https://electronvisual.org' : ''}/api/downloadGLB/${props.name}`;
 
   const [gltf, setGltf] = useState(null);
+
+  const [rotation, setRotation] = useState({x: 0, y: 1.25, z: 0.15});
+  const [scale, setScale] = useState(6);
+
   const ref = useRef();
 
   useEffect(() => {
@@ -147,15 +151,37 @@ export function GLBViewer(props) {
             wireframe: true,
             color: 0xffffff,
             transparent: true,
-            opacity: 0.5,
+            opacity: 0.1,
           });
         }
       });
     }
   }, [gltf]);
 
+  useEffect(() => {
+    console.log(props.name);
+
+    if (props.name.includes("C2H4")) {
+      setRotation({x: 0, y: 1.25, z: 0.15});
+      setScale(6);
+      
+    } else if (props.name.includes("H2O")) {
+      setRotation({x: 0, y: Math.PI / 2, z: Math.PI / 2});
+      setScale(4);
+    }
+  }, [props.name]);
+
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.rotation.x = rotation.x;
+      ref.current.rotation.y = rotation.y;
+      ref.current.rotation.z = rotation.z;
+      ref.current.scale.set(scale, scale, scale);
+    }
+  }, [rotation, scale])
+
   return (
-    <mesh rotation-y={1.25} rotation-z={0.15} scale={6} ref={ref}>
+    <mesh ref={ref}>
       {gltf && <primitive castShadow receiveShadow object={gltf.scene} />}
     </mesh>
   );

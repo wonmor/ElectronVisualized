@@ -507,16 +507,21 @@ export default function Renderer() {
                           }}
                         >
                           {isHomo ? (
-                            <span className="font-bold">
-                              TOGGLE{" "}
+                            <span>
+                              ORBITAL{" "}
                               <span className="bg-black font-bold text-white p-1 rounded">
                                 HOMO
                               </span>{" "}
-                              LUMO
+                              <span className="font-bold">
+                                LUMO
+                              </span>
                             </span>
                           ) : (
-                            <span className="font-bold">
-                              TOGGLE HOMO{" "}
+                            <span>
+                              ORBITAL{" "}
+                              <span className="font-bold">
+                                HOMO{" "}
+                              </span>
                               <span className="bg-black font-bold text-white p-1 rounded">
                                 LUMO
                               </span>
