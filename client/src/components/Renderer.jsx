@@ -780,13 +780,13 @@ export default function Renderer() {
             />
           )}
 
-        {!preRender && (
+        {!isElectron() && !preRender && (
           <button
             onClick={handleExportClick}
             className="bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 m-5 border border-white hover:border-transparent rounded"
             type="button"
           >
-            <span>Export as .GLB (GLTF) file</span>
+            <span>Export as .GLTF file</span>
           </button>
         )}
 
