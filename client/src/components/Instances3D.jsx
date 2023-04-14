@@ -36,20 +36,23 @@ export function Particles3D({ particleRef, lightRef, particleRadius }) {
     A HTML markup that contains graphical elements; in this case,
     containing instanced mesh that can be replicated throughout the canvas
   */
-  const meshRef = particleRef;
+    const pointCloudRef = particleRef;
 
-  const globalAtomInfo = useSelector((state) => state.atomInfo.globalAtomInfo);
-
-  const globalSelectedElement = useSelector(
-    (state) => state.selectedElement.globalSelectedElement
-  );
+    const globalAtomInfo = useSelector((state) => state.atomInfo.globalAtomInfo);
+  
+    const globalSelectedElement = useSelector(
+      (state) => state.selectedElement.globalSelectedElement
+    );
 
   // Write the coordinates based upon its parent JSON data stored in the Redux global state...
   const particles = useMemo(() => {
     let temp = [];
     let isColourException = false;
 
-    if (globalSelectedElement["type"] === "Molecule" && globalAtomInfo["density_data"]) {
+    if (
+      globalSelectedElement["type"] === "Molecule" &&
+      globalAtomInfo["density_data"]
+    ) {
       for (const [key, value] of Object.entries(
         globalAtomInfo["density_data"]
       )) {
@@ -76,92 +79,74 @@ export function Particles3D({ particleRef, lightRef, particleRadius }) {
 
         temp.push({ x, y, z, volume, isColourException });
       }
-      
-    } else if (globalSelectedElement["type"] === "Atom" && globalAtomInfo["z_coords"]) {
+    } else if (
+      globalSelectedElement["type"] === "Atom" &&
+      globalAtomInfo["z_coords"]
+    ) {
       for (let i = 0; i < globalAtomInfo["z_coords"].length; i++) {
         const currentXCoords = globalAtomInfo["x_coords"][i];
         const currentYCoords = globalAtomInfo["y_coords"][i];
         const currentZCoords = globalAtomInfo["z_coords"][i];
-        
-        const x = currentXCoords / 10 - 8;
-        const y = currentYCoords / 10 - 8;
-        const z = currentZCoords / 10 - 8;
+
+        const x = currentXCoords / 10;
+        const y = currentYCoords / 10;
+        const z = currentZCoords / 10;
 
         const volume = 0;
-        
+
         temp.push({ x, y, z, volume, isColourException });
       }
     }
 
-    console.log(temp)
+    console.log(temp);
     return temp;
   }, [globalAtomInfo, globalSelectedElement]);
 
-  // Anonymous states for instances...
-  const anonymousObject = useMemo(() => new THREE.Object3D(), []);
-  const anonymousColour = useMemo(() => new THREE.Color(), []);
+  return (
+    <>
+      <ambientLight ref={lightRef} />
+      {particles.map((particle, index) => {
+        const { x, y, z, volume, isColourException } = particle;
+        let currentColour;
 
-  useEffect(() => {
-    particles.forEach((particle, index) => {
-      const { x, y, z, volume, isColourException } = particle;
-      let currentColour;
-
-      if (globalSelectedElement["type"] === "Molecule") {
-        currentColour = getMoleculeColour(
-          globalSelectedElement["element"],
-          volume
-        );
-
-        if (isColourException) {
+        if (globalSelectedElement["type"] === "Molecule") {
           currentColour = getMoleculeColour(
             globalSelectedElement["element"],
-            volume,
-            true
+            volume
           );
+
+          if (isColourException) {
+            currentColour = getMoleculeColour(
+              globalSelectedElement["element"],
+              volume,
+              true
+            );
+          }
         }
-      }
 
-      if (globalSelectedElement["type"] === "Atom") {
-        currentColour = getAtomColour(globalSelectedElement["element"]);
+        if (globalSelectedElement["type"] === "Atom") {
+          currentColour = getAtomColour(globalSelectedElement["element"]);
 
-        if (isColourException) {
-          currentColour = "#FFFF00";
+          if (isColourException) {
+            currentColour = "#FFFF00";
+          }
         }
-      }
 
-      anonymousObject.position.set(x, y, z);
+        const sphereGeometry = new THREE.SphereGeometry(particleRadius, 16, 16);
+        const sphereMaterial = new THREE.MeshStandardMaterial({
+          color: currentColour,
+        });
 
-      // Add code to differentiate the boundaries between the shells...
-
-      anonymousObject.updateMatrix();
-
-      // Apply the matrix to the instanced item...
-      meshRef.current.setMatrixAt(index, anonymousObject.matrix);
-      meshRef.current.setColorAt(index, anonymousColour.set(currentColour));
-    });
-
-    /*
-    The lines below are arguably the most important part in this code.
-    Without them, the changes will not be applied
-    and the instances will not be updated accordingly.
-    */
-
-    meshRef.current.instanceMatrix.needsUpdate = true;
-    meshRef.current.instanceColor.needsUpdate = true;
-    meshRef.current.material.needsUpdate = true;
-  });
-
-  return (
-    <instancedMesh
-      ref={meshRef}
-      args={[null, null, globalSelectedElement["type"] === "Molecule" ? Object.keys(globalAtomInfo["density_data"]).length : globalAtomInfo["z_coords"].length]}
-    >
-        <ambientLight ref={lightRef} />
-        <sphereBufferGeometry
-          args={[particleRadius, 30, 30]}
-          attach="geometry"
-        />
-        <meshBasicMaterial attach="material" />
-    </instancedMesh>
+        return (
+          <mesh
+            ref={pointCloudRef}
+            key={index}
+            geometry={sphereGeometry}
+            material={sphereMaterial}
+            position={[x, y, z]}
+          />
+        );
+      })}
+    </>
   );
 }
