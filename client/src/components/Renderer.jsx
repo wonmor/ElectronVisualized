@@ -23,6 +23,8 @@ import MetaTag from "./MetaTag";
 import Diagram from "./Diagram";
 
 import { Particles } from "./Instances";
+import { Particles3D } from "./Instances3D";
+
 import {
   moleculeDict,
   moleculesWithLonePairs,
@@ -98,35 +100,49 @@ export default function Renderer() {
   const [reachedMaxPeak, setMaxPeak] = useState(false);
   const [reachedMinPeak, setMinPeak] = useState(true);
   const [molecularOrbital, setMolecularOrbital] = useState(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const handleExportClick = () => {
-    const gltfExporter = new GLTFExporter();
-    const scene = sceneRef.current;
+  const handleExportClick = (option) => {
+    if (option === "gltf") {
+      const gltfExporter = new GLTFExporter();
+      const scene = sceneRef.current;
 
-    // Remove any non-exportable objects from the scene
-    scene.traverse((node) => {
-      if (node.userData && node.userData.skipExport) {
-        node.parent.remove(node);
-      }
-    });
-    gltfExporter.parse(scene, (glb) => {
-      downloadJSON(glb);
-    }, { binary: true });
+      // Remove any non-exportable objects from the scene
+      scene.traverse((node) => {
+        if (node.userData && node.userData.skipExport) {
+          node.parent.remove(node);
+        }
+      });
+      gltfExporter.parse(
+        scene,
+        (glb) => {
+          downloadJSON(glb);
+        },
+        { binary: false }
+      );
+    }
   };
 
-  function downloadJSON( data ) {
-    const jsonData = JSON.stringify( data );
-    const blob = new Blob( [ jsonData ], { type: 'application/json' } );
-    const url = URL.createObjectURL( blob );
-    const link = document.createElement( 'a' );
-    link.href = url;
-    link.download = 'model.gltf';
-    document.body.appendChild( link );
-    link.click();
-    document.body.removeChild( link );
-    URL.revokeObjectURL( url );
-  }
+  const resetParticleRadius = () => {
+    setParticleRadius(0.015);
+  };
 
+  const changeParticleRadius = (radius) => {
+    setParticleRadius(radius);
+  };
+
+  function downloadJSON(data) {
+    const jsonData = JSON.stringify(data);
+    const blob = new Blob([jsonData], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "model.gltf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  }
 
   /*
   Define that React and Redux states: former being used locally, and the latter being used globally.
@@ -143,6 +159,7 @@ export default function Renderer() {
     (state) => state.renderInfo.globalRenderInfo
   );
 
+  const [isExportReady, setExportReady] = useState(false);
   const [animation, setAnimation] = useState(globalRenderInfo.animation);
   const [statusText, setStatusText] = useState(globalRenderInfo.statusText);
   const [disableButton, setDisableButton] = useState(
@@ -704,43 +721,6 @@ export default function Renderer() {
             <mesh ref={sceneRef}>
               {globalAtomInfo && !preRender && (
                 <Provider store={store}>
-                  {/* {globalSelectedElement.type === "Molecule" &&
-                  globalAtomInfo.atoms_x.map((value, index) => {
-                    return (
-                      <>
-                        <mesh>
-                          <Atoms
-                            position={[
-                              globalAtomInfo.atoms_x[index],
-                              globalAtomInfo.atoms_y[index],
-                              globalAtomInfo.atoms_z[index],
-                            ]}
-
-                            // colour={globalAtomInfo["atomic_color"][currentElementArray[index]]}
-                          />
-
-                          {Object.values(
-                            bondShapeDict[globalSelectedElement.element]
-                          ).map((value) => {
-                            return (
-                              <>
-                                <BondLine
-                                  coords={[
-                                    globalAtomInfo["atoms_x"][value[0]],
-                                    globalAtomInfo["atoms_y"][value[0]],
-                                    globalAtomInfo["atoms_z"][value[0]],
-                                    globalAtomInfo["atoms_x"][value[1]],
-                                    globalAtomInfo["atoms_y"][value[1]],
-                                    globalAtomInfo["atoms_z"][value[1]],
-                                  ]}
-                                />
-                              </>
-                            );
-                          })}
-                        </mesh>
-                      </>
-                    );
-                  })} */}
                   {globalSelectedElement.type === "Molecule" && (
                     <>
                       {globalSelectedElement.element &&
@@ -753,11 +733,20 @@ export default function Renderer() {
                     </>
                   )}
 
-                  <Particles
-                    particleRef={particleRef}
-                    lightRef={lightRef}
-                    particleRadius={particleRadius}
-                  />
+                  {isExportReady ? (
+                    <Particles3D
+                      particleRef={particleRef}
+                      lightRef={lightRef}
+                      particleRadius={particleRadius}
+                    />
+                  ) : (
+                    <Particles
+                      particleRef={particleRef}
+                      lightRef={lightRef}
+                      particleRadius={particleRadius}
+                    />
+                  )}
+                  
                 </Provider>
               )}
             </mesh>
@@ -777,14 +766,40 @@ export default function Renderer() {
             />
           )}
 
-        {!isElectron() && !preRender && (
-          <button
-            onClick={handleExportClick}
-            className="bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 m-5 border border-white hover:border-transparent rounded"
-            type="button"
-          >
-            <span>Export as .GLTF file</span>
-          </button>
+        {!preRender && (
+          <div className="relative inline-block">
+            <button
+              onClick={() => {
+                setExportReady(!isExportReady)
+                setDropdownOpen(!dropdownOpen)
+                
+                // Will change the particles to 3D sphere from point since Project Atomizer needs triangulated mesh...
+                if (!isExportReady) {
+                  changeParticleRadius(0.04);
+
+                } else {
+                  resetParticleRadius();
+                }
+              }
+            }
+              className="bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 m-5 border border-white hover:border-transparent rounded"
+              type="button"
+            >
+              <span>Export 3D Model</span>
+            </button>
+            {dropdownOpen && (
+              <div className="flex flex-col right-0 py-2 w-48 bg-white rounded-md shadow-xl z-10">
+                <button
+                  onClick={() => handleExportClick("gltf")}
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                >
+                  <span>
+                  Export as <span className="font-bold">.GLTF</span>
+                  </span>
+                </button>
+              </div>
+            )}
+          </div>
         )}
 
         <div class="p-5" />
