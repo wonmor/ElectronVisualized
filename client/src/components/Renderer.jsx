@@ -775,7 +775,7 @@ export default function Renderer() {
                 
                 // Will change the particles to 3D sphere from point since Project Atomizer needs triangulated mesh...
                 if (!isExportReady) {
-                  changeParticleRadius(0.04);
+                  changeParticleRadius(0.15);
 
                 } else {
                   resetParticleRadius();
