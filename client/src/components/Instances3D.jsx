@@ -102,51 +102,67 @@ export function Particles3D({ particleRef, lightRef, particleRadius }) {
     return temp;
   }, [globalAtomInfo, globalSelectedElement]);
 
-  return (
-    <>
-      <ambientLight ref={lightRef} />
-      {particles.map((particle, index) => {
-        const { x, y, z, volume, isColourException } = particle;
-        let currentColour;
+  const pointsGeometry = useMemo(() => {
+    const geometry = new THREE.BufferGeometry();
+    const positions = [];
+    const colors = [];
+    const color = new THREE.Color();
+  
+    particles.forEach((particle) => {
+      const { x, y, z, volume, isColourException } = particle;
+      let currentColour;
 
-        if (globalSelectedElement["type"] === "Molecule") {
+      if (globalSelectedElement["type"] === "Molecule") {
+        currentColour = getMoleculeColour(
+          globalSelectedElement["element"],
+          volume
+        );
+
+        if (isColourException) {
           currentColour = getMoleculeColour(
             globalSelectedElement["element"],
-            volume
+            volume,
+            true
           );
-
-          if (isColourException) {
-            currentColour = getMoleculeColour(
-              globalSelectedElement["element"],
-              volume,
-              true
-            );
-          }
         }
+      }
 
-        if (globalSelectedElement["type"] === "Atom") {
-          currentColour = getAtomColour(globalSelectedElement["element"]);
+      if (globalSelectedElement["type"] === "Atom") {
+        currentColour = getAtomColour(globalSelectedElement["element"]);
 
-          if (isColourException) {
-            currentColour = "#FFFF00";
-          }
+        if (isColourException) {
+          currentColour = "#FFFF00";
         }
+      }
+      // Add vertices for the triangles
+      positions.push(x, y, z);
+      positions.push(x + particleRadius, y, z);
+      positions.push(x, y + particleRadius, z);
 
-        const sphereGeometry = new THREE.SphereGeometry(particleRadius, 16, 16);
-        const sphereMaterial = new THREE.MeshStandardMaterial({
-          color: currentColour,
-        });
+      // Add colors for each vertex of the triangle
+      color.set(currentColour);
+      colors.push(color.r, color.g, color.b);
+      colors.push(color.r, color.g, color.b);
+      colors.push(color.r, color.g, color.b);
+      });
 
-        return (
-          <mesh
-            ref={pointCloudRef}
-            key={index}
-            geometry={sphereGeometry}
-            material={sphereMaterial}
-            position={[x, y, z]}
-          />
-        );
-      })}
-    </>
+      geometry.setAttribute(
+      "position",
+      new THREE.Float32BufferAttribute(positions, 3)
+      );
+      geometry.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
+
+      return geometry;
+  }, [particles, globalSelectedElement]);
+
+  return (
+    <mesh ref={pointCloudRef} geometry={pointsGeometry}>
+    <ambientLight ref={lightRef} />
+    <meshBasicMaterial
+      attach="material"
+      vertexColors={THREE.VertexColors}
+      side={THREE.DoubleSide}
+    />
+  </mesh>
   );
 }
