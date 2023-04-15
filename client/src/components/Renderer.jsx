@@ -160,6 +160,8 @@ export default function Renderer() {
   );
 
   const [isExportReady, setExportReady] = useState(false);
+  const [isExportReadyAR, setExportReadyAR] = useState(false);
+
   const [animation, setAnimation] = useState(globalRenderInfo.animation);
   const [statusText, setStatusText] = useState(globalRenderInfo.statusText);
   const [disableButton, setDisableButton] = useState(
@@ -222,6 +224,10 @@ export default function Renderer() {
       console.log(error);
     }
   }, [globalSelectedElement]);
+
+  useEffect(() => {
+    setExportReadyAR(false);
+  }, []);
 
   const fetchMoleculeSecondRenderElement = async (secondRenderElement) => {
     await axios({
@@ -728,7 +734,7 @@ export default function Renderer() {
                           globalSelectedElement.element
                         ) &&
                         molecularOrbital !== null && (
-                          <GLBViewer name={molecularOrbital} />
+                          <GLBViewer name={molecularOrbital} isExportReady={isExportReadyAR} />
                         )}
                     </>
                   )}
@@ -779,6 +785,7 @@ export default function Renderer() {
 
                 } else {
                   resetParticleRadius();
+                  setExportReadyAR(false);
                 }
               }
             }
@@ -794,7 +801,18 @@ export default function Renderer() {
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                 >
                   <span>
-                  Export as <span className="font-bold">.GLTF</span>
+                  <span className="font-bold">.GLTF</span> for General Use
+                  </span>
+                </button>
+                <button
+                  onClick={() => {
+                    setExportReadyAR(true);
+                    handleExportClick("gltf")
+                  }}
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                >
+                  <span>
+                  <span className="font-bold">.GLTF</span> for AR
                   </span>
                 </button>
               </div>

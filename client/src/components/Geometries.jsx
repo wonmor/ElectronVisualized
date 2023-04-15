@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { extend } from '@react-three/fiber'
-import { useGLTF, useAnimations } from '@react-three/drei'
 import { GLTFLoader } from "three-stdlib";
 
 import * as THREE from "three";
@@ -151,12 +150,12 @@ export function GLBViewer(props) {
             wireframe: true,
             color: 0xffffff,
             transparent: true,
-            opacity: 0.1,
+            opacity: props.isExportReady ? 1.0 : 0.1,
           });
         }
       });
     }
-  }, [gltf]);
+  }, [gltf, props.isExportReady]);
 
   useEffect(() => {
     console.log(props.name);
