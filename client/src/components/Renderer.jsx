@@ -225,10 +225,6 @@ export default function Renderer() {
     }
   }, [globalSelectedElement]);
 
-  useEffect(() => {
-    setExportReadyAR(false);
-  }, []);
-
   const fetchMoleculeSecondRenderElement = async (secondRenderElement) => {
     await axios({
       method: "GET",
@@ -785,7 +781,6 @@ export default function Renderer() {
 
                 } else {
                   resetParticleRadius();
-                  setExportReadyAR(false);
                 }
               }
             }
