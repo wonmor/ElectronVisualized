@@ -30,7 +30,7 @@ pd.options.display.float_format = "{:,.3f}".format
 smiles = {
     "ethene": "C=C",
     "hydrogen_gas": "[H][H]",
-    "hydrochloric_acid": "ClC(=O)O",
+    "hydrochloric_acid": "Cl",
     "methane": "C",
     "ethane": "CC",
     "propane": "CCC",
@@ -198,4 +198,4 @@ def plot_mo(molecule_name="ethene"):
     cmo_homo_cube_path = pathlib.Path("server/cmo_homo.cube")
     cmo_lumo_cube_path = pathlib.Path("server/cmo_lumo.cube")
 
-plot_mo("water")
+plot_mo("hydrochloric_acid")

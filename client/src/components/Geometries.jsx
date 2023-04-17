@@ -127,6 +127,7 @@ export function GLBViewer(props) {
 
   const [rotation, setRotation] = useState({x: 0, y: 1.25, z: 0.15});
   const [scale, setScale] = useState(6);
+  const [offset, setOffset] = useState([0, 0, 0]);
 
   const ref = useRef();
 
@@ -167,8 +168,23 @@ export function GLBViewer(props) {
     } else if (props.name.includes("H2O")) {
       setRotation({x: 0, y: Math.PI / 2, z: Math.PI / 2});
       setScale(4);
+      
+    } else if (props.name.includes("H2")) {
+      setRotation({x: 0, y: Math.PI / 2, z: 0});
+      setScale(3);
+      setOffset([0.4, 0.4, 0.4])
+
+    } else if (props.name.includes("Cl2")) {
+      setRotation({x: 0, y: Math.PI / 2, z: 0});
+      setScale(4.5);
+      setOffset([0.0, 0.4, 0.0])
+
+    } else if (props.name.includes("HCl")) {
+      setRotation({x: 0, y: -Math.PI / 2, z: 0});
+      setScale(4.5);
+      setOffset([0.0, 0.4, props.isHomo ? 2.8 : 0.8])
     }
-  }, [props.name]);
+  }, [props.isHomo, props.name]);
 
   useEffect(() => {
     if (ref.current) {
@@ -176,8 +192,9 @@ export function GLBViewer(props) {
       ref.current.rotation.y = rotation.y;
       ref.current.rotation.z = rotation.z;
       ref.current.scale.set(scale, scale, scale);
+      ref.current.position.set(...offset)
     }
-  }, [rotation, scale])
+  }, [offset, rotation, scale])
 
   return (
     <mesh ref={ref}>

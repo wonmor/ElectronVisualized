@@ -43,7 +43,7 @@ HOW TO OPTIMIZE REACT + THREE-FIBER: https://docs.pmnd.rs/react-three-fiber/adva
 PERIODIC TABLE REST API WRITTEN IN GOLANG: https://github.com/neelpatel05/periodic-table-api-go
 */
 
-const moleculesWithMolecularOrbitals = ["C2H4", "H2O"];
+const moleculesWithMolecularOrbitals = ["C2H4", "H2O", "H2", "Cl2", "HCl"];
 
 const useLazyInterval = (callback, delay) => {
   /*
@@ -730,7 +730,7 @@ export default function Renderer() {
                           globalSelectedElement.element
                         ) &&
                         molecularOrbital !== null && (
-                          <GLBViewer name={molecularOrbital} isExportReady={isExportReadyAR} />
+                          <GLBViewer name={molecularOrbital} isExportReady={isExportReadyAR} isHomo={isHomo} />
                         )}
                     </>
                   )}
@@ -811,7 +811,7 @@ export default function Renderer() {
                   </span>
                 </button>
               </div>
-            )}
+            )}  
           </div>
         )}
 
