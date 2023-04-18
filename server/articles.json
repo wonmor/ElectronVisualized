@@ -3,21 +3,21 @@
       "id": "D69F173B-C18F-46EB-8C31-0AA3AFB9EC9C",
       "title": "Understanding Atomic Orbitals",
       "subtitle": "A Comprehensive Guide",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Hydrogen_Density_Plots.png",
+      "imageUrl": "https://electronvisualized.s3.amazonaws.com/public/atomic_orbital_image.jpeg",
       "content": "Atomic orbitals are regions of space around an atom's nucleus where electrons are most likely to be found. **Quantum mechanics** provides the theoretical framework for understanding atomic orbitals. According to this theory, electrons can only occupy certain energy levels, or **quantum states**. These energy levels are described by a set of four quantum numbers: the principal quantum number, azimuthal quantum number, magnetic quantum number, and spin quantum number. \n\n![Atomic orbitals](https://upload.wikimedia.org/wikipedia/commons/5/5b/Hydrogen_Density_Plots.png)\n\nThe shapes of atomic orbitals are determined by their quantum numbers. The principal quantum number determines the orbital's energy level and size, while the azimuthal quantum number determines the orbital's shape. The magnetic quantum number determines the orbital's orientation in space. \n\nIn summary, atomic orbitals are essential to understanding the behavior of electrons in atoms. They play a crucial role in chemical bonding and the formation of molecules. "
     },
     {
       "id": "B5B5A5C4-4A2A-4E29-9D87-59CC5F7A1D67",
       "title": "The Double Slit Experiment: A Window into the Quantum World",
       "subtitle": "What it is and Why it Matters",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/eb/Single_slit_and_double_slit.png",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/49/Double_slit_x-ray_simulation_polychromatic_false-color.jpg",
       "content": "The double slit experiment is a classic demonstration of the **wave-particle duality** of matter. It involves firing a stream of particles, such as electrons or photons, at a screen with two slits. The pattern that emerges on the other side of the screen is an **interference pattern**, which suggests that the particles behave like waves. \n\n![Double Slit Experiment](https://upload.wikimedia.org/wikipedia/commons/e/eb/Single_slit_and_double_slit.png)\n\nThe double slit experiment has important implications for our understanding of quantum mechanics. It shows that particles can exist in multiple states at the same time, and that our observations can influence their behavior. This phenomenon is known as **quantum entanglement**. The double slit experiment also suggests that the act of measurement or observation can collapse a particle's wave function, forcing it to assume a definite state. \n\nIn summary, the double slit experiment is a fascinating demonstration of the weird and wonderful world of quantum mechanics."
     },
     {
       "id": "7E4DC4B4-0C0F-4A4B-A78A-91E99B9A3B3C",
       "title": "Molecular Orbitals: The Key to Understanding Chemical Bonding",
       "subtitle": "A Beginner's Guide",
-      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Molecular_Orbitals.svg/1024px-Molecular_Orbitals.svg.png",
+      "imageUrl": "https://electronvisualized.s3.amazonaws.com/public/molecular_orbital_image.png",
       "content": "Molecular orbitals are formed from the combination of atomic orbitals when atoms bond together to form molecules. They are the **quantum mechanical** analog of the classical concept of chemical bonding. \n\nThe behavior of electrons in molecular orbitals can be described using the principles of quantum mechanics. The Schrödinger equation is used to calculate the energy and shape of molecular orbitals. Molecular orbitals can be bonding, non-bonding, or anti-bonding, depending on their energy levels. \n\n![Molecular Orbitals](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Molecular_Orbitals.svg/1024px-Molecular_Orbitals.png)\n\nMolecular orbitals are essential to understanding chemical bonding and the properties of molecules. They are used to explain why some molecules are stable while others are not, and why some molecules have unique properties such as color or magnetism. \n\nIn summary, molecular orbitals are a key concept in chemistry that provides insight into the behavior of electrons in molecules."
     }
 ]
