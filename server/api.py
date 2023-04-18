@@ -1,7 +1,7 @@
 import json
 import os
 
-from flask import Blueprint, request, current_app, send_file, make_response
+from flask import Blueprint, jsonify, request, current_app, send_file, make_response
 import flask
 
 from flask_cors import CORS, cross_origin
@@ -267,6 +267,15 @@ def loadSPH_from_s3(name):
         data = json.load(f)
         return data
     
+@bp.route('/api/get-articles')
+@limiter.exempt
+@cross_origin()
+def get_articles():
+    with open('articles.json', 'r') as f:
+        articles = json.load(f)
+
+    return jsonify(articles)
+    
 @bp.route('/api/upload', methods=['POST'])
 @limiter.limit("5 per minute")
 @cross_origin()
@@ -332,7 +341,7 @@ def download_png(key):
         return 'Error downloading file from S3!', 500
     
 @bp.route('/api/connect', methods=['POST'])
-@limiter.exempt
+@limiter.exempt()
 @cross_origin()
 def connect_to_socket():
     '''
