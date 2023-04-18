@@ -271,7 +271,7 @@ def loadSPH_from_s3(name):
 @limiter.exempt
 @cross_origin()
 def get_articles():
-    with open('articles.json', 'r') as f:
+    with open('server/articles.json', 'r') as f:
         articles = json.load(f)
 
     return jsonify(articles)
