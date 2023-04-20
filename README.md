@@ -2,7 +2,7 @@
 
 # ElectronVisualized
 
-Designed and Developed by John Seong.
+**Designed and Developed by John Seong.**
 
 A web-based viewer for atomic and molecular orbitals. This viewer uses mathematical functions called spherical harmonics and formulas from Density Functional Theory to visualize these orbitals.
 
