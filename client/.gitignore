@@ -24,3 +24,6 @@ yarn-error.log*
 
 package-lock.json
 yarn.lock
+
+# For macOS provisioning profiles
+/sign

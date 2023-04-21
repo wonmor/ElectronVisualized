@@ -58,6 +58,22 @@
         "vtk.js": "^26.9.12",
         "web-vitals": "^2.1.4"
     },
+    "build": {
+        "appId": "com.johnseong.electronvisualized",
+        "mac": {
+            "target": [
+                "mas"
+            ]
+        },
+        "mas": {
+            "hardenedRuntime": false,
+            "provisioningProfile": "sign/embedded.provisionprofile",
+            "entitlements": "sign/entitlements.mas.plist",
+            "entitlementsInherit": "sign/entitlements.mas.inherit.plist",
+            "gatekeeperAssess": false,
+            "asarUnpack": []
+        }
+    },     
     "scripts": {
         "start": "react-scripts start",
         "start-api": "cd ../ && venv/bin/flask run --no-debugger",
