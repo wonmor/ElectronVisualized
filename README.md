@@ -2,7 +2,9 @@
 
 # ElectronVisualized
 
-A web-based viewer for atomic and molecular orbitals. This viewer uses mathematical functions called spherical harmonics and formulas from Density Functional Theory to visualize these orbitals.
+**Designed and Developed by John Seong.**
+
+A web-based viewer and an API for atomic and molecular orbitals. The viewer, written entirely in Javascript, uses mathematical functions called spherical harmonics and formulas from Density Functional Theory to visualize these orbitals.
 
 - For atomic orbitals, the viewer shows the different shapes of orbitals (e.g. s, p, d) for different energy levels (e.g. 1s, 2s, 2p).
 
