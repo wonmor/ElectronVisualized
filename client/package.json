@@ -1,7 +1,10 @@
 {
     "name": "client",
     "homepage": ".",
-    "version": "0.1.0",
+    "version": "2.0.0",
+    "author": "John Seong",
+    "productName": "ElectronVisualized",
+    "description": "ElectronVisualized allows users to freely interact with the 3D models of atoms and molecules generated based upon the internal DFT calculations.",
     "private": true,
     "main": "electron/main.ts",
     "proxy": "http://localhost:5000",
@@ -59,6 +62,7 @@
         "web-vitals": "^2.1.4"
     },
     "build": {
+        "extends": null,
         "appId": "com.johnseong.electronvisualized",
         "mac": {
             "target": [
@@ -72,6 +76,18 @@
             "entitlementsInherit": "sign/entitlements.mas.inherit.plist",
             "gatekeeperAssess": false,
             "asarUnpack": []
+        },
+        "win": {
+            "asar": false,
+            "target": "nsis",
+            "icon": "resources/icon.ico"
+        },
+        "files": [
+            "build/**/*",
+            "node_modules/**/*"
+          ],
+        "directories":{
+            "buildResources":"resources"
         }
     },
     "scripts": {

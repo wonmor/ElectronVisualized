@@ -2,6 +2,9 @@ const { app, BrowserWindow, screen: electronScreen } = require('electron');
 const isDev = require('electron-is-dev');
 const path = require('path');
 
+// How to get provisioning profiles for macOS distribution: https://webspaceteam.com/blog/how-to-publish-an-electron-application-to-mac-app-store
+// Run the following command to build an universal app: yarn electron-builder --universal
+
 const createMainWindow = () => {
   let mainWindow = new BrowserWindow({
     width: 1000,
