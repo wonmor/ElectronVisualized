@@ -16,6 +16,14 @@ function Membership() {
     };
   }, []);
 
+  const signOut = async () => {
+    try {
+      await firebase.auth().signOut();
+    } catch (error) {
+      console.error('Sign-out error:', error);
+    }
+  };
+
   return (
     <>
       <div className="bg-gray-700 pb-5 overflow-auto" style={{ "min-height": "100vh" }}>
@@ -28,6 +36,12 @@ function Membership() {
                 </span>
               </h1>
               <p>This is your membership page.</p>
+              <button
+                className="m-5 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
+                onClick={signOut}
+              >
+                Sign out
+              </button>
             </div>
           ) : (
             <div>
