@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from "react";
-import classNames from "classnames";
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setGlobalRenderInfo } from "../states/renderInfoSlice";
 import { setGlobalSelectedElement } from "../states/selectedElementSlice";
 import { Background } from "./Geometries";
 import { moleculeDict, atomDict, useWindowSize, isElectron } from "./Globals";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+
+import classNames from "classnames";
+import MetaTag from "./MetaTag";
+import quantumNumbers from "../assets/quantum_num.json";
+
+import "./Table.css";
+import "./Background.css";
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -22,13 +28,6 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-
-import ViewInArIcon from '@mui/icons-material/ViewInAr';
-import MetaTag from "./MetaTag";
-import quantumNumbers from "../assets/quantum_num.json";
-
-import "./Table.css";
-import "./Background.css";
 
 /*
 ░█▀▀█ ░█▀▀▀ ░█▀▀█ ▀█▀ ░█▀▀▀█ ░█▀▀▄ ▀█▀ ░█▀▀█ 　 ▀▀█▀▀ ─█▀▀█ ░█▀▀█ ░█─── ░█▀▀▀ 
@@ -49,9 +48,6 @@ export default function Table() {
     DOM File
         A HTML markup that contains graphical elements
   */
-  const globalSelectedElement = useSelector(
-    (state) => state.selectedElement.globalSelectedElement
-  );
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
