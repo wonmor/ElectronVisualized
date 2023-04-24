@@ -1,39 +1,49 @@
 import { Background } from "./Geometries";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { StyledFirebaseAuth } from "react-firebaseui";
 
 import MetaTag from "./MetaTag";
 import firebase from 'firebase/compat/app';
+import * as firebaseui from 'firebaseui';
 
 import 'firebase/compat/auth';
+import 'firebaseui/dist/firebaseui.css';
 
 export default function Login() {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    const authContainer = useRef(null);
 
     const navigate = useNavigate();
 
-    const loginSuccessful = async () => {
-        try {
-          await firebase.auth().signInWithEmailAndPassword(username, password);
-          navigate("/");
-        } catch (error) {
-          setErrorMessage("Please type in the correct username and password pair.");
-        }
-      };
-      
-      const uiConfig = {
-        // Popup signin flow rather than redirect flow.
+    const uiConfig = {
         signInFlow: 'popup',
-        // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
         signInSuccessUrl: '/signedIn',
-        // We will display Google and Facebook as auth providers.
         signInOptions: [
           firebase.auth.GoogleAuthProvider.PROVIDER_ID,
         ],
-      };
+        callbacks: {
+          signInSuccessWithAuthResult: () => {
+            navigate('/signedIn');
+            return false; // Prevents redirect by FirebaseUI
+          },
+        },
+    };
+
+    useEffect(() => {
+        const ui = firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(firebase.auth());
+        ui.start(authContainer.current, uiConfig);
+
+        const unregisterAuthObserver = firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+            navigate('/signedIn');
+          }
+        });
+
+        return () => {
+          unregisterAuthObserver();
+          ui.reset();
+        };
+    }, [navigate]);
 
     return (
         <>
@@ -52,34 +62,25 @@ export default function Login() {
               <h3>or <button onClick={() => {
                 navigate("/register");
               }}><span className="text-blue-200 hover:underline">{"Sign up"}</span></button>.</h3>
-            
-            {username === "" ? (
-      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
-    ) : password === "" ? (
-      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
-    ) : (
+
+              <div ref={authContainer}></div>
+
+              {errorMessage !== "" && (
                 <div className="mt-5">
-                        <>
-                            {errorMessage === "" ? (
-                                <h3 className="text-blue-200">
-                                    Authenticating...
-                                </h3>
-                            ) : (
-                                <h3 className="text-red-200">
-                                    {errorMessage}
-                                </h3>
-                            )}
-                        </>
+                    <h3 className="text-red-200">
+                        {errorMessage}
+                    </h3>
                 </div>
-            )}
-                <div className="max-w-lg m-auto pt-5">
-                    <span className="text-center text-gray-400">
-                        Sign up for our membership today and start exploring the exciting world of atomic and molecular orbitals like never before!
-                    </span>
-                </div>
+              )}
+
+              <div className="max-w-lg m-auto pt-5">
+                  <span className="text-center text-gray-400">
+                      Sign up for our membership today and start exploring the exciting world of atomic and molecular orbitals like never before!
+                  </span>
+              </div>
             </div>
           </div>
           <Background />
         </>
-      );
+    );
 }
