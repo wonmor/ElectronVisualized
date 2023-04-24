@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Transition } from "@headlessui/react";
 import { useWindowSize, isElectron } from "./Globals";
-import { useAuth } from "../auth";
 
 import "./Header.css";
 
 import Logo from "../assets/e_logo.svg";
+import firebase from "firebase/compat/app";
 
 /*
 ███████████████████████████████████
@@ -37,12 +37,22 @@ export default function Header() {
   const location = useLocation();
 
   const [localSearchKeyword, setLocalSearchKeyword] = useState("");
-
   const [showMenu, setMenu] = useState(false);
   const [showMenuAlreadyTriggered, setMenuAlreadyTriggered] = useState(false);
   const [showDropDown, setDropDown] = useState(false);
+  const [logged, setLogged] = useState(false);
 
-  const [logged] = useAuth();
+  useEffect(() => {
+    const unregisterAuthObserver = firebase.auth().onAuthStateChanged((user) => {
+      setLogged(!!user);
+    });
+
+    return () => {
+      unregisterAuthObserver();
+    };
+  }, []);
+
+  const menuText = logged ? 'Member' : 'Sign in';
 
   const navigate = useNavigate();
 
@@ -122,12 +132,14 @@ export default function Header() {
               </button>
             ) : (
               <button
-                onClick={() => {}}
+                onClick={() => {
+                  movePage("/membership");
+                }}
                 className={`flex items-center px-3 py-2 border rounded text-rose-200 border-rose-200 hover:text-white hover:border-white ${
                   size.width < 380 ? "mt-5 mr-2" : "mr-2"
                 }`}
               >
-                <span>Sign out</span>
+                <span>Member</span>
               </button>
             )}
           </>
@@ -178,20 +190,18 @@ export default function Header() {
                       size.width < 380 ? "mt-5 mr-5" : "mr-5"
                     }`}
                   >
-                    {size.width < 380 && <span className="mr-3">Menu</span>}
-
                     <span>Sign in</span>
                   </button>
                 ) : (
                   <button
-                    onClick={() => {}}
+                    onClick={() => {
+                      movePage("/membership");
+                    }}
                     className={`items-center px-3 py-2 border rounded text-rose-200 border-rose-200 hover:text-white hover:border-white hidden lg:inline-block ${
                       size.width < 380 ? "mt-5 mr-5" : "mr-5"
                     }`}
                   >
-                    {size.width < 380 && <span className="mr-3">Menu</span>}
-
-                    <span>Sign out</span>
+                    <span>Member</span>
                   </button>
                 )}
               </>
