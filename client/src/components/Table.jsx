@@ -6,6 +6,22 @@ import { setGlobalRenderInfo } from "../states/renderInfoSlice";
 import { setGlobalSelectedElement } from "../states/selectedElementSlice";
 import { Background } from "./Geometries";
 import { moleculeDict, atomDict, useWindowSize, isElectron } from "./Globals";
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+
+const firebaseConfig = {
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: "electronvisualized.firebaseapp.com",
+  projectId: "electronvisualized",
+  storageBucket: "electronvisualized.appspot.com",
+  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.FIREBASE_APP_ID,
+  measurementId: process.env.FIREBASE_MEASUREMENT_ID
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
 import ViewInArIcon from '@mui/icons-material/ViewInAr';
 import MetaTag from "./MetaTag";

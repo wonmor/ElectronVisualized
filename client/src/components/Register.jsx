@@ -173,18 +173,6 @@ export default function Register() {
           )}
           <div className="max-w-lg m-auto pt-5">
             <span className="text-center text-gray-400">
-              By signing up for a membership, you'll gain access to even more
-              advanced features, such as real-time molecular visualization and
-              interactive orbital manipulation.
-              <br />
-              <br />
-              You'll also have access to our comprehensive database of orbital
-              data, which is constantly updated with the latest research
-              findings.
-              <br />
-              <br />
-              So what are you waiting for?
-              <br />
               Sign up for our membership today and start exploring the exciting
               world of atomic and molecular orbitals like never before!
             </span>
