@@ -1,11 +1,12 @@
 import React, { Suspense, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
 import ReactGA from "react-ga";
+import firebase from "firebase/compat/app";
 
 import { Routes, Route } from "react-router-dom";
 import { Sidebar, Menu, MenuItem, useProSidebar } from "react-pro-sidebar";
 import { isElectron } from "./components/Globals";
-import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
@@ -13,6 +14,7 @@ import GestureIcon from "@mui/icons-material/Gesture";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import ScaleIcon from "@mui/icons-material/Scale";
 
+import 'firebase/compat/auth';
 import "./App.css";
 
 import Header from "./components/Header";
@@ -62,9 +64,10 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+const firebaseAnalytics = getAnalytics(firebaseApp);
 
+export { firebaseApp, firebaseAnalytics };
 
 export default function App() {
   /*
