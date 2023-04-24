@@ -5,6 +5,8 @@ import ReactGA from "react-ga";
 import { Routes, Route } from "react-router-dom";
 import { Sidebar, Menu, MenuItem, useProSidebar } from "react-pro-sidebar";
 import { isElectron } from "./components/Globals";
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import GestureIcon from "@mui/icons-material/Gesture";
@@ -48,6 +50,21 @@ HOW TO START AS AN ELECTRON APP: yarn electron:start https://plainenglish.io/blo
 const TRACKING_ID = "G-15Q6HNH1D8"; // Google Analytics Tracking ID
 
 ReactGA.initialize(TRACKING_ID);
+
+const firebaseConfig = {
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: "electronvisualized.firebaseapp.com",
+  projectId: "electronvisualized",
+  storageBucket: "electronvisualized.appspot.com",
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
 
 export default function App() {
   /*

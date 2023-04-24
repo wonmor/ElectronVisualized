@@ -5,8 +5,6 @@ import { setGlobalRenderInfo } from "../states/renderInfoSlice";
 import { setGlobalSelectedElement } from "../states/selectedElementSlice";
 import { Background } from "./Geometries";
 import { moleculeDict, atomDict, useWindowSize, isElectron } from "./Globals";
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 
 import classNames from "classnames";
 import MetaTag from "./MetaTag";
@@ -14,21 +12,6 @@ import quantumNumbers from "../assets/quantum_num.json";
 
 import "./Table.css";
 import "./Background.css";
-
-const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: "electronvisualized.firebaseapp.com",
-  projectId: "electronvisualized",
-  storageBucket: "electronvisualized.appspot.com",
-  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.FIREBASE_APP_ID,
-  measurementId: process.env.FIREBASE_MEASUREMENT_ID
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
 /*
 ░█▀▀█ ░█▀▀▀ ░█▀▀█ ▀█▀ ░█▀▀▀█ ░█▀▀▄ ▀█▀ ░█▀▀█ 　 ▀▀█▀▀ ─█▀▀█ ░█▀▀█ ░█─── ░█▀▀▀ 
 ░█▄▄█ ░█▀▀▀ ░█▄▄▀ ░█─ ░█──░█ ░█─░█ ░█─ ░█─── 　 ─░█── ░█▄▄█ ░█▀▀▄ ░█─── ░█▀▀▀ 
@@ -64,6 +47,7 @@ export default function Table() {
       setNoResultsFound(false);
     }
   }, [digit1, digit2, digit3]);
+  
 
   const handleDigitChange = (event, digitSetter) => {
     const value = event.target.value;

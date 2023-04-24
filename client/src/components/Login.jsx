@@ -1,8 +1,12 @@
 import { Background } from "./Geometries";
-import MetaTag from "./MetaTag";
-import { login } from "../auth"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { StyledFirebaseAuth } from "react-firebaseui";
+
+import MetaTag from "./MetaTag";
+import firebase from 'firebase/compat/app';
+
+import 'firebase/compat/auth';
 
 export default function Login() {
     const [username, setUsername] = useState("");
@@ -12,25 +16,24 @@ export default function Login() {
     const navigate = useNavigate();
 
     const loginSuccessful = async () => {
-        let opts = {
-            'username': username,
-            'password': password
+        try {
+          await firebase.auth().signInWithEmailAndPassword(username, password);
+          navigate("/");
+        } catch (error) {
+          setErrorMessage("Please type in the correct username and password pair.");
         }
-
-        fetch('/api/login', {
-            method: 'post',
-            body: JSON.stringify(opts)
-          }).then(r => r.json())
-            .then(token => {
-              if (token.access_token) {
-                login(token);
-                navigate("/");     
-              }
-              else {
-                setErrorMessage("Please type in the correct username and password pair.");
-              }
-            })
-    };
+      };
+      
+      const uiConfig = {
+        // Popup signin flow rather than redirect flow.
+        signInFlow: 'popup',
+        // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
+        signInSuccessUrl: '/signedIn',
+        // We will display Google and Facebook as auth providers.
+        signInOptions: [
+          firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        ],
+      };
 
     return (
         <>
@@ -50,62 +53,11 @@ export default function Login() {
                 navigate("/register");
               }}><span className="text-blue-200 hover:underline">{"Sign up"}</span></button>.</h3>
             
-              {username === "" ? (
-                <form
-                    onSubmit={(e) => {
-                        e.preventDefault(); // Else the page will be reloaded which is the default DOM behaviour in forms and its submit button...
-
-                        if (e.target[0].value.replace(/\s/g, '') === "") {
-                            return;
-                        }
-
-                        setUsername(e.target[0].value);
-                        e.target[0].value = "";
-                    }}
-                    className="flex flex-cols justify-self-end m-auto mt-5 overflow-auto scale-90 sm:scale-100 mb-5 p-3 max-w-fit text-white border border-gray-400 rounded"
-                    >
-                        <label>
-                            <span>
-                                <input
-                                    className="bg-transparent truncate ..."
-                                    type="username"
-                                    placeholder="Enter your username..."
-                                />
-                            </span>
-                        </label>
-                        <button className="ml-3" type="submit">
-                            <span>Submit</span>
-                        </button>
-                    </form>
-              ) : password === "" ? (
-                    <form
-                        onSubmit={(e) => {
-                            e.preventDefault(); // Else the page will be reloaded which is the default DOM behaviour in forms and its submit button...
-
-                            if (e.target[0].value.replace(/\s/g, '') === "") {
-                                return;
-                            }
-
-                            setPassword(e.target[0].value);
-                            e.target[0].value = "";
-                            loginSuccessful();
-                        }}
-                        className="flex flex-cols justify-self-end m-auto mt-5 overflow-auto scale-90 sm:scale-100 mb-5 p-3 max-w-fit text-white border border-gray-400 rounded"
-                    >
-                        <label>
-                            <span>
-                            <input
-                                className="bg-transparent truncate ..."
-                                type="password"
-                                placeholder="Enter the password..."
-                            />
-                            </span>
-                        </label>
-                        <button className="ml-3" type="submit">
-                            <span>Submit</span>
-                        </button>
-                    </form> 
-            ) : (
+            {username === "" ? (
+      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+    ) : password === "" ? (
+      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+    ) : (
                 <div className="mt-5">
                         <>
                             {errorMessage === "" ? (

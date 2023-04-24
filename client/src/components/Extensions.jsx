@@ -18,9 +18,7 @@ export default function Extensions() {
     Contains HTML properties that each represent the graphic element on the website
   */
   const [browserError, setBrowserError] = useState();
-
   const [entryCode, setEntryCode] = useState("23wrebr");
-
   const [enableiOSComms, setEnableiOSComms] = useState(false);
 
   useEffect(() => {
