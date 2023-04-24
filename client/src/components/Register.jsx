@@ -59,7 +59,7 @@ export default function Register() {
         url={"https://electronvisual.org"}
       />
 
-      <div className="bg-gray-700 pb-5 overflow-auto" style={{ "min-height": "100vh" }}>
+      <div className="bg-gray-700 pb-5 overflow-auto"  style={{ minHeight: "100vh", width: "-webkit-fill-available" }}>
         <div className="text-center pt-10 pl-5 pr-5 text-gray-400">
           <h1 className="sm:pb-5 scale-75 sm:scale-100">
             <span className="text-white">{"Sign up"}</span>

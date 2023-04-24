@@ -11,6 +11,7 @@ import { getAnalytics } from "firebase/analytics";
 
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import GestureIcon from "@mui/icons-material/Gesture";
+import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import ScaleIcon from "@mui/icons-material/Scale";
 
@@ -155,6 +156,16 @@ export default function App() {
                 }}
               >
                 Home
+              </MenuItem>
+
+              <MenuItem
+                icon={<InsertEmoticonIcon />}
+                onClick={() => {
+                  collapseSidebar(true);
+                  navigate("/login");
+                }}
+              >
+                Member
               </MenuItem>
 
               <MenuItem

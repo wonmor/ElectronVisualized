@@ -73,12 +73,6 @@ export default function Header() {
     navigate(page);
   };
 
-  const moveToSearchResults = (keyword) => {
-    if (!isEmpty(keyword)) {
-      movePage("/search");
-    }
-  };
-
   // Responsive Menu Design
   useEffect(() => {
     if (size.width > 1024) {
