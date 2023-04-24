@@ -17,13 +17,14 @@ export default function Login() {
 
     const uiConfig = {
         signInFlow: 'popup',
-        signInSuccessUrl: '/signedIn',
+        signInSuccessUrl: '/membership',
         signInOptions: [
+            firebase.auth.EmailAuthProvider.PROVIDER_ID,
           firebase.auth.GoogleAuthProvider.PROVIDER_ID,
         ],
         callbacks: {
           signInSuccessWithAuthResult: () => {
-            navigate('/signedIn');
+            navigate('/membership');
             return false; // Prevents redirect by FirebaseUI
           },
         },
@@ -35,7 +36,7 @@ export default function Login() {
 
         const unregisterAuthObserver = firebase.auth().onAuthStateChanged((user) => {
           if (user) {
-            navigate('/signedIn');
+            navigate('/membership');
           }
         });
 
