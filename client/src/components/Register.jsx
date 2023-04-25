@@ -68,38 +68,38 @@ export default function SignUp() {
             placeholder="Display Name"
             value={displayName}
             onChange={(e) => setDisplayName(e.target.value)}
-            className="block mt-4 lg:inline-block lg:mt-0 mr-4 text-white"
+            className="block w-full py-2 px-4 mt-4 text-white bg-gray-800 rounded-md"
           />
           <input
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="block mt-4 lg:inline-block lg:mt-0 mr-4 text-white"
+            className="block w-full py-2 px-4 mt-4 text-white bg-gray-800 rounded-md"
           />
           <input
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="block mt-4 lg:inline-block lg:mt-0 mr-4 text-white"
+            className="block w-full py-2 px-4 mt-4 text-white bg-gray-800 rounded-md"
           />
           <input
             type="password"
             placeholder="Confirm Password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            className="block mt-4 lg:inline-block lg:mt-0 mr-4 text-white"
+            className="block w-full py-2 px-4 mt-4 text-white bg-gray-800 rounded-md"
           />
-          <button type="submit" className="block mt-4 lg:inline-block lg:mt-0 mr-4 text-white">
+          <button type="submit" className="block w-full py-2 px-4 mt-4 text-white bg-blue-600 rounded-md">
             Sign Up
           </button>
         </form>
-        <button onClick={handleGoogleSignUp} className="block mt-4 lg:inline-block lg:mt-0 mr-4 text-white">
+        <button onClick={handleGoogleSignUp} className="block w-full py-2 px-4 mt-4 text-white bg-red-600 rounded-md">
           Sign Up with Google
         </button>
         {error && <p className="text-red-200">{error}</p>}
-        </div>
+      </div>
     </div>
   );
 }
