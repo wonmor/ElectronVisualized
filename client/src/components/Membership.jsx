@@ -40,7 +40,7 @@ function Membership() {
                 className="m-5 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
                 onClick={signOut}
               >
-                Sign out
+                <span>Sign out</span>
               </button>
             </div>
           ) : (
