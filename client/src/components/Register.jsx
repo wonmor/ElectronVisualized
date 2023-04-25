@@ -4,6 +4,7 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 
 export default function SignUp() {
+  const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -12,13 +13,11 @@ export default function SignUp() {
   const navigate = useNavigate();
 
   const isValidEmail = (email) => {
-    // You can use any email validation regex you prefer
     const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     return regex.test(email);
   };
 
   const isValidPassword = (password) => {
-    // This is a basic password validation, you can update it to include more rules
     return password.length >= 8;
   };
 
@@ -37,7 +36,10 @@ export default function SignUp() {
       return;
     }
     try {
-      await firebase.auth().createUserWithEmailAndPassword(email.trim(), password);
+      const result = await firebase.auth().createUserWithEmailAndPassword(email.trim(), password);
+      await result.user.updateProfile({
+        displayName: displayName.trim(),
+      });
       navigate("/membership");
     } catch (error) {
       setError(error.message);
@@ -61,6 +63,13 @@ export default function SignUp() {
           <span className="text-white">{"Sign Up"}</span>
         </h1>
         <form onSubmit={handleSignUp}>
+          <input
+            type="text"
+            placeholder="Display Name"
+            value={displayName}
+            onChange={(e) => setDisplayName(e.target.value)}
+            className="block mt-4 lg:inline-block lg:mt-0 mr-4 text-white"
+          />
           <input
             type="email"
             placeholder="Email"
