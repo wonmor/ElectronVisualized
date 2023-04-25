@@ -101,11 +101,15 @@ export default function SignUp() {
               className="block w-full py-2 px-4 mt-4 text-white bg-gray-800 rounded-md"
             />
             <button type="submit" className="block w-full py-2 px-4 mt-4 text-white bg-blue-600 rounded-md">
-              Sign up
+              <span>
+                Sign up
+              </span>
             </button>
           </form>
           <button onClick={handleGoogleSignUp} className="block w-full py-2 px-4 mt-4 text-white bg-red-600 rounded-md">
-            Sign up with Google
+            <span>
+              Sign up with Google
+            </span>
           </button>
           {error && <p className="mt-5 text-red-200">{`${error}.`}</p>}
         </div>
