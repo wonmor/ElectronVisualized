@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Background } from "./Geometries";
+
 import firebase from "firebase/compat/app";
+
 import "firebase/compat/auth";
 
 export default function SignUp() {
@@ -59,47 +62,56 @@ export default function SignUp() {
   return (
     <div className="bg-gray-700 pb-5 overflow-auto" style={{ minHeight: "100vh", width: "-webkit-fill-available" }}>
       <div className="text-center pt-10 pl-5 pr-5 text-gray-400">
-        <h1 className="sm:pb-5 scale-75 sm:scale-100">
-          <span className="text-white">{"Sign Up"}</span>
-        </h1>
-        <form onSubmit={handleSignUp}>
-          <input
-            type="text"
-            placeholder="Display Name"
-            value={displayName}
-            onChange={(e) => setDisplayName(e.target.value)}
-            className="block w-full py-2 px-4 mt-4 text-white bg-gray-800 rounded-md"
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="block w-full py-2 px-4 mt-4 text-white bg-gray-800 rounded-md"
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="block w-full py-2 px-4 mt-4 text-white bg-gray-800 rounded-md"
-          />
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            className="block w-full py-2 px-4 mt-4 text-white bg-gray-800 rounded-md"
-          />
-          <button type="submit" className="block w-full py-2 px-4 mt-4 text-white bg-blue-600 rounded-md">
-            Sign Up
+      <h1 className="sm:pb-5 scale-75 sm:scale-100">
+        <span className="text-white">{"Sign up"}</span>
+      </h1>
+
+      <h3>or <button onClick={() => {
+        navigate("/login");
+      }}><span className="text-blue-200 hover:underline">{"Sign in"}</span></button>.</h3>
+
+        <div className="mx-auto" style={{ maxWidth: "400px" }}>
+          <form onSubmit={handleSignUp}>
+            <input
+              type="text"
+              placeholder="Display Name"
+              value={displayName}
+              onChange={(e) => setDisplayName(e.target.value)}
+              className="block w-full py-2 px-4 mt-4 text-white bg-gray-800 rounded-md"
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="block w-full py-2 px-4 mt-4 text-white bg-gray-800 rounded-md"
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="block w-full py-2 px-4 mt-4 text-white bg-gray-800 rounded-md"
+            />
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className="block w-full py-2 px-4 mt-4 text-white bg-gray-800 rounded-md"
+            />
+            <button type="submit" className="block w-full py-2 px-4 mt-4 text-white bg-blue-600 rounded-md">
+              Sign up
+            </button>
+          </form>
+          <button onClick={handleGoogleSignUp} className="block w-full py-2 px-4 mt-4 text-white bg-red-600 rounded-md">
+            Sign up with Google
           </button>
-        </form>
-        <button onClick={handleGoogleSignUp} className="block w-full py-2 px-4 mt-4 text-white bg-red-600 rounded-md">
-          Sign Up with Google
-        </button>
-        {error && <p className="text-red-200">{error}</p>}
+          {error && <p className="mt-5 text-red-200">{`${error}.`}</p>}
+        </div>
       </div>
+
+      <Background />
     </div>
   );
 }
