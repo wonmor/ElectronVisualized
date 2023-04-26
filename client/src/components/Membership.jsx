@@ -20,8 +20,8 @@ const ProductDisplay = () => (
           <form action="/api/create-checkout-session" method="POST">
             <input
               type="hidden"
-              name="lookup_key"
-              value="{{MONTHLY_PRICE_LOOKUP_KEY}}"
+              name="priceId"
+              value="price_1N10a0IVyMsxlantM7J62CoG"
             />
             <button
               id="checkout-and-portal-button"
@@ -47,8 +47,8 @@ const ProductDisplay = () => (
           <form action="/api/create-checkout-session" method="POST">
             <input
               type="hidden"
-              name="lookup_key"
-              value="{{YEARLY_PRICE_LOOKUP_KEY}}"
+              name="priceId"
+              value="price_1N10aHIVyMsxlantLvo9MffR"
             />
             <button
               id="checkout-and-portal-button"

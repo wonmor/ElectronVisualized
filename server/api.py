@@ -364,28 +364,26 @@ def connect_to_socket():
 
 @bp.route('/api/create-checkout-session', methods=['POST'])
 def create_checkout_session():
-    try:
-        prices = stripe.Price.list(
-            lookup_keys=[request.form['lookup_key']],
-            expand=['data.product']
-        )
+    price_id = request.form.get('priceId')
 
+    try:
         checkout_session = stripe.checkout.Session.create(
             line_items=[
                 {
-                    'price': prices.data[0].id,
+                    # Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+                    'price': price_id,
                     'quantity': 1,
                 },
             ],
-            mode='subscription',
-            success_url=YOUR_DOMAIN +
-            '?success=true&session_id={CHECKOUT_SESSION_ID}',
+            mode='payment',
+            success_url=YOUR_DOMAIN + '?success=true',
             cancel_url=YOUR_DOMAIN + '?canceled=true',
+            automatic_tax={'enabled': True},
         )
-        return redirect(checkout_session.url, code=303)
     except Exception as e:
-        print(e)
-        return "Server error", 500
+        return str(e)
+
+    return redirect(checkout_session.url, code=303)
 
 @bp.route('/api/create-portal-session', methods=['POST'])
 def customer_portal():

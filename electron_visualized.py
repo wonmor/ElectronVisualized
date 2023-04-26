@@ -18,9 +18,11 @@ I think this project deserves a level 4+ because...
 '''
 
 from server import create_app
+from dotenv import load_dotenv
 
 import os
 
+load_dotenv()
 app = create_app()
 
 if __name__ == '__main__':
