@@ -23,6 +23,17 @@ export const moleculesWithLonePairs = {
 }
 
 export const moleculeDict = {
+  CH3OH: [
+    "Methanol",
+    "Methanol, also known as methyl alcohol, is a colorless liquid with the chemical formula CH3OH. It is the simplest alcohol and is used as an antifreeze, solvent, and fuel.",
+    "Tetrahedral",
+    "Polar",
+    "109.5°",
+    "4 bonding orbitals\n4 antibonding orbitals",
+    "sp3",
+    "AX4",
+    "4 sigma bonds"
+  ],
   C6H6: [
     "Benzene",
     "Benzene is an organic compound with the molecular formula C6H6. It is a cyclic hydrocarbon with a typical ring structure composed of six carbon atoms, each with one hydrogen atom attached.",
