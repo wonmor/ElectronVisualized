@@ -641,6 +641,10 @@ export default function Table() {
                 );
               })}
 
+              <br />
+
+              <p className="mt-5 mb-5 ml-0 mr-0 md:ml-40 md:mr-40">DFT calculations are used for the electron density.<br />Molecular orbitals are plotted using the Hartree-Fock method.</p>
+
               {/* <br />
 
               <button
@@ -767,7 +771,7 @@ export default function Table() {
 
           {displayPeriodicTable()}
 
-          <p className="ml-0 mr-0 md:ml-40 md:mr-40 mb-40">Calculating the wavefunctions of atoms and molecules requires a lot of processing power.<br />Dedicated servers with specialized hardware and software are used to perform these calculations efficiently.</p>
+          <p className="ml-0 mr-0 md:ml-40 md:mr-40 mb-40">ElectronVisualized uses spherical harmonics to calculate the radial part of the atomic orbitals.<br />Then, Metropolis-Hastings algorithm is used to sample the wavefunction.</p>
         </div>
         <Background />
       </div>
