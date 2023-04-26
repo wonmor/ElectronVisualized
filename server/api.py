@@ -14,7 +14,7 @@ from flask_limiter.util import get_remote_address
 from botocore.exceptions import ClientError
 from server.extensions import multipart_download_boto3, multipart_upload_boto3
 
-from . import User, molecule, atom, socketio, guard, db
+from . import User, atomic_orbital, electron_density, socketio, guard, db
 
 import stripe
 
@@ -160,7 +160,7 @@ def compute_atom_by_quantum_no(data):
     name = int(dataList[3])
 
 
-    return_value = atom.plot_atomic_orbital(name, n, l, m)
+    return_value = atomic_orbital.plot_atomic_orbital(name, n, l, m)
     return return_value
 
 @bp.route('/api/atom/<name>', methods=['GET'])
@@ -189,7 +189,7 @@ def compute_atom(name):
         name_dict = json.load(f)
         current_name = name_dict[name]
 
-        data = atom.plot_atomic_orbital(name, current_name["n"], current_name["l"], current_name["m"])
+        data = atomic_orbital.plot_atomic_orbital(name, current_name["n"], current_name["l"], current_name["m"])
         return data
 
 @bp.route('/api/molecule/<name>', methods=['GET'])
@@ -215,7 +215,7 @@ def compute_molecule(name):
         the electron density and coordinate data
     '''
     
-    data = molecule.plot_molecule(name)
+    data = electron_density.plot_molecule(name)
     return data
 
 @bp.route('/api/load/<name>', methods=['GET'])

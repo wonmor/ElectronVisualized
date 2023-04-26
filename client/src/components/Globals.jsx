@@ -444,10 +444,9 @@ export const getCameraPosition = (element) => {
     case "HCl":
       return { fov: 55, position: [-6.25, 10, 10] };
 
-    case "C2H4":
-      return { fov: 75, position: [-6.25, 10, 10] };
-
+    case "CH3OH":
     case "C6H6":
+    case "C2H4":
       return { fov: 75, position: [-6.25, 10, 10] };
 
     case "Cl2":
