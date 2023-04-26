@@ -23,6 +23,17 @@ export const moleculesWithLonePairs = {
 }
 
 export const moleculeDict = {
+  C6H6: [
+    "Benzene",
+    "Benzene is an organic compound with the molecular formula C6H6. It is a cyclic hydrocarbon with a typical ring structure composed of six carbon atoms, each with one hydrogen atom attached.",
+    "Planar",
+    "Nonpolar",
+    "120°",
+    "6 bonding orbitals\n6 antibonding orbitals",
+    "sp2",
+    "AX6",
+    "6 sigma bonds"
+  ],
   C2H4: [
     "Ethene",
     "Ethene is an organic compound having the formula C2H4. It is a colorless, flammable gas with a faint 'sweet and musky' odor.",
@@ -416,31 +427,34 @@ export const getCameraPosition = (element) => {
     */
   switch (element) {
     case "H":
-      return { fov: 15, position: [-5, 8, 8] };
+      return { fov: 15, position: [-6.25, 10, 10] };
 
     case "Na":
-      return { fov: 55, position: [-5, 8, 8] };
+      return { fov: 55, position: [-6.25, 10, 10] };
 
     case "K":
-      return { fov: 65, position: [-5, 8, 8] };
+      return { fov: 65, position: [-6.25, 10, 10] };
 
     case "H2":
-      return { fov: 20, position: [-5, 8, 8] };
+      return { fov: 20, position: [-6.25, 10, 10] };
 
     case "H2O":
-      return { fov: 55, position: [-5, 8, 8] };
+      return { fov: 55, position: [-6.25, 10, 10] };
 
     case "HCl":
-      return { fov: 55, position: [-5, 8, 8] };
+      return { fov: 55, position: [-6.25, 10, 10] };
 
     case "C2H4":
-      return { fov: 75, position: [-5, 8, 8] };
+      return { fov: 75, position: [-6.25, 10, 10] };
+
+    case "C6H6":
+      return { fov: 75, position: [-6.25, 10, 10] };
 
     case "Cl2":
-      return { fov: 75, position: [-5, 8, 8] };
+      return { fov: 75, position: [-6.25, 10, 10] };
 
     default:
-      return { fov: 35, position: [-5, 8, 8] };
+      return { fov: 35, position: [-6.25, 10, 10] };
   }
 };
 

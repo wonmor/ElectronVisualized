@@ -119,6 +119,10 @@ def _density_parser():
     elif element_name == "C2H4":
         vmin = min + 0.002 * (max - min)
         vmax = min + 0.09 * (max - min)
+
+    elif element_name == "C6H6":
+        vmin = min + 0.002 * (max - min)
+        vmax = min + 0.09 * (max - min)
     
     else:
         vmin = min + 0.2 * (max - min)
@@ -288,7 +292,7 @@ def plot_molecule(name):
     global mol
     mol = molecule(element_name)
 
-    mol.set_cell((5.0, 5.1, 5.2))
+    mol.set_cell((10, 10, 10))
     mol.set_pbc((False, False, False))
 
     mol.center()
