@@ -94,7 +94,7 @@ export default function Header() {
         <div className="flex items-center flex-shrink-0 text-white mr-6">
           <img className="w-20 mr-5" src={Logo} alt="logo"></img>
 
-          <span className="text-xl tracking-tight">{"ElectronVisualized Pro"}</span>
+          <span className="text-xl tracking-tight">{"ElectronVisualized"}</span>
         </div>
       </button>
 
