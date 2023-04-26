@@ -21,6 +21,8 @@ import stripe
 # This is your test secret API key.
 stripe.api_key = 'sk_test_51MekZrIVyMsxlantk9D0bSQO3GwMfxDZo6Wb0V5aLMjM63fNCVaaenadEZ87CWk9Ow5JKIr0p4u4dHAanzZLNwe200BMPWXSA0'
 
+YOUR_DOMAIN = 'http://localhost:5000'
+
 '''
 █▀█ █▀▀ █▀ ▀█▀   ▄▀█ █▀█ █
 █▀▄ ██▄ ▄█ ░█░   █▀█ █▀▀ █
@@ -396,7 +398,7 @@ def customer_portal():
 
     # This is the URL to which the customer will be redirected after they are
     # done managing their billing with the portal.
-    return_url = "/membership"
+    return_url = YOUR_DOMAIN
 
     portalSession = stripe.billing_portal.Session.create(
         customer=checkout_session.customer,
