@@ -76,6 +76,7 @@ scooby==0.7.1
 seaborn==0.12.2
 six==1.16.0
 SQLAlchemy==2.0.3
+stripe==5.4.0
 threadpoolctl==3.1.0
 toml==0.10.2
 traits==6.3.2
