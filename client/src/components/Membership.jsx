@@ -4,27 +4,23 @@ import { Background } from './Geometries';
 import firebase from 'firebase/compat/app';
 
 import 'firebase/compat/auth';
-
 const ProductDisplay = () => (
-  <section className="bg-gray-100 py-12">
+  <section className="bg-transparent py-12">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-2">
-      <div className="bg-white overflow-hidden shadow rounded-lg">
+      <div className="bg-white overflow-hidden shadow rounded-lg flex flex-col justify-center items-center">
         <div className="px-4 py-5 sm:p-6">
           <h3 className="text-lg leading-6 font-medium text-gray-900">Monthly Plan</h3>
-          <div className="mt-4 flex items-baseline">
+          <div className="mt-4 flex items-baseline justify-center">
             <span className="text-5xl font-extrabold text-gray-900">$20</span>
             <span className="ml-1 text-xl font-semibold text-gray-500">/ month</span>
           </div>
-          <p className="mt-4 text-sm text-gray-500">Perfect for users who need our services on a monthly basis.</p>
+          <p className="mt-4 text-sm text-gray-500">Perfect for aspiring chemical engineers.</p>
         </div>
-        <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+        <div className="px-4 py-3 bg-gray-50 text-center sm:px-6">
           <form action="/create-checkout-session" method="POST">
             <input type="hidden" name="lookup_key" value="{{MONTHLY_PRICE_LOOKUP_KEY}}" />
             <button id="checkout-and-portal-button" type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-orange-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
               <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                <svg className="h-5 w-5 text-orange-500 group-hover:text-orange-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                  <path fillRule="evenodd" d="M13.293 6.293a1 1 0 00-1.414-1.414l-5 5a1 1 0 000 1.414l5 5a1 1 0 001.414-1.414L9.414 11H16a1 1 0 100-2H9.414l3.879-3.879z" clipRule="evenodd" />
-                </svg>
               </span>
               <span>Subscribe Now</span>
             </button>
@@ -32,31 +28,26 @@ const ProductDisplay = () => (
         </div>
       </div>
 
-      <div className="bg-white overflow-hidden shadow rounded-lg">
+      <div className="bg-white overflow-hidden shadow rounded-lg flex flex-col justify-center items-center">
         <div className="px-4 py-5 sm:p-6">
           <h3 className="text-lg leading-6 font-medium text-gray-900">Yearly Plan</h3>
-          <div className="mt-4 flex items-baseline">
+          <div className="mt-4 flex items-baseline justify-center">
             <span className="text-5xl font-extrabold text-gray-900">$40</span>
             <span className="ml-1 text-xl font-semibold text-gray-500">/ year</span>
           </div>
-          <p className="mt-4 text-sm text-gray-500">Get 85% discount when you pay annually!</p>
+          <p className="mt-4 text-sm text-gray-500">Time to get a little more serious.</p>
         </div>
-        <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-          <form action="/create-checkout-session"       method="POST">
-        <input type="hidden" name="lookup_key" value="{{YEARLY_PRICE_LOOKUP_KEY}}" />
-        <button id="checkout-and-portal-button" type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-orange-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
-          <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-            <svg className="h-5 w-5 text-orange-500 group-hover:text-orange-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fillRule="evenodd" d="M13.293 6.293a1 1 0 00-1.414-1.414l-5 5a1 1 0 000 1.414l5 5a1 1 0 001.414-1.414L9.414 11H16a1 1 0 100-2H9.414l3.879-3.879z" clipRule="evenodd" />
-            </svg>
-          </span>
-          <span>Subscribe Now</span>
-        </button>
-      </form>
+        <div className="px-4 py-3 bg-gray-50 text-center sm:px-6">
+        <form action="/create-checkout-session" method="POST">
+            <input type="hidden" name="lookup_key" value="{{YEARLY_PRICE_LOOKUP_KEY}}" />
+            <button id="checkout-and-portal-button" type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-orange-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
+              <span>Subscribe Now</span>
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-</section>
+  </section>
 );
 
 
@@ -152,7 +143,7 @@ function Membership() {
                   Welcome, {user.displayName || user.email}.
                 </span>
               </h1>
-              <p>Hey there! If you want to get the most out of your experience, we invite you to become a family of our community.</p>
+              <p>Hey there! If you want to get the most out of your experience, we invite you to become a part of our community.</p>
 
               <PaymentContainer />
 
