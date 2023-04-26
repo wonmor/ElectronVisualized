@@ -375,7 +375,7 @@ def create_checkout_session():
                     'quantity': 1,
                 },
             ],
-            mode='payment',
+            mode='subscription',
             success_url=YOUR_DOMAIN + '?success=true',
             cancel_url=YOUR_DOMAIN + '?canceled=true',
             automatic_tax={'enabled': True},
