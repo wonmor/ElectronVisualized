@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import MetaTag from "./MetaTag";
 import firebase from 'firebase/compat/app';
+
 import * as firebaseui from 'firebaseui';
 
 import 'firebase/compat/auth';

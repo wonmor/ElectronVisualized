@@ -16,6 +16,11 @@ from server.extensions import multipart_download_boto3, multipart_upload_boto3
 
 from . import User, molecule, atom, socketio, guard, db
 
+import stripe
+
+# This is your test secret API key.
+stripe.api_key = 'sk_test_51MekZrIVyMsxlantk9D0bSQO3GwMfxDZo6Wb0V5aLMjM63fNCVaaenadEZ87CWk9Ow5JKIr0p4u4dHAanzZLNwe200BMPWXSA0'
+
 '''
 █▀█ █▀▀ █▀ ▀█▀   ▄▀█ █▀█ █
 █▀▄ ██▄ ▄█ ░█░   █▀█ █▀▀ █
@@ -357,101 +362,89 @@ def connect_to_socket():
     '''
     socketio.run(current_app, host="0.0.0.0", port=9000)
 
-@bp.route('/api/login', methods=['POST'])
-@limiter.limit("100 per minute")
-@cross_origin()
-def login():
-    """
-    Logs a user in by parsing a POST request containing user credentials and
-    issuing a JWT token.
-    .. example::
-       $ curl http://localhost:5000/api/login -X POST \
-         -d '{"username":"Yasoob","password":"strongpassword"}'
-    """
-    req = flask.request.get_json(force=True)
-    username = req.get('username', None)
-    password = req.get('password', None)
-    user = guard.authenticate(username, password)
-    ret = {'access_token': guard.encode_jwt_token(user)}
-    return ret, 200
+@bp.route('/api/create-checkout-session', methods=['POST'])
+def create_checkout_session():
+    try:
+        prices = stripe.Price.list(
+            lookup_keys=[request.form['lookup_key']],
+            expand=['data.product']
+        )
 
-@bp.route('/api/register', methods=['POST'])
-@limiter.limit("30 per minute")
-@cross_origin()
-def register():
-    """
-    Registers a new user by parsing a POST request containing user credentials and
-    adding the user to the database.
-    .. example::
-       $ curl http://localhost:5000/api/register -X POST \
-         -d '{"username":"Yasoob","password":"strongpassword"}'
-    """
-    req = flask.request.get_json(force=True)
-    username = req.get('username', None)
-    password = req.get('password', None)
-    if username is None or password is None:
-        return {'error': 'Missing username or password'}, 400
-    if User.query.filter_by(username=username).first() is not None:
-        return {'error': 'Username already taken'}, 400
-    user = User(username=username)
-    user.hash_password(password)
-    db.session.add(user)
-    db.session.commit()
-    ret = {'message': 'Registration successful'}
-    return ret, 201
+        checkout_session = stripe.checkout.Session.create(
+            line_items=[
+                {
+                    'price': prices.data[0].id,
+                    'quantity': 1,
+                },
+            ],
+            mode='subscription',
+            success_url=YOUR_DOMAIN +
+            '?success=true&session_id={CHECKOUT_SESSION_ID}',
+            cancel_url=YOUR_DOMAIN + '?canceled=true',
+        )
+        return redirect(checkout_session.url, code=303)
+    except Exception as e:
+        print(e)
+        return "Server error", 500
 
+@bp.route('/api/create-portal-session', methods=['POST'])
+def customer_portal():
+    # For demonstration purposes, we're using the Checkout session to retrieve the customer ID.
+    # Typically this is stored alongside the authenticated user in your database.
+    checkout_session_id = request.form.get('session_id')
+    checkout_session = stripe.checkout.Session.retrieve(checkout_session_id)
 
-@bp.route('/api/check_duplicate_username', methods=['POST'])
-@limiter.limit("30 per minute")
-@cross_origin()
-def check_duplicate_username():
-    """
-    Checks whether a given username is already present in the database.
-    .. example::
-       $ curl http://localhost:5000/api/check_duplicate_username -X POST \
-         -d '{"username":"Yasoob"}'
-    """
-    req = flask.request.get_json(force=True)
-    username = req.get('username', None)
-    if username is None:
-        return {'error': 'Missing username'}, 400
-    if User.query.filter_by(username=username).first() is not None:
-        return {'duplicate': True}, 200
-    return {'duplicate': False}, 200
+    # This is the URL to which the customer will be redirected after they are
+    # done managing their billing with the portal.
+    return_url = "/membership"
 
-  
-@bp.route('/api/refresh', methods=['POST'])
-@limiter.limit("30 per minute")
-@cross_origin()
-def refresh():
-    """
-    Refreshes an existing JWT by creating a new one that is a copy of the old
-    except that it has a refrehsed access expiration.
-    .. example::
-       $ curl http://localhost:5000/api/refresh -X GET \
-         -H "Authorization: Bearer <your_token>"
-    """
-    print("refresh request")
-    old_token = request.get_data()
-    new_token = guard.refresh_jwt_token(old_token)
-    ret = {'access_token': new_token}
-    return ret, 200
-  
-  
-@bp.route('/api/protected')
-@limiter.limit("30 per minute")
-@cross_origin()
-@flask_praetorian.auth_required
-def protected():
-    """
-    A protected endpoint. The auth_required decorator will require a header
-    containing a valid JWT
-    .. example::
-       $ curl http://localhost:5000/api/protected -X GET \
-         -H "Authorization: Bearer <your_token>"
-    """
-    return {'message': f'protected endpoint (allowed user {flask_praetorian.current_user().username})'}
+    portalSession = stripe.billing_portal.Session.create(
+        customer=checkout_session.customer,
+        return_url=return_url,
+    )
+    return redirect(portalSession.url, code=303)
 
+@bp.route('/api/webhook', methods=['POST'])
+def webhook_received():
+    # Replace this endpoint secret with your endpoint's unique secret
+    # If you are testing with the CLI, find the secret by running 'stripe listen'
+    # If you are using an endpoint defined with the API or dashboard, look in your webhook settings
+    # at https://dashboard.stripe.com/webhooks
+    webhook_secret = 'whsec_12345'
+    request_data = json.loads(request.data)
+
+    if webhook_secret:
+        # Retrieve the event by verifying the signature using the raw body and secret if webhook signing is configured.
+        signature = request.headers.get('stripe-signature')
+        try:
+            event = stripe.Webhook.construct_event(
+                payload=request.data, sig_header=signature, secret=webhook_secret)
+            data = event['data']
+        except Exception as e:
+            return e
+        # Get the type of webhook event sent - used to check the status of PaymentIntents.
+        event_type = event['type']
+    else:
+        data = request_data['data']
+        event_type = request_data['type']
+    data_object = data['object']
+
+    print('event ' + event_type)
+
+    if event_type == 'checkout.session.completed':
+        print('🔔 Payment succeeded!')
+    elif event_type == 'customer.subscription.trial_will_end':
+        print('Subscription trial will end')
+    elif event_type == 'customer.subscription.created':
+        print('Subscription created %s', event.id)
+    elif event_type == 'customer.subscription.updated':
+        print('Subscription created %s', event.id)
+    elif event_type == 'customer.subscription.deleted':
+        # handle subscription canceled automatically based
+        # upon your subscription settings. Or if the user cancels it.
+        print('Subscription canceled: %s', event.id)
+
+    return jsonify({'status': 'success'})
 
 '''
 ----------------------------------------------------------------

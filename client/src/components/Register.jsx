@@ -100,13 +100,13 @@ export default function SignUp() {
               onChange={(e) => setConfirmPassword(e.target.value)}
               className="block w-full py-2 px-4 mt-4 text-white bg-gray-800 rounded-md"
             />
-            <button type="submit" className="block w-full py-2 px-4 mt-4 text-white bg-blue-600 rounded-md">
+            <button type="submit" className="block w-full py-2 px-4 mt-4 text-white bg-sky-800 rounded-md">
               <span>
                 Sign up
               </span>
             </button>
           </form>
-          <button onClick={handleGoogleSignUp} className="block w-full py-2 px-4 mt-4 text-white bg-red-600 rounded-md">
+          <button onClick={handleGoogleSignUp} className="block w-full py-2 px-4 mt-4 text-white bg-orange-800 rounded-md">
             <span>
               Sign up with Google
             </span>

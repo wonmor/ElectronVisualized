@@ -1,7 +1,124 @@
 import React, { useState, useEffect } from 'react';
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
 import { Background } from './Geometries';
+
+import firebase from 'firebase/compat/app';
+
+import 'firebase/compat/auth';
+
+const ProductDisplay = () => (
+  <section className="bg-gray-100 py-12">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-2">
+      <div className="bg-white overflow-hidden shadow rounded-lg">
+        <div className="px-4 py-5 sm:p-6">
+          <h3 className="text-lg leading-6 font-medium text-gray-900">Monthly Plan</h3>
+          <div className="mt-4 flex items-baseline">
+            <span className="text-5xl font-extrabold text-gray-900">$20</span>
+            <span className="ml-1 text-xl font-semibold text-gray-500">/ month</span>
+          </div>
+          <p className="mt-4 text-sm text-gray-500">Perfect for users who need our services on a monthly basis.</p>
+        </div>
+        <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+          <form action="/create-checkout-session" method="POST">
+            <input type="hidden" name="lookup_key" value="{{MONTHLY_PRICE_LOOKUP_KEY}}" />
+            <button id="checkout-and-portal-button" type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-orange-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
+              <span className="absolute left-0 inset-y-0 flex items-center pl-3">
+                <svg className="h-5 w-5 text-orange-500 group-hover:text-orange-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fillRule="evenodd" d="M13.293 6.293a1 1 0 00-1.414-1.414l-5 5a1 1 0 000 1.414l5 5a1 1 0 001.414-1.414L9.414 11H16a1 1 0 100-2H9.414l3.879-3.879z" clipRule="evenodd" />
+                </svg>
+              </span>
+              <span>Subscribe Now</span>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div className="bg-white overflow-hidden shadow rounded-lg">
+        <div className="px-4 py-5 sm:p-6">
+          <h3 className="text-lg leading-6 font-medium text-gray-900">Yearly Plan</h3>
+          <div className="mt-4 flex items-baseline">
+            <span className="text-5xl font-extrabold text-gray-900">$40</span>
+            <span className="ml-1 text-xl font-semibold text-gray-500">/ year</span>
+          </div>
+          <p className="mt-4 text-sm text-gray-500">Get 85% discount when you pay annually!</p>
+        </div>
+        <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+          <form action="/create-checkout-session"       method="POST">
+        <input type="hidden" name="lookup_key" value="{{YEARLY_PRICE_LOOKUP_KEY}}" />
+        <button id="checkout-and-portal-button" type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-orange-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
+          <span className="absolute left-0 inset-y-0 flex items-center pl-3">
+            <svg className="h-5 w-5 text-orange-500 group-hover:text-orange-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fillRule="evenodd" d="M13.293 6.293a1 1 0 00-1.414-1.414l-5 5a1 1 0 000 1.414l5 5a1 1 0 001.414-1.414L9.414 11H16a1 1 0 100-2H9.414l3.879-3.879z" clipRule="evenodd" />
+            </svg>
+          </span>
+          <span>Subscribe Now</span>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+</section>
+);
+
+
+const SuccessDisplay = ({ sessionId }) => {
+  return (
+    <section>
+      <div className="product Box-root">
+        <div className="description Box-root">
+          <h3>Subscription to starter plan successful!</h3>
+        </div>
+      </div>
+      <form action="/create-portal-session" method="POST">
+        <input
+          type="hidden"
+          id="session-id"
+          name="session_id"
+          value={sessionId}
+        />
+        <button id="checkout-and-portal-button" type="submit">
+          Manage your billing information
+        </button>
+      </form>
+    </section>
+  );
+};
+
+const Message = ({ message }) => (
+  <section>
+    <p>{message}</p>
+  </section>
+);
+
+const PaymentContainer = () => {
+  let [message, setMessage] = useState('');
+  let [success, setSuccess] = useState(false);
+  let [sessionId, setSessionId] = useState('');
+
+  useEffect(() => {
+    // Check to see if this is a redirect back from Checkout
+    const query = new URLSearchParams(window.location.search);
+
+    if (query.get('success')) {
+      setSuccess(true);
+      setSessionId(query.get('session_id'));
+    }
+
+    if (query.get('canceled')) {
+      setSuccess(false);
+      setMessage(
+        "Order canceled -- continue to shop around and checkout when you're ready."
+      );
+    }
+  }, [sessionId]);
+
+  if (!success && message === '') {
+    return <ProductDisplay />;
+  } else if (success && sessionId !== '') {
+    return <SuccessDisplay sessionId={sessionId} />;
+  } else {
+    return <Message message={message} />;
+  }
+};
 
 function Membership() {
   const [user, setUser] = useState(null);
@@ -30,12 +147,15 @@ function Membership() {
         <div className="text-center pt-10 pl-5 pr-5 text-gray-400">
           {user ? (
             <div>
-              <h1 className="sm:pb-5 scale-75 sm:scale-100">
+              <h1 className="text-5xl sm:pb-5 scale-75 sm:scale-100">
                 <span className="text-white">
-                  Welcome, {user.displayName || user.email}!
+                  Welcome, {user.displayName || user.email}.
                 </span>
               </h1>
-              <p>This is your membership page.</p>
+              <p>Hey there! If you want to get the most out of your experience, we invite you to become a family of our community.</p>
+
+              <PaymentContainer />
+
               <button
                 className="m-5 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
                 onClick={signOut}
@@ -45,11 +165,12 @@ function Membership() {
             </div>
           ) : (
             <div>
-              <h1 className="sm:pb-5 scale-75 sm:scale-100">
+              <h1 className="text-5xl sm:pb-5 scale-75 sm:scale-100">
                 <span className="text-white">
                   Please sign in to access your membership page.
                 </span>
               </h1>
+              <p>As a member, you'll be able to unlock all sorts of cool benefits that will enhance your use of our educational web app.</p>
             </div>
           )}
         </div>
