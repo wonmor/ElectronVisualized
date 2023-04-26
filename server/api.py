@@ -1,7 +1,7 @@
 import json
 import os
 
-from flask import Blueprint, jsonify, request, current_app, send_file, make_response
+from flask import Blueprint, jsonify, redirect, request, current_app, send_file, make_response
 import flask
 
 from flask_cors import CORS, cross_origin
