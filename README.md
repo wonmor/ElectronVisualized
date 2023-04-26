@@ -14,19 +14,19 @@ A web-based viewer and an API for atomic and molecular orbitals. The viewer, wri
 
 ---
 
-## Atomic Orbitals
-
-**ElectronVisualized** uses the spherical harmonics formula to display the shape of atomic orbitals based on their quantum numbers. Each orbital has a unique shape, and the tool accurately represents this shape by calculating the probability of finding an electron at any given point in space. These probabilities are represented as dots, which show where electrons are most likely to be located within the orbital.
-
-<img width="1200" alt="Screenshot 2023-04-12 at 9 21 54 PM" src="https://user-images.githubusercontent.com/35755386/231621160-9405e6e6-e32d-49f4-ae31-89dae2b3b74a.png">
-
----
-
 ## Molecular Orbitals
 
 Molecular orbitals (MOs) are formed by the combination of atomic orbitals (AOs) from different atoms in a molecule. In this process, AOs interact and combine to form bonding MOs and antibonding MOs.
 
 <img width="1200" alt="Screenshot 2023-04-12 at 8 57 42 PM" src="https://user-images.githubusercontent.com/35755386/231621394-a8c84a2b-8d0a-4c5a-a790-f3a4590a971d.png">
+
+---
+
+## Atomic Orbitals
+
+**ElectronVisualized** uses the spherical harmonics formula to display the shape of atomic orbitals based on their quantum numbers. Each orbital has a unique shape, and the tool accurately represents this shape by calculating the probability of finding an electron at any given point in space. These probabilities are represented as dots, which show where electrons are most likely to be located within the orbital.
+
+<img width="1200" alt="Screenshot 2023-04-12 at 9 21 54 PM" src="https://user-images.githubusercontent.com/35755386/231621160-9405e6e6-e32d-49f4-ae31-89dae2b3b74a.png">
 
 ---
 
