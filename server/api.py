@@ -18,10 +18,8 @@ from . import User, molecule, atom, socketio, guard, db
 
 import stripe
 
-# This is your test secret API key.
-stripe.api_key = 'sk_test_51MekZrIVyMsxlantk9D0bSQO3GwMfxDZo6Wb0V5aLMjM63fNCVaaenadEZ87CWk9Ow5JKIr0p4u4dHAanzZLNwe200BMPWXSA0'
 
-YOUR_DOMAIN = 'http://localhost:5000'
+YOUR_DOMAIN = 'http://127.0.0.1:5000'
 
 '''
 █▀█ █▀▀ █▀ ▀█▀   ▄▀█ █▀█ █

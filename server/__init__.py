@@ -6,7 +6,7 @@ from flask_cors import CORS
 
 from dotenv import load_dotenv
 
-import os
+import os, stripe
 
 '''
 ----------------------------------------------------------------
@@ -75,6 +75,9 @@ def create_app():
     load_dotenv()
 
     app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
+
+    # Read the Stripe API key from the environment variable
+    stripe.api_key = os.environ.get('STRIPE_API_KEY')
 
     # Create the 'users' directory if it doesn't exist
     users_dir = os.path.join(os.getcwd(), 'server', 'users')
