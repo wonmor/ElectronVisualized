@@ -16,7 +16,7 @@ const ProductDisplay = () => (
           </div>
           <p className="mt-4 text-sm text-gray-500">Perfect for aspiring chemical engineers.</p>
         </div>
-        <div className="px-4 py-3 bg-gray-50 text-center sm:px-6">
+        <div className="px-4 py-3 text-center sm:px-6">
           <form action="/create-checkout-session" method="POST">
             <input type="hidden" name="lookup_key" value="{{MONTHLY_PRICE_LOOKUP_KEY}}" />
             <button id="checkout-and-portal-button" type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-rose-500 hover:bg-rose-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500">
@@ -28,24 +28,25 @@ const ProductDisplay = () => (
         </div>
       </div>
 
-      <div className="bg-white overflow-hidden shadow rounded-lg flex flex-col justify-center items-center">
-        <div className="px-4 py-5 sm:p-6">
-          <h3 className="text-lg leading-6 font-medium text-gray-900">Yearly Plan</h3>
-          <div className="mt-4 flex items-baseline justify-center">
-            <span className="text-5xl font-extrabold text-gray-900">$40</span>
-            <span className="ml-1 text-xl font-semibold text-gray-500">/ year</span>
-          </div>
-          <p className="mt-4 text-sm text-gray-500">Time to get a little more serious.</p>
-        </div>
-        <div className="px-4 py-3 bg-gray-50 text-center sm:px-6">
-        <form action="/create-checkout-session" method="POST">
-            <input type="hidden" name="lookup_key" value="{{YEARLY_PRICE_LOOKUP_KEY}}" />
-            <button id="checkout-and-portal-button" type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-rose-500 hover:bg-rose-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500">
-              <span>Subscribe Now</span>
-            </button>
-          </form>
-        </div>
-      </div>
+      <div class="bg-gray-800 overflow-hidden shadow rounded-lg flex flex-col justify-center items-center text-white">
+  <div class="px-4 py-5 sm:p-6">
+    <h3 class="text-lg leading-6 font-medium">Yearly Plan</h3>
+    <div class="mt-4 flex items-baseline justify-center">
+      <span class="text-5xl font-extrabold">$40</span>
+      <span class="ml-1 text-xl font-semibold">/ year</span>
+    </div>
+    <p class="mt-4 text-sm">Time to get a little more serious.</p>
+  </div>
+  <div class="px-4 py-3 text-center sm:px-6">
+    <form action="/create-checkout-session" method="POST">
+      <input type="hidden" name="lookup_key" value="{{YEARLY_PRICE_LOOKUP_KEY}}" />
+      <button id="checkout-and-portal-button" type="submit" class="inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-white hover:bg-blue-500 hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+        <span>Subscribe Now</span>
+      </button>
+    </form>
+  </div>
+</div>
+
     </div>
   </section>
 );
@@ -134,7 +135,7 @@ function Membership() {
 
   return (
     <>
-      <div className="bg-gray-700 pb-5 overflow-auto" style={{ "min-height": "100vh" }}>
+      <div className="bg-black pb-40 overflow-auto" style={{ "min-height": "100vh", width: "-webkit-fill-available" }}>
         <div className="text-center pt-10 pl-5 pr-5 text-gray-400">
           {user ? (
             <div>

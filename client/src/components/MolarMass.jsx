@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faBackspace } from "@fortawesome/free-solid-svg-icons";
+import { Background } from "./Geometries";
 
 import elements from "../assets/elements.json";
 import "./MolarMass.css";
@@ -131,6 +132,7 @@ const MolarMass = () => {
     <div className="parent">
       <div className="container">
         <Autocomplete />
+        <Background />
       </div>
     </div>
   );

@@ -47,7 +47,6 @@ export default function Table() {
       setNoResultsFound(false);
     }
   }, [digit1, digit2, digit3]);
-  
 
   const handleDigitChange = (event, digitSetter) => {
     const value = event.target.value;
@@ -636,6 +635,7 @@ export default function Table() {
                     className="mb-2 mr-2 sm:mt-0 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
                     type="button"
                   >
+                    <span className="font-bold">{key}</span>{" "}
                     <span>{value[0]}</span>
                   </button>
                 );
@@ -643,7 +643,11 @@ export default function Table() {
 
               <br />
 
-              <p className="mt-5 mb-5 ml-0 mr-0 md:ml-40 md:mr-40">DFT calculations are used for the electron density.<br />Molecular orbitals are plotted using the Hartree-Fock method.</p>
+              <p className="mt-5 mb-5 ml-0 mr-0 md:ml-40 md:mr-40">
+                DFT calculations are used for the electron density.
+                <br />
+                Molecular orbitals are plotted using the Hartree-Fock method.
+              </p>
 
               {/* <br />
 
@@ -717,19 +721,6 @@ export default function Table() {
                 digit3.length === 0 ? (
                   <>
                     <p className="text-red-500">Please enter three digits.</p>
-
-                    <div className="ml-5 mr-5 mt-2">
-                      <button
-                        onClick={() => {
-                          // This code runs after a global state change...
-                          movePage(`/molar-mass`);
-                        }}
-                        className="mb-2 mr-2 sm:mt-0 bg-transparent hover:bg-blue-500 text-black hover:text-white py-2 px-4 border border-black hover:border-transparent rounded"
-                        type="button"
-                      >
-                        <span>Molar Mass Calculator</span>
-                      </button>
-                    </div>
                   </>
                 ) : (
                   <button
@@ -771,7 +762,26 @@ export default function Table() {
 
           {displayPeriodicTable()}
 
-          <p className="ml-0 mr-0 md:ml-40 md:mr-40 mb-40">ElectronVisualized uses spherical harmonics to calculate the radial part of the atomic orbitals.<br />Then, Metropolis-Hastings algorithm is used to sample the wavefunction.</p>
+          <p className="ml-0 mr-0 md:ml-40 md:mr-40">
+            ElectronVisualized uses spherical harmonics to calculate the radial
+            part of the atomic orbitals.
+            <br />
+            Then, Metropolis-Hastings algorithm is used to sample the
+            wavefunction.
+          </p>
+
+          <div className="ml-5 mr-5 mt-2">
+            <button
+              onClick={() => {
+                // This code runs after a global state change...
+                movePage(`/molar-mass`);
+              }}
+              className="m-5 mb-40 bg-transparent hover:bg-blue-500 text-gray-400 hover:text-white py-2 px-4 border border-gray-400 hover:border-transparent rounded"
+              type="button"
+            >
+              <span>Molar Mass Calculator</span>
+            </button>
+          </div>
         </div>
         <Background />
       </div>
