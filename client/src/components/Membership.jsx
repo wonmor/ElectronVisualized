@@ -19,7 +19,7 @@ const ProductDisplay = () => (
         <div className="px-4 py-3 bg-gray-50 text-center sm:px-6">
           <form action="/create-checkout-session" method="POST">
             <input type="hidden" name="lookup_key" value="{{MONTHLY_PRICE_LOOKUP_KEY}}" />
-            <button id="checkout-and-portal-button" type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-orange-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
+            <button id="checkout-and-portal-button" type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-rose-500 hover:bg-rose-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500">
               <span className="absolute left-0 inset-y-0 flex items-center pl-3">
               </span>
               <span>Subscribe Now</span>
@@ -40,7 +40,7 @@ const ProductDisplay = () => (
         <div className="px-4 py-3 bg-gray-50 text-center sm:px-6">
         <form action="/create-checkout-session" method="POST">
             <input type="hidden" name="lookup_key" value="{{YEARLY_PRICE_LOOKUP_KEY}}" />
-            <button id="checkout-and-portal-button" type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-orange-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
+            <button id="checkout-and-portal-button" type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-rose-500 hover:bg-rose-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500">
               <span>Subscribe Now</span>
             </button>
           </form>
