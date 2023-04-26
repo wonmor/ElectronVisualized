@@ -113,6 +113,12 @@ export default function SignUp() {
           </button>
           {error && <p className="mt-5 text-red-200">{`${error}.`}</p>}
         </div>
+
+        <div className="max-w-lg m-auto pt-5">
+                  <span className="text-center text-gray-400">
+                    Enjoy our <b>JET-BLACK</b> theme,<br />with unlimited access to all content.
+                  </span>
+              </div>
       </div>
 
       <Background />

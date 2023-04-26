@@ -4,13 +4,17 @@ body {
   overflow-x: clip;
 }
 
-h1, h2, h3, a, p, span, li, input {
+h1, h2, h3, a, p, b, span, li, input {
   font-family: 'Outfit', sans-serif;
   font-weight: 400;
   -webkit-hyphens: auto;
   -moz-hyphens: auto;
   -ms-hyphens: auto;
   hyphens: auto;
+}
+
+b {
+  font-weight: 800;
 }
 
 h1 {
