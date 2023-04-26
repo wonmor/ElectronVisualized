@@ -17,7 +17,7 @@ const ProductDisplay = () => (
           <p class="mt-4 text-sm">Perfect for aspiring chemical engineers.</p>
         </div>
         <div class="px-4 py-3 text-center sm:px-6">
-          <form action="/create-checkout-session" method="POST">
+          <form action="/api/create-checkout-session" method="POST">
             <input
               type="hidden"
               name="lookup_key"
@@ -44,7 +44,7 @@ const ProductDisplay = () => (
           <p class="mt-4 text-sm">Time to get a little more serious.</p>
         </div>
         <div class="px-4 py-3 text-center sm:px-6">
-          <form action="/create-checkout-session" method="POST">
+          <form action="/api/create-checkout-session" method="POST">
             <input
               type="hidden"
               name="lookup_key"
