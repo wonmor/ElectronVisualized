@@ -143,7 +143,7 @@ function Membership() {
                   Welcome, {user.displayName || user.email}.
                 </span>
               </h1>
-              <p>Hey there! If you want to get the most out of your experience, we invite you to become a part of our community.</p>
+              <p className="ml-0 mr-0 md:ml-40 md:mr-40">Calculating the wavefunctions of atoms and molecules requires a lot of processing power.<br />Dedicated servers with specialized hardware and software are used to perform these calculations efficiently.</p>
 
               <PaymentContainer />
 

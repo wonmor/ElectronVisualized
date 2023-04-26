@@ -145,7 +145,7 @@ export default function Table() {
     return (
       <>
         <div
-          className={`m-10 pb-20 scale-75 sm:scale-100 ${
+          className={`m-10 scale-75 sm:scale-100 ${
             size.width < 350 ? "scale-50" : null
           }`}
           role="region"
@@ -766,6 +766,8 @@ export default function Table() {
           </div>
 
           {displayPeriodicTable()}
+
+          <p className="ml-0 mr-0 md:ml-40 md:mr-40 mb-40">Calculating the wavefunctions of atoms and molecules requires a lot of processing power.<br />Dedicated servers with specialized hardware and software are used to perform these calculations efficiently.</p>
         </div>
         <Background />
       </div>

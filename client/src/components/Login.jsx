@@ -77,7 +77,7 @@ export default function Login() {
 
               <div className="max-w-lg m-auto pt-5">
                   <span className="text-center text-gray-400">
-                      Sign up for our membership today and start exploring the exciting world of atomic and molecular orbitals like never before!
+                    Calculating atomic and molecular orbitals requires a lot of processing power and memory. Dedicated servers with specialized hardware and software are used to perform these calculations efficiently. The cost of running these servers can be high, but advancements in technology can help reduce these costs while maintaining high-quality results.
                   </span>
               </div>
             </div>
