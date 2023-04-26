@@ -643,7 +643,7 @@ export default function Table() {
 
               <br />
 
-              <p className="mt-5 mb-5 ml-0 mr-0 md:ml-40 md:mr-40">
+              <p className="text-gray-400 mt-5 mb-5 ml-0 mr-0 md:ml-40 md:mr-40">
                 DFT calculations are used for the electron density.
                 <br />
                 Molecular orbitals are plotted using the Hartree-Fock method.
@@ -762,7 +762,7 @@ export default function Table() {
 
           {displayPeriodicTable()}
 
-          <p className="ml-0 mr-0 md:ml-40 md:mr-40">
+          <p className="text-gray-400 ml-0 mr-0 md:ml-40 md:mr-40">
             ElectronVisualized uses spherical harmonics to calculate the radial
             part of the atomic orbitals.
             <br />
