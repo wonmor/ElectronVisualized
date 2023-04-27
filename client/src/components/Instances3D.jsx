@@ -73,9 +73,9 @@ export function Particles3D({ particleRef, lightRef, particleRadius }) {
         );
 
         // Phase shift and scale the coordinates to match the existing molecule shape that is already generated....
-        const x = coords[0] / 5 - 10.7;
-        const y = coords[1] / 5 - 10.7;
-        const z = coords[2] / 5 - 10.7;
+        const x = coords[0] / 5 - 22.0
+        const y = coords[1] / 5 - 22.0
+        const z = coords[2] / 5 - 22.0
 
         temp.push({ x, y, z, volume, isColourException });
       }
