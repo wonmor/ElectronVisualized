@@ -18,7 +18,7 @@ A web-based viewer and an API for atomic and molecular orbitals. The viewer, wri
 
 Molecular orbitals (MOs) are formed by the combination of atomic orbitals (AOs) from different atoms in a molecule. In this process, AOs interact and combine to form bonding MOs and antibonding MOs.
 
-<img width="1200" alt="Screenshot 2023-04-12 at 8 57 42 PM" src="https://user-images.githubusercontent.com/35755386/231621394-a8c84a2b-8d0a-4c5a-a790-f3a4590a971d.png">
+<img width="1200" alt="Screenshot 2023-04-27 at 12 26 13 AM" src="https://user-images.githubusercontent.com/35755386/234759440-d62654f4-06c3-4b49-ab9c-58bbdd4377be.png">
 
 ---
 
