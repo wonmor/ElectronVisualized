@@ -167,9 +167,16 @@ export function GLBViewer(props) {
       setOffset([0, -1.5, 0]);
 
     } else if (props.name.includes("CH3OH")) {
-      setRotation({x: 0, y: 0.75, z: -1.05});
-      setScale(3.5);
-      setOffset([1.5, 1.25, 0]);
+      if (props.isHomo) {
+        setRotation({x: 0, y: 0.75, z: -1.05});
+        setScale(3.5);
+        setOffset([1.5, 1.25, 0]);
+
+      } else {
+        setRotation({x: 0, y: 0.75, z: -1.15});
+        setScale(3.75);
+        setOffset([1.5, 0, -1.25]);
+      }
 
     } else if (props.name.includes("C2H4")) {
       setRotation({x: 0, y: 1.25, z: 0.15});
