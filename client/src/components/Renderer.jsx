@@ -43,7 +43,8 @@ HOW TO OPTIMIZE REACT + THREE-FIBER: https://docs.pmnd.rs/react-three-fiber/adva
 PERIODIC TABLE REST API WRITTEN IN GOLANG: https://github.com/neelpatel05/periodic-table-api-go
 */
 
-const moleculesWithMolecularOrbitals = ["CH3OH", "C6H6", "C2H4", "H2O", "H2", "Cl2", "HCl"];
+export const moleculesWithMolecularOrbitals = ["CH3OH", "C6H6", "C2H4", "H2O", "H2", "Cl2", "HCl"];
+export const organicMolecules = ["CH3OH", "C6H6", "C2H4"];
 
 const useLazyInterval = (callback, delay) => {
   /*
@@ -434,8 +435,8 @@ export default function Renderer() {
         style={{ minHeight: "100vh", width: "-webkit-fill-available" }}
       >
         <div className="text-rose-200 text-center pt-10 pb-10 ml-5 mr-5">
-          <h1 className={`mb-5 ${size.width < 350 ? "scale-75" : null}`}>
-            {globalSelectedElement["name"]}
+          <h1 className={`mb-5 ${size.width < 350 ? "scale-75" : null} ${organicMolecules.includes(globalSelectedElement.element) === true ? "text-green-200" : "text-rose-200"}`}>
+            {globalSelectedElement.name}
             <span className="font-thin text-gray-400">. Visualized.</span>
           </h1>
 
@@ -477,7 +478,7 @@ export default function Renderer() {
                     }
                     setDisableButton(true);
                   }}
-                  className="bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
+                  className={`bg-transparent py-2 px-4 border hover:border-transparent rounded ${organicMolecules.includes(globalSelectedElement.element) === true ? "border-green-200 text-green-200 hover:bg-green-200 hover:text-black" : "border-white text-white hover:text-white hover:bg-blue-500"}`}
                   type="button"
                 >
                   <span>View 3D Model</span>

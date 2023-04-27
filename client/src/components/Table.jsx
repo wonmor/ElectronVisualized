@@ -619,49 +619,64 @@ export default function Table() {
             </h1>
 
             <div className="ml-5 mr-5">
-              {Object.keys(moleculeDict).map((key, index) => {
-                const value = moleculeDict[key];
+              {Object.keys(moleculeDict)
+                .slice(3)
+                .map((key, index) => {
+                  const value = moleculeDict[key];
 
-                return (
-                  <button
-                    onMouseDown={() => {
-                      // This code runs first...
-                      appendNewRender(key, value[0], "Molecule", value[1]);
-                    }}
-                    onClick={() => {
-                      // This code runs after a global state change...
-                      movePage(`/renderer`);
-                    }}
-                    className="mb-2 mr-2 sm:mt-0 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
-                    type="button"
-                  >
-                    <span className="font-bold">{key}</span>{" "}
-                    <span>{value[0]}</span>
-                  </button>
-                );
-              })}
+                  return (
+                    <button
+                      onMouseDown={() => {
+                        // This code runs first...
+                        appendNewRender(key, value[0], "Molecule", value[1]);
+                      }}
+                      onClick={() => {
+                        // This code runs after a global state change...
+                        movePage(`/renderer`);
+                      }}
+                      className="mb-2 mr-2 sm:mt-0 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
+                      type="button"
+                      key={key}
+                    >
+                      <span className="font-bold">{key}</span>{" "}
+                      <span>{value[0]}</span>
+                    </button>
+                  );
+                })}
+            </div>
 
-              <br />
 
-              <p className="text-gray-400 mt-5 mb-5 ml-0 mr-0 md:ml-40 md:mr-40">
-                DFT calculations are used for the electron density.
-                <br />
-                Molecular orbitals are plotted using the Hartree-Fock method.
-              </p>
-
-              {/* <br />
-
-              <button
-                onClick={() => {
-                  // This code runs after a global state change...
-                  movePage(`/gaussian-cube`);
-                }}
-                className="mb-2 mr-2 mt-5 bg-transparent hover:bg-blue-500 text-white hover:text-white py-5 px-10 border border-white hover:border-transparent rounded"
-                type="button"
+            <div className="flex flex-col ml-5 mr-5 justify-center items-center">
+              <div
+                className="border-2 border-green-200 rounded-md p-3 m-5"
+                style={{ maxWidth: "500px" }}
               >
-                <ViewInArIcon className="w-5 h-5 mr-2 -ml-1" />
-                <span>Gaussian Cube<br />3D Visualizer</span>
-              </button> */}
+                <h2 className="text-green-200 mb-3">Organic.</h2>
+                {Object.keys(moleculeDict)
+                  .slice(0, 3)
+                  .map((key, index) => {
+                    const value = moleculeDict[key];
+
+                    return (
+                      <button
+                        onMouseDown={() => {
+                          // This code runs first...
+                          appendNewRender(key, value[0], "Molecule", value[1]);
+                        }}
+                        onClick={() => {
+                          // This code runs after a global state change...
+                          movePage(`/renderer`);
+                        }}
+                        className="mb-2 mr-2 sm:mt-0 bg-transparent hover:bg-green-200 text-green-200 hover:text-black py-2 px-4 border border-green-200 hover:border-transparent rounded"
+                        type="button"
+                        key={key}
+                      >
+                        <span className="font-bold">{key}</span>{" "}
+                        <span>{value[0]}</span>
+                      </button>
+                    );
+                  })}
+              </div>
             </div>
           </div>
 
