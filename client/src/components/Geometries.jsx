@@ -161,7 +161,17 @@ export function GLBViewer(props) {
   useEffect(() => {
     console.log(props.name);
 
-    if (props.name.includes("C2H4")) {
+    if (props.name.includes("C6H6")) {
+      setRotation({x: 0, y: 0, z: Math.PI / 2});
+      setScale(6);
+      setOffset([0, -1.5, 0]);
+
+    } else if (props.name.includes("CH3OH")) {
+      setRotation({x: 0, y: 0.75, z: -1.05});
+      setScale(3.5);
+      setOffset([1.5, 1.25, 0]);
+
+    } else if (props.name.includes("C2H4")) {
       setRotation({x: 0, y: 1.25, z: 0.15});
       setScale(6);
       

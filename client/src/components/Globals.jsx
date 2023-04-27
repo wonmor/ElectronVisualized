@@ -329,6 +329,8 @@ export const getMoleculeColour = (
     case "HCl":
       return `hsl(${volume * 204000.0 + 200.0}, 100%, 60%)`;
 
+    case "CH3OH":
+    case "C6H6":
     case "C2H4":
       return `hsl(${volume * 5000.0 + 180.0}, 100%, 60%)`;
 

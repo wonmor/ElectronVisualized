@@ -101,7 +101,7 @@ def _density_parser():
         vmax = min + 0.9 * (max - min)
 
     elif element_name == 'H2O' or element_name == 'O':
-        vmin = min + 0.002 * (max - min)
+        vmin = min + 0.0015 * (max - min)
         vmax = min + 0.09 * (max - min)
     
     elif element_name == 'HCl':
@@ -116,8 +116,12 @@ def _density_parser():
         vmin = min + 0.0001 * (max - min)
         vmax = min + 0.9 * (max - min)
 
-    elif element_name == "C2H4" or element_name == "CH3OH" or element_name == "C2H6":
+    elif element_name == "C2H4" or element_name == "C2H6":
         vmin = min + 0.002 * (max - min)
+        vmax = min + 0.09 * (max - min)
+
+    elif element_name == "CH3OH":
+        vmin = min + 0.0015 * (max - min)
         vmax = min + 0.09 * (max - min)
     
     else:

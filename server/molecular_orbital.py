@@ -31,6 +31,7 @@ smiles = {
     "ethene": "C=C",
     "hydrogen_gas": "[H][H]",
     "hydrochloric_acid": "Cl",
+    "methanol": "CO",
     "methane": "C",
     "ethane": "CC",
     "propane": "CCC",
@@ -112,7 +113,8 @@ def plot_mo(molecule_name="ethene"):
 
     ax.axhline(y=0, ls=":", color="k")
     ax.set_xticks(pos)
-    ax.set_xticklabels([f"#{i}" for i, _ in enumerate(pos)])
+    ax.set_xticklabels([f"{i}" for i, _ in enumerate(pos)])
+    ax.set_xticks(ax.get_xticks()[::2]) # Show only every other tick
     ax.set(xlabel="MO number", ylabel="Energy / a.u.")
     sns.despine(fig=fig)
 
@@ -198,4 +200,4 @@ def plot_mo(molecule_name="ethene"):
     cmo_homo_cube_path = pathlib.Path("server/cmo_homo.cube")
     cmo_lumo_cube_path = pathlib.Path("server/cmo_lumo.cube")
 
-plot_mo("hydrochloric_acid")
+plot_mo("methanol")

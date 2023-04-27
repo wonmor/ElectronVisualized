@@ -43,7 +43,7 @@ HOW TO OPTIMIZE REACT + THREE-FIBER: https://docs.pmnd.rs/react-three-fiber/adva
 PERIODIC TABLE REST API WRITTEN IN GOLANG: https://github.com/neelpatel05/periodic-table-api-go
 */
 
-const moleculesWithMolecularOrbitals = ["C2H4", "H2O", "H2", "Cl2", "HCl"];
+const moleculesWithMolecularOrbitals = ["CH3OH", "C6H6", "C2H4", "H2O", "H2", "Cl2", "HCl"];
 
 const useLazyInterval = (callback, delay) => {
   /*
