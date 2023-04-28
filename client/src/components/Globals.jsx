@@ -48,7 +48,7 @@ export const moleculeDict = {
   C2H4: [
     "Ethene",
     "Ethene is an organic compound having the formula C2H4. It is a colorless, flammable gas with a faint 'sweet and musky' odor.",
-    "Trigonal Planar",
+    "Planar",
     "Nonpolar",
     "120°",
     "3 bonding orbitals\n1 antibonding orbital",
