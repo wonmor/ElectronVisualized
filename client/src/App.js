@@ -37,6 +37,7 @@ const DownloadWeb = React.lazy(() => import("./components/DownloadWeb"));
 const MolarMass = React.lazy(() => import("./components/MolarMass"));
 const FileUploadForm = React.lazy(() => import("./components/FileUploadForm"));
 const Membership = React.lazy(() => import("./components/Membership"));
+const SelfIonization = React.lazy(() => import("./components/SelfIonization"));
 
 /*
 ██████╗░░█████╗░██╗░░░██╗████████╗███████╗██████╗░░██████╗
@@ -205,6 +206,7 @@ export default function App() {
             <Route path="/molar-mass" element={<MolarMass />} />
             <Route path="/file-upload" element={<FileUploadForm />} />
             <Route path="/membership" element={<Membership />} />
+            <Route path="/self-ionization" element={<SelfIonization />} />
           </Routes>
         </Suspense>
       </div>
