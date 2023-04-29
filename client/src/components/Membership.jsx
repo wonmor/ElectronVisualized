@@ -4,7 +4,6 @@ import { Background } from "./Geometries";
 import firebase from "firebase/compat/app";
 
 import "firebase/compat/auth";
-
 const ProductDisplay = () => (
   <section className="bg-transparent py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-2">
@@ -163,13 +162,13 @@ function Membership() {
                 </span>
               </h1>
               <p className="ml-0 mr-0 md:ml-40 md:mr-40">
-                Enjoy our <b>JET-BLACK</b> theme,
+                {/* Enjoy our <b>JET-BLACK</b> theme,
                 <br />
-                with unlimited access to all content.
-                {/* Membership page is under construction. */}
+                with unlimited access to all content. */}
+                Membership page is under construction.
               </p>
 
-              <PaymentContainer />
+              {/* <PaymentContainer /> */}
 
               <button
                 className="m-5 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
