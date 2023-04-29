@@ -150,7 +150,7 @@ function Membership() {
   return (
     <>
       <div
-        className="bg-black pb-40 overflow-auto"
+        className="bg-gray-800 pb-40 overflow-auto"
         style={{ "min-height": "100vh", width: "-webkit-fill-available" }}
       >
         <div className="text-center pt-10 pl-5 pr-5 text-gray-400">

@@ -431,7 +431,7 @@ export default function Renderer() {
       />
 
       <div
-        className="bg-gray-700 pb-20 text-center overflow-auto"
+        className="bg-gray-800 pb-20 text-center overflow-auto"
         style={{ minHeight: "100vh", width: "-webkit-fill-available" }}
       >
         <div className="text-rose-200 text-center pt-10 pb-10 ml-5 mr-5">
@@ -642,7 +642,7 @@ export default function Renderer() {
         </div>
 
         <div
-          className="bg-gray-800 text-center text-gray-400 ml-10 mr-10 md:ml-40 md:mr-40 rounded"
+          className={`border-2 text-center text-gray-400 ml-10 mr-10 md:ml-40 md:mr-40 rounded-xl ${organicMolecules.includes(globalSelectedElement.element) === true && "border-green-200"}`}
           style={{ width: CANVAS.WIDTH, height: CANVAS.HEIGHT }}
         >
           {!preRender && globalSelectedElement["type"] === "Molecule" && (

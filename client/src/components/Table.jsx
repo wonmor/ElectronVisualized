@@ -243,7 +243,7 @@ export default function Table() {
     return (
       <>
         <div
-          className={`border-t border-gray-500 pt-10 m-10 scale-75 sm:scale-100 ${
+          className={`pt-10 m-10 scale-75 sm:scale-100 ${
             size.width < 350 ? "scale-50" : null
           }`}
           role="region"
@@ -651,17 +651,11 @@ export default function Table() {
       />
 
       <div
-        className={`overflow-auto ${
-          selectedItem === "atom" ? "bg-gray-800" : "bg-gray-700"
-        }`}
+        className={`overflow-auto bg-gray-800`}
         style={{ minHeight: "100vh", width: "-webkit-fill-available" }}
       >
         <div className="text-white text-center p-5 text-gray-400">
-          <div
-            className={`${
-              selectedItem === "atom" && "bg-gray-700 p-5 rounded-xl"
-            }`}
-          >
+
             <h1
               className={`scale-75 sm:scale-100 mb-5 ${
                 size.width < 350 ? "truncate" : null
@@ -715,7 +709,7 @@ export default function Table() {
                 </a>
               </div>
             )}
-          </div>
+   
 
           {selectedItem === "none" && <OptionDisplay />}
 
@@ -734,7 +728,7 @@ export default function Table() {
 
           {selectedItem === "molecule" && (
             <>
-              <div className="bg-gray-800 rounded-xl pb-2">
+              <div className="border-2 rounded-xl pb-2">
                 <h1
                   className={`scale-90 sm:scale-100 pt-5 text-blue-200 ${
                     size.width < 350 ? "truncate ..." : null
@@ -818,7 +812,7 @@ export default function Table() {
 
           {selectedItem === "atom" && (
             <>
-              <div className="pb-2 m-auto" style={{ width: "fit-content" }}>
+              <div className="border-2 rounded-xl p-5 m-auto">
                 <h1 className="scale-90 sm:scale-100 px-5 text-white">
                   Atoms.
                 </h1>
