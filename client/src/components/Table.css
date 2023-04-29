@@ -16,7 +16,6 @@
 }
 
 #periodic-table li {
-  @apply bg-gray-800 rounded;
   color: pink;
   padding: 0.5em 0.125em;
   text-align: center;

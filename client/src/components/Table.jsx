@@ -7,6 +7,7 @@ import { Background } from "./Geometries";
 import { moleculeDict, atomDict, useWindowSize, isElectron } from "./Globals";
 
 import classNames from "classnames";
+import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import MetaTag from "./MetaTag";
 import quantumNumbers from "../assets/quantum_num.json";
 
@@ -36,11 +37,79 @@ export default function Table() {
   const navigate = useNavigate();
   const size = useWindowSize();
 
+  const [selectedItem, setSelectedItem] = useState("none");
+
   const [digit1, setDigit1] = useState("");
   const [digit2, setDigit2] = useState("");
   const [digit3, setDigit3] = useState("");
 
   const [noResultsFound, setNoResultsFound] = useState(false);
+
+  const OptionDisplay = () => (
+    <section className="bg-transparent py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-2">
+        <div class="border border-white overflow-hidden shadow rounded-lg flex flex-col justify-center items-center text-white">
+          <div class="px-4 py-5 sm:p-6">
+            <h3 class="text-lg leading-6 font-medium">A Beginner's Guide</h3>
+            <div class="mt-4 flex items-baseline justify-center">
+              <span class="text-5xl font-thin">
+                <span className="underline decoration-1 underline-offset-8 font-thin">
+                  EXPLORE
+                </span>
+                <br />
+                ATOMIC
+                <br />
+                ORBITALS
+              </span>
+            </div>
+            <p class="mt-4 text-sm">
+              Discover the Secrets of the Quantum Realm
+            </p>
+          </div>
+          <div class="px-4 py-3 text-center sm:px-6">
+            <button
+              id="checkout-and-portal-button"
+              onClick={() => {
+                setSelectedItem("atom");
+              }}
+              class="inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-white hover:bg-blue-500 hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+            >
+              <span>Navigate</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="bg-gray-800 overflow-hidden shadow rounded-lg flex flex-col justify-center items-center text-white">
+          <div class="px-4 py-5 sm:p-6">
+            <h3 class="text-lg leading-6 font-medium">A Comprehensive Guide</h3>
+            <div class="mt-4 flex items-baseline justify-center">
+              <span class="text-5xl font-thin">
+                MOLECULAR
+                <br />
+                <span className="underline decoration-1 underline-offset-8 font-thin">
+                  ORBITAL
+                </span>
+                <br />
+                THEORY
+              </span>
+            </div>
+            <p class="mt-4 text-sm">Friendly Hugs Between Atoms</p>
+          </div>
+          <div class="px-4 py-3 text-center sm:px-6">
+            <button
+              id="checkout-and-portal-button"
+              onClick={() => {
+                setSelectedItem("molecule");
+              }}
+              class="inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-white hover:bg-blue-500 hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+            >
+              <span>Navigate</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 
   useEffect(() => {
     if (digit1.length === 0 || digit2.length === 0 || digit3.length === 0) {
@@ -144,7 +213,7 @@ export default function Table() {
     return (
       <>
         <div
-          className={`m-10 scale-75 sm:scale-100 ${
+          className={`border-t border-gray-500 pt-10 m-10 scale-75 sm:scale-100 ${
             size.width < 350 ? "scale-50" : null
           }`}
           role="region"
@@ -552,251 +621,303 @@ export default function Table() {
       />
 
       <div
-        className="bg-gray-700 overflow-auto"
+        className={`overflow-auto ${
+          selectedItem === "atom" ? "bg-gray-800" : "bg-gray-700"
+        }`}
         style={{ minHeight: "100vh", width: "-webkit-fill-available" }}
       >
         <div className="text-white text-center p-5 text-gray-400">
-          <h1
-            className={`scale-75 sm:scale-100 mb-5 ${
-              size.width < 350 ? "truncate" : null
+          <div
+            className={`${
+              selectedItem === "atom" && "bg-gray-700 p-5 rounded-xl"
             }`}
           >
-            Visualizing <span className="text-rose-200">Quantum Mechanics</span>
-            . Reimagined.
-          </h1>
-
-          {!isElectron() && (
-            <div className="flex flex-col md:flex-row justify-center items-center">
-              <a
-                href="https://apps.apple.com/us/app/electronify/id6446613861"
-                type="button"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-fit text-white bg-[#050708] hover:bg-[#050708]/90 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#050708]/50 dark:hover:bg-[#050708]/30 mr-2 mb-2"
-              >
-                <svg
-                  className="w-5 h-5 mr-2 -ml-1"
-                  aria-hidden="true"
-                  focusable="false"
-                  data-prefix="fab"
-                  data-icon="apple"
-                  role="img"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 384 512"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"
-                  ></path>
-                </svg>
-                <span>App Store</span>
-              </a>
-
-              <a
-                href="https://play.google.com/store/apps/details?id=com.johnseong.electronify"
-                type="button"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-fit text-black bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-300 dark:hover:bg-gray-100 mr-2 mb-2"
-              >
-                <img
-                  src="google_play.svg"
-                  alt="google_play_icon"
-                  className="w-5 h-5 mr-2 -ml-1"
-                />
-                <span>Google Play</span>
-              </a>
-            </div>
-          )}
-
-          <div className="bg-gray-600 rounded pb-2">
             <h1
-              className={`scale-90 sm:scale-100 mt-5 p-5 text-blue-200 ${
-                size.width < 350 ? "truncate ..." : null
+              className={`scale-75 sm:scale-100 mb-5 ${
+                size.width < 350 ? "truncate" : null
               }`}
             >
-              Molecules<span className="text-gray-400">.</span>
+              Visualizing{" "}
+              <span className="text-rose-200">Quantum Mechanics</span>.
+              Reimagined.
             </h1>
 
-            <div className="ml-5 mr-5">
-              {Object.keys(moleculeDict)
-                .slice(3)
-                .map((key, index) => {
-                  const value = moleculeDict[key];
-
-                  return (
-                    <button
-                      onMouseDown={() => {
-                        // This code runs first...
-                        appendNewRender(key, value[0], "Molecule", value[1]);
-                      }}
-                      onClick={() => {
-                        // This code runs after a global state change...
-                        movePage(`/renderer`);
-                      }}
-                      className="mb-2 mr-2 sm:mt-0 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
-                      type="button"
-                      key={key}
-                    >
-                      <span className="font-bold">{key}</span>{" "}
-                      <span>{value[0]}</span>
-                    </button>
-                  );
-                })}
-            </div>
-
-
-            <div className="flex flex-col ml-5 mr-5 justify-center items-center">
-              <div
-                className="border-2 border-green-200 rounded-md p-3 m-5"
-                style={{ maxWidth: "500px" }}
-              >
-                <h2 className="text-green-200 mb-3">Organic.</h2>
-                {Object.keys(moleculeDict)
-                  .slice(0, 3)
-                  .map((key, index) => {
-                    const value = moleculeDict[key];
-
-                    return (
-                      <button
-                        onMouseDown={() => {
-                          // This code runs first...
-                          appendNewRender(key, value[0], "Molecule", value[1]);
-                        }}
-                        onClick={() => {
-                          // This code runs after a global state change...
-                          movePage(`/renderer`);
-                        }}
-                        className="mb-2 mr-2 sm:mt-0 bg-transparent hover:bg-green-200 text-green-200 hover:text-black py-2 px-4 border border-green-200 hover:border-transparent rounded"
-                        type="button"
-                        key={key}
-                      >
-                        <span className="font-bold">{key}</span>{" "}
-                        <span>{value[0]}</span>
-                      </button>
-                    );
-                  })}
-              </div>
-            </div>
-          </div>
-
-          <h1 className="scale-90 sm:scale-100 mt-5 pl-5 pr-5 pb-5 text-gray-400">
-            Atoms.
-          </h1>
-
-          <div className="ml-5 mr-5 pb-10 border-b border-gray-500">
-            <div className="p-6 w-fit m-auto bg-white rounded-lg shadow-lg">
-              <h2 className="mb-4 text-xl text-black font-medium">
-                Enter Quantum Num.
-              </h2>
-              <div className="flex items-center justify-center">
-                <input
-                  className={classNames(
-                    "w-12 py-2 mr-2 text-center text-gray-500 border rounded",
-                    {
-                      "border-red-500": digit1.length === 0,
-                    }
-                  )}
-                  type="text"
-                  maxLength="1"
-                  placeholder="N"
-                  value={digit1}
-                  onChange={(event) => handleDigitChange(event, setDigit1)}
-                />
-                <input
-                  className={classNames(
-                    "w-12 py-2 mr-2 text-center text-gray-500 border rounded",
-                    {
-                      "border-red-500": digit2.length === 0,
-                    }
-                  )}
-                  type="text"
-                  maxLength="1"
-                  placeholder="L"
-                  value={digit2}
-                  onChange={(event) => handleDigitChange(event, setDigit2)}
-                />
-                <input
-                  className={classNames(
-                    "w-12 py-2 text-center text-gray-500 border rounded",
-                    {
-                      "border-red-500": digit3.length === 0,
-                    }
-                  )}
-                  type="text"
-                  maxLength="1"
-                  value={digit3}
-                  placeholder="ML"
-                  onChange={(event) => handleDigitChange(event, setDigit3)}
-                />
-              </div>
-              <div className="mt-4">
-                {digit1.length === 0 ||
-                digit2.length === 0 ||
-                digit3.length === 0 ? (
-                  <>
-                    <p className="text-red-500">Please enter three digits.</p>
-                  </>
-                ) : (
-                  <button
-                    onClick={() => {
-                      let matchFound = false;
-
-                      for (const [key, value] of Object.entries(
-                        quantumNumbers
-                      )) {
-                        if (
-                          value["n"] === parseInt(digit1) &&
-                          value["l"] === parseInt(digit2) &&
-                          value["m"] === parseInt(digit3)
-                        ) {
-                          appendNewRender(...atomDict[key]);
-                          movePage(`/renderer`);
-                          matchFound = true;
-                          break;
-                        }
-                      }
-
-                      if (!matchFound) {
-                        setNoResultsFound(true);
-                      }
-                    }}
-                    className="mb-2 mr-2 sm:mt-0 bg-transparent hover:bg-green-800 text-green-800 hover:text-white py-2 px-4 border border-green-800 hover:border-transparent rounded"
-                    type="button"
+            {!isElectron() && (
+              <div className="flex flex-col md:flex-row justify-center items-center">
+                <a
+                  href="https://apps.apple.com/us/app/electronify/id6446613861"
+                  type="button"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-fit text-white bg-[#050708] hover:bg-[#050708]/90 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#050708]/50 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+                >
+                  <svg
+                    className="w-5 h-5 mr-2 -ml-1"
+                    aria-hidden="true"
+                    focusable="false"
+                    data-prefix="fab"
+                    data-icon="apple"
+                    role="img"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 384 512"
                   >
-                    <span>Search</span>
-                  </button>
-                )}
+                    <path
+                      fill="currentColor"
+                      d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"
+                    ></path>
+                  </svg>
+                  <span>App Store</span>
+                </a>
 
-                {noResultsFound && (
-                  <p className="text-red-500">No results found.</p>
-                )}
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.johnseong.electronify"
+                  type="button"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-fit text-black bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-300 dark:hover:bg-gray-100 mr-2 mb-2"
+                >
+                  <img
+                    src="google_play.svg"
+                    alt="google_play_icon"
+                    className="w-5 h-5 mr-2 -ml-1"
+                  />
+                  <span>Google Play</span>
+                </a>
               </div>
-            </div>
+            )}
           </div>
 
-          {displayPeriodicTable()}
+          {selectedItem === "none" && <OptionDisplay />}
 
-          <p className="text-gray-400 ml-0 mr-0 md:ml-40 md:mr-40">
-            ElectronVisualized uses spherical harmonics to calculate the radial
-            part of the atomic orbitals.
-            <br />
-            Then, Metropolis-Hastings algorithm is used to sample the
-            wavefunction.
-          </p>
+          {(selectedItem === "atom" ||
+            selectedItem === "molecule") && (
+              <button
+                className="m-5 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
+                type="button"
+                onClick={() => {
+                  setSelectedItem("none");
+                }}
+              >
+                <KeyboardBackspaceIcon />
+                <span className="ml-2">Back</span>
+              </button>
+            )}
 
-          <div className="ml-5 mr-5 mt-2">
-            <button
-              onClick={() => {
-                // This code runs after a global state change...
-                movePage(`/molar-mass`);
-              }}
-              className="m-5 mb-40 bg-transparent hover:bg-blue-500 text-gray-400 hover:text-white py-2 px-4 border border-gray-400 hover:border-transparent rounded"
-              type="button"
-            >
-              <span>Molar Mass Calculator</span>
-            </button>
-          </div>
+          {selectedItem === "molecule" && (
+            <>
+              <div className="bg-gray-800 rounded-xl pb-2">
+                <h1
+                  className={`scale-90 sm:scale-100 pt-5 text-blue-200 ${
+                    size.width < 350 ? "truncate ..." : null
+                  }`}
+                >
+                  Molecules<span className="text-gray-400">.</span>
+                </h1>
+
+                <div className="my-5 mt-5">
+                  {Object.keys(moleculeDict)
+                    .slice(3)
+                    .map((key, index) => {
+                      const value = moleculeDict[key];
+
+                      return (
+                        <button
+                          onMouseDown={() => {
+                            // This code runs first...
+                            appendNewRender(
+                              key,
+                              value[0],
+                              "Molecule",
+                              value[1]
+                            );
+                          }}
+                          onClick={() => {
+                            // This code runs after a global state change...
+                            movePage(`/renderer`);
+                          }}
+                          className="mb-2 mr-2 sm:mt-0 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
+                          type="button"
+                          key={key}
+                        >
+                          <span className="font-bold">{key}</span>{" "}
+                          <span>{value[0]}</span>
+                        </button>
+                      );
+                    })}
+                </div>
+
+                <div className="flex flex-col ml-5 mr-5 justify-center items-center">
+                  <div
+                    className="border-2 border-green-200 rounded-md p-3 m-5"
+                    style={{ maxWidth: "500px" }}
+                  >
+                    <h2 className="text-green-200 mb-3">Organic.</h2>
+                    {Object.keys(moleculeDict)
+                      .slice(0, 3)
+                      .map((key, index) => {
+                        const value = moleculeDict[key];
+
+                        return (
+                          <button
+                            onMouseDown={() => {
+                              // This code runs first...
+                              appendNewRender(
+                                key,
+                                value[0],
+                                "Molecule",
+                                value[1]
+                              );
+                            }}
+                            onClick={() => {
+                              // This code runs after a global state change...
+                              movePage(`/renderer`);
+                            }}
+                            className="mb-2 mr-2 sm:mt-0 bg-transparent hover:bg-green-200 text-green-200 hover:text-black py-2 px-4 border border-green-200 hover:border-transparent rounded"
+                            type="button"
+                            key={key}
+                          >
+                            <span className="font-bold">{key}</span>{" "}
+                            <span>{value[0]}</span>
+                          </button>
+                        );
+                      })}
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+
+          {selectedItem === "atom" && (
+            <>
+              <div className="pb-2 m-auto" style={{ width: "fit-content" }}>
+                <h1 className="scale-90 sm:scale-100 px-5 text-white">
+                  Atoms.
+                </h1>
+
+                <div className="mx-5 py-5">
+                  <div className="p-6 w-fit m-auto bg-white rounded-lg shadow-lg">
+                    <h2 className="mb-4 text-xl text-black font-medium">
+                      Enter Quantum Num.
+                    </h2>
+                    <div className="flex items-center justify-center">
+                      <input
+                        className={classNames(
+                          "w-12 py-2 mr-2 text-center text-gray-500 border rounded",
+                          {
+                            "border-red-500": digit1.length === 0,
+                          }
+                        )}
+                        type="text"
+                        maxLength="1"
+                        placeholder="N"
+                        value={digit1}
+                        onChange={(event) =>
+                          handleDigitChange(event, setDigit1)
+                        }
+                      />
+                      <input
+                        className={classNames(
+                          "w-12 py-2 mr-2 text-center text-gray-500 border rounded",
+                          {
+                            "border-red-500": digit2.length === 0,
+                          }
+                        )}
+                        type="text"
+                        maxLength="1"
+                        placeholder="L"
+                        value={digit2}
+                        onChange={(event) =>
+                          handleDigitChange(event, setDigit2)
+                        }
+                      />
+                      <input
+                        className={classNames(
+                          "w-12 py-2 text-center text-gray-500 border rounded",
+                          {
+                            "border-red-500": digit3.length === 0,
+                          }
+                        )}
+                        type="text"
+                        maxLength="1"
+                        value={digit3}
+                        placeholder="ML"
+                        onChange={(event) =>
+                          handleDigitChange(event, setDigit3)
+                        }
+                      />
+                    </div>
+                    <div className="mt-4">
+                      {digit1.length === 0 ||
+                      digit2.length === 0 ||
+                      digit3.length === 0 ? (
+                        <>
+                          <p className="text-red-500">
+                            Please enter three digits.
+                          </p>
+                        </>
+                      ) : (
+                        <button
+                          onClick={() => {
+                            let matchFound = false;
+
+                            for (const [key, value] of Object.entries(
+                              quantumNumbers
+                            )) {
+                              if (
+                                value["n"] === parseInt(digit1) &&
+                                value["l"] === parseInt(digit2) &&
+                                value["m"] === parseInt(digit3)
+                              ) {
+                                appendNewRender(...atomDict[key]);
+                                movePage(`/renderer`);
+                                matchFound = true;
+                                break;
+                              }
+                            }
+
+                            if (!matchFound) {
+                              setNoResultsFound(true);
+                            }
+                          }}
+                          className="mb-2 mr-2 sm:mt-0 bg-transparent hover:bg-green-800 text-green-800 hover:text-white py-2 px-4 border border-green-800 hover:border-transparent rounded"
+                          type="button"
+                        >
+                          <span>Search</span>
+                        </button>
+                      )}
+
+                      {noResultsFound && (
+                        <p className="text-red-500">No results found.</p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {displayPeriodicTable()}
+
+              <p className="text-gray-400 ml-0 mr-0 md:ml-40 md:mr-40">
+                ElectronVisualized uses spherical harmonics to calculate the
+                radial part of the atomic orbitals.
+                <br />
+                Then, Metropolis-Hastings algorithm is used to sample the
+                wavefunction.
+              </p>
+
+              <div className="ml-5 mr-5 mt-2">
+                <button
+                  onClick={() => {
+                    // This code runs after a global state change...
+                    movePage(`/molar-mass`);
+                  }}
+                  className="m-5 mb-40 bg-transparent hover:bg-blue-500 text-gray-400 hover:text-white py-2 px-4 border border-gray-400 hover:border-transparent rounded"
+                  type="button"
+                >
+                  <span>Molar Mass Calculator</span>
+                </button>
+              </div>
+            </>
+          )}
         </div>
         <Background />
       </div>
