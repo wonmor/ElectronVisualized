@@ -6,6 +6,7 @@ import { setGlobalSelectedElement } from "../states/selectedElementSlice";
 import { Background } from "./Geometries";
 import { moleculeDict, atomDict, useWindowSize, isElectron } from "./Globals";
 
+import LazyLoad from "react-lazyload";
 import classNames from "classnames";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import MetaTag from "./MetaTag";
@@ -13,6 +14,7 @@ import quantumNumbers from "../assets/quantum_num.json";
 
 import "./Table.css";
 import "./Background.css";
+
 /*
 ░█▀▀█ ░█▀▀▀ ░█▀▀█ ▀█▀ ░█▀▀▀█ ░█▀▀▄ ▀█▀ ░█▀▀█ 　 ▀▀█▀▀ ─█▀▀█ ░█▀▀█ ░█─── ░█▀▀▀ 
 ░█▄▄█ ░█▀▀▀ ░█▄▄▀ ░█─ ░█──░█ ░█─░█ ░█─ ░█─── 　 ─░█── ░█▄▄█ ░█▀▀▄ ░█─── ░█▀▀▀ 
@@ -48,36 +50,51 @@ export default function Table() {
   const OptionDisplay = () => (
     <section className="bg-transparent py-12">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-2">
-        <div class="border border-white overflow-hidden shadow rounded-lg flex flex-col justify-center items-center text-white">
-          <div class="px-4 py-5 sm:p-6">
-            <h3 class="text-lg leading-6 font-medium">A Beginner's Guide</h3>
-            <div class="mt-4 flex items-baseline justify-center">
-              <span class="text-5xl font-thin">
-                <span className="underline decoration-1 underline-offset-8 font-thin">
-                  EXPLORE
+        <LazyLoad height={400} once>
+          <div
+            className="relative bg-black overflow-hidden shadow rounded-lg text-white"
+            style={{
+              height: "400px", // Set the height to the desired value
+            }}
+          >
+            <div className="absolute top-0 left-0 right-0 bottom-0 bg-black opacity-50" />
+            <div className="absolute top-0 left-0 right-0 bottom-0 flex flex-col justify-center items-center">
+              <h3 className="text-lg leading-6 font-medium z-40">
+                A Beginner's Guide
+              </h3>
+              <div className="mt-4 flex items-baseline justify-center">
+                <span className="text-5xl font-thin z-40">
+                  <span className="underline decoration-1 underline-offset-8 font-thin">
+                    EXPLORE
+                  </span>
+                  <br />
+                  ATOMIC
+                  <br />
+                  ORBITALS
                 </span>
-                <br />
-                ATOMIC
-                <br />
-                ORBITALS
-              </span>
+              </div>
+              <p className="mt-4 text-sm z-40">
+                Discover the Secrets of the Quantum Realm
+              </p>
+              <button
+                id="checkout-and-portal-button"
+                onClick={() => {
+                  setSelectedItem("atom");
+                }}
+                className="z-40 inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-white hover:bg-blue-500 hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4"
+              >
+                <span>Navigate</span>
+              </button>
             </div>
-            <p class="mt-4 text-sm">
-              Discover the Secrets of the Quantum Realm
-            </p>
+            <img
+  className="absolute top-0 left-0 right-0 bottom-0 object-contain object-center w-full h-full"
+  src="atomic-orbital.png"
+  alt="Atomic Orbital"
+  style={{ filter: 'brightness(30%)' }}
+/>
+
           </div>
-          <div class="px-4 py-3 text-center sm:px-6">
-            <button
-              id="checkout-and-portal-button"
-              onClick={() => {
-                setSelectedItem("atom");
-              }}
-              class="inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-white hover:bg-blue-500 hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-            >
-              <span>Navigate</span>
-            </button>
-          </div>
-        </div>
+        </LazyLoad>
 
         <div class="bg-gray-800 overflow-hidden shadow rounded-lg flex flex-col justify-center items-center text-white">
           <div class="px-4 py-5 sm:p-6">
@@ -689,19 +706,18 @@ export default function Table() {
 
           {selectedItem === "none" && <OptionDisplay />}
 
-          {(selectedItem === "atom" ||
-            selectedItem === "molecule") && (
-              <button
-                className="m-5 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
-                type="button"
-                onClick={() => {
-                  setSelectedItem("none");
-                }}
-              >
-                <KeyboardBackspaceIcon />
-                <span className="ml-2">Back</span>
-              </button>
-            )}
+          {(selectedItem === "atom" || selectedItem === "molecule") && (
+            <button
+              className="m-5 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
+              type="button"
+              onClick={() => {
+                setSelectedItem("none");
+              }}
+            >
+              <KeyboardBackspaceIcon />
+              <span className="ml-2">Back</span>
+            </button>
+          )}
 
           {selectedItem === "molecule" && (
             <>
