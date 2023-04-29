@@ -114,7 +114,10 @@ def plot_mo(molecule_name="ethene"):
     ax.axhline(y=0, ls=":", color="k")
     ax.set_xticks(pos)
     ax.set_xticklabels([f"{i}" for i, _ in enumerate(pos)])
-    ax.set_xticks(ax.get_xticks()[::2]) # Show only every other tick
+
+    if molecule_name == "benzene" or molecule_name == "methanol":
+        ax.set_xticks(ax.get_xticks()[::2]) # Show only every other tick
+
     ax.set(xlabel="MO number", ylabel="Energy / a.u.")
     sns.despine(fig=fig)
 
