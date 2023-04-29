@@ -87,43 +87,56 @@ export default function Table() {
               </button>
             </div>
             <img
-  className="absolute top-0 left-0 right-0 bottom-0 object-contain object-center w-full h-full"
-  src="atomic-orbital.png"
-  alt="Atomic Orbital"
-  style={{ filter: 'brightness(30%)' }}
-/>
-
+              className="absolute top-0 left-0 right-0 bottom-0 object-contain object-center w-full h-full"
+              src="atomic-orbital.png"
+              alt="Atomic Orbital"
+              style={{ filter: "brightness(30%)" }}
+            />
           </div>
         </LazyLoad>
 
-        <div class="bg-gray-800 overflow-hidden shadow rounded-lg flex flex-col justify-center items-center text-white">
-          <div class="px-4 py-5 sm:p-6">
-            <h3 class="text-lg leading-6 font-medium">A Comprehensive Guide</h3>
-            <div class="mt-4 flex items-baseline justify-center">
-              <span class="text-5xl font-thin">
-                MOLECULAR
-                <br />
-                <span className="underline decoration-1 underline-offset-8 font-thin">
-                  ORBITAL
+        <LazyLoad height={400} once>
+          <div
+            className="relative bg-gray-800 overflow-hidden shadow rounded-lg text-white"
+            style={{
+              height: "400px", // Set the height to the desired value
+            }}
+          >
+            <div className="absolute top-0 left-0 right-0 bottom-0 bg-black opacity-50" />
+            <div className="absolute top-0 left-0 right-0 bottom-0 flex flex-col justify-center items-center">
+              <h3 class="text-lg leading-6 font-medium z-40">
+                A Comprehensive Guide
+              </h3>
+              <div class="mt-4 flex items-baseline justify-center">
+                <span class="text-5xl font-thin z-40">
+                  MOLECULAR
+                  <br />
+                  <span className="underline decoration-1 underline-offset-8 font-thin">
+                    ORBITAL
+                  </span>
+                  <br />
+                  THEORY
                 </span>
-                <br />
-                THEORY
-              </span>
+              </div>
+              <p class="mt-4 text-sm z-40">Friendly Hugs Between Atoms</p>
+              <button
+                id="checkout-and-portal-button"
+                onClick={() => {
+                  setSelectedItem("molecule");
+                }}
+                className="z-40 inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-white hover:bg-blue-500 hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4"
+              >
+                <span>Navigate</span>
+              </button>
             </div>
-            <p class="mt-4 text-sm">Friendly Hugs Between Atoms</p>
+            <img
+              className="absolute top-0 left-0 right-0 bottom-0 object-contain object-center w-full h-full"
+              src="molecular-orbital.png"
+              alt="Moleecular Orbital"
+              style={{ filter: "brightness(30%)" }}
+            />
           </div>
-          <div class="px-4 py-3 text-center sm:px-6">
-            <button
-              id="checkout-and-portal-button"
-              onClick={() => {
-                setSelectedItem("molecule");
-              }}
-              class="inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-white hover:bg-blue-500 hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-            >
-              <span>Navigate</span>
-            </button>
-          </div>
-        </div>
+        </LazyLoad>
       </div>
     </section>
   );
