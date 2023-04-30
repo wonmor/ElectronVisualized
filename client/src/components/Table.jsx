@@ -65,12 +65,12 @@ export default function Table() {
               <div className="mt-4 flex items-baseline justify-center">
                 <span className="text-5xl font-thin z-40">
                   <span className="underline decoration-1 underline-offset-8 font-thin">
-                    EXPLORE
+                    Explore
                   </span>
                   <br />
-                  ATOMIC
+                  Atomic
                   <br />
-                  ORBITALS
+                  Orbitals
                 </span>
               </div>
               <p className="mt-4 text-sm z-40">
@@ -109,13 +109,13 @@ export default function Table() {
               </h3>
               <div class="mt-4 flex items-baseline justify-center">
                 <span class="text-5xl font-thin z-40">
-                  MOLECULAR
+                  Molecular
                   <br />
                   <span className="underline decoration-1 underline-offset-8 font-thin">
-                    ORBITAL
+                    Orbital
                   </span>
                   <br />
-                  THEORY
+                  Theory
                 </span>
               </div>
               <p class="mt-4 text-sm z-40">Friendly Hugs Between Atoms</p>
@@ -657,12 +657,12 @@ export default function Table() {
         <div className="text-white text-center p-5 text-gray-400">
 
             <h1
-              className={`scale-75 sm:scale-100 mb-5 ${
+              className={`scale-75 sm:scale-100 mb-5 font-thin ${
                 size.width < 350 ? "truncate" : null
               }`}
             >
               Visualizing{" "}
-              <span className="text-rose-200">Quantum Mechanics</span>.
+              <span className="font-thin text-rose-200">Quantum Mechanics</span>.
               Reimagined.
             </h1>
 
@@ -730,7 +730,7 @@ export default function Table() {
             <>
               <div className="border-2 border-gray-600 rounded-xl pb-2 m-auto" style={{ maxWidth: "1200px" }}>
                 <h1
-                  className={`scale-90 sm:scale-100 pt-5 text-blue-200 ${
+                  className={`scale-90 sm:scale-100 pt-5 font-thin text-white ${
                     size.width < 350 ? "truncate ..." : null
                   }`}
                 >
@@ -774,7 +774,7 @@ export default function Table() {
                     className="border-2 border-green-200 rounded-md p-3 m-5"
                     style={{ maxWidth: "500px" }}
                   >
-                    <h2 className="text-green-200 mb-3">Organic</h2>
+                    <h2 className="text-green-200 font-thin mb-3">Organic</h2>
                     {Object.keys(moleculeDict)
                       .slice(0, 3)
                       .map((key, index) => {
@@ -813,7 +813,7 @@ export default function Table() {
           {selectedItem === "atom" && (
             <>
               <div className="border-2 border-gray-600 rounded-xl p-5 m-auto" style={{ maxWidth: "1200px" }}>
-                <h1 className="scale-90 sm:scale-100 px-5 text-white">
+                <h1 className="scale-90 sm:scale-100 px-5 font-thin text-white">
                   Atoms
                 </h1>
 

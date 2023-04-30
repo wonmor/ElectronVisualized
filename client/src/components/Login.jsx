@@ -57,7 +57,7 @@ export default function Login() {
           <div className="pb-5 overflow-auto" style={{ minHeight: "100vh", width: "-webkit-fill-available" }}>
             <div className="text-center pt-10 pl-5 pr-5 text-gray-400">
               <h1 className="sm:pb-5 scale-75 sm:scale-100">
-                <span className="text-white">{"Sign in"}</span>
+                <span className="text-white font-thin">{"Sign in"}</span>
               </h1>
 
               <h3>or <button onClick={() => {

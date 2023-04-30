@@ -156,7 +156,7 @@ function Membership() {
           {user ? (
             <div>
               <h1 className="text-5xl sm:pb-5 scale-75 sm:scale-100">
-                <span className="text-white">
+                <span className="font-thin text-white">
                   Welcome, {user.displayName || user.email}.
                 </span>
               </h1>
@@ -179,7 +179,7 @@ function Membership() {
           ) : (
             <div>
               <h1 className="text-5xl sm:pb-5 scale-75 sm:scale-100">
-                <span className="text-white">
+                <span className="text-white font-thin">
                   Please sign in to access your membership page.
                 </span>
               </h1>

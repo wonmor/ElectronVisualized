@@ -18,13 +18,13 @@ export default function DownloadWeb() {
 
   return (
     <div style={{ minWidth: "-webkit-fill-available", overflow: "auto" }}>
-      <div className="bg-gray-800 pb-20 overflow-auto" style={{ height: "100vh" }}>
+      <div className="pb-20 overflow-auto" style={{ height: "100vh" }}>
         <div className="ml-5 mr-5 text-white text-center sm:pt-10 text-gray-400">
-          <h1 className="scale-75 sm:scale-90">
+          <h1 className="scale-75 font-thin sm:scale-90">
             Now on{" "}
-            <span className="text-white">Mobile</span>.
+            <span className="font-thin text-white">Mobile</span>.
             <br />
-            <span className="text-rose-200">Electronify.</span>
+            <span className="font-thin text-rose-200">Electronify.</span>
           </h1>
 
           <p className="p-5 text-white">

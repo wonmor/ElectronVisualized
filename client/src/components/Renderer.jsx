@@ -435,7 +435,7 @@ export default function Renderer() {
         style={{ minHeight: "100vh", width: "-webkit-fill-available" }}
       >
         <div className="text-rose-200 text-center pt-10 pb-10 ml-5 mr-5">
-          <h1 className={`mb-5 ${size.width < 350 ? "scale-75" : null} ${organicMolecules.includes(globalSelectedElement.element) === true ? "text-green-200" : "text-rose-200"}`}>
+          <h1 className={`font-thin mb-5 ${size.width < 350 ? "scale-75" : null} ${organicMolecules.includes(globalSelectedElement.element) === true ? "text-green-200" : "text-rose-200"}`}>
             {globalSelectedElement.name}
             <span className="font-thin text-gray-400">. Visualized.</span>
           </h1>

@@ -88,7 +88,7 @@ const Autocomplete = () => {
 
   return (
     <div className="container text-center">
-      <h1 className="title-text text-5xl">Calculate</h1>
+      <h1 className="title-text text-5xl font-thin">Calculate</h1>
       <h2 className="text-gray-400 text-3xl">Molar Mass.</h2>
       <input
         className="input"
