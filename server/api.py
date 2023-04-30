@@ -484,7 +484,7 @@ def webhook_received():
             # Payment succeeded!
             print('🔔 Payment succeeded!')
             # Store checkout session ID in the document with the name of customer_id in the customers collection inside Firebase Firestore
-            doc_ref = db.collection(u'customers').document(customer_id)
+            doc_ref = db.collection(u'customers-stripe').document(customer_id)
             doc_ref.set({
                 u'checkout_session_id': checkout_session_id
             }, merge=True)
