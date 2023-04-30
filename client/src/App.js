@@ -159,7 +159,7 @@ export default function App() {
                 Home
               </MenuItem>
 
-              <MenuItem
+              {/* <MenuItem
                 icon={<InsertEmoticonIcon />}
                 onClick={() => {
                   collapseSidebar(true);
@@ -167,7 +167,7 @@ export default function App() {
                 }}
               >
                 Member
-              </MenuItem>
+              </MenuItem> */}
 
               <MenuItem
                 icon={<GestureIcon />}

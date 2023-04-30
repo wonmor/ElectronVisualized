@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import firebase from "firebase/compat/app";
 
 import "firebase/compat/auth";
+
 const ProductDisplay = () => (
   <section className="bg-transparent py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-2">
@@ -21,6 +22,11 @@ const ProductDisplay = () => (
               type="hidden"
               name="priceId"
               value="price_1N10a0IVyMsxlantM7J62CoG"
+            />
+            <input
+              type="hidden"
+              name="appUserId"
+              value={firebase.auth().currentUser.uid}
             />
             <button
               id="checkout-and-portal-button"
