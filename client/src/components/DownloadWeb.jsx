@@ -1,5 +1,4 @@
 import React from "react";
-import { Background } from "./Geometries";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export default function DownloadWeb() {
@@ -41,7 +40,6 @@ export default function DownloadWeb() {
           ></LazyLoadImage>
           </div>
       </div>
-      <Background />
     </div>
   );
 }

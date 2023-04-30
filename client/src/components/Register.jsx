@@ -115,7 +115,7 @@ export default function SignUp() {
 
         <div className="max-w-lg m-auto pt-5">
                   <span className="text-center text-gray-400">
-                    Enjoy our <b>JET-BLACK</b> theme,<br />with unlimited access to all content.
+                  Enjoy the Pro membership benefits<br />with unlimited access to all content.
                   </span>
               </div>
       </div>

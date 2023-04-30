@@ -8,7 +8,6 @@ import { Routes, Route } from "react-router-dom";
 import { Sidebar, Menu, MenuItem, useProSidebar } from "react-pro-sidebar";
 import { isElectron } from "./components/Globals";
 import { getAnalytics } from "firebase/analytics";
-import { Background } from "./components/Geometries";
 
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import GestureIcon from "@mui/icons-material/Gesture";
@@ -212,7 +211,6 @@ export default function App() {
         </Suspense>
       </div>
       <Footer />
-      <Background />
     </div>
   );
 }

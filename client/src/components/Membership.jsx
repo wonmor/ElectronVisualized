@@ -10,8 +10,8 @@ const ProductDisplay = () => (
         <div class="px-4 py-5 sm:p-6">
           <h3 class="text-lg leading-6 font-medium">Monthly Plan</h3>
           <div class="mt-4 flex items-baseline justify-center">
-            <span class="text-5xl font-extrabold">$20</span>
-            <span class="ml-1 text-xl font-semibold">/ month</span>
+            <span class="text-5xl font-thin">$20</span>
+            <span class="ml-1 text-xl font-light">/ month</span>
           </div>
           <p class="mt-4 text-sm">Perfect for aspiring chemical engineers.</p>
         </div>
@@ -33,12 +33,12 @@ const ProductDisplay = () => (
         </div>
       </div>
 
-      <div class="bg-gray-800 overflow-hidden shadow rounded-lg flex flex-col justify-center items-center text-white">
+      <div class="bg-black overflow-hidden shadow rounded-lg flex flex-col justify-center items-center text-white">
         <div class="px-4 py-5 sm:p-6">
           <h3 class="text-lg leading-6 font-medium">Yearly Plan</h3>
           <div class="mt-4 flex items-baseline justify-center">
-            <span class="text-5xl font-extrabold">$40</span>
-            <span class="ml-1 text-xl font-semibold">/ year</span>
+            <span class="text-5xl font-thin">$40</span>
+            <span class="ml-1 text-xl font-light">/ year</span>
           </div>
           <p class="mt-4 text-sm">Time to get a little more serious.</p>
         </div>
@@ -157,17 +157,17 @@ function Membership() {
             <div>
               <h1 className="text-5xl sm:pb-5 scale-75 sm:scale-100">
                 <span className="font-thin text-white">
-                  Welcome, {user.displayName || user.email}.
+                  Welcome,<br />{user.displayName || user.email}.
                 </span>
               </h1>
               <p className="ml-0 mr-0 md:ml-40 md:mr-40">
-                {/* Enjoy our <b>JET-BLACK</b> theme,
+                Enjoy the Pro membership benefits
                 <br />
-                with unlimited access to all content. */}
-                Membership page is under construction.
+                with unlimited access to all content.
+                {/* Membership page is under construction. */}
               </p>
 
-              {/* <PaymentContainer /> */}
+              <PaymentContainer />
 
               <button
                 className="m-5 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
