@@ -651,7 +651,7 @@ export default function Table() {
       />
 
       <div
-        className={`overflow-auto bg-gray-800`}
+        className={`overflow-auto pb-40`}
         style={{ minHeight: "100vh", width: "-webkit-fill-available" }}
       >
         <div className="text-white text-center p-5 text-gray-400">
@@ -933,7 +933,7 @@ export default function Table() {
                     // This code runs after a global state change...
                     movePage(`/molar-mass`);
                   }}
-                  className="m-5 mb-40 bg-transparent hover:bg-blue-500 text-gray-400 hover:text-white py-2 px-4 border border-gray-400 hover:border-transparent rounded"
+                  className="m-5 bg-transparent hover:bg-blue-500 text-gray-400 hover:text-white py-2 px-4 border border-gray-400 hover:border-transparent rounded"
                   type="button"
                 >
                   <span>Molar Mass Calculator</span>
