@@ -426,6 +426,7 @@ def customer_portal():
     return redirect(portalSession.url, code=303)
 
 # The use of webhooks allows web applications to automatically communicate with other web-apps.
+# Connected directly on the Stripe dashboard, this webhook will send a POST request to the specified
 @bp.route('/api/webhook', methods=['POST'])
 def webhook_received():
     # Replace this endpoint secret with your endpoint's unique secret
