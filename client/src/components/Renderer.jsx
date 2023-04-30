@@ -642,7 +642,7 @@ export default function Renderer() {
         </div>
 
         <div
-          className={`border-2 text-center text-gray-400 ml-10 mr-10 md:ml-40 md:mr-40 rounded-xl ${organicMolecules.includes(globalSelectedElement.element) === true && "border-green-200"}`}
+          className={`border-2 text-center text-gray-400 ml-10 mr-10 md:ml-40 md:mr-40 rounded-xl ${organicMolecules.includes(globalSelectedElement.element) === true ? "border-green-200" : "border-gray-600"}`}
           style={{ width: CANVAS.WIDTH, height: CANVAS.HEIGHT }}
         >
           {!preRender && globalSelectedElement["type"] === "Molecule" && (

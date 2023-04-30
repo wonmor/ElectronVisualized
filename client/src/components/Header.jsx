@@ -85,7 +85,7 @@ export default function Header() {
   }, [showMenu, showMenuAlreadyTriggered, size.width]);
 
   return (
-    <nav className="flex items-center justify-between flex-wrap bg-gray-800 p-3">
+    <nav className="flex items-center justify-between flex-wrap bg-transparent p-3">
       <button
         onClick={() => {
           movePage("/");

@@ -20,20 +20,16 @@ export default function NotFound() {
   */
   return (
     <>
-      <div className="bg-gray-700 overflow-auto" style={{ "min-height": "100vh" }}>
+      <div className="overflow-auto" style={{ "min-height": "100vh" }}>
         <div className="text-white text-center pt-10 text-gray-400">
 
-          <h1 className="leading-tight">
-            Oops, <span className="font-bold text-rose-200">404</span> Error.
+          <h1 className="leading-tight font-thin">
+            Oops, <span className="text-rose-200">404</span> Error.
           </h1>
 
-          <h2 className="mt-5 pb-5 text-gray-400 border-b border-gray-400">
-            Sorry bud, page not found.
+          <h2 className="mt-5 pb-5 text-gray-400">
+            Sorry bud, but page not found.
           </h2>
-
-          <p className="pt-5 text-gray-400">
-            Kindly consider <b>redirecting</b> to the main website.
-          </p>
         </div>
       </div>
     </>

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Background } from "./Geometries";
 
 import firebase from "firebase/compat/app";
 
@@ -60,7 +59,7 @@ export default function SignUp() {
   };
 
   return (
-    <div className="bg-gray-700 pb-5 overflow-auto" style={{ minHeight: "100vh", width: "-webkit-fill-available" }}>
+    <div className="pb-5 overflow-auto" style={{ minHeight: "100vh", width: "-webkit-fill-available" }}>
       <div className="text-center pt-10 pl-5 pr-5 text-gray-400">
       <h1 className="sm:pb-5 scale-75 sm:scale-100">
         <span className="text-white">{"Sign up"}</span>
@@ -77,28 +76,28 @@ export default function SignUp() {
               placeholder="Display Name"
               value={displayName}
               onChange={(e) => setDisplayName(e.target.value)}
-              className="block w-full py-2 px-4 mt-4 text-white bg-gray-800 rounded-md"
+              className="block w-full py-2 px-4 mt-4 text-white bg-gray-700 rounded-md"
             />
             <input
               type="email"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="block w-full py-2 px-4 mt-4 text-white bg-gray-800 rounded-md"
+              className="block w-full py-2 px-4 mt-4 text-white bg-gray-700 rounded-md"
             />
             <input
               type="password"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="block w-full py-2 px-4 mt-4 text-white bg-gray-800 rounded-md"
+              className="block w-full py-2 px-4 mt-4 text-white bg-gray-700 rounded-md"
             />
             <input
               type="password"
               placeholder="Confirm Password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="block w-full py-2 px-4 mt-4 text-white bg-gray-800 rounded-md"
+              className="block w-full py-2 px-4 mt-4 text-white bg-gray-700 rounded-md"
             />
             <button type="submit" className="block w-full py-2 px-4 mt-4 text-white bg-sky-800 rounded-md">
               <span>
@@ -120,8 +119,6 @@ export default function SignUp() {
                   </span>
               </div>
       </div>
-
-      <Background />
     </div>
   );
 }

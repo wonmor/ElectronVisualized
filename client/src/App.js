@@ -8,6 +8,7 @@ import { Routes, Route } from "react-router-dom";
 import { Sidebar, Menu, MenuItem, useProSidebar } from "react-pro-sidebar";
 import { isElectron } from "./components/Globals";
 import { getAnalytics } from "firebase/analytics";
+import { Background } from "./components/Geometries";
 
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import GestureIcon from "@mui/icons-material/Gesture";
@@ -111,7 +112,7 @@ export default function App() {
   const Fallback = () => {
     return (
       <div
-        className="p-10"
+        className="p-10 bg-black"
         style={{ minHeight: "100vh", width: "-webkit-fill-available" }}
       >
         <div className="loading__container">
@@ -135,7 +136,7 @@ export default function App() {
   const { collapseSidebar } = useProSidebar();
 
   return (
-    <>
+    <div className="bg-gray-800">
       <Header />
       <div className={`${isElectron() && "flex flex-row"}`}>
         {isElectron() && (
@@ -211,6 +212,7 @@ export default function App() {
         </Suspense>
       </div>
       <Footer />
-    </>
+      <Background />
+    </div>
   );
 }

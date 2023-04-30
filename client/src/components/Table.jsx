@@ -52,7 +52,7 @@ export default function Table() {
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-2">
         <LazyLoad height={400} once>
           <div
-            className="relative bg-black overflow-hidden shadow rounded-lg text-white"
+            className="relative bg-black px-4 overflow-hidden shadow rounded-lg text-white"
             style={{
               height: "400px", // Set the height to the desired value
             }}
@@ -97,7 +97,7 @@ export default function Table() {
 
         <LazyLoad height={400} once>
           <div
-            className="relative bg-gray-800 overflow-hidden shadow rounded-lg text-white"
+            className="relative bg-gray-800 px-4 overflow-hidden shadow rounded-lg text-white"
             style={{
               height: "400px", // Set the height to the desired value
             }}
@@ -728,13 +728,13 @@ export default function Table() {
 
           {selectedItem === "molecule" && (
             <>
-              <div className="border-2 rounded-xl pb-2">
+              <div className="border-2 border-gray-600 rounded-xl pb-2 m-auto" style={{ maxWidth: "1200px" }}>
                 <h1
                   className={`scale-90 sm:scale-100 pt-5 text-blue-200 ${
                     size.width < 350 ? "truncate ..." : null
                   }`}
                 >
-                  Molecules<span className="text-gray-400">.</span>
+                  Molecules
                 </h1>
 
                 <div className="my-5 mt-5">
@@ -774,7 +774,7 @@ export default function Table() {
                     className="border-2 border-green-200 rounded-md p-3 m-5"
                     style={{ maxWidth: "500px" }}
                   >
-                    <h2 className="text-green-200 mb-3">Organic.</h2>
+                    <h2 className="text-green-200 mb-3">Organic</h2>
                     {Object.keys(moleculeDict)
                       .slice(0, 3)
                       .map((key, index) => {
@@ -812,9 +812,9 @@ export default function Table() {
 
           {selectedItem === "atom" && (
             <>
-              <div className="border-2 rounded-xl p-5 m-auto">
+              <div className="border-2 border-gray-600 rounded-xl p-5 m-auto" style={{ maxWidth: "1200px" }}>
                 <h1 className="scale-90 sm:scale-100 px-5 text-white">
-                  Atoms.
+                  Atoms
                 </h1>
 
                 <div className="mx-5 py-5">
@@ -942,7 +942,6 @@ export default function Table() {
             </>
           )}
         </div>
-        <Background />
       </div>
     </>
   );

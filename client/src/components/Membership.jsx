@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Background } from "./Geometries";
 
 import firebase from "firebase/compat/app";
 
@@ -150,7 +149,7 @@ function Membership() {
   return (
     <>
       <div
-        className="bg-gray-800 pb-40 overflow-auto"
+        className="pb-40 overflow-auto"
         style={{ "min-height": "100vh", width: "-webkit-fill-available" }}
       >
         <div className="text-center pt-10 pl-5 pr-5 text-gray-400">
@@ -192,7 +191,6 @@ function Membership() {
           )}
         </div>
       </div>
-      <Background />
     </>
   );
 }
