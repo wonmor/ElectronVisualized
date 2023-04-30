@@ -11,12 +11,27 @@ from flask_socketio import SocketIO, emit, join_room
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import firestore
+
 from botocore.exceptions import ClientError
 from server.extensions import multipart_download_boto3, multipart_upload_boto3
 
 from . import User, atomic_orbital, electron_density, socketio, guard, db
+from dotenv import load_dotenv
+load_dotenv()
 
 import stripe
+
+# Load Firebase credentials from environment variables
+firebase_credentials = json.loads(os.environ['FIREBASE_CREDENTIALS'])
+
+# Initialize Firebase credentials
+cred = credentials.Certificate(firebase_credentials)
+firebase_admin.initialize_app(cred)
+
+db = firestore.client()
 
 STRIPE_WEBHOOK_SECRET = os.environ.get('STRIPE_WEBHOOK_SECRET')
 REVENUECAT_STRIPE_API_KEY = os.environ.get('REVENUECAT_STIRPE_API_KEY')
@@ -420,8 +435,8 @@ def webhook_received():
     webhook_secret = STRIPE_WEBHOOK_SECRET
     request_data = json.loads(request.data)
 
-     # Send the receipt to RevenueCat
-        # https://community.revenuecat.com/third-party-integrations-53/help-sending-stripe-webhooks-rest-api-2055
+    # Send the receipt to RevenueCat
+    # https://community.revenuecat.com/third-party-integrations-53/help-sending-stripe-webhooks-rest-api-2055
 
     if webhook_secret:
         # Retrieve the event by verifying the signature using the raw body and secret if webhook signing is configured.
@@ -444,13 +459,13 @@ def webhook_received():
     if event_type == 'checkout.session.completed':
         # Retrieve the Checkout Session ID from the event data
         checkout_session_id = data_object['id']
-        
+
         # Retrieve the customer ID from the Checkout Session object
         customer_id = data_object['client_reference_id']
-        
+
         # Retrieve the subscription ID from the Checkout Session object
         subscription_id = data_object['subscription']
-        
+
         # Use the customer ID and subscription ID to fetch the latest receipt and subscription data from RevenueCat
         headers = {
             'Content-Type': 'application/json',
@@ -464,9 +479,18 @@ def webhook_received():
         }
 
         response = requests.post('https://api.revenuecat.com/v1/receipts', headers=headers, json=data)
-        
-        print('🔔 Payment succeeded!')
-        
+
+        if response.status_code == 200:
+            # Payment succeeded!
+            print('🔔 Payment succeeded!')
+            # Store checkout session ID in the document with the name of customer_id in the customers collection inside Firebase Firestore
+            doc_ref = db.collection(u'customers').document(customer_id)
+            doc_ref.set({
+                u'checkout_session_id': checkout_session_id
+            }, merge=True)
+        else:
+            print('❌ Payment failed!')
+
     return jsonify({'status': 'success'})
 
 '''
