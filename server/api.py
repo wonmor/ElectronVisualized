@@ -388,22 +388,6 @@ def create_checkout_session():
             automatic_tax={'enabled': True},
         )
 
-        # Send the receipt to RevenueCat
-        # https://community.revenuecat.com/third-party-integrations-53/help-sending-stripe-webhooks-rest-api-2055
-
-        headers = {
-            'Content-Type': 'application/json',
-            'X-Platform': 'stripe',
-            'Authorization': f'Bearer {REVENUECAT_STRIPE_API_KEY}'
-        }
-
-        data = {
-            'app_user_id': app_user_id,
-            'fetch_token': checkout_session.id
-        }
-
-        response = requests.post('https://api.revenuecat.com/v1/receipts', headers=headers, json=data)
-
     except Exception as e:
         return str(e)
 
@@ -426,6 +410,64 @@ def customer_portal():
     )
     return redirect(portalSession.url, code=303)
 
+# The use of webhooks allows web applications to automatically communicate with other web-apps.
+@bp.route('/api/webhook', methods=['POST'])
+def webhook_received():
+    # Replace this endpoint secret with your endpoint's unique secret
+    # If you are testing with the CLI, find the secret by running 'stripe listen'
+    # If you are using an endpoint defined with the API or dashboard, look in your webhook settings
+    # at https://dashboard.stripe.com/webhooks
+    webhook_secret = STRIPE_WEBHOOK_SECRET
+    request_data = json.loads(request.data)
+
+     # Send the receipt to RevenueCat
+        # https://community.revenuecat.com/third-party-integrations-53/help-sending-stripe-webhooks-rest-api-2055
+
+    if webhook_secret:
+        # Retrieve the event by verifying the signature using the raw body and secret if webhook signing is configured.
+        signature = request.headers['STRIPE_SIGNATURE']
+        try:
+            event = stripe.Webhook.construct_event(
+                payload=request.data, sig_header=signature, secret=webhook_secret)
+            data = event['data']
+        except Exception as e:
+            return e
+        # Get the type of webhook event sent - used to check the status of PaymentIntents.
+        event_type = event['type']
+    else:
+        data = request_data['data']
+        event_type = request_data['type']
+    data_object = data['object']
+
+    print('event ' + event_type)
+
+    if event_type == 'checkout.session.completed':
+        # Retrieve the Checkout Session ID from the event data
+        checkout_session_id = data_object['id']
+        
+        # Retrieve the customer ID from the Checkout Session object
+        customer_id = data_object['client_reference_id']
+        
+        # Retrieve the subscription ID from the Checkout Session object
+        subscription_id = data_object['subscription']
+        
+        # Use the customer ID and subscription ID to fetch the latest receipt and subscription data from RevenueCat
+        headers = {
+            'Content-Type': 'application/json',
+            'X-Platform': 'stripe',
+            'Authorization': f'Bearer {REVENUECAT_STRIPE_API_KEY}'
+        }
+
+        data = {
+            'app_user_id': customer_id,
+            'fetch_token': subscription_id
+        }
+
+        response = requests.post('https://api.revenuecat.com/v1/receipts', headers=headers, json=data)
+        
+        print('🔔 Payment succeeded!')
+        
+    return jsonify({'status': 'success'})
 
 '''
 ----------------------------------------------------------------
