@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { isElectron } from "./Globals";
 
 import firebase from "firebase/compat/app";
 
@@ -164,27 +163,16 @@ function Membership() {
             <div>
               <h1 className="text-5xl sm:pb-5 scale-75 sm:scale-100">
                 <span className="font-thin text-white">
-                  Welcome,
-                  <br />
-                  {user.displayName || user.email}.
+                  Welcome,<br />{user.displayName || user.email}.
                 </span>
               </h1>
+              <p className="ml-0 mr-0 md:ml-40 md:mr-40">
+                Enjoy the Pro membership benefits
+                <br />
+                with unlimited access to all content.
+              </p>
 
-              {isElectron() ? (
-                <p className="ml-0 mr-0 md:ml-40 md:mr-40">
-                  Membership page is under construction.
-                </p>
-              ) : (
-                <>
-                  <p className="ml-0 mr-0 md:ml-40 md:mr-40">
-                    Enjoy the Pro membership benefits
-                    <br />
-                    with unlimited access to all content.
-                  </p>
-
-                  <PaymentContainer />
-                </>
-              )}
+              <PaymentContainer />
 
               <button
                 className="m-5 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
