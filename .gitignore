@@ -281,3 +281,5 @@ server/GPAW_log.txt
 server/*.cube
 server/*.png
 server/*.glb
+
+server/service_account.json

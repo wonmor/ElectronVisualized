@@ -24,11 +24,8 @@ load_dotenv()
 
 import stripe
 
-# Load Firebase credentials from environment variables
-firebase_credentials = json.loads(os.environ['FIREBASE_CREDENTIALS'])
-
 # Initialize Firebase credentials
-cred = credentials.Certificate(firebase_credentials)
+cred = credentials.Certificate("server/service_account.json")
 firebase_admin.initialize_app(cred)
 
 db = firestore.client()
