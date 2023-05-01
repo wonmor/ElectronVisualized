@@ -33,10 +33,10 @@ db = firestore.client()
 STRIPE_WEBHOOK_SECRET = os.environ.get('STRIPE_WEBHOOK_SECRET')
 REVENUECAT_STRIPE_API_KEY = os.environ.get('REVENUECAT_STIRPE_API_KEY')
 
-YOUR_DOMAIN = 'https://electronvisual.org/membership'
+YOUR_DOMAIN = 'http://127.0.0.1:5000/membership'
 
-if current_app.debug == True:
-    YOUR_DOMAIN = 'http://127.0.0.1:5000/membership'
+if os.environ.get("FLASK_DEBUG") == True:
+    YOUR_DOMAIN = 'https://electronvisual.org/membership'
 
 '''
 █▀█ █▀▀ █▀ ▀█▀   ▄▀█ █▀█ █

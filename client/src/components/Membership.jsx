@@ -21,7 +21,7 @@ const ProductDisplay = () => (
             <input
               type="hidden"
               name="priceId"
-              value="price_1N10a0IVyMsxlantM7J62CoG"
+              value="price_1N0wUOIVyMsxlantolNUqcM1"
             />
             <input
               type="hidden"
@@ -53,7 +53,7 @@ const ProductDisplay = () => (
             <input
               type="hidden"
               name="priceId"
-              value="price_1N10aHIVyMsxlantLvo9MffR"
+              value="price_1N0wVuIVyMsxlantt4KxBuPG"
             />
             <button
               id="checkout-and-portal-button"
