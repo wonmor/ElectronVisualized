@@ -9,11 +9,12 @@ import { Sidebar, Menu, MenuItem, useProSidebar } from "react-pro-sidebar";
 import { isElectron } from "./components/Globals";
 import { getAnalytics } from "firebase/analytics";
 
+import AlertPopup from "./components/tools/AlertPopup";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import GestureIcon from "@mui/icons-material/Gesture";
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import ScaleIcon from "@mui/icons-material/Scale";
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 
 import 'firebase/compat/auth';
 import "./App.css";
@@ -24,20 +25,25 @@ import Footer from "./components/Footer";
 import Lottie from "react-lottie";
 import animationData from "./assets/spinner.json";
 
-const Login = React.lazy(() => import("./components/Login"));
-const Register = React.lazy(() => import("./components/Register"));
+const Login = React.lazy(() => import("./components/member/Login"));
+const Register = React.lazy(() => import("./components/member/Register"));
 const Table = React.lazy(() => import("./components/Table"));
-const Search = React.lazy(() => import("./components/Search"));
-const Renderer = React.lazy(() => import("./components/Renderer"));
+const Search = React.lazy(() => import("./components/tools/Search"));
+const Renderer = React.lazy(() => import("./components/visuals/Renderer"));
 const NotFound = React.lazy(() => import("./components/NotFound"));
 const Developer = React.lazy(() => import("./components/Developer"));
-const Extensions = React.lazy(() => import("./components/Extensions"));
-const Download = React.lazy(() => import("./components/Download"));
-const DownloadWeb = React.lazy(() => import("./components/DownloadWeb"));
-const MolarMass = React.lazy(() => import("./components/MolarMass"));
-const FileUploadForm = React.lazy(() => import("./components/FileUploadForm"));
-const Membership = React.lazy(() => import("./components/Membership"));
-const SelfIonization = React.lazy(() => import("./components/SelfIonization"));
+const Extensions = React.lazy(() => import("./components/tools/Extensions"));
+const Download = React.lazy(() => import("./components/tools/Download"));
+const DownloadWeb = React.lazy(() => import("./components/tools/DownloadWeb"));
+const MolarMass = React.lazy(() => import("./components/tools/MolarMass"));
+const FileUploadForm = React.lazy(() => import("./components/tools/FileUploadForm"));
+const Membership = React.lazy(() => import("./components/member/Membership"));
+const MembershipElectron = React.lazy(() => import("./components/member/MembershipElectron"));
+const SelfIonization = React.lazy(() => import("./components/visuals/SelfIonization"));
+const Shop = React.lazy(() => import("./components/giftshop/Shop"));
+const Cart = React.lazy(() => import("./components/giftshop/Cart"));
+const Highlight = React.lazy(() => import("./components/giftshop/Highlight"));
+const Blog = React.lazy(() => import("./components/articles/Blog"));
 
 /*
 ██████╗░░█████╗░██╗░░░██╗████████╗███████╗██████╗░░██████╗
@@ -123,10 +129,7 @@ export default function App() {
               width={400}
             />
           </div>
-          <h2 className="text-center text-white m-5">Loading Resources.</h2>
-          <h3 className="text-center text-gray-400 m-5 mb-40">
-            Please wait until the process is completed.
-          </h3>
+          <h2 className="text-center text-white m-5 font-thin">Loading Resources...</h2>
         </div>
       </div>
     );
@@ -138,6 +141,7 @@ export default function App() {
     <div className="bg-gray-800">
       <Header />
       <div className={`${isElectron() && "flex flex-row"}`}>
+        <AlertPopup />
         {isElectron() && (
           <Sidebar style={{ height: "inherit" }}>
             <Menu>
@@ -159,16 +163,6 @@ export default function App() {
                 Home
               </MenuItem>
 
-              {/* <MenuItem
-                icon={<InsertEmoticonIcon />}
-                onClick={() => {
-                  collapseSidebar(true);
-                  navigate("/login");
-                }}
-              >
-                Member
-              </MenuItem> */}
-
               <MenuItem
                 icon={<GestureIcon />}
                 onClick={() => {
@@ -180,17 +174,28 @@ export default function App() {
               </MenuItem>
 
               <MenuItem
-                icon={<ScaleIcon />}
+                icon={<LibraryBooksIcon />}
                 onClick={() => {
                   collapseSidebar(true);
-                  navigate("/molar-mass");
+                  navigate("/blog");
                 }}
               >
-                Molar Mass
+                Articles
+              </MenuItem>
+
+              <MenuItem
+                icon={<InsertEmoticonIcon />}
+                onClick={() => {
+                  collapseSidebar(true);
+                  navigate("/login");
+                }}
+              >
+                Member
               </MenuItem>
             </Menu>
           </Sidebar>
         )}
+        
         <Suspense fallback={<Fallback />}>
           <Routes>
             <Route path="*" element={<NotFound />} />
@@ -206,7 +211,12 @@ export default function App() {
             <Route path="/molar-mass" element={<MolarMass />} />
             <Route path="/file-upload" element={<FileUploadForm />} />
             <Route path="/membership" element={<Membership />} />
+            <Route path="/membership-electron" element={<MembershipElectron />} />
             <Route path="/self-ionization" element={<SelfIonization />} />
+            <Route path="/highlight" element={<Highlight />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/blog" element={<Blog />} />
           </Routes>
         </Suspense>
       </div>

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { extend, useThree } from "@react-three/fiber";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
-import { setCameraInfo } from "../states/cameraInfoSlice";
+import { setCameraInfo } from "../../states/cameraInfoSlice";
 
 /*
 ░█▀▀█ ─█▀▀█ ░█▀▄▀█ ░█▀▀▀ ░█▀▀█ ─█▀▀█ 　 ░█▀▀█ ░█▀▀▀█ ░█▄─░█ ▀▀█▀▀ ░█▀▀█ ░█▀▀▀█ ░█─── ░█▀▀▀█ 

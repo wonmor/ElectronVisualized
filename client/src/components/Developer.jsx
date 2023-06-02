@@ -1,11 +1,8 @@
 import React, { useState } from "react";
+import { isElectron, moleculeDict } from "./Globals";
 
-import { Background } from "./Geometries";
-
-import Dropdown from "./Dropdown";
-
-import MetaTag from "./MetaTag";
-
+import Dropdown from "./tools/Dropdown";
+import MetaTag from "./tools/MetaTag";
 import axios from "axios";
 
 /*
@@ -31,14 +28,10 @@ export default function Developer() {
     Contains HTML properties that each represent the graphic element on the website
   */
   const [disable, setDisable] = useState(false);
-
   const [preRender, setPreRender] = useState(true);
-
   const [atomInfo, setAtomInfo] = useState(null);
-
   const [serverError, setServerError] = useState(false);
-
-  const [statusText, setStatusText] = useState("Fetching in Progress...");
+  const [statusText, setStatusText] = useState("Working hard...");
 
   const fetchData = async (elementName = "H2") => {
     /*
@@ -54,7 +47,7 @@ export default function Developer() {
     */
     await axios({
       method: "GET",
-      url: `/api/load/${elementName}`,
+      url: `${isElectron() ? "https://electronvisual.org" : ""}/api/load/${elementName}`,
     })
       .then((response) => {
         const res = response.data;
@@ -84,53 +77,37 @@ export default function Developer() {
 
   return (
     <>
-      <MetaTag title={"ElectronVisualized"}
+      <MetaTag
+        title={"ElectronVisualized"}
         description={"View Electron Density, Molecular and Atomic Orbitals"}
-        keywords={"electron, electron density, chemistry, computational chemistry"}
+        keywords={
+          "electron, electron density, chemistry, computational chemistry"
+        }
         imgsrc={"cover.png"}
-        url={"https://electronvisual.org"} />
+        url={"https://electronvisual.org"}
+      />
 
-      <div className="bg-gray-700 overflow-auto" style={{ "min-height": "100vh" }}>
-        <div className="text-white text-center pt-10 pl-5 pr-5 text-gray-400">
-          <h1 className="pb-5 text-ellipsis overflow-hidden">
-            <span className="text-white">Density Functional Theory</span> Meets
-            the <span className="text-blue-200">Web</span>.
+      <div
+        className="overflow-auto pb-40"
+        style={{ "min-height": "100vh", width: "-webkit-fill-available" }}
+      >
+        <div className="text-center pt-10 pl-5 pr-5 text-white">
+          <h1 className="sm:pb-5 scale-75 sm:scale-100 flex items-center justify-center">
+            <span className="text-white font-thin">API Guide</span>
           </h1>
-
-          <div className="bg-gray-600 rounded ml-0 mr-0 lg:ml-60 lg:mr-60">
-            <h2 className="mt-5 pl-5 pr-5 pt-5 leading-normal text-gray-400">
-              <span className="text-5xl sm:text-6xl">
-                Introducing the{" "}
-                <span className="text-rose-200">World Engine</span>.
-              </span>
-            </h2>
-
-            <h2 className="p-5 leading-normal text-gray-400">
-              A <span className="text-white">REST API</span> Powered by the
-              Industry-leading <span className="text-white">GPAW</span> and{" "}
-              <span className="text-white">ASE</span> Libaries.
-            </h2>
-          </div>
-
-          <h2 id="api-description" className="p-5 leading-tight text-gray-400">
-            An implementation that seemed to be impossible to be made.<br></br>
-            Handcrafted for{" "}
-            <span className="text-white">Computational Chemists</span> and{" "}
-            <span className="text-white">Engineers</span>.
-          </h2>
-
+          <p className="text-gray-400 m-5">
+            REST API for DFT Electron Density Data
+          </p>
           <p
             id="api-url"
-            className="flex m-auto overflow-auto scale-90 sm:scale-100 mb-5 p-3 max-w-fit text-rose-200 border border-rose-200 rounded"
+            className="flex justify-center items-center m-auto overflow-auto scale-90 sm:scale-100 mb-5 p-3 max-w-fit bg-gray-700 text-gray-400 rounded"
           >
-            https://electronvisual.org/api/load/H2
+            <span className="mr-2 p-2 bg-gray-800 rounded">GET</span>https://electronvisual.org/api/load/H2
           </p>
 
-          {!disable ? (
-            <div>
+          <>
               <Dropdown />
               <button
-                disabled={disable}
                 onClick={() => {
                   fetchData();
                   setDisable(true);
@@ -138,11 +115,14 @@ export default function Developer() {
                 className="mt-5 sm:mt-0 ml-2 bg-transparent hover:bg-blue-500 text-gray-400 hover:text-white py-2 px-4 border border-gray-400 hover:border-transparent rounded"
                 type="button"
               >
-                <span>Fetch Data from the API</span>
+                <span>Fetch</span>
               </button>
-            </div>
+            </>
+
+          {!disable ? (
+            <></>
           ) : preRender ? (
-            <div className={"text-gray-400"}>
+            <div className={"mt-5 text-gray-400"}>
               <h3>{statusText}</h3>
 
               {!serverError && (
@@ -163,38 +143,12 @@ export default function Developer() {
           <div className="flex flex-col pt-5 pb-5">
             {preRender ? (
               <>
-                <img
-                  className="border-dotted border-2 border-white m-auto rounded"
-                  src="/API.png"
-                  style={{ width: "1000px" }}
-                  alt="Screenshot"
-                />
-
-                <div className="bg-gray-800 mt-5 p-5 ml-0 mr-0 lg:ml-60 lg:mr-60 rounded">
-                  <h2>
-                    This is an{" "}
-                    <span className="text-white">Open Source Project</span>.
-                  </h2>
-
-                  <p className="text-left mt-2">
-                    The nature of being <b>open source</b> is that anyone can
-                    jump in and contribute to our project. This means you, you,
-                    and you over there! You guys can all be a part of the{" "}
-                    <b>ElectronVisualized</b> Dev team. If you would like to
-                    contact me personally, however, please shoot an email to{" "}
-                    <span className="text-rose-200">
-                      business@johnseong.info
-                    </span>
-                    .
-                  </p>
-                </div>
+  
               </>
             ) : (
               <div className="block sm:flex align-center justify-center">
                 <div className="text-xl max-h-min text-left bg-gray-900 p-5 text-white">
-                  <span className="text-5xl text-gray-400">
-                    HYDROGEN GAS
-                  </span>
+                  <span className="text-5xl text-gray-400">HYDROGEN GAS</span>
                   <br></br>
                   <br></br>
                   <span>
@@ -203,7 +157,7 @@ export default function Developer() {
                   <pre>{JSON.stringify(atomInfo.density_data, null, 2)}</pre>
                 </div>
 
-                <div className="text-xl max-h-min text-left bg-gray-800 p-5 text-white">
+                <div className="text-xl max-h-min text-left bg-gray-700 p-5 text-white">
                   <span>
                     <code>atom_x:</code>
                   </span>
@@ -272,7 +226,6 @@ export default function Developer() {
           </div>
         </div>
       </div>
-      <Background />
     </>
   );
 }

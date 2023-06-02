@@ -1,9 +1,9 @@
-import React, { useMemo, useEffect } from "react";
+import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 
 import * as THREE from "three";
 
-import { getMoleculeColour, normalizeData, getAtomColour } from "./Globals";
+import { getMoleculeColour, normalizeData, getAtomColour } from "../Globals";
 
 /*
 ▀█▀ █▀▀▄ █▀▀ ▀▀█▀▀ █▀▀█ █▀▀▄ █▀▀ █▀▀ █▀▀ 

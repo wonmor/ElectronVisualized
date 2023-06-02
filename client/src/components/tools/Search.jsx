@@ -1,4 +1,4 @@
-import React, { Background } from "./Geometries";
+import React, { Background } from "../visuals/Geometries";
 import MetaTag from "./MetaTag";
 
 export default function Docs() {

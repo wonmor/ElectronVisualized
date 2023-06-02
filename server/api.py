@@ -2,24 +2,27 @@ import json
 import requests
 import os
 
-from flask import Blueprint, jsonify, redirect, request, current_app, send_file, make_response
-import flask
-
+from flask import Blueprint, jsonify, redirect, request, current_app, send_file, make_response, send_file
 from flask_cors import CORS, cross_origin
-import flask_praetorian
-from flask_socketio import SocketIO, emit, join_room
-
+from flask_socketio import emit
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+from flask_apscheduler import APScheduler
+
+from datetime import datetime, timedelta
+from io import BytesIO
 
 import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import firestore
+from firebase_admin import credentials, firestore
 
 from botocore.exceptions import ClientError
 from server.extensions import multipart_download_boto3, multipart_upload_boto3
 
-from . import User, atomic_orbital, electron_density, socketio, guard, db
+import sendgrid
+from sendgrid.helpers.mail import Mail
+
+from . import atomic_orbital, electron_density
+from .extensions import socketio
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -29,15 +32,18 @@ import stripe
 cred = credentials.Certificate("server/service_account.json")
 firebase_admin.initialize_app(cred)
 
+socketio_bp = Blueprint('socketio', __name__)
+
 db = firestore.client()
+scheduler = APScheduler()
 
 STRIPE_WEBHOOK_SECRET = os.environ.get('STRIPE_WEBHOOK_SECRET')
-REVENUECAT_STRIPE_API_KEY = os.environ.get('REVENUECAT_STIRPE_API_KEY')
+REVENUECAT_STRIPE_API_KEY = os.environ.get('REVENUECAT_STRIPE_API_KEY')
 
-YOUR_DOMAIN = 'http://127.0.0.1:5000/membership'
+YOUR_DOMAIN = 'https://electronvisual.org/membership'
 
 if os.environ.get("FLASK_DEBUG") == True:
-    YOUR_DOMAIN = 'https://electronvisual.org/membership'
+    YOUR_DOMAIN = 'http://127.0.0.1:5000/membership'
 
 '''
 █▀█ █▀▀ █▀ ▀█▀   ▄▀█ █▀█ █
@@ -59,63 +65,6 @@ limiter = Limiter(
 CORS(bp, resources={r'/api/*': {'origins': '*'}})
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-@socketio.on('join')
-def join(message):
-    '''
-    When a user joins the room, they are added to the room's list of users
-    
-    Parameters
-    ----------
-    message : dict
-        A dictionary containing the room name and the user's name
-
-    Returns
-    -------
-    None
-    '''
-    username = message['username']
-    room = message['room']
-    join_room(room)
-    print('RoomEvent: {} has joined the room {}\n'.format(username, room))
-    emit('ready', {username: username}, to=room, skip_sid=request.sid)
-
-@socketio.on('data')
-def transfer_data(message):
-    '''
-    This function is called when a user sends a message to the server.
-    
-    Parameters
-    ----------
-    message : dict
-        The message that the user sent to the server.
-
-    Returns
-    -------
-    None
-    '''
-    username = message['username']
-    room = message['room']
-    data = message['data']
-    print('DataEvent: {} has sent the data:\n {}\n'.format(username, data))
-    emit('data', data, to=room, skip_sid=request.sid)
-
-@socketio.on_error_default
-def default_error_handler(e):
-    '''
-    This function handles all errors that occur in the socket.io connection
-    
-    Parameters
-    ----------
-    e: Exception
-        The exception that was raised
-
-    Returns
-    -------
-    None
-    '''
-    print("Error: {}".format(e))
-    socketio.stop()
 
 # For React Router Redirection Purposes...
 @bp.app_errorhandler(404)   
@@ -363,24 +312,30 @@ def download_png(key):
         print(e)
         return 'Error downloading file from S3!', 500
     
-@bp.route('/api/connect', methods=['POST'])
+@bp.route('/api/downloadSTL/<key>', methods=['GET'])
 @limiter.exempt()
 @cross_origin()
-def connect_to_socket():
-    '''
-    When API call is made, this function opens the SocketIO connection
-    
-    Parameters
-    ----------
-    None
+def download_stl(key):
+    try:
+        file_path = f'server/{key}'
+        multipart_download_boto3(key, file_path)
 
-    Returns
-    -------
-    None
-    '''
-    socketio.run(current_app, host="0.0.0.0", port=9000)
+        # Change the file extension to .png
+        name, extension = os.path.splitext(file_path)
+        new_file_path = f'{name}.stl'
+        os.rename(file_path, new_file_path)
+
+        response = make_response(send_file(new_file_path.replace("server/", ""), as_attachment=True))
+        response.headers['Content-Disposition'] = f'attachment; filename="{key}"'
+        return response
+
+    except ClientError as e:
+        print(e)
+        return 'Error downloading file from S3!', 500
 
 @bp.route('/api/create-checkout-session', methods=['POST'])
+@limiter.exempt()
+@cross_origin()
 def create_checkout_session():
     price_id = request.form.get('priceId')
     app_user_id = request.form.get('appUserId')
@@ -407,10 +362,21 @@ def create_checkout_session():
     return redirect(checkout_session.url, code=303)
 
 @bp.route('/api/create-portal-session', methods=['POST'])
+@limiter.exempt()
+@cross_origin()
 def customer_portal():
-    # For demonstration purposes, we're using the Checkout session to retrieve the customer ID.
-    # Typically this is stored alongside the authenticated user in your database.
-    checkout_session_id = request.form.get('session_id')
+    # Get app_user_id from the request form
+    app_user_id = request.form.get('appUserId')
+
+    # Retrieve the checkout_session_id from Firestore using app_user_id
+    doc_ref = db.collection('customers-web').document(app_user_id)
+    doc = doc_ref.get()
+    if doc.exists:
+        checkout_session_id = doc.get('checkout_session_id')
+    else:
+        return "No such document", 404
+
+    # Retrieve the customer ID using the checkout_session_id
     checkout_session = stripe.checkout.Session.retrieve(checkout_session_id)
 
     # This is the URL to which the customer will be redirected after they are
@@ -423,49 +389,48 @@ def customer_portal():
     )
     return redirect(portalSession.url, code=303)
 
-# The use of webhooks allows web applications to automatically communicate with other web-apps.
-# Connected directly on the Stripe dashboard, this webhook will send a POST request to the specified
 @bp.route('/api/webhook', methods=['POST'])
+@limiter.exempt()
+@cross_origin()
 def webhook_received():
-    # Replace this endpoint secret with your endpoint's unique secret
-    # If you are testing with the CLI, find the secret by running 'stripe listen'
-    # If you are using an endpoint defined with the API or dashboard, look in your webhook settings
-    # at https://dashboard.stripe.com/webhooks
     webhook_secret = STRIPE_WEBHOOK_SECRET
-    request_data = json.loads(request.data)
 
-    # Send the receipt to RevenueCat
-    # https://community.revenuecat.com/third-party-integrations-53/help-sending-stripe-webhooks-rest-api-2055
+    if request.get_data(as_text=True):
+        try:
+            request_data = json.loads(request.get_data(as_text=True))
+        except json.JSONDecodeError as e:
+            current_app.logger.error(f"JSONDecodeError: {e}")
+            return jsonify({'status': 'error', 'message': 'Invalid or empty JSON received'})
+    else:
+        return jsonify({'status': 'error', 'message': 'Empty request data received'})
 
     if webhook_secret:
-        # Retrieve the event by verifying the signature using the raw body and secret if webhook signing is configured.
-        signature = request.headers['STRIPE_SIGNATURE']
+        try:
+            signature = request.headers['STRIPE_SIGNATURE']
+        except KeyError:
+            current_app.logger.error("STRIPE_SIGNATURE header not found")
+            return jsonify({'status': 'error', 'message': 'STRIPE_SIGNATURE header not found'})
+
         try:
             event = stripe.Webhook.construct_event(
-                payload=request.data, sig_header=signature, secret=webhook_secret)
+                payload=request.get_data(as_text=True), sig_header=signature, secret=webhook_secret)
             data = event['data']
         except Exception as e:
-            return e
-        # Get the type of webhook event sent - used to check the status of PaymentIntents.
+            current_app.logger.error(f"Exception: {e}")
+            return jsonify({'status': 'error', 'message': 'Signature verification failed'})
         event_type = event['type']
     else:
         data = request_data['data']
         event_type = request_data['type']
     data_object = data['object']
 
-    print('event ' + event_type)
+    current_app.logger.info(f'event {event_type}')
 
     if event_type == 'checkout.session.completed':
-        # Retrieve the Checkout Session ID from the event data
         checkout_session_id = data_object['id']
-
-        # Retrieve the customer ID from the Checkout Session object
         customer_id = data_object['client_reference_id']
-
-        # Retrieve the subscription ID from the Checkout Session object
         subscription_id = data_object['subscription']
 
-        # Use the customer ID and subscription ID to fetch the latest receipt and subscription data from RevenueCat
         headers = {
             'Content-Type': 'application/json',
             'X-Platform': 'stripe',
@@ -480,17 +445,158 @@ def webhook_received():
         response = requests.post('https://api.revenuecat.com/v1/receipts', headers=headers, json=data)
 
         if response.status_code == 200:
-            # Payment succeeded!
-            print('🔔 Payment succeeded!')
-            # Store checkout session ID in the document with the name of customer_id in the customers collection inside Firebase Firestore
-            doc_ref = db.collection(u'customers-stripe').document(customer_id)
+            current_app.logger.info('🔔 Payment succeeded!')
+            doc_ref = db.collection(u'customers-web').document(customer_id)
             doc_ref.set({
                 u'checkout_session_id': checkout_session_id
             }, merge=True)
         else:
-            print('❌ Payment failed!')
+            current_app.logger.error(f'❌ Payment failed! Status code: {response.status_code}, Response: {response.text}')
 
     return jsonify({'status': 'success'})
+
+@bp.route('/api/get_subscriber_data/<app_user_id>')
+@limiter.exempt()
+@cross_origin()
+def get_subscriber_data(app_user_id):
+    url = f'https://api.revenuecat.com/v1/subscribers/{app_user_id}'
+    headers = {
+        'Content-Type': 'application/json',
+        'Authorization': f'Bearer {REVENUECAT_STRIPE_API_KEY}'
+    }
+    response = requests.get(url, headers=headers)
+    return response.json()
+
+@bp.route('/api/send-email', methods=['POST'])
+@limiter.exempt()
+@cross_origin()
+def contact():
+    # Get form data
+    name = request.form['name']
+    email = request.form['email']
+    message = request.form['message']
+    
+    # Send email
+    sg = sendgrid.SendGridAPIClient(api_key=os.environ.get('SENDGRID_API_KEY'))
+    from_email = ('johnseong@havit.space', 'John Seong')
+    to_email = ('johnseong@havit.space', 'John Seong')
+    subject = f"New message from {name}"
+    body = f"Name: {name}\nEmail: {email}\n\n{message}"
+    mail = Mail(from_email, to_email, subject, body)
+    response = sg.send(mail)
+
+    # Return success message
+    return "Message sent successfully"
+
+@bp.route('/api/get_chemistry_data', methods=['GET'])
+@limiter.exempt()
+@cross_origin()
+def proxy_request():
+    term = request.args.get('term')
+    url = f'https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/{term}/JSON'
+    response = requests.get(url)
+    
+    if response.status_code == 200:
+        return jsonify(response.json())
+    else:
+        return jsonify({"error": "Request failed"}), response.status_code
+
+@bp.route('/api/get_chemistry_image', methods=['GET'])
+@limiter.exempt()
+@cross_origin()
+def image_request():
+    cid = request.args.get('cid')
+    url = f'https://pubchem.ncbi.nlm.nih.gov/image/imgsrv.fcgi?cid={cid}&t=l'
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        return send_file(BytesIO(response.content), mimetype='image/png')
+    else:
+        return jsonify({"error": "Image request failed"}), response.status_code
+
+# Define a function to reset the click count in Firebase
+def reset_click_count(uid):
+    user_ref = db.collection('customers-web').document(uid)
+    user_ref.update({'button_click_count': 0})
+
+from apscheduler.triggers.date import DateTrigger
+
+@bp.route('/api/button_click_logged', methods=['POST'])
+@limiter.exempt()
+@cross_origin()
+def handle_button_click():
+    user_uid = request.form.get('user_uid')
+
+    current_app.logger.info(f"Selected user: {user_uid}")
+
+    # Check if the document with user_uid exists
+    user_ref = db.collection('customers-web').document(user_uid)
+    user_data = user_ref.get().to_dict()
+
+    if user_data:
+        # Update the existing document
+        user_ref.update({'button_click_count': firestore.Increment(1)})
+    else:
+        # Create a new document with the given user_uid
+        user_ref.set({'button_click_count': firestore.Increment(1)}, merge=True)
+
+    # Remove all previous scheduled jobs for the current user
+    jobs = scheduler.get_jobs()
+    for job in jobs:
+       if isinstance(job.trigger, DateTrigger) and job.args and job.args[0] == user_uid:
+            scheduler.remove_job(job.id)
+
+    # Add a new job to the scheduler that runs reset_click_count once after 2 hours
+    import time
+
+    job_id = f'job_{int(time.time())}'
+    scheduler.add_job(id=job_id, func=reset_click_count, args=[user_uid], trigger='date', run_date=datetime.now() + timedelta(hours=2))
+
+    return {'message': 'Button clicked successfully.'}
+
+# Initialize the scheduler
+def init_scheduler(app):
+    scheduler.init_app(app)
+
+@socketio_bp.route('/socket.io/')
+def socketio_route():
+    return
+
+@socketio.on('connect', namespace='/socket.io/')
+def socketio_connect():
+    # Handle connection event
+    emit('connected', {'data': 'Connected successfully'})
+
+# SocketIO event handler to retrieve hours left till reset
+@socketio.on('get_hours_left_logged')
+def get_hours_left(user_uid):
+    user_ref = db.collection('customers-web').document(user_uid).get()
+    click_count = user_ref.get('button_click_count')
+
+    if click_count is not None and click_count > 0:
+        # Calculate hours left till reset
+        last_reset_time = user_ref.get('last_reset_time')
+        if last_reset_time is not None:
+            hours_passed = (datetime.now() - last_reset_time).total_seconds() / 3600
+            hours_left = 2 - hours_passed
+            if hours_left > 0:
+                emit('hours_left', hours_left)
+            else:
+                emit('hours_left', 0)
+        else:
+            emit('hours_left', 0)
+    else:
+        emit('hours_left', 0)
+
+@socketio.on('get_button_click_number_logged')
+def get_button_click_number(user_uid):
+    # Retrieve the button click number for the user
+    user_ref = db.collection('customers-web').document(user_uid)
+    user_data = user_ref.get().to_dict()
+    button_click_count = user_data.get('button_click_count', 0)
+
+    # Emit the button click number to the client
+    emit('button_click_number', button_click_count)
 
 '''
 ----------------------------------------------------------------

@@ -28,7 +28,7 @@ app = create_app()
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8080)) 
     from waitress import serve
-    serve(app, host="0.0.0.0", port=port)
+    serve(app, host="0.0.0.0", port=port, threads=100)
 
 '''
 TIPS & TRICKS
@@ -53,7 +53,7 @@ VVIP: ENVIRONMENTAL VARIABLES REQUIRED
 2. export LIBRARY_PATH=/my/path/to/libxc/5.2.0/lib
 3. export LD_LIBRARY_PATH=/my/path/to/libxc/5.2.0/lib
 
-(IN CASE OF MACOS: /opt/homebrew/Cellar/libxc/6.0.0 IS THE PATH FOR LIBXC)
+(IN CASE OF MACOS: /opt/homebrew/Cellar/libxc/6.1.0 IS THE PATH FOR LIBXC)
 
 4. GPAW_SETUP_PATH="server/datasets/gpaw-setups-0.9.20000"
 5. SECRET_KEY — FOR FLASK

@@ -10,6 +10,7 @@ import store from "./store";
 
 import { Provider } from "react-redux";
 import { ProSidebarProvider } from "react-pro-sidebar";
+import { AlertProvider } from "./contexts/AuthContext";
 
 /*
 █▀▀ █░░ █▀▀ █▀▀ ▀█▀ █▀█ █▀█ █▄░█ █░█ █ █▀ █░█ ▄▀█ █░░ █ ▀█ █▀▀ █▀▄ ▀   █▀▀ █▀█ █▀█ █▄░█ ▀█▀ ▄▄ █▀▀ █▄░█ █▀▄
@@ -26,7 +27,9 @@ root.render(
     <ProSidebarProvider>
       <BrowserRouter>
         <Provider store={store}>
-          <App />
+          <AlertProvider>
+            <App />
+          </AlertProvider>
         </Provider>
       </BrowserRouter>
     </ProSidebarProvider>

@@ -2,24 +2,26 @@ import React, { useState, useEffect, useRef, Suspense } from "react";
 import { useSelector, useDispatch, Provider } from "react-redux";
 import { Canvas } from "@react-three/fiber";
 import { Button } from "@mui/material";
+import { checkIfUserIsSubscriber } from "../member/Membership";
 
-import store from "../store";
+import store from "../../store";
 
 // A MUST — MAKE SURE THAT YOU WRITE CURLY BRACKETS NEXT TO IMPORT!
 import {
   setGlobalAtomInfo,
   appendGlobalAtomInfo,
-} from "../states/atomInfoSlice";
+} from "../../states/atomInfoSlice";
 
-import { setGlobalRenderInfo } from "../states/renderInfoSlice";
+import { setGlobalRenderInfo } from "../../states/renderInfoSlice";
 import { GLTFExporter } from "./GLTFExporter";
 
 import axios from "axios";
+import firebase from "firebase/compat/app";
 
 import { GLBViewer } from "./Geometries";
 
 import Controls from "./Controls";
-import MetaTag from "./MetaTag";
+import MetaTag from "../tools/MetaTag";
 import Diagram from "./Diagram";
 
 import { Particles } from "./Instances";
@@ -33,7 +35,7 @@ import {
   getCameraPosition,
   useWindowSize,
   useAnalyticsEventTracker,
-} from "./Globals";
+} from "../Globals";
 
 /*
 DEVELOPED AND DESIGNED BY JOHN SEONG.
@@ -43,7 +45,15 @@ HOW TO OPTIMIZE REACT + THREE-FIBER: https://docs.pmnd.rs/react-three-fiber/adva
 PERIODIC TABLE REST API WRITTEN IN GOLANG: https://github.com/neelpatel05/periodic-table-api-go
 */
 
-export const moleculesWithMolecularOrbitals = ["CH3OH", "C6H6", "C2H4", "H2O", "H2", "Cl2", "HCl"];
+export const moleculesWithMolecularOrbitals = [
+  "CH3OH",
+  "C6H6",
+  "C2H4",
+  "H2O",
+  "H2",
+  "Cl2",
+  "HCl",
+];
 export const organicMolecules = ["CH3OH", "C6H6", "C2H4"];
 
 const useLazyInterval = (callback, delay) => {
@@ -102,6 +112,31 @@ export default function Renderer() {
   const [reachedMinPeak, setMinPeak] = useState(true);
   const [molecularOrbital, setMolecularOrbital] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [logged, setLogged] = useState(false);
+  const [isSubscriber, setSubscriber] = useState(false);
+
+  useEffect(() => {
+    const checkSubscription = async (user) => {
+      const isUserSubscriber = await checkIfUserIsSubscriber(user);
+      setSubscriber(isUserSubscriber);
+    };
+
+    const unregisterAuthObserver = firebase
+      .auth()
+      .onAuthStateChanged(async (user) => {
+        if (user) {
+          setLogged(true);
+          await checkSubscription(user);
+        } else {
+          setLogged(false);
+          setSubscriber(false);
+        }
+      });
+
+    return () => {
+      unregisterAuthObserver();
+    };
+  }, []);
 
   const handleExportClick = (option) => {
     if (option === "gltf") {
@@ -173,6 +208,20 @@ export default function Renderer() {
   const [serverError, setServerError] = useState(globalRenderInfo.serverError);
   const [electronConfig, setElectronConfig] = useState([]);
   const [isHomo, setIsHomo] = useState(true);
+
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalType, setModalType] = useState("");
+
+  const showAlert = (message, type) => {
+    setModalMessage(message);
+    setModalType(type);
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
 
   const dispatch = useDispatch();
 
@@ -434,8 +483,45 @@ export default function Renderer() {
         className="bg-gray-800 pb-20 text-center overflow-auto"
         style={{ minHeight: "100vh", width: "-webkit-fill-available" }}
       >
+        {modalVisible && (
+          <div className="fixed z-10 inset-0 overflow-y-auto">
+            <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center">
+              <div
+                className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+                onClick={closeModal}
+              ></div>
+              <div className="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all">
+                <div className="bg-gray-900 px-4 py-3 sm:px-6">
+                  <h3 className="text-lg leading-6 font-medium text-white">
+                    {modalType === "error" ? "Error" : "Info"}
+                  </h3>
+                </div>
+                <div className="bg-gray-900 px-4 py-5 sm:p-6">
+                  <p className="text-sm text-gray-500">{modalMessage}</p>
+                </div>
+                <div className="bg-gray-900 px-4 py-4 sm:px-6">
+                  <button
+                    onClick={closeModal}
+                    className="bg-blue-900 text-white py-2 px-4 rounded"
+                  >
+                    <span>Close</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         <div className="text-rose-200 text-center pt-10 pb-10 ml-5 mr-5">
-          <h1 className={`font-thin mb-5 ${size.width < 350 ? "scale-75" : null} ${organicMolecules.includes(globalSelectedElement.element) === true ? "text-green-200" : "text-rose-200"}`}>
+          <h1
+            className={`font-thin mb-5 ${
+              size.width < 350 ? "scale-75" : null
+            } ${
+              organicMolecules.includes(globalSelectedElement.element) === true
+                ? "text-green-200"
+                : "text-rose-200"
+            }`}
+          >
             {globalSelectedElement.name}
             <span className="font-thin text-gray-400">. Visualized.</span>
           </h1>
@@ -478,7 +564,12 @@ export default function Renderer() {
                     }
                     setDisableButton(true);
                   }}
-                  className={`bg-transparent py-2 px-4 border hover:border-transparent rounded ${organicMolecules.includes(globalSelectedElement.element) === true ? "border-green-200 text-green-200 hover:bg-green-200 hover:text-black" : "border-white text-white hover:text-white hover:bg-blue-500"}`}
+                  className={`bg-transparent py-2 px-4 border hover:border-transparent rounded ${
+                    organicMolecules.includes(globalSelectedElement.element) ===
+                    true
+                      ? "border-green-200 text-green-200 hover:bg-green-200 hover:text-black"
+                      : "border-white text-white hover:text-white hover:bg-blue-500"
+                  }`}
                   type="button"
                 >
                   <span>View 3D Model</span>
@@ -642,7 +733,11 @@ export default function Renderer() {
         </div>
 
         <div
-          className={`border-2 text-center text-gray-400 ml-10 mr-10 md:ml-40 md:mr-40 rounded-xl ${organicMolecules.includes(globalSelectedElement.element) === true ? "border-green-200" : "border-gray-600"}`}
+          className={`border-2 text-center text-gray-400 ml-10 mr-10 md:ml-40 md:mr-40 rounded-xl ${
+            organicMolecules.includes(globalSelectedElement.element) === true
+              ? "border-green-200"
+              : "border-gray-600"
+          }`}
           style={{ width: CANVAS.WIDTH, height: CANVAS.HEIGHT }}
         >
           {!preRender && globalSelectedElement["type"] === "Molecule" && (
@@ -731,7 +826,11 @@ export default function Renderer() {
                           globalSelectedElement.element
                         ) &&
                         molecularOrbital !== null && (
-                          <GLBViewer name={molecularOrbital} isExportReady={isExportReadyAR} isHomo={isHomo} />
+                          <GLBViewer
+                            name={molecularOrbital}
+                            isExportReady={isExportReadyAR}
+                            isHomo={isHomo}
+                          />
                         )}
                     </>
                   )}
@@ -749,7 +848,6 @@ export default function Renderer() {
                       particleRadius={particleRadius}
                     />
                   )}
-                  
                 </Provider>
               )}
             </mesh>
@@ -773,18 +871,20 @@ export default function Renderer() {
           <div className="relative inline-block">
             <button
               onClick={() => {
-                setExportReady(!isExportReady)
-                setDropdownOpen(!dropdownOpen)
-                
-                // Will change the particles to 3D sphere from point since Project Atomizer needs triangulated mesh...
-                if (!isExportReady) {
-                  changeParticleRadius(0.15);
+                if (logged && isSubscriber) {
+                  setExportReady(!isExportReady);
+                  setDropdownOpen(!dropdownOpen);
 
+                  // Will change the particles to 3D sphere from point since Project Atomizer needs triangulated mesh...
+                  if (!isExportReady) {
+                    changeParticleRadius(0.15);
+                  } else {
+                    resetParticleRadius();
+                  }
                 } else {
-                  resetParticleRadius();
+                  showAlert("This feature is membership-only.", "error");
                 }
-              }
-            }
+              }}
               className="bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 m-5 border border-white hover:border-transparent rounded"
               type="button"
             >
@@ -797,22 +897,22 @@ export default function Renderer() {
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                 >
                   <span>
-                  <span className="font-bold">.GLTF</span> for General Use
+                    <span className="font-bold">.GLTF</span> for General Use
                   </span>
                 </button>
                 <button
                   onClick={() => {
                     setExportReadyAR(true);
-                    handleExportClick("gltf")
+                    handleExportClick("gltf");
                   }}
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                 >
                   <span>
-                  <span className="font-bold">.GLTF</span> for AR
+                    <span className="font-bold">.GLTF</span> for AR
                   </span>
                 </button>
               </div>
-            )}  
+            )}
           </div>
         )}
 

@@ -1,25 +1,58 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { useNavigate } from "react-router-dom";
+import { Canvas } from "@react-three/fiber";
 import { useDispatch } from "react-redux";
 import { setGlobalRenderInfo } from "../states/renderInfoSlice";
 import { setGlobalSelectedElement } from "../states/selectedElementSlice";
-import { Background } from "./Geometries";
-import { moleculeDict, atomDict, useWindowSize, isElectron } from "./Globals";
+import { checkIfUserIsSubscriber } from "./member/Membership";
+import { Model } from "./giftshop/Shop";
+import {
+  moleculeDict,
+  atomDict,
+  useWindowSize,
+  isElectron,
+  capitalize,
+} from "./Globals";
 
+import axios from "axios";
 import LazyLoad from "react-lazyload";
 import classNames from "classnames";
+
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
-import MetaTag from "./MetaTag";
+import CardGiftcardOutlinedIcon from "@mui/icons-material/CardGiftcardOutlined";
+import ScienceIcon from "@mui/icons-material/Science";
+
+import MetaTag from "./tools/MetaTag";
+import Typewriter from "typewriter-effect";
 import quantumNumbers from "../assets/quantum_num.json";
 
+import firebase from "firebase/compat/app";
+
+import "firebase/compat/firestore";
 import "./Table.css";
-import "./Background.css";
+import "./visuals/Background.css";
 
 /*
 ░█▀▀█ ░█▀▀▀ ░█▀▀█ ▀█▀ ░█▀▀▀█ ░█▀▀▄ ▀█▀ ░█▀▀█ 　 ▀▀█▀▀ ─█▀▀█ ░█▀▀█ ░█─── ░█▀▀▀ 
 ░█▄▄█ ░█▀▀▀ ░█▄▄▀ ░█─ ░█──░█ ░█─░█ ░█─ ░█─── 　 ─░█── ░█▄▄█ ░█▀▀▄ ░█─── ░█▀▀▀ 
 ░█─── ░█▄▄▄ ░█─░█ ▄█▄ ░█▄▄▄█ ░█▄▄▀ ▄█▄ ░█▄▄█ 　 ─░█── ░█─░█ ░█▄▄█ ░█▄▄█ ░█▄▄▄
 */
+
+const useDebounce = (value, delay) => {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
+};
 
 export default function Table() {
   /*
@@ -40,15 +73,171 @@ export default function Table() {
   const size = useWindowSize();
 
   const [selectedItem, setSelectedItem] = useState("none");
+  const [user, setUser] = useState(null);
 
   const [digit1, setDigit1] = useState("");
   const [digit2, setDigit2] = useState("");
   const [digit3, setDigit3] = useState("");
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalType, setModalType] = useState("");
+  const [items, setItems] = useState([]);
+  const [matchingIndex, setMatchingIndex] = useState(-1);
+
+  const currentYear = new Date().getFullYear(); // Get the current year
+
+  useEffect(() => {
+    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      setUser(user);
+      setIsLoggedIn(!!user);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const itemsRef = firebase.firestore().collection("items");
+        const snapshot = await itemsRef.get();
+
+        const itemsData = [];
+        snapshot.forEach((doc) => {
+          const item = doc.data();
+          if (item.name.toLowerCase().includes("benzene")) {
+            itemsData.push({
+              id: doc.id,
+              ...item,
+            });
+          }
+        });
+
+        setItems(itemsData);
+      } catch (error) {
+        console.error("Error fetching items:", error);
+      }
+    };
+
+    fetchItems();
+  }, []);
+
+  const showAlert = (message, type) => {
+    setModalMessage(message);
+    setModalType(type);
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
+  const countButtonClicks = () => {
+    console.log("Button clicked");
+
+    if (isLoggedIn) {
+      checkIfUserIsSubscriber(user).then(async (isSubscriber) => {
+        if (!isSubscriber) {
+          try {
+            const response = await axios.post(
+              `${
+                isElectron() ? "https://electronvisual.org/" : ""
+              }/api/button_click_logged`,
+              {
+                user_uid: user.uid,
+              }
+            );
+            console.log(response.data); // Response from the server
+          } catch (error) {
+            console.error("Error:", error);
+          }
+        }
+      });
+    }
+  };
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [results, setResults] = useState([]);
   const [noResultsFound, setNoResultsFound] = useState(false);
 
+  const debouncedSearchTerm = useDebounce(searchTerm, 300);
+
+  useEffect(() => {
+    if (debouncedSearchTerm) {
+      searchPubChem(debouncedSearchTerm);
+    } else {
+      setResults([]);
+      setNoResultsFound(false);
+    }
+  }, [debouncedSearchTerm]);
+
+  function extractProperties(compound) {
+    const props = {};
+    compound.props.forEach((prop) => {
+      const label = prop.urn.label;
+      const name = prop.urn.name;
+      const value = prop.value.sval || prop.value.ival || prop.value.fval;
+
+      if (label === "IUPAC Name" && name === "Preferred") {
+        props["IUPAC Name"] = value;
+      } else if (!props[label] && label !== "IUPAC Name") {
+        props[label] = value;
+      }
+    });
+    return props;
+  }
+
+  function searchPubChem(term) {
+    const url = `${
+      isElectron() ? "https://electronvisual.org/" : ""
+    }/api/get_chemistry_data?term=${term}`;
+    axios
+      .get(url)
+      .then((response) => {
+        if (response.data.PC_Compounds) {
+          const results = response.data.PC_Compounds.map((compound) => {
+            const properties = extractProperties(compound);
+
+            const name = capitalize(properties["IUPAC Name"] || "Unknown");
+            const formula = properties["Molecular Formula"] || "Unknown";
+
+            let otherNames = [];
+
+            compound.props.forEach((prop) => {
+              if (prop.urn.label === "IUPAC Name") {
+                otherNames.push(prop.value.sval.toLowerCase());
+              }
+            });
+
+            return {
+              name,
+              otherNames,
+              formula,
+              image: `${
+                isElectron() ? "https://electronvisual.org/" : ""
+              }/api/get_chemistry_image?cid=${compound.id.id.cid}`,
+            };
+          });
+          setResults(results);
+          setNoResultsFound(results.length === 0);
+        } else {
+          setNoResultsFound(true);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        setNoResultsFound(true);
+      });
+  }
+
+  function handleSearch(event) {
+    const term = event.target.value;
+    setSearchTerm(term);
+  }
+
   const OptionDisplay = () => (
-    <section className="bg-transparent py-12">
+    <section className="bg-transparent pt-12">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-2">
         <LazyLoad height={400} once>
           <div
@@ -83,7 +272,7 @@ export default function Table() {
                 }}
                 className="z-40 inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-white hover:bg-blue-500 hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4"
               >
-                <span>Navigate</span>
+                <span>Explore</span>
               </button>
             </div>
             <img
@@ -126,7 +315,7 @@ export default function Table() {
                 }}
                 className="z-40 inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-white hover:bg-blue-500 hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4"
               >
-                <span>Navigate</span>
+                <span>Explore</span>
               </button>
             </div>
             <img
@@ -190,7 +379,7 @@ export default function Table() {
         disableButton: false,
         preRender: true,
         serverError: false,
-        statusText: "Rendering in Progress...",
+        statusText: "Working hard...",
       })
     );
   };
@@ -254,6 +443,7 @@ export default function Table() {
               onMouseDown={() => {
                 // This code runs first...
                 appendNewRender(...atomDict.H);
+                countButtonClicks();
               }}
               onClick={() => {
                 // This code runs after a global state change...
@@ -268,6 +458,7 @@ export default function Table() {
               onMouseDown={() => {
                 // This code runs first...
                 appendNewRender(...atomDict.Li);
+                countButtonClicks();
               }}
               onClick={() => {
                 // This code runs after a global state change...
@@ -281,6 +472,7 @@ export default function Table() {
               onMouseDown={() => {
                 // This code runs first...
                 appendNewRender(...atomDict.Be);
+                countButtonClicks();
               }}
               onClick={() => {
                 // This code runs after a global state change...
@@ -294,6 +486,7 @@ export default function Table() {
               onMouseDown={() => {
                 // This code runs first...
                 appendNewRender(...atomDict.B);
+                countButtonClicks();
               }}
               onClick={() => {
                 // This code runs after a global state change...
@@ -309,6 +502,7 @@ export default function Table() {
               onMouseDown={() => {
                 // This code runs first...
                 appendNewRender(...atomDict.O);
+                countButtonClicks();
               }}
               onClick={() => {
                 // This code runs after a global state change...
@@ -322,6 +516,7 @@ export default function Table() {
               onMouseDown={() => {
                 // This code runs first...
                 appendNewRender(...atomDict.F);
+                countButtonClicks();
               }}
               onClick={() => {
                 // This code runs after a global state change...
@@ -335,6 +530,7 @@ export default function Table() {
               onMouseDown={() => {
                 // This code runs first...
                 appendNewRender(...atomDict.Ne);
+                countButtonClicks();
               }}
               onClick={() => {
                 // This code runs after a global state change...
@@ -348,6 +544,7 @@ export default function Table() {
               onMouseDown={() => {
                 // This code runs first...
                 appendNewRender(...atomDict.Na);
+                countButtonClicks();
               }}
               onClick={() => {
                 // This code runs after a global state change...
@@ -368,6 +565,7 @@ export default function Table() {
               onMouseDown={() => {
                 // This code runs first...
                 appendNewRender(...atomDict.K);
+                countButtonClicks();
               }}
               onClick={() => {
                 // This code runs after a global state change...
@@ -387,6 +585,7 @@ export default function Table() {
               onMouseDown={() => {
                 // This code runs first...
                 appendNewRender(...atomDict.Fe);
+                countButtonClicks();
               }}
               onClick={() => {
                 // This code runs after a global state change...
@@ -400,6 +599,7 @@ export default function Table() {
               onMouseDown={() => {
                 // This code runs first...
                 appendNewRender(...atomDict.Co);
+                countButtonClicks();
               }}
               onClick={() => {
                 // This code runs after a global state change...
@@ -413,6 +613,7 @@ export default function Table() {
               onMouseDown={() => {
                 // This code runs first...
                 appendNewRender(...atomDict.Ni);
+                countButtonClicks();
               }}
               onClick={() => {
                 // This code runs after a global state change...
@@ -439,6 +640,7 @@ export default function Table() {
               onMouseDown={() => {
                 // This code runs first...
                 appendNewRender(...atomDict.Zn);
+                countButtonClicks();
               }}
               onClick={() => {
                 // This code runs after a global state change...
@@ -467,6 +669,7 @@ export default function Table() {
               onMouseDown={() => {
                 // This code runs first...
                 appendNewRender(...atomDict.Pd);
+                countButtonClicks();
               }}
               onClick={() => {
                 // This code runs after a global state change...
@@ -491,6 +694,7 @@ export default function Table() {
               onMouseDown={() => {
                 // This code runs first...
                 appendNewRender(...atomDict.Ce);
+                countButtonClicks();
               }}
               onClick={() => {
                 // This code runs after a global state change...
@@ -504,6 +708,7 @@ export default function Table() {
               onMouseDown={() => {
                 // This code runs first...
                 appendNewRender(...atomDict.Pr);
+                countButtonClicks();
               }}
               onClick={() => {
                 // This code runs after a global state change...
@@ -517,6 +722,7 @@ export default function Table() {
               onMouseDown={() => {
                 // This code runs first...
                 appendNewRender(...atomDict.Nd);
+                countButtonClicks();
               }}
               onClick={() => {
                 // This code runs after a global state change...
@@ -530,6 +736,7 @@ export default function Table() {
               onMouseDown={() => {
                 // This code runs first...
                 appendNewRender(...atomDict.Pm);
+                countButtonClicks();
               }}
               onClick={() => {
                 // This code runs after a global state change...
@@ -543,6 +750,7 @@ export default function Table() {
               onMouseDown={() => {
                 // This code runs first...
                 appendNewRender(...atomDict.Sm);
+                countButtonClicks();
               }}
               onClick={() => {
                 // This code runs after a global state change...
@@ -556,6 +764,7 @@ export default function Table() {
               onMouseDown={() => {
                 // This code runs first...
                 appendNewRender(...atomDict.Eu);
+                countButtonClicks();
               }}
               onClick={() => {
                 // This code runs after a global state change...
@@ -569,6 +778,7 @@ export default function Table() {
               onMouseDown={() => {
                 // This code runs first...
                 appendNewRender(...atomDict.Gd);
+                countButtonClicks();
               }}
               onClick={() => {
                 // This code runs after a global state change...
@@ -654,22 +864,64 @@ export default function Table() {
         className={`overflow-auto pb-40`}
         style={{ minHeight: "100vh", width: "-webkit-fill-available" }}
       >
-        <div className="text-white text-center p-5 text-gray-400">
+        {modalVisible && (
+          <div className="fixed inset-0 overflow-y-auto" style={{ zIndex: 50 }}>
+            <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center">
+              <div
+                className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+                onClick={closeModal}
+              ></div>
+              <div className="bg-white rounded-lg text-left overflow-hidden transform transition-all">
+                <div className="bg-gray-900 px-4 py-3 sm:px-6">
+                  <h3 className="text-lg leading-6 font-medium text-white">
+                    {modalType === "error" ? "Error" : "Info"}
+                  </h3>
+                </div>
+                <div className="bg-gray-900 px-4 py-5 sm:p-6">
+                  <p className="text-sm text-gray-500">{modalMessage}</p>
+                </div>
+                <div className="bg-gray-900 px-4 py-4 sm:px-6">
+                  <button
+                    onClick={closeModal}
+                    className="bg-blue-900 text-white py-2 px-4 rounded"
+                  >
+                    <span>Close</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
-            <h1
-              className={`scale-75 sm:scale-100 mb-5 font-thin ${
-                size.width < 350 ? "truncate" : null
-              }`}
-            >
-              Visualizing{" "}
-              <span className="font-thin text-rose-200">Quantum Mechanics</span>.
-              Reimagined.
-            </h1>
+        <div className="text-center p-5 text-gray-400">
+          <h1
+            className={`text-4xl sm:text-6xl font-thin`}
+            style={{
+              textAlign: "center",
+              position: "absolute",
+              left: 0,
+              right: 0,
+              margin: "auto",
+              transform:
+                "translateY(-50%); translateX(-10%)" /* This will center the div */,
+              maxWidth: size.width * 0.8,
+            }}
+          >
+            <Typewriter
+              options={{
+                wrapperClassName: "typewriter",
+                strings: ["Visualizing Chemistry.", "For Everyday People."],
+                autoStart: true,
+                loop: true,
+              }}
+            />
+          </h1>
 
+          <div className="mt-40">
             {!isElectron() && (
               <div className="flex flex-col md:flex-row justify-center items-center">
                 <a
-                  href="https://apps.apple.com/us/app/electronify/id6446613861"
+                  href="https://apps.apple.com/us/app/atomizer-ar/id6449015706"
                   type="button"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -709,74 +961,154 @@ export default function Table() {
                 </a>
               </div>
             )}
-   
 
-          {selectedItem === "none" && <OptionDisplay />}
+            <div className="p-5 m-auto" style={{ maxWidth: "500px" }}>
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={handleSearch}
+                className="outline-none w-full px-4 py-2 rounded-md text-white bg-gray-700 text-center focus:ring-2 focus:ring-blue-500"
+                placeholder="Search by IUPAC name or formula"
+              />
+              <ul className="mt-2">
+                {results.map((result) => (
+                  <li key={result.formula}>
+                    <button
+                      onMouseDown={() => {
+                        let type = "Molecule";
+                        let value = undefined;
 
-          {(selectedItem === "atom" || selectedItem === "molecule") && (
-            <button
-              className="m-5 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
-              type="button"
-              onClick={() => {
-                setSelectedItem("none");
-              }}
-            >
-              <KeyboardBackspaceIcon />
-              <span className="ml-2">Back</span>
-            </button>
-          )}
+                        let moleculeDictNames = [];
 
-          {selectedItem === "molecule" && (
-            <>
-              <div className="border-2 border-gray-600 rounded-xl pb-2 m-auto" style={{ maxWidth: "1200px" }}>
-                <h1
-                  className={`scale-90 sm:scale-100 pt-5 font-thin text-white ${
-                    size.width < 350 ? "truncate ..." : null
-                  }`}
-                >
-                  Molecules
-                </h1>
+                        Object.entries(moleculeDict).forEach(([key, value]) => {
+                          moleculeDictNames.push(value[0].toLowerCase());
+                        });
 
-                <div className="my-5 mt-5">
-                  {Object.keys(moleculeDict)
-                    .slice(3)
-                    .map((key, index) => {
-                      const value = moleculeDict[key];
+                        let matchingIndex = -1;
 
-                      return (
-                        <button
-                          onMouseDown={() => {
-                            // This code runs first...
+                        result.otherNames.some((element) => {
+                          const index = moleculeDictNames.indexOf(element);
+                          if (index !== -1) {
+                            matchingIndex = index;
+
+                            return true; // Stop iteration after finding the first match
+                          }
+                          return false;
+                        });
+
+                        setMatchingIndex(matchingIndex);
+
+                        if (
+                          result.formula in moleculeDict ||
+                          result.formula in atomDict
+                        ) {
+                          if (
+                            /\d/.test(result.formula) ||
+                            result.formula.length > 2
+                          ) {
+                            // Handle click event if the formula contains numbers
+                            type = "Molecule";
+                            value = moleculeDict[result.formula];
+
                             appendNewRender(
-                              key,
+                              result.formula,
                               value[0],
-                              "Molecule",
+                              type,
                               value[1]
                             );
-                          }}
-                          onClick={() => {
-                            // This code runs after a global state change...
-                            movePage(`/renderer`);
-                          }}
-                          className="mb-2 mr-2 sm:mt-0 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
-                          type="button"
-                          key={key}
-                        >
-                          <span className="font-bold">{key}</span>{" "}
-                          <span>{value[0]}</span>
-                        </button>
-                      );
-                    })}
-                </div>
+                          } else {
+                            appendNewRender(...atomDict[result.formula]);
+                          }
+                        } else if (matchingIndex !== -1) {
+                          Object.entries(moleculeDict).forEach(
+                            ([key, value], index) => {
+                              if (index === matchingIndex) {
+                                appendNewRender(
+                                  key,
+                                  value[0],
+                                  "Molecule",
+                                  value[1]
+                                );
+                              }
+                            }
+                          );
+                        } else {
+                          showAlert(
+                            "No data found for this element or molecule!",
+                            "error"
+                          );
+                        }
 
-                <div className="flex flex-col ml-5 mr-5 justify-center items-center">
-                  <div
-                    className="border-2 border-green-200 rounded-md p-3 m-5"
-                    style={{ maxWidth: "500px" }}
+                        countButtonClicks();
+                      }}
+                      onClick={() => {
+                        if (
+                          result.formula in moleculeDict ||
+                          result.formula in atomDict ||
+                          matchingIndex !== -1
+                        ) {
+                          movePage("/renderer");
+                        }
+                      }}
+                      className="flex items-center px-4 py-2 hover:bg-gray-700 rounded-md"
+                      style={{ margin: "auto" }}
+                    >
+                      <img
+                        src={result.image}
+                        alt={result.name}
+                        className="w-12 h-12 mr-4 rounded-md"
+                      />
+                      <div className="space-x-2">
+                        <span className="text-lg font-medium text-white">
+                          {result.name}
+                        </span>
+                        <span className="text-sm text-gray-400">
+                          {result.formula}
+                        </span>
+                      </div>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+              {noResultsFound && (
+                <span className="text-center text-white mt-2">
+                  No results found for "{searchTerm}"
+                </span>
+              )}
+            </div>
+
+            {selectedItem === "none" && <OptionDisplay />}
+
+            {(selectedItem === "atom" || selectedItem === "molecule") && (
+              <button
+                className="m-5 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
+                type="button"
+                onClick={() => {
+                  setSelectedItem("none");
+                }}
+              >
+                <KeyboardBackspaceIcon />
+                <span className="ml-2">Back</span>
+              </button>
+            )}
+
+            {selectedItem === "molecule" && (
+              <>
+                <div
+                  className="border-2 border-gray-600 rounded-xl pb-2 m-auto"
+                  style={{ maxWidth: "1200px" }}
+                >
+                  <h1
+                    className={`scale-90 sm:scale-100 pt-5 font-thin text-white ${
+                      size.width < 350 ? "truncate ..." : null
+                    }`}
                   >
-                    <h2 className="text-green-200 font-thin mb-3">Organic</h2>
+                    Molecules
+                  </h1>
+
+                  <div className="my-5 mt-5">
                     {Object.keys(moleculeDict)
-                      .slice(0, 3)
+                      .slice(3)
                       .map((key, index) => {
                         const value = moleculeDict[key];
 
@@ -790,12 +1122,14 @@ export default function Table() {
                                 "Molecule",
                                 value[1]
                               );
+
+                              countButtonClicks();
                             }}
                             onClick={() => {
                               // This code runs after a global state change...
                               movePage(`/renderer`);
                             }}
-                            className="mb-2 mr-2 sm:mt-0 bg-transparent hover:bg-green-200 text-green-200 hover:text-black py-2 px-4 border border-green-200 hover:border-transparent rounded"
+                            className="mb-2 mr-2 sm:mt-0 bg-transparent hover:bg-blue-500 text-white hover:text-white py-2 px-4 border border-white hover:border-transparent rounded"
                             type="button"
                             key={key}
                           >
@@ -805,142 +1139,297 @@ export default function Table() {
                         );
                       })}
                   </div>
-                </div>
-              </div>
-            </>
-          )}
 
-          {selectedItem === "atom" && (
-            <>
-              <div className="border-2 border-gray-600 rounded-xl p-5 m-auto" style={{ maxWidth: "1200px" }}>
-                <h1 className="scale-90 sm:scale-100 px-5 font-thin text-white">
-                  Atoms
-                </h1>
+                  <div className="flex flex-col ml-5 mr-5 justify-center items-center">
+                    <div
+                      className="border-2 border-green-200 rounded-md p-3 m-5"
+                      style={{ maxWidth: "500px" }}
+                    >
+                      <h2 className="text-green-200 font-thin mb-3">Organic</h2>
+                      {Object.keys(moleculeDict)
+                        .slice(0, 3)
+                        .map((key, index) => {
+                          const value = moleculeDict[key];
 
-                <div className="mx-5 py-5">
-                  <div className="p-6 w-fit m-auto bg-white rounded-lg shadow-lg">
-                    <h2 className="mb-4 text-xl text-black font-medium">
-                      Enter Quantum Num.
-                    </h2>
-                    <div className="flex items-center justify-center">
-                      <input
-                        className={classNames(
-                          "w-12 py-2 mr-2 text-center text-gray-500 border rounded",
-                          {
-                            "border-red-500": digit1.length === 0,
-                          }
-                        )}
-                        type="text"
-                        maxLength="1"
-                        placeholder="N"
-                        value={digit1}
-                        onChange={(event) =>
-                          handleDigitChange(event, setDigit1)
-                        }
-                      />
-                      <input
-                        className={classNames(
-                          "w-12 py-2 mr-2 text-center text-gray-500 border rounded",
-                          {
-                            "border-red-500": digit2.length === 0,
-                          }
-                        )}
-                        type="text"
-                        maxLength="1"
-                        placeholder="L"
-                        value={digit2}
-                        onChange={(event) =>
-                          handleDigitChange(event, setDigit2)
-                        }
-                      />
-                      <input
-                        className={classNames(
-                          "w-12 py-2 text-center text-gray-500 border rounded",
-                          {
-                            "border-red-500": digit3.length === 0,
-                          }
-                        )}
-                        type="text"
-                        maxLength="1"
-                        value={digit3}
-                        placeholder="ML"
-                        onChange={(event) =>
-                          handleDigitChange(event, setDigit3)
-                        }
-                      />
-                    </div>
-                    <div className="mt-4">
-                      {digit1.length === 0 ||
-                      digit2.length === 0 ||
-                      digit3.length === 0 ? (
-                        <>
-                          <p className="text-red-500">
-                            Please enter three digits.
-                          </p>
-                        </>
-                      ) : (
-                        <button
-                          onClick={() => {
-                            let matchFound = false;
-
-                            for (const [key, value] of Object.entries(
-                              quantumNumbers
-                            )) {
-                              if (
-                                value["n"] === parseInt(digit1) &&
-                                value["l"] === parseInt(digit2) &&
-                                value["m"] === parseInt(digit3)
-                              ) {
-                                appendNewRender(...atomDict[key]);
+                          return (
+                            <button
+                              onMouseDown={() => {
+                                // This code runs first...
+                                appendNewRender(
+                                  key,
+                                  value[0],
+                                  "Molecule",
+                                  value[1]
+                                );
+                                countButtonClicks();
+                              }}
+                              onClick={() => {
+                                // This code runs after a global state change...
                                 movePage(`/renderer`);
-                                matchFound = true;
-                                break;
-                              }
-                            }
-
-                            if (!matchFound) {
-                              setNoResultsFound(true);
-                            }
-                          }}
-                          className="mb-2 mr-2 sm:mt-0 bg-transparent hover:bg-green-800 text-green-800 hover:text-white py-2 px-4 border border-green-800 hover:border-transparent rounded"
-                          type="button"
-                        >
-                          <span>Search</span>
-                        </button>
-                      )}
-
-                      {noResultsFound && (
-                        <p className="text-red-500">No results found.</p>
-                      )}
+                              }}
+                              className="mb-2 mr-2 sm:mt-0 bg-transparent hover:bg-green-200 text-green-200 hover:text-black py-2 px-4 border border-green-200 hover:border-transparent rounded"
+                              type="button"
+                              key={key}
+                            >
+                              <span className="font-bold">{key}</span>{" "}
+                              <span>{value[0]}</span>
+                            </button>
+                          );
+                        })}
                     </div>
                   </div>
                 </div>
-              </div>
 
-              {displayPeriodicTable()}
+                <p className="text-gray-400 mt-5 ml-0 mr-0 md:ml-40 md:mr-40">
+                  Density Functional Theory (DFT) libraries are used to
+                  calculate the electron density of the molecule.
+                  <br />
+                  Molecular orbitals are then approximated based upon the
+                  Hatree-Fock (HF) method.
+                </p>
+              </>
+            )}
 
-              <p className="text-gray-400 ml-0 mr-0 md:ml-40 md:mr-40">
-                ElectronVisualized uses spherical harmonics to calculate the
-                radial part of the atomic orbitals.
-                <br />
-                Then, Metropolis-Hastings algorithm is used to sample the
-                wavefunction.
-              </p>
-
-              <div className="ml-5 mr-5 mt-2">
-                <button
-                  onClick={() => {
-                    // This code runs after a global state change...
-                    movePage(`/molar-mass`);
-                  }}
-                  className="m-5 bg-transparent hover:bg-blue-500 text-gray-400 hover:text-white py-2 px-4 border border-gray-400 hover:border-transparent rounded"
-                  type="button"
+            {selectedItem === "atom" && (
+              <>
+                <div
+                  className="border-2 border-gray-600 rounded-xl p-5 m-auto"
+                  style={{ maxWidth: "1200px" }}
                 >
-                  <span>Molar Mass Calculator</span>
-                </button>
-              </div>
-            </>
-          )}
+                  <h1 className="scale-90 sm:scale-100 px-5 font-thin text-white">
+                    Atoms
+                  </h1>
+
+                  <div className="mx-5 py-5">
+                    <div className="p-6 w-fit m-auto bg-white rounded-lg shadow-lg">
+                      <h2 className="mb-4 text-xl text-black font-medium">
+                        Enter Quantum Num.
+                      </h2>
+                      <div className="flex items-center justify-center">
+                        <input
+                          className={classNames(
+                            "w-12 py-2 mr-2 text-center text-gray-500 border rounded",
+                            {
+                              "border-red-500": digit1.length === 0,
+                            }
+                          )}
+                          type="text"
+                          maxLength="1"
+                          placeholder="N"
+                          value={digit1}
+                          onChange={(event) =>
+                            handleDigitChange(event, setDigit1)
+                          }
+                        />
+                        <input
+                          className={classNames(
+                            "w-12 py-2 mr-2 text-center text-gray-500 border rounded",
+                            {
+                              "border-red-500": digit2.length === 0,
+                            }
+                          )}
+                          type="text"
+                          maxLength="1"
+                          placeholder="L"
+                          value={digit2}
+                          onChange={(event) =>
+                            handleDigitChange(event, setDigit2)
+                          }
+                        />
+                        <input
+                          className={classNames(
+                            "w-12 py-2 text-center text-gray-500 border rounded",
+                            {
+                              "border-red-500": digit3.length === 0,
+                            }
+                          )}
+                          type="text"
+                          maxLength="1"
+                          value={digit3}
+                          placeholder="ML"
+                          onChange={(event) =>
+                            handleDigitChange(event, setDigit3)
+                          }
+                        />
+                      </div>
+                      <div className="mt-4">
+                        {digit1.length === 0 ||
+                        digit2.length === 0 ||
+                        digit3.length === 0 ? (
+                          <>
+                            <p className="text-red-500">
+                              Please enter three digits.
+                            </p>
+                          </>
+                        ) : (
+                          <button
+                            onClick={() => {
+                              let matchFound = false;
+
+                              for (const [key, value] of Object.entries(
+                                quantumNumbers
+                              )) {
+                                if (
+                                  value["n"] === parseInt(digit1) &&
+                                  value["l"] === parseInt(digit2) &&
+                                  value["m"] === parseInt(digit3)
+                                ) {
+                                  appendNewRender(...atomDict[key]);
+                                  movePage(`/renderer`);
+                                  matchFound = true;
+                                  break;
+                                }
+                              }
+
+                              if (!matchFound) {
+                                setNoResultsFound(true);
+                              }
+                            }}
+                            className="mb-2 mr-2 sm:mt-0 bg-transparent hover:bg-green-800 text-green-800 hover:text-white py-2 px-4 border border-green-800 hover:border-transparent rounded"
+                            type="button"
+                          >
+                            <span>Search</span>
+                          </button>
+                        )}
+
+                        {noResultsFound && (
+                          <p className="text-red-500">No results found.</p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {displayPeriodicTable()}
+
+                <p className="text-gray-400 ml-0 mr-0 md:ml-40 md:mr-40">
+                  ElectronVisualized uses spherical harmonics to calculate the
+                  radial part of the atomic orbitals.
+                  <br />
+                  Then, Metropolis-Hastings algorithm is used to sample the
+                  wavefunction.
+                </p>
+
+                <div className="ml-5 mr-5 mt-2">
+                  <button
+                    onClick={() => {
+                      // This code runs after a global state change...
+                      movePage(`/molar-mass`);
+                    }}
+                    className="m-5 bg-transparent hover:bg-blue-500 text-gray-400 hover:text-white py-2 px-4 border border-gray-400 hover:border-transparent rounded"
+                    type="button"
+                  >
+                    <span>Molar Mass Calculator</span>
+                  </button>
+                </div>
+              </>
+            )}
+
+            {selectedItem === "none" && (
+              <>
+                <section className="bg-transparent pt-7 pb-12">
+                  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-2">
+                    <div class="bg-gray-700 overflow-hidden shadow rounded-lg flex flex-col justify-center items-center text-white">
+                      <div
+                        style={{
+                          height: "300px",
+                          display: "inline-grid",
+                          width: "-webkit-fill-available",
+                        }}
+                      >
+                        {items[0] && (
+                          <Canvas camera={{ position: [0, 0, 5] }}>
+                            <directionalLight
+                              position={[0, 10, 5]}
+                              intensity={1}
+                            />
+                            <Suspense fallback={null}>
+                              <Model
+                                name={items[0].name}
+                                key={items[0].id}
+                                url={items[0].stlFileUrl}
+                              />
+                            </Suspense>
+                          </Canvas>
+                        )}
+                        <div class="mt-4 flex items-baseline justify-center">
+                          <ScienceIcon fontSize="large" />
+                          <span class="ml-2 text-5xl font-thin">Benzene</span>
+                        </div>
+                        <p class="mt-4 text-lg">Meet the 3D Printed Version</p>
+                      </div>
+                      <div class="px-4 py-3 text-center sm:px-6">
+                        <button
+                          id="checkout-and-portal-button"
+                          onClick={() => {
+                            navigate("/highlight");
+                          }}
+                          class="inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-white hover:bg-blue-500 hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                        >
+                          <span>Navigate</span>
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="border border-white overflow-hidden shadow rounded-lg flex flex-col justify-center items-center text-white">
+                      <div class="px-4 py-5 sm:p-6">
+                        <div class="mt-4 flex items-baseline justify-center">
+                          <CardGiftcardOutlinedIcon fontSize="large" />
+                          <span class="ml-2 text-5xl font-thin">Giftshop</span>
+                        </div>
+                        <p class="mt-4 text-lg">For True Fans of Chemistry</p>
+                      </div>
+                      <div class="px-4 py-3 text-center sm:px-6">
+                        <button
+                          onClick={() => {
+                            movePage("/shop");
+                          }}
+                          class="inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-white hover:bg-blue-500 hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                        >
+                          <span>Navigate</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                <p className="text-gray-400 ml-10 mr-10 md:ml-40 md:mr-40">
+                  <span className="font-thin text-sm md:text-xl">
+                    © {currentYear} Developed by{" "}
+                    <a
+                      className="hover:underline text-white font-thin"
+                      href="https://github.com/wonmor"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      John Seong
+                    </a>
+                    .
+                  </span>
+                </p>
+
+                <div className="flex flex-row space-x-2 justify-center items-center">
+                  <a
+                    href="https://github.com/wonmor/ElectronVisualized"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="z-40 inline-flex tracking-widest justify-center py-2 px-4 border border-gray-400 bg-gray-400 shadow-sm text-sm font-medium rounded-md text-gray-800 hover:text-white hover:bg-blue-500 hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4"
+                  >
+                    <span>GITHUB</span>
+                  </a>
+
+                  <a
+                    href="https://github.com/wonmor/ElectronVisualized/blob/main/LICENSE"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="z-40 inline-flex tracking-widest justify-center py-2 px-4 border border-gray-400 shadow-sm text-sm font-medium rounded-md text-gray-400 hover:text-white hover:bg-blue-500 hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mt-4"
+                  >
+                    <span>LICENSE</span>
+                  </a>
+                </div>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </>

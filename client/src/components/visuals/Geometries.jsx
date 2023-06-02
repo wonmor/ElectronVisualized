@@ -5,7 +5,7 @@ import { GLTFLoader } from "three-stdlib";
 import * as THREE from "three";
 
 import { Line2, LineGeometry, LineMaterial } from "three-fatline";
-import { RENDERER, isElectron } from "./Globals";
+import { RENDERER, isElectron } from "../Globals";
 
 /*
 █▀▀▀ █▀▀ █▀▀█ █▀▄▀█ █▀▀ ▀▀█▀▀ █▀▀█ ─▀─ █▀▀ █▀▀ 

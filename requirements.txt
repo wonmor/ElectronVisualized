@@ -1,4 +1,5 @@
 apptools==5.1.0
+APScheduler==3.10.1
 ase==3.22.1
 asgiref==3.5.2
 autopep8==1.6.0
@@ -20,6 +21,7 @@ Deprecated==1.2.13
 envisage==7.0.3
 firebase-admin==6.1.0
 Flask==2.2.3
+Flask-APScheduler==1.12.4
 flask-buzz==2.0.1
 Flask-Cors==3.0.10
 Flask-Limiter==2.4.6
@@ -85,9 +87,11 @@ pyscf==2.2.1
 python-dateutil==2.8.2
 python-dotenv==0.20.0
 python-engineio==4.3.2
+python-http-client==3.3.7
 python-socketio==5.6.0
 python-vtk==0.0.0
 pytz==2022.1
+pytz-deprecation-shim==0.1.0.post0
 pytzdata==2020.1
 pyvista==0.38.5
 rdkit==2022.9.5
@@ -99,14 +103,18 @@ scikit-learn==1.1.1
 scipy==1.8.1
 scooby==0.7.1
 seaborn==0.12.2
+sendgrid==6.10.0
 six==1.16.0
 SQLAlchemy==2.0.3
+starkbank-ecdsa==2.2.0
 stripe==5.4.0
 threadpoolctl==3.1.0
 toml==0.10.2
 traits==6.3.2
 traitsui==7.3.1
 typing_extensions==4.2.0
+tzdata==2023.3
+tzlocal==4.3
 uritemplate==4.1.1
 urllib3==1.26.9
 vtk==9.2.6

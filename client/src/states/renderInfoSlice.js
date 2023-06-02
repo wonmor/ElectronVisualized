@@ -20,7 +20,7 @@ export const renderInfoSlice = createSlice({
             "disableButton": false,
             "preRender": true,
             "serverError": false,
-            "statusText": "Rendering in Progress..."
+            "statusText": "Working hard..."
         },
     },
     reducers: {

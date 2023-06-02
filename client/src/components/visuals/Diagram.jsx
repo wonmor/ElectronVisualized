@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import axios from 'axios';
-import { isElectron } from './Globals';
+import { isElectron } from '../Globals';
 import './Diagram.css';
 
 function Diagram(props) {
@@ -42,9 +42,10 @@ function Diagram(props) {
       <div className="image-container ml-10 mr-10 md:ml-40 md:mr-40 rounded">
         <LazyLoadImage
           effect="blur"
+          style={{ maxWidth: 500 }}
           src={imageUrl}
           alt="Energy Diagram"
-          className="scaled-image"
+          className="scaled-image mt-5 mx-5 rounded-xl scale-75 sm:scale-100"
         />
       </div>
     );

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-import MetaTag from "./MetaTag";
+import MetaTag from "../tools/MetaTag";
 import firebase from 'firebase/compat/app';
 
 import * as firebaseui from 'firebaseui';
@@ -20,7 +20,7 @@ export default function Login() {
         signInSuccessUrl: '/membership',
         signInOptions: [
             firebase.auth.EmailAuthProvider.PROVIDER_ID,
-          firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+            firebase.auth.GoogleAuthProvider.PROVIDER_ID,
         ],
         callbacks: {
           signInSuccessWithAuthResult: () => {

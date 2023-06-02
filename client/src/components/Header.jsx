@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Transition } from "@headlessui/react";
 import { useWindowSize, isElectron } from "./Globals";
+import { checkIfUserIsSubscriber } from "./member/Membership";
 
 import "./Header.css";
 
@@ -14,10 +15,6 @@ import firebase from "firebase/compat/app";
 █─▄─██─▄█▀██─▀─███─██─██─▄█▀██─▄─▄█
 ▀▄▀▄▀▄▄▄▄▄▀▄▄▀▄▄▀▄▄▄▄▀▀▄▄▄▄▄▀▄▄▀▄▄▀
 */
-
-const isEmpty = (str) => {
-  return !str.trim().length;
-};
 
 export default function Header() {
   /*
@@ -36,23 +33,31 @@ export default function Header() {
 
   const location = useLocation();
 
-  const [localSearchKeyword, setLocalSearchKeyword] = useState("");
   const [showMenu, setMenu] = useState(false);
   const [showMenuAlreadyTriggered, setMenuAlreadyTriggered] = useState(false);
-  const [showDropDown, setDropDown] = useState(false);
   const [logged, setLogged] = useState(false);
+  const [isSubscriber, setSubscriber] = useState(false);
 
   useEffect(() => {
-    const unregisterAuthObserver = firebase.auth().onAuthStateChanged((user) => {
-      setLogged(!!user);
+    const checkSubscription = async (user) => {
+      const isUserSubscriber = await checkIfUserIsSubscriber(user);
+      setSubscriber(isUserSubscriber);
+    };
+  
+    const unregisterAuthObserver = firebase.auth().onAuthStateChanged(async (user) => {
+      if (user) {
+        setLogged(true);
+        await checkSubscription(user);
+      } else {
+        setLogged(false);
+        setSubscriber(false);
+      }
     });
-
+  
     return () => {
       unregisterAuthObserver();
     };
   }, []);
-
-  const menuText = logged ? 'Member' : 'Sign in';
 
   const navigate = useNavigate();
 
@@ -94,7 +99,7 @@ export default function Header() {
         <div className="flex items-center flex-shrink-0 text-white mr-6">
           <img className="w-20 mr-5" src={Logo} alt="logo"></img>
 
-          <span className="text-xl tracking-tight">{"ElectronVisualized"}</span>
+          <span className="text-xl tracking-tight">{`ElectronVisualized ${isSubscriber ? "Pro" : ""}`}</span>
         </div>
       </button>
 
@@ -229,15 +234,15 @@ export default function Header() {
 
             <button
               onClick={() => {
-                movePage("/download-web");
+                movePage("/blog");
               }}
               className={`block mt-4 lg:inline-block lg:mt-0 ${
-                location.pathname === "/download-web"
+                location.pathname === "/blog"
                   ? "text-gray-400"
                   : "text-rose-200"
               } hover:text-white`}
             >
-              <span>Download</span>
+              <span>Articles</span>
             </button>
               </>
             )}

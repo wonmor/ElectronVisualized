@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faBackspace } from "@fortawesome/free-solid-svg-icons";
-import { Background } from "./Geometries";
 
-import elements from "../assets/elements.json";
+import elements from "../../assets/elements.json";
 import "./MolarMass.css";
 
 const Autocomplete = () => {
@@ -89,7 +88,7 @@ const Autocomplete = () => {
   return (
     <div className="container text-center">
       <h1 className="title-text text-5xl font-thin">Calculate</h1>
-      <h2 className="text-gray-400 text-3xl">Molar Mass.</h2>
+      <h2 className="text-gray-400 text-3xl font-thin">Molar Mass.</h2>
       <input
         className="input"
         type="text"
@@ -129,10 +128,9 @@ const Autocomplete = () => {
 
 const MolarMass = () => {
   return (
-    <div className="parent">
+    <div className="parent" style={{ minHeight: "100vh", width: "-webkit-fill-available" }}>
       <div className="container">
         <Autocomplete />
-        <Background />
       </div>
     </div>
   );

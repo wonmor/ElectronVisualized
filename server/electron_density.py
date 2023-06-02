@@ -116,7 +116,7 @@ def _density_parser():
         vmin = min + 0.0001 * (max - min)
         vmax = min + 0.9 * (max - min)
 
-    elif element_name == "C2H4" or element_name == "C2H6":
+    elif element_name == "C2H4" or element_name == "C6H6":
         vmin = min + 0.002 * (max - min)
         vmax = min + 0.09 * (max - min)
 

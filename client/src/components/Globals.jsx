@@ -17,6 +17,10 @@ export const RENDERER = {
   TUBE_RADIUS: "0.3",
 };
 
+export const capitalize = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
 // Key: Molecule Name, Value: Molecule to Subtract
 export const moleculesWithLonePairs = {
   "H2O": "O",
@@ -68,7 +72,7 @@ export const moleculeDict = {
     "2 sigma bonds\n2 lone pairs"
   ],
   H2: [
-    "Hydrogen Gas",
+    "Molecular Hydrogen",
     "Hydrogen is the lightest element. At standard conditions hydrogen is a gas of diatomic molecules having the formula H2.",
     "Linear",
     "Nonpolar",
@@ -79,7 +83,7 @@ export const moleculeDict = {
     "1 sigma bond"
   ],
   Cl2: [
-    "Chlorine Gas",
+    "Molecular Chlorine",
     "Chlorine is a yellow-green gas at room temperature. Chlorine has a pungent, irritating odor similar to bleach that is detectable at low concentrations.",
     "Linear",
     "Nonpolar",
@@ -90,7 +94,7 @@ export const moleculeDict = {
     "1 sigma bond\n1 pi bond"
   ],
   HCl: [
-    "Hydrochloric Acid",
+    "Hydrogen Chloride",
     "Hydrochloric acid is the water-based, or aqueous, solution of hydrogen chloride gas.",
     "Linear",
     "Polar",

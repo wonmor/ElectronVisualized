@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { isElectron } from './Globals';
+import { isElectron } from '../Globals';
 
 function FileUploadForm() {
   const [file, setFile] = useState(null);

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Background } from "./Geometries";
-import { uBitConnectDevice } from "../utilities/serial";
-import { getBrowser } from "../utilities/platform";
-import { isElectron } from "./Globals";
+import { Background } from "../visuals/Geometries";
+import { uBitConnectDevice } from "../../utilities/serial";
+import { getBrowser } from "../../utilities/platform";
+import { isElectron } from "../Globals";
 
 export default function Extensions() {
   /*
