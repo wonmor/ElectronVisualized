@@ -1,47 +1,49 @@
-<img width="100" alt="icon-2" src="https://user-images.githubusercontent.com/35755386/224520472-1e542a07-dfca-4a27-a663-c5831708aeaa.png">
+<img width="200" alt="icon-2" src="./electron/assets/Icon1024.png">
 
 # ElectronVisualized
 
 **Designed and Developed by John Seong.**
 
-A web-based viewer and an API for atomic and molecular orbitals. The viewer, written entirely in Javascript, uses mathematical functions called spherical harmonics and formulas from Density Functional Theory to visualize these orbitals.
-
-- For atomic orbitals, the viewer shows the different shapes of orbitals (e.g. s, p, d) for different energy levels (e.g. 1s, 2s, 2p).
-
-- For molecular orbitals, the viewer uses a computational chemistry method called the Hartree-Fock approach to calculate and visualize the orbitals. This approach calculates the energies and shapes of the orbitals based on the interactions between electrons and nuclei in the molecule.
+ElectronVisualized provides an interactive visualization in the areas of chemistry and quantum mechanics. 
+The app showcases atomic orbitals through electron density — alongside with molecular orbitals — beautifully and elegantly.
 
 [**https://electronvisual.org**](https://electronvisual.org)
 
----
+<table><tr>
 
-## Molecular Orbitals
+<td valign="center"><img width="500" alt="Screenshot-1" src="https://github.com/wonmor/ElectronVisualized-Prod/assets/35755386/f83a0411-e5cc-4a86-8be6-f5355f9c232f" /></td>
 
-Molecular orbitals (MOs) are formed by the combination of atomic orbitals (AOs) from different atoms in a molecule. In this process, AOs interact and combine to form bonding MOs and antibonding MOs.
+<td valign="center"><img width="500" alt="Screenshot-2" src="https://github.com/wonmor/ElectronVisualized-Prod/assets/35755386/b1b4b4d3-9145-4e47-b775-016edc45bf4e" /></td>
 
-<img width="1200" alt="Screenshot 2023-04-27 at 12 26 13 AM" src="https://user-images.githubusercontent.com/35755386/234759440-d62654f4-06c3-4b49-ab9c-58bbdd4377be.png">
+</tr></table>
 
----
-
-## Atomic Orbitals
-
-**ElectronVisualized** uses the spherical harmonics formula to display the shape of atomic orbitals based on their quantum numbers. Each orbital has a unique shape, and the tool accurately represents this shape by calculating the probability of finding an electron at any given point in space. These probabilities are represented as dots, which show where electrons are most likely to be located within the orbital.
-
-<img width="1200" alt="Screenshot 2023-04-12 at 9 21 54 PM" src="https://user-images.githubusercontent.com/35755386/231621160-9405e6e6-e32d-49f4-ae31-89dae2b3b74a.png">
+## Stunning Visuals
+Both atomic and molecular orbitals are displayed on a three-dimensional plane where you can freely rotate around.
 
 ---
 
-## API Guide
-
-### ```https://electronvisual.org/api/load/<molecule_name_goes_here>```
-
-Loads the x, y, and z coordinates of a **molecule** based upon the **DFT** calculations, all from the Amazon S3 server with blazingly fast speed guaranteed.
-
-### ```https://electronvisual.org/api/loadSPH/<atom_name_goes_here>```
-
-Retrieves the x, y, and z coordinates of an individual **atom** derived from the **Spherical Harmonics** formula. This might take a little more time as it is more precise and contains significantly more information.
+## Organic Playground
+With our playground feature, you can draw any molecules with dots and lines.
+Auto-snapping allows users to do this in an easiest way possible.
 
 ---
 
-![IMG_7647](https://user-images.githubusercontent.com/35755386/166985579-96c2d483-e74c-4802-ac92-762b2ccc8bc9.jpg)
+## Find My Electron
+Our robust search feature provides an extraordinary insight into the properties of molecules.
+Unapologetically — it is the most efficient way of navigating the PubChem database.
 
-<img width="1200" alt="Screen Shot 2022-06-05 at 10 10 18 PM" src="https://user-images.githubusercontent.com/35755386/172083147-e11ab873-f156-4dda-8d26-71652a1de0c8.png">
+<table><tr>
+
+<td valign="center"><img width="500" alt="Screenshot-1" src="https://github.com/wonmor/ElectronVisualized-Prod/assets/35755386/1e41f7ac-a13a-4a76-ac6d-0861f8c83530" /></td>
+
+<td valign="center"><img width="500" alt="Screenshot-2" src="https://github.com/wonmor/ElectronVisualized-Prod/assets/35755386/52da9162-3c6e-46fc-8c10-15da1897b345" /></td>
+
+</tr></table>
+
+<table><tr>
+
+<td valign="center"><img width="500" alt="Screenshot-1" src="https://user-images.githubusercontent.com/35755386/166985579-96c2d483-e74c-4802-ac92-762b2ccc8bc9.jpg" /></td>
+
+<td valign="center"><img width="500" alt="Screenshot-2" src="https://user-images.githubusercontent.com/35755386/172083147-e11ab873-f156-4dda-8d26-71652a1de0c8.png" /></td>
+
+</tr></table>
