@@ -1,4 +1,4 @@
-<img width="200" alt="icon-2" src="./electron/assets/Icon1024.png">
+<img width="200" alt="icon-2" src="https://github.com/wonmor/ElectronVisualized/assets/35755386/fabe39e5-cc00-4e62-9dff-e362d449ec29">
 
 # ElectronVisualized
 
