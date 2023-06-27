@@ -11,9 +11,9 @@ The app showcases atomic orbitals through electron density — alongside with mo
 
 <table><tr>
 
-<td valign="center"><img width="500" alt="Screenshot-1" src="https://github.com/wonmor/ElectronVisualized-Prod/assets/35755386/f83a0411-e5cc-4a86-8be6-f5355f9c232f" /></td>
+<td valign="center"><img width="500" alt="Screenshot-1" src="https://github.com/wonmor/ElectronVisualized/assets/35755386/90380fb0-9843-4b2e-9101-b1015293fc3c" /></td>
 
-<td valign="center"><img width="500" alt="Screenshot-2" src="https://github.com/wonmor/ElectronVisualized-Prod/assets/35755386/b1b4b4d3-9145-4e47-b775-016edc45bf4e" /></td>
+<td valign="center"><img width="500" alt="Screenshot-2" src="https://github.com/wonmor/ElectronVisualized/assets/35755386/e070ed1f-fab6-498e-88be-0eb628e91e58" /></td>
 
 </tr></table>
 
@@ -34,16 +34,16 @@ Unapologetically — it is the most efficient way of navigating the PubChem data
 
 <table><tr>
 
-<td valign="center"><img width="500" alt="Screenshot-1" src="https://github.com/wonmor/ElectronVisualized-Prod/assets/35755386/1e41f7ac-a13a-4a76-ac6d-0861f8c83530" /></td>
+<td valign="center"><img width="500" alt="Screenshot-3" src="https://github.com/wonmor/ElectronVisualized/assets/35755386/6d3e2fb1-6013-4b90-8885-383cb5193695)" /></td>
 
-<td valign="center"><img width="500" alt="Screenshot-2" src="https://github.com/wonmor/ElectronVisualized-Prod/assets/35755386/52da9162-3c6e-46fc-8c10-15da1897b345" /></td>
+<td valign="center"><img width="500" alt="Screenshot-4" src="https://github.com/wonmor/ElectronVisualized/assets/35755386/2be02e12-5e58-49a2-ad13-e9cf94cbf156" /></td>
 
 </tr></table>
 
 <table><tr>
 
-<td valign="center"><img width="500" alt="Screenshot-1" src="https://user-images.githubusercontent.com/35755386/166985579-96c2d483-e74c-4802-ac92-762b2ccc8bc9.jpg" /></td>
+<td valign="center"><img width="500" alt="Screenshot-5" src="https://user-images.githubusercontent.com/35755386/166985579-96c2d483-e74c-4802-ac92-762b2ccc8bc9.jpg" /></td>
 
-<td valign="center"><img width="500" alt="Screenshot-2" src="https://user-images.githubusercontent.com/35755386/172083147-e11ab873-f156-4dda-8d26-71652a1de0c8.png" /></td>
+<td valign="center"><img width="500" alt="Screenshot-6" src="https://user-images.githubusercontent.com/35755386/172083147-e11ab873-f156-4dda-8d26-71652a1de0c8.png" /></td>
 
 </tr></table>
