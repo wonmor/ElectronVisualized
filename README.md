@@ -1,4 +1,4 @@
-<img width="200" alt="icon-2" src="./electron/assets/Icon1024.png">
+<img width="200" alt="icon-2" src="./docs/Icon1024.png">
 
 # ElectronVisualized
 
