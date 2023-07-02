@@ -2,7 +2,7 @@
 
 # ElectronVisualized
 
-**Designed and Developed by John Seong. This public archive is not intended for use in production. Please read the license carefully before using any parts of this source code.**
+**Designed and Developed by John Seong. This public archive is not intended for use in production. Please read the license carefully before using any parts or segments of this source code.**
 
 ElectronVisualized provides an interactive visualization in the areas of chemistry and quantum mechanics. 
 The app showcases atomic orbitals through electron density — alongside with molecular orbitals — beautifully and elegantly.
