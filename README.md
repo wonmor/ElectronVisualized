@@ -9,6 +9,8 @@ The app showcases atomic orbitals through electron density — alongside with mo
 
 [**https://electronvisual.org**](https://electronvisual.org)
 
+> **The website is being actively maintained by a seperate entity. Please refer to our license to check more.**
+
 <table><tr>
 
 <td valign="center"><img width="500" alt="Screenshot-1" src="docs/screenshot1.png" /></td>
