@@ -2,14 +2,10 @@
 
 # ElectronVisualized
 
-> **This public archive was not intended for use in production. Please read the license carefully before using any parts or segments of this source code.**
-
 ElectronVisualized provides an interactive visualization in the areas of chemistry and quantum mechanics. 
 The app showcases atomic orbitals through electron density — alongside with molecular orbitals — beautifully and elegantly.
 
 [**https://electronvisual.org**](https://electronvisual.org)
-
-> **Yes! The website is still actively being maintained/hosted by myself, although it does not necessarily reflect the changes made in this repository. Please refer to the license to learn more.**
 
 <table><tr>
 
