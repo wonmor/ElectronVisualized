@@ -9,7 +9,7 @@ The app showcases atomic orbitals through electron density — alongside with mo
 
 | iOS, iPadOS, and visionOS |
 |:-:|
-| [<img src="Docs/appstore-badge.png" height="50">](https://apps.apple.com/us/app/atomizer-ar/id6449015706) |
+| [<img src="https://github.com/wonmor/Atomizer-Swift-Challenge/blob/bb3e156b76ce46eeed402345667d51c843f73280/Docs/appstore-badge.png" height="50">](https://apps.apple.com/us/app/atomizer-ar/id6449015706) |
 
 
 <table><tr>
