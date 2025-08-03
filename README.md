@@ -2,10 +2,15 @@
 
 # ElectronVisualized
 
-ElectronVisualized provides an interactive visualization in the areas of chemistry and quantum mechanics. 
+ElectronVisualized provides an web-based interactive visualization in the areas of chemistry and quantum mechanics. 
 The app showcases atomic orbitals through electron density — alongside with molecular orbitals — beautifully and elegantly.
 
 [**https://electronvisual.org**](https://electronvisual.org)
+
+| iOS, iPadOS, and visionOS |
+|:-:|
+| [<img src="Docs/appstore-badge.png" height="50">](https://apps.apple.com/us/app/atomizer-ar/id6449015706) |
+
 
 <table><tr>
 
