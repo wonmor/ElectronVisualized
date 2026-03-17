@@ -4,12 +4,17 @@
 
 A cross-platform **quantum mechanics visualizer powered by Density Functional Theory (DFT)**, available across:
 
-- Web (Three.js)  
+- Web (Three.js) [**https://electronvisual.org**](https://electronvisual.org)
 - iOS  
 - macOS  
 - visionOS via *Atomizer AR* (**10K+ downloads**)  
 
 This is the very project that earned me the **2023 Apple WWDC Swift Student Challenge Award**.
+
+
+| iOS, iPadOS, and visionOS |
+|:-:|
+| [<img src="https://github.com/wonmor/Atomizer-Swift-Challenge/blob/bb3e156b76ce46eeed402345667d51c843f73280/Docs/appstore-badge.png" height="50">](https://apps.apple.com/us/app/atomizer-ar/id6449015706) |
 
 ---
 
@@ -48,12 +53,6 @@ This is the very project that earned me the **2023 Apple WWDC Swift Student Chal
 ### 🎥 Demo
 
 Watch demo walkthrough: **YouTube**  
-
-[**https://electronvisual.org**](https://electronvisual.org)
-
-| iOS, iPadOS, and visionOS |
-|:-:|
-| [<img src="https://github.com/wonmor/Atomizer-Swift-Challenge/blob/bb3e156b76ce46eeed402345667d51c843f73280/Docs/appstore-badge.png" height="50">](https://apps.apple.com/us/app/atomizer-ar/id6449015706) |
 
 ## How to run
 ```
