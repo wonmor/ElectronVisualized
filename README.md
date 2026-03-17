@@ -40,7 +40,7 @@ This is the very project that earned me the **2023 Apple WWDC Swift Student Chal
 
 ### 🏆 Recognition
 
-- 🥇 Apple WWDC 2023 Swift Student Challenge Award Winner  
+- 🥇 Apple WWDC 2023 Swift Student Challenge Award Winner (Invited to WWDC where I got to meet Tim Cook and Craig Federighi in-person)
 - 📘 Featured in acknowledgment of a publication by **Sir David Clary**  
   (University of Oxford Professor and former UK Government Chief Scientific Advisor)  
   - Acknowledgement: https://www.worldscientific.com/doi/suppl/10.1142/13806/suppl_file/13806_preface.pdf  
