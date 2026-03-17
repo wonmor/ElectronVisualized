@@ -2,8 +2,52 @@
 
 # ElectronVisualized
 
-ElectronVisualized provides an web-based interactive visualization in the areas of chemistry and quantum mechanics. 
-The app showcases atomic orbitals through electron density — alongside with molecular orbitals — beautifully and elegantly.
+A cross-platform **quantum mechanics visualizer powered by Density Functional Theory (DFT)**, available across:
+
+- Web (Three.js)  
+- iOS  
+- macOS  
+- visionOS via *Atomizer AR* (**10K+ downloads**)  
+
+This is the very project that earned me the **2023 Apple WWDC Swift Student Challenge Award**.
+
+---
+
+### 🧠 Tech Stack
+
+**Frontend**
+- Three.js  
+- React  
+- Redux  
+- WebXR  
+
+**Backend**
+- RDKit  
+- SciPy  
+- ASE (Atomic Simulation Environment)  
+- GPAW (DFT engine)  
+- Celery  
+- Redis  
+- Docker  
+- AWS  
+
+---
+
+### 🏆 Recognition
+
+- 🥇 Apple WWDC 2023 Swift Student Challenge Award Winner  
+- 📘 Featured in acknowledgment of a publication by **Sir David Clary**  
+  (University of Oxford Professor and former UK Government Chief Scientific Advisor)  
+  - Acknowledgement: https://www.worldscientific.com/doi/suppl/10.1142/13806/suppl_file/13806_preface.pdf  
+
+- 🧪 Built upon foundational work by **Walter Kohn** (Nobel Laureate, DFT)  
+  - Reference: https://doi.org/10.1142/13806  
+
+---
+
+### 🎥 Demo
+
+Watch demo walkthrough: **YouTube**  
 
 [**https://electronvisual.org**](https://electronvisual.org)
 
